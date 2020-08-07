@@ -1,0 +1,11 @@
+{
+  "WhatDBYouChoose": "Postgresql",
+  "Username": "NAME",
+  "Password": "PASSWORD",
+  "isEncrypted": true,
+  "YouDBs": {
+    "DBNAME1": "DESCRIPTION",
+    "DBNAME2": "DESCRIPTION",
+    "etc.": "etc."
+  }
+}

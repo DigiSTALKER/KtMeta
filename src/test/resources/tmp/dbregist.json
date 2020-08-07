@@ -1,0 +1,9 @@
+{
+  "WhatDBYouChoose": "Sqlite",
+  "Username": null,
+  "Password": null,
+  "isEncrypted": false,
+  "YouDBs": {
+    "A": "DESC A"
+  }
+}
