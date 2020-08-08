@@ -25,8 +25,8 @@ class TestContainers {
         assertThrows<IllegalArgumentException> { mgmt.setDBConfig("org.sql.jdbc", dbPathForRead) }
         assertThrows<IllegalArgumentException> { mgmt.setDBConfig("org.sqlite.JDBC", "") }
         assertEquals(
-            "DBConfigContainer(driver=$driverForSqlite, url=$dbPathForRead)",
-            DBConfigContainer(driverForSqlite, dbPathForRead).toString()
+            "DBConfigContainer(driver=$driverForSqlite, url=$dbPathForRead, username=null, password=null)",
+            DBConfigContainer(driverForSqlite, dbPathForRead, null, null).toString()
         )
     }
 
@@ -43,14 +43,15 @@ class TestContainers {
         assertEquals("PASSWORD", obj.password)
         assertEquals(true, obj.encrypted)
         assertEquals("etc.", obj.dbs["etc."])
-        assertEquals("DESCRIPTION", obj.dbs["DBNAME2"])
+        assertEquals("URL 2", obj.dbs["DBNAME2"])
 
         val obj1 = DBRegJSONContainer(
             db = "Sqlite",
             username = null,
             password = null,
             encrypted = false,
-            dbs = mapOf("A" to "DESC A", "B" to "DESC B")
+            dbs = mapOf("A" to "URL A", "B" to "URL B"),
+            descriptions = mapOf("A" to "DESC A")
         )
         val js = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(obj1)
         // File("test.json").writeText(js)

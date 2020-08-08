@@ -20,6 +20,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
     implementation "org.jetbrains.dokka:dokka-gradle-plugin:0.10.1"
     implementation "com.fasterxml.jackson.module:jackson-module-kotlin:2.11.0"
+    implementation "com.zaxxer:HikariCP:3.4.5"
     implementation "me.liuwj.ktorm:ktorm-core:3.0.0"
     implementation "me.liuwj.ktorm:ktorm-support-sqlite:3.0.0"
     implementation "me.liuwj.ktorm:ktorm-support-postgresql:3.0.0"

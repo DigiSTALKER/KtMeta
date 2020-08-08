@@ -15,22 +15,31 @@ import me.liuwj.ktorm.support.sqlite.SQLiteDialect
  * @param url Target database url, e.g., 'jdbc:sqlite:xxxx.db'.
  * @constructor Create a new db config data class by [driver] and [url].
  */
-data class DBConfigContainer(val driver: String, val url: String) {
+data class DBConfigContainer(
+    val driver: String,
+    val url: String,
+    val username: String?,
+    val password: String?
+) {
     val dialect: SqlDialect = when {
-        "sqlite" in driver -> {
+        driver.contains("sqlite") -> {
             SQLiteDialect()
         }
-        "postgresql" in driver -> {
+        driver.contains("postgresql") -> {
             PostgreSqlDialect()
         }
-        else -> {
-            SQLiteDialect()
-        }
+        else -> throw IllegalArgumentException("Only sqlite or postgresql is supported.")
+    }
+
+    val dataSource: String = when {
+        driver.contains("sqlite") -> "org.sqlite.SQLiteDataSource"
+        driver.contains("postgresql") -> "org.postgresql.ds.PGSimpleDataSource"
+        else -> throw java.lang.IllegalArgumentException("Only sqlite or postgresql is supported.")
     }
 
     override fun equals(other: Any?): Boolean {
         if (other is DBConfigContainer) {
-            return (other.driver == this.driver) and (other.url == this.url) and (other.dialect == this.dialect)
+            return (other.driver == this.driver) and (other.url == this.url) and (other.dialect == this.dialect) and (other.dataSource == this.dataSource)
         }
         return false
     }
@@ -51,7 +60,10 @@ data class DBConfigContainer(val driver: String, val url: String) {
  * @param username When use PostgreSQL as database is String, or null when use SQLite.
  * @param password When use PostgreSQL as database is String, or null when use SQLite.
  * @param encrypted When use PostgreSQL as database is true, or false when use SQLite.
- * @param dbs
+ * @param dbs Map<String, String>, e.g.,  "TestDB":"DB URL"
+ *        DB URL: Simple url without username and password, e.g., "jdbc:postgresql://localhost/test".
+ * @param descriptions Map<String, String>, e.g.,  "TestDB":"DB DESCRIPTION"
+ *        DESCRIPTION: Description for db.
  *
  * Examples:
  *
@@ -61,11 +73,15 @@ data class DBConfigContainer(val driver: String, val url: String) {
  *   "WhatDBYouChoose": "Postgresql",
  *   "Username": "NAME",
  *   "Password": "PASSWORD",
- *   "isEncrypted": true,
+ *   "IsEncrypted": true,
  *   "YouDBs": {
- *   "DBNAME1": "DESCRIPTION",
- *   "DBNAME2": "DESCRIPTION",
+ *   "DBNAME1": "DB URL",
+ *   "DBNAME2": "DB URL",
  *   "etc.": "etc."
+ *   },
+ *   "DB Descriptions":{
+ *   "DBNAME1": "DESC",
+ *   "DBNAME2": "DESC"
  *   }
  *  }
  *  ```
@@ -76,11 +92,15 @@ data class DBConfigContainer(val driver: String, val url: String) {
  *   "WhatDBYouChoose": "Sqlite",
  *   "Username": null,
  *   "Password": null,
- *   "isEncrypted": false,
+ *   "IsEncrypted": false,
  *   "YouDBs": {
- *   "DBNAME1": "DESCRIPTION",
- *   "DBNAME2": "DESCRIPTION",
+ *   "DBNAME1": "DB URL",
+ *   "DBNAME2": "DB URL",
  *   "etc.": "etc."
+ *   },
+ *   "DB Descriptions":{
+ *   "DBNAME1": "DESC",
+ *   "DBNAME2": "DESC"
  *   }
  *  }
  *  ```
@@ -92,8 +112,10 @@ data class DBRegJSONContainer(
     val username: String?,
     @JsonProperty("Password")
     val password: String?,
-    @JsonProperty("isEncrypted")
+    @JsonProperty("IsEncrypted")
     val encrypted: Boolean,
     @JsonProperty("YouDBs")
-    val dbs: Map<String, String>
+    val dbs: Map<String, String>,
+    @JsonProperty("DB Descriptions")
+    val descriptions: Map<String, String>
 )

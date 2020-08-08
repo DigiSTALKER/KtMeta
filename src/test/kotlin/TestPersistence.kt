@@ -9,7 +9,14 @@ class TestPersistence {
 
     @Test
     fun testWrite() {
-        val config = DBRegJSONContainer("Sqlite", null, null, false, mapOf("A" to "DESC A"))
+        val config = DBRegJSONContainer(
+            "Sqlite",
+            null,
+            null,
+            false,
+            mapOf("A" to "URL A"),
+            mapOf("A" to "DESC A")
+        )
         assertEquals(true, DBRegPersistence.saveTo(absPath = absp, data = config))
         val f = File("$absp\\dbregist.json")
         assert(f.isFile)
@@ -18,11 +25,15 @@ class TestPersistence {
 
     @Test
     fun testLoad() {
-        val obj = DBRegPersistence.loadFrom(absPath = absp)
-        assertEquals("Sqlite", obj.db)
-        assertEquals(null, obj.username)
-        assertEquals(null, obj.password)
-        assertEquals(false, obj.encrypted)
-        assertEquals(mapOf("A" to "DESC A"), obj.dbs)
+        DBRegPersistence.loadFrom(absPath = absp)
+        val obj = DBRegPersistence.containerCache
+        if (obj != null) {
+            assertEquals("Sqlite", obj.db)
+            assertEquals(null, obj.username)
+            assertEquals(null, obj.password)
+            assertEquals(false, obj.encrypted)
+            assertEquals(mapOf("A" to "URL A"), obj.dbs)
+            assertEquals(mapOf("A" to "DESC A"), obj.descriptions)
+        }
     }
 }

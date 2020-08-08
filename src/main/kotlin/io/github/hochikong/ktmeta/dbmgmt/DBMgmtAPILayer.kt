@@ -5,6 +5,7 @@
 
 package io.github.hochikong.ktmeta.dbmgmt
 
+import com.zaxxer.hikari.HikariConfig
 import me.liuwj.ktorm.database.Database
 import java.sql.Connection
 import java.sql.DriverManager
@@ -15,18 +16,24 @@ object ManagementInterface {
         private set
     var isDBUrlSet: Boolean = false
         private set
-    lateinit var config: DBConfigContainer
+    lateinit var dbconfig: DBConfigContainer
+        private set
+
+    /*
+    * HikariCP configurations
+    * */
+    lateinit var poolConfig: HikariConfig
         private set
 
 
     /**
      * Use [driver] and [url] to create a db connection configuration.
      * */
-    fun setDBConfig(driver: String, url: String): Boolean {
+    fun setDBConfig(driver: String, url: String, username: String? = null, passwd: String? = null): Boolean {
         require((driver == "org.sqlite.JDBC") or (driver == "org.postgresql.Driver")) { "Illegal driver name." }
         require("jdbc" in url) { "Illegal url without `jdbc`" }
         require(("sqlite" in url) or ("postgresql" in url)) { "Illegal url without `sqlite` or `postgresql`" }
-        config = DBConfigContainer(driver, url)
+        dbconfig = DBConfigContainer(driver, url, username, passwd)
         isDriverSet = true
         isDBUrlSet = true
         return true
@@ -39,8 +46,8 @@ object ManagementInterface {
         require(isDriverSet) { "Driver not set." }
         require(isDBUrlSet) { "Target DB not set." }
         try {
-            Class.forName(config.driver)
-            return DriverManager.getConnection(config.url)
+            Class.forName(dbconfig.driver)
+            return DriverManager.getConnection(dbconfig.url)
         } catch (e: Exception) {
             println(e.toString())
         }
@@ -50,19 +57,27 @@ object ManagementInterface {
     /**
      * Return Ktorm's Database. Use setDBConfig() before this API. You can provide [user] and [password] for connection.
      * */
-    fun getDSLDatabase(user: String? = null, password: String? = null): Database? {
+    fun getDatabase(user: String? = null, password: String? = null): Database? {
         require(isDBUrlSet) { "Target DB not set." }
         try {
             return Database.connect(
-                url = config.url,
-                driver = config.driver,
+                url = dbconfig.url,
+                driver = dbconfig.driver,
                 user = user,
                 password = password,
-                dialect = config.dialect
+                dialect = dbconfig.dialect
             )
         } catch (e: Exception) {
             println(e.toString())
         }
         return null
     }
+
+    /**
+     * Return Ktorm's Database with connection pool. Use setDBConfig() before this API.
+     * You can provide [user] and [passwd] for connection.
+     * */
+//    fun getPoolDatabase(user: String? = null, passwd: String? = null): Database?{
+//        TODO()
+//    }
 }

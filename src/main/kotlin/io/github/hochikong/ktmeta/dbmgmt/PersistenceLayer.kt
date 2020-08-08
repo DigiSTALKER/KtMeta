@@ -9,11 +9,13 @@ import com.fasterxml.jackson.module.kotlin.readValue
 import com.fasterxml.jackson.module.kotlin.registerKotlinModule
 import java.io.File
 
+
 /**
  * Save database registration as json to absPath/dbregist.json file or load to data class.
  */
 object DBRegPersistence {
     private val mapper = ObjectMapper().registerKotlinModule()
+    var containerCache: DBRegJSONContainer? = null
 
     private fun returnPath(absPath: String, fileName: String): String {
         return if ((absPath.endsWith("\\")) or (absPath.endsWith("/"))) {
@@ -29,27 +31,29 @@ object DBRegPersistence {
 
     /**
      * Load dbreg file from json
-     * @param absPath String, Simple absolute path
-     * @param fileName String, by default is dbregist.json
-     * @return DBRegJSONContainer
+     * @param absPath String, Simple absolute path without filename.
+     * @param fileName String, by default is dbregist.json.
+     * @return Boolean
      * */
-    fun loadFrom(absPath: String, fileName: String = "dbregist.json"): DBRegJSONContainer {
+    fun loadFrom(absPath: String, fileName: String = "dbregist.json"): Boolean {
         val f = File(returnPath(absPath, fileName))
         return when {
             f.exists() and f.isFile and f.canRead() -> {
                 val result = mapper.readValue<DBRegJSONContainer>(f.readText())
-                result
+                containerCache = result
+                true
             }
             else -> {
-                DBRegJSONContainer("empty", null, null, false, mapOf())
+                false
             }
         }
     }
 
     /**
      * Save db registration info to json file or overwrite it.
-     * @param absPath String, simple absolute path.
+     * @param absPath String, simple absolute path without filename.
      * @param fileName String, file name.
+     * @param data DBRegJSONContainer with data.
      * @return Boolean
      * */
     fun saveTo(absPath: String, fileName: String = "dbregist.json", data: DBRegJSONContainer): Boolean {

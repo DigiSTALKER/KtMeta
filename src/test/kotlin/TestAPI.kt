@@ -41,7 +41,7 @@ class TestAPI {
     fun testgetDSLDatabase() {
         val mgmt = getMgmt()
         mgmt.setDBConfig(driverForSqlite, dbPathForRead)
-        assert(mgmt.config.dialect is SQLiteDialect)
-        assert(mgmt.getDSLDatabase() is Database)
+        assert(mgmt.dbconfig.dialect is SQLiteDialect)
+        assert(mgmt.getDatabase() is Database)
     }
 }

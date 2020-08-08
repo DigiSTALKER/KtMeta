@@ -2,9 +2,12 @@
   "WhatDBYouChoose": "Sqlite",
   "Username": null,
   "Password": null,
-  "isEncrypted": false,
+  "IsEncrypted": false,
   "YouDBs": {
-    "A": "DESC A",
-    "B": "DESC B"
+    "A": "URL A",
+    "B": "URL B"
+  },
+  "DB Descriptions": {
+    "A": "DESC A"
   }
 }
