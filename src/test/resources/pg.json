@@ -2,7 +2,6 @@
   "WhatDBYouChoose": "Postgresql",
   "Username": "NAME",
   "Password": "PASSWORD",
-  "IsEncrypted": true,
   "YouDBs": {
     "DBNAME1": "URL 1",
     "DBNAME2": "URL 2",

@@ -8,6 +8,17 @@ import com.fasterxml.jackson.annotation.JsonProperty
 import me.liuwj.ktorm.database.SqlDialect
 import me.liuwj.ktorm.support.postgresql.PostgreSqlDialect
 import me.liuwj.ktorm.support.sqlite.SQLiteDialect
+import kotlin.properties.Delegates
+
+
+/**
+ * Supported DBs
+ * */
+enum class SupportedDBs(val identity: String) {
+    SQLite("Sqlite"),
+    PostgreSQL("Postgresql")
+}
+
 
 /**
  * Data class used for keeping database configurations.
@@ -58,8 +69,7 @@ data class DBConfigContainer(
  *
  * @param db String, only "Sqlite" and "Postgresql" is legal.
  * @param username When use PostgreSQL as database is String, or null when use SQLite.
- * @param password When use PostgreSQL as database is String, or null when use SQLite.
- * @param encrypted When use PostgreSQL as database is true, or false when use SQLite.
+ * @param password When use PostgreSQL as database is String (encrypted), or null when use SQLite.
  * @param dbs Map<String, String>, e.g.,  "TestDB":"DB URL"
  *        DB URL: Simple url without username and password, e.g., "jdbc:postgresql://localhost/test".
  * @param descriptions Map<String, String>, e.g.,  "TestDB":"DB DESCRIPTION"
@@ -73,7 +83,6 @@ data class DBConfigContainer(
  *   "WhatDBYouChoose": "Postgresql",
  *   "Username": "NAME",
  *   "Password": "PASSWORD",
- *   "IsEncrypted": true,
  *   "YouDBs": {
  *   "DBNAME1": "DB URL",
  *   "DBNAME2": "DB URL",
@@ -92,7 +101,6 @@ data class DBConfigContainer(
  *   "WhatDBYouChoose": "Sqlite",
  *   "Username": null,
  *   "Password": null,
- *   "IsEncrypted": false,
  *   "YouDBs": {
  *   "DBNAME1": "DB URL",
  *   "DBNAME2": "DB URL",
@@ -112,10 +120,50 @@ data class DBRegJSONContainer(
     val username: String?,
     @JsonProperty("Password")
     val password: String?,
-    @JsonProperty("IsEncrypted")
-    val encrypted: Boolean,
     @JsonProperty("YouDBs")
     val dbs: Map<String, String>,
     @JsonProperty("DB Descriptions")
     val descriptions: Map<String, String>
 )
+
+
+/**
+ * DB catalog container.
+ * */
+class DBCatalog {
+    var pgUser: String by Delegates.vetoable("") { _, oldValue, newValue ->
+        newValue != oldValue
+    }
+        private set
+
+    /**
+     * Encrypted password.
+     * */
+    var pgPassword: String by Delegates.vetoable("") { _, oldValue, newValue ->
+        newValue != oldValue
+    }
+        private set
+
+    var sqUser: String by Delegates.vetoable("") { _, oldValue, newValue ->
+        newValue != oldValue
+    }
+        private set
+
+    /**
+     * Encrypted password.
+     * */
+    var sqPassword: String by Delegates.vetoable("") { _, oldValue, newValue ->
+        newValue != oldValue
+    }
+        private set
+
+    /**
+     * Each key value pair is: "DB NAME": setOf("DESCRIPTION", "DB URL")
+     * */
+    val pgDBs = mutableMapOf<String, Set<String>>()
+
+    /**
+     * Each key value pair is: "DB NAME": setOf("DESCRIPTION", "DB URL")
+     * */
+    val SqDBs = mutableMapOf<String, Set<String>>()
+}

@@ -2,7 +2,6 @@
   "WhatDBYouChoose": "Sqlite",
   "Username": null,
   "Password": null,
-  "IsEncrypted": false,
   "YouDBs": {
     "A": "URL A",
     "B": "URL B"

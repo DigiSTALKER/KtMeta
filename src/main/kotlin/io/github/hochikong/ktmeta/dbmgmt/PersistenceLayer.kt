@@ -15,7 +15,7 @@ import java.io.File
  */
 object DBRegPersistence {
     private val mapper = ObjectMapper().registerKotlinModule()
-    var containerCache: DBRegJSONContainer? = null
+    val dbCatalog = DBCatalog()
 
     private fun returnPath(absPath: String, fileName: String): String {
         return if ((absPath.endsWith("\\")) or (absPath.endsWith("/"))) {
@@ -40,7 +40,7 @@ object DBRegPersistence {
         return when {
             f.exists() and f.isFile and f.canRead() -> {
                 val result = mapper.readValue<DBRegJSONContainer>(f.readText())
-                containerCache = result
+
                 true
             }
             else -> {
@@ -50,7 +50,7 @@ object DBRegPersistence {
     }
 
     /**
-     * Save db registration info to json file or overwrite it.
+     * Save db registration info to json file or overwrite it. You can create multiple files.
      * @param absPath String, simple absolute path without filename.
      * @param fileName String, file name.
      * @param data DBRegJSONContainer with data.
@@ -72,4 +72,8 @@ object DBRegPersistence {
             else -> false
         }
     }
+
+    /**
+     * Search db configurations
+     * */
 }
