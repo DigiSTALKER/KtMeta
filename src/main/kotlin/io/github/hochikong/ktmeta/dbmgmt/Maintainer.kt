@@ -4,7 +4,7 @@
  * */
 package io.github.hochikong.ktmeta.dbmgmt
 
-import org.jetbrains.annotations.TestOnly
+import org.slf4j.LoggerFactory
 import java.sql.Connection
 import java.sql.DriverManager
 import java.sql.SQLException
@@ -20,6 +20,7 @@ object Maintainer {
         Pair("url", 1),
         Pair("protected", 0)
     )
+    private val logger = LoggerFactory.getLogger("Logger from Maintainer.kt")
     private val columnNames = List(7) {
         columnConstrains[it].first
     }
@@ -55,15 +56,15 @@ object Maintainer {
      * Execute DDL below:
      * ```SQL
      * CREATE TABLE registration(
-     * id INTEGER PRIMARY KEY AUTOINCREMENT ,
-     * db TEXT NOT NULL ,
-     * user TEXT,
-     * password TEXT,
-     * description TEXT NOT NULL ,
-     * url TEXT NOT NULL UNIQUE ,
-     * protected INTEGER NOT NULL ,
-     * CONSTRAINT db_type_check CHECK ( db in ('Sqlite', 'Postgresql') ),
-     * CONSTRAINT is_protected CHECK ( protected in (0, 1) )
+     *  id INTEGER PRIMARY KEY AUTOINCREMENT ,
+     *  db TEXT NOT NULL ,
+     *  user TEXT,
+     *  password TEXT,
+     *  description TEXT NOT NULL ,
+     *  url TEXT NOT NULL UNIQUE ,
+     *  protected INTEGER NOT NULL ,
+     *  CONSTRAINT db_type_check CHECK ( db in ('Sqlite', 'Postgresql') ),
+     *  CONSTRAINT is_protected CHECK ( protected in (0, 1) )
      * );
      * ```
      *
@@ -99,9 +100,12 @@ object Maintainer {
     /**
      * Insert a row to table.
      * @param data List, contains values of 'db', 'user', 'password', 'description', 'url', 'protected'.
-     *        check createTable()'s document for more information about these columns.
-     *        If you want to insert a string, you must use "'CONTENT'" to cover it, but if you insert null or integer,
-     *        just simply use "CONTENT".
+     *
+     * Check createTable()'s document for more information about these columns.
+     *
+     * If you want to insert a string, you must use "'CONTENT'" to cover it,
+     * but if you insert null or integer, just simply use "CONTENT".
+     *
      * */
     fun insertData(data: List<Any>): Boolean {
         val sql = """
@@ -185,7 +189,9 @@ object Maintainer {
         }
     }
 
-    @TestOnly
+    /**
+     * Drop table
+     * */
     fun dropTable(): Boolean {
         connection.createStatement().use {
             return try {

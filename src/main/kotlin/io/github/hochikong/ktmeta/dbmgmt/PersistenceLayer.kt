@@ -15,7 +15,6 @@ import java.io.File
  */
 object DBRegPersistence {
     private val mapper = ObjectMapper().registerKotlinModule()
-    val dbCatalog = DBCatalog()
 
     private fun returnPath(absPath: String, fileName: String): String {
         return if ((absPath.endsWith("\\")) or (absPath.endsWith("/"))) {

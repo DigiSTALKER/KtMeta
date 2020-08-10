@@ -8,7 +8,6 @@ import com.fasterxml.jackson.annotation.JsonProperty
 import me.liuwj.ktorm.database.SqlDialect
 import me.liuwj.ktorm.support.postgresql.PostgreSqlDialect
 import me.liuwj.ktorm.support.sqlite.SQLiteDialect
-import kotlin.properties.Delegates
 
 
 /**
@@ -125,45 +124,3 @@ data class DBRegJSONContainer(
     @JsonProperty("DB Descriptions")
     val descriptions: Map<String, String>
 )
-
-
-/**
- * DB catalog container.
- * */
-class DBCatalog {
-    var pgUser: String by Delegates.vetoable("") { _, oldValue, newValue ->
-        newValue != oldValue
-    }
-        private set
-
-    /**
-     * Encrypted password.
-     * */
-    var pgPassword: String by Delegates.vetoable("") { _, oldValue, newValue ->
-        newValue != oldValue
-    }
-        private set
-
-    var sqUser: String by Delegates.vetoable("") { _, oldValue, newValue ->
-        newValue != oldValue
-    }
-        private set
-
-    /**
-     * Encrypted password.
-     * */
-    var sqPassword: String by Delegates.vetoable("") { _, oldValue, newValue ->
-        newValue != oldValue
-    }
-        private set
-
-    /**
-     * Each key value pair is: "DB NAME": setOf("DESCRIPTION", "DB URL")
-     * */
-    val pgDBs = mutableMapOf<String, Set<String>>()
-
-    /**
-     * Each key value pair is: "DB NAME": setOf("DESCRIPTION", "DB URL")
-     * */
-    val SqDBs = mutableMapOf<String, Set<String>>()
-}
