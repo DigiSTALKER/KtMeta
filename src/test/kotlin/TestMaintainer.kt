@@ -18,7 +18,7 @@ class TestMaintainer {
         listOf("'Postgresql'", "'postgres'", "'postgres'", "'desc postgresql'", "'url 2'", '1')
     )
 
-    val illegalData = listOf("'Mysql'", "'mysql'", "'mysql'", "'desc mysql'", "'url 3'", '1')
+    private val illegalData = listOf("'Mysql'", "'mysql'", "'mysql'", "'desc mysql'", "'url 3'", '1')
 
     companion object {
         @JvmStatic

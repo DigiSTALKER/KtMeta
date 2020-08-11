@@ -12,16 +12,6 @@ import java.sql.SQLException
 object Maintainer {
     private val loggerM = LoggerFactory.getLogger("ktmeta->dbmgmt")
 
-    /* When 0, it means Int, 1 means String */
-    private val columnConstrains = listOf(
-        Pair("id", 0),
-        Pair("db", 1),
-        Pair("user", 1),
-        Pair("password", 1),
-        Pair("description", 1),
-        Pair("url", 1),
-        Pair("protected", 0)
-    )
     private val columnNames = List(7) {
         columnConstrains[it].first
     }
@@ -45,7 +35,7 @@ object Maintainer {
                 result.close()
                 true
             } catch (e: SQLException) {
-                loggerM.error("SQL: $sql, $e")
+                // loggerM.error("SQL: $sql, $e")
                 false
             }
         }

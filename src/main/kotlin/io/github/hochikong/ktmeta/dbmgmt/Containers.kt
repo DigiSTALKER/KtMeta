@@ -11,15 +11,6 @@ import me.liuwj.ktorm.support.sqlite.SQLiteDialect
 
 
 /**
- * Supported DBs
- * */
-enum class SupportedDBs(val identity: String) {
-    SQLite("Sqlite"),
-    PostgreSQL("Postgresql")
-}
-
-
-/**
  * Data class used for keeping database configurations.
  * @param driver JDBC driver name, e.g., 'org.sqlite.JDBC' or 'org.postgresql.Driver'.
  * @param url Target database url, e.g., 'jdbc:sqlite:xxxx.db'.
