@@ -1,38 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configuration>
-    <appender name="DBMGMT-NORMAL" class="ch.qos.logback.core.FileAppender">
-        <file>logs/ktmeta-normal.log</file>
-        <filter class="ch.qos.logback.classic.filter.LevelFilter">
-            <level>ERROR</level>
-            <onMatch>DENY</onMatch>
-            <onMismatch>ACCEPT</onMismatch>
-        </filter>
-        <encoder>
-            <pattern>%date %-5level [%thread] %logger{10} [%file:%line] -> %msg%n</pattern>
-        </encoder>
-    </appender>
-
+<configuration debug="false">
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>%msg%n</pattern>
         </encoder>
     </appender>
 
-    <appender name="DBMGMT-ERROR" class="ch.qos.logback.core.FileAppender">
-        <file>logs/ktmeta-error.log</file>
-        <filter class="ch.qos.logback.classic.filter.LevelFilter">
-            <level>ERROR</level>
-            <onMatch>ACCEPT</onMatch>
-            <onMismatch>DENY</onMismatch>
+    <appender name="dbmgmt" class="ch.qos.logback.core.FileAppender">
+        <file>logs/ktmeta-dgmgmt.log</file>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>WARN</level>
         </filter>
         <encoder>
             <pattern>%date %-5level [%thread] %logger{10} [%file:%line] -> %msg%n</pattern>
         </encoder>
     </appender>
 
+    <logger name="ktmeta->dbmgmt" level="warn" additivity="false">
+        <appender-ref ref="dbmgmt"/>
+    </logger>
+
     <root level="debug">
-        <appender-ref ref="DBMGMT-ERROR"/>
-        <appender-ref ref="DBMGMT-NORMAL"/>
         <appender-ref ref="STDOUT"/>
     </root>
 </configuration>

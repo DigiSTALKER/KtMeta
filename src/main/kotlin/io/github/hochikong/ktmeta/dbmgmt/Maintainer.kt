@@ -10,6 +10,8 @@ import java.sql.DriverManager
 import java.sql.SQLException
 
 object Maintainer {
+    private val loggerM = LoggerFactory.getLogger("ktmeta->dbmgmt")
+
     /* When 0, it means Int, 1 means String */
     private val columnConstrains = listOf(
         Pair("id", 0),
@@ -20,7 +22,6 @@ object Maintainer {
         Pair("url", 1),
         Pair("protected", 0)
     )
-    private val logger = LoggerFactory.getLogger("Logger from Maintainer.kt")
     private val columnNames = List(7) {
         columnConstrains[it].first
     }
@@ -37,14 +38,14 @@ object Maintainer {
      * Check dbreg.db contains registration table or not.
      * */
     fun hasTable(): Boolean {
-        val query = "SELECT id FROM registration;"
+        val sql = "SELECT id FROM registration;"
         connection.createStatement().use {
             return try {
-                val result = it.executeQuery(query)
+                val result = it.executeQuery(sql)
                 result.close()
                 true
             } catch (e: SQLException) {
-                println(e.toString())
+                loggerM.error("SQL: $sql, $e")
                 false
             }
         }
@@ -91,7 +92,7 @@ object Maintainer {
                 it.execute(sql)
                 true
             } catch (e: SQLException) {
-                println(e.toString())
+                loggerM.error("SQL: $sql, $e")
                 false
             }
         }
@@ -117,7 +118,7 @@ object Maintainer {
                 it.executeUpdate(sql)
                 true
             } catch (e: SQLException) {
-                println(e.toString())
+                loggerM.error("SQL: $sql, $e")
                 false
             }
         }
@@ -147,7 +148,7 @@ object Maintainer {
                 queryResult.close()
                 return result.toList()
             } catch (e: SQLException) {
-                println(e.toString())
+                loggerM.error("SQL: $sql, $e")
                 return null
             }
         }
@@ -158,14 +159,15 @@ object Maintainer {
      * */
     fun updateRow(column: String, newValue: String, where: String): Boolean {
         require(column in columnNames) { "Column $column not exists." }
-        connection.createStatement().use {
-            return try {
-                val sql = """
+        val sql = """
                     UPDATE registration SET $column=$newValue WHERE $where;
                 """.trimIndent()
+        connection.createStatement().use {
+            return try {
                 it.executeUpdate(sql)
                 true
             } catch (e: SQLException) {
+                loggerM.error("SQL: $sql, $e")
                 false
             }
         }
@@ -175,15 +177,16 @@ object Maintainer {
      * Delete row(s) from registration table by condition(s) [where].
      * */
     fun deleteRow(where: String): Boolean {
+        val sql = """
+                    DELETE FROM registration WHERE $where ;
+                  """.trimIndent()
         connection.createStatement().use {
             return try {
-                val sql = """
-                    DELETE FROM registration WHERE $where ;
-                """.trimIndent()
                 println(sql)
                 it.executeUpdate(sql)
                 true
             } catch (e: SQLException) {
+                loggerM.error("SQL: $sql, $e")
                 false
             }
         }
@@ -193,11 +196,15 @@ object Maintainer {
      * Drop table
      * */
     fun dropTable(): Boolean {
+        val sql = """
+            DROP TABLE registration;
+        """.trimIndent()
         connection.createStatement().use {
             return try {
-                it.execute("DROP TABLE registration;")
+                it.execute(sql)
                 true
             } catch (e: SQLException) {
+                loggerM.error("SQL: $sql, $e")
                 false
             }
         }
