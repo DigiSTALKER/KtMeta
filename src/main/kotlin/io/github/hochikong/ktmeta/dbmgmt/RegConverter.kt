@@ -14,7 +14,9 @@ enum class SupportedDBs(val identity: String) {
 }
 
 /**
- * Columns' type constrain.
+ * Columns' type constrain for Maintainer use SQLite .
+ *
+ * When Pair.second is 0, it means column type is Int, 1 means String.
  *
  * SQL DDL:
  * ```SQL
@@ -30,10 +32,8 @@ enum class SupportedDBs(val identity: String) {
  *  CONSTRAINT is_protected CHECK ( protected in (0, 1) )
  * );
  * ```
- *
- *  When Pair.second is 0, it means Int, 1 means String
  * */
-val columnConstrains = listOf(
+val SQLiteDBRegColumnConstrains = listOf(
     Pair("id", 0),
     Pair("db", 1),
     Pair("user", 1),
@@ -45,6 +45,9 @@ val columnConstrains = listOf(
 
 /**
  * Use regOut to convert result from Maintainer.
+ *
+ * Only a list which comes from Maintainer.queryAllData() and its size equals to 7 will return new list.
+ * Otherwise, return null.
  *
  * SQL DDL:
  * ```SQL
@@ -88,6 +91,15 @@ fun List<Any>.regOut(): List<Any?>? {
 /**
  * Use RegIn to convert input for Maintainer.
  *
+ * Only a list's elements fit the DML below and its size equals to 6 can
+ * be converted to an input list for Maintainer.insertRow().
+ *
+ * SQL DML:
+ * ```SQL
+ * INSERT INTO registration(db, user, password, description, url, protected)
+ * VALUES (xxx, etc.)
+ * ```
+ *
  * SQL DDL:
  * ```SQL
  * CREATE TABLE registration(
@@ -102,12 +114,6 @@ fun List<Any>.regOut(): List<Any?>? {
  *  CONSTRAINT is_protected CHECK ( protected in (0, 1) )
  * );
  * ```
- *
- * SQL DML:
- * ```SQL
- * INSERT INTO registration(db, user, password, description, url, protected)
- * VALUES (xxx, etc.)
- * ```
  * */
 fun List<Any?>.regIn(): List<Any>? {
     var result: List<Any>? = null
@@ -120,6 +126,7 @@ fun List<Any?>.regIn(): List<Any>? {
                         null -> tmp.add("null")
                         is Number -> tmp.add("$ele")
                         is Char -> tmp.add("'$ele'")
+                        is CharSequence -> tmp.add("'$ele")
                         is String -> tmp.add("'$ele'")
                         false -> tmp.add("0")
                         true -> tmp.add("1")

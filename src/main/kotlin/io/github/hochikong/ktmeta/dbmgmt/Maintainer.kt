@@ -13,7 +13,7 @@ object Maintainer {
     private val loggerM = LoggerFactory.getLogger("ktmeta->dbmgmt")
 
     private val columnNames = List(7) {
-        columnConstrains[it].first
+        SQLiteDBRegColumnConstrains[it].first
     }
     private const val driverStr = "org.sqlite.JDBC"
     private const val dbURL = "jdbc:sqlite:dbreg.db"
@@ -98,7 +98,7 @@ object Maintainer {
      * but if you insert null or integer, just simply use "CONTENT".
      *
      * */
-    fun insertData(data: List<Any>): Boolean {
+    fun insertRow(data: List<Any>): Boolean {
         val sql = """
                 INSERT INTO registration(db, user, password, description, url, protected)
                 VALUES (${data[0]}, ${data[1]}, ${data[2]}, ${data[3]}, ${data[4]}, ${data[5]});
@@ -117,7 +117,7 @@ object Maintainer {
     /**
      * Return a list which contains all rows of registration table.
      * */
-    fun queryAllData(): List<List<Any>>? {
+    fun queryAllRow(): List<List<Any>>? {
         val result = mutableListOf<List<Any>>()
         val sql = "SELECT * FROM registration;"
         connection.createStatement().use { it ->
@@ -125,7 +125,7 @@ object Maintainer {
                 val queryResult = it.executeQuery(sql)
                 while (queryResult.next()) {
                     val tmp = mutableListOf<Any>()
-                    for (p in columnConstrains) {
+                    for (p in SQLiteDBRegColumnConstrains) {
                         if (p.second == 0) {
                             tmp.add(queryResult.getInt(p.first))
                         }

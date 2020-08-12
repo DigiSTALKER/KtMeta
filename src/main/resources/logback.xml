@@ -6,11 +6,17 @@
         </encoder>
     </appender>
 
-    <appender name="dbmgmt" class="ch.qos.logback.core.FileAppender">
-        <file>logs/ktmeta-dgmgmt.log</file>
+    <appender name="dbmgmt" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--        <file>logs/ktmeta-dgmgmt.log</file>-->
+        <prudent>true</prudent>
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
             <level>WARN</level>
         </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>logs/ktmeta-dbmgmt.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <maxHistory>5</maxHistory>
+            <maxFileSize>5KB</maxFileSize>
+        </rollingPolicy>
         <encoder>
             <pattern>%date %-5level [%thread] %logger{10} [%file:%line] -> %msg%n</pattern>
         </encoder>

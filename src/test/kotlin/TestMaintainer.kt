@@ -48,16 +48,16 @@ class TestMaintainer {
     @Test
     fun testInsertTable() {
         assertEquals(false, Maintainer.createTable())
-        assertEquals(true, Maintainer.insertData(legalData[0]))
-        assertEquals(true, Maintainer.insertData(legalData[1]))
+        assertEquals(true, Maintainer.insertRow(legalData[0]))
+        assertEquals(true, Maintainer.insertRow(legalData[1]))
     }
 
     @Order(3)
     @Test
     fun testQueryTable() {
         Maintainer.createTable()
-        assertEquals(false, Maintainer.insertData(legalData[0]))
-        val result = Maintainer.queryAllData()
+        assertEquals(false, Maintainer.insertRow(legalData[0]))
+        val result = Maintainer.queryAllRow()
         println(result)
         assertEquals(listOf(1, "Sqlite", "null", "null", "desc sqlite", "url 1", 0), result?.get(0))
     }
@@ -65,7 +65,7 @@ class TestMaintainer {
     @Order(4)
     @Test
     fun testIllegal() {
-        assertEquals(false, Maintainer.insertData(illegalData))
+        assertEquals(false, Maintainer.insertRow(illegalData))
     }
 
     @Order(5)
@@ -85,12 +85,12 @@ class TestMaintainer {
         )
         assertEquals(
             listOf(1, "Sqlite", "null", "null", "new desc sqlite", "url 1", 0).toString(),
-            Maintainer.queryAllData()?.get(0).toString()
+            Maintainer.queryAllRow()?.get(0).toString()
         )
         Maintainer.deleteRow("db == 'Sqlite'")
         assertEquals(
             listOf(2, "Postgresql", "postgres", "postgres", "desc postgresql", "url 2", '1').toString(),
-            Maintainer.queryAllData()?.get(0).toString()
+            Maintainer.queryAllRow()?.get(0).toString()
         )
     }
 }

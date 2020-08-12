@@ -38,7 +38,7 @@ class TestRegConverter {
 
     @Test
     fun testRegInOutWithDB() {
-        rawInput.regIn()?.let { Maintainer.insertData(it) }
-        assert(Maintainer.queryAllData()?.get(0)?.regOut() == output)
+        rawInput.regIn()?.let { Maintainer.insertRow(it) }
+        assert(Maintainer.queryAllRow()?.get(0)?.regOut() == output)
     }
 }
