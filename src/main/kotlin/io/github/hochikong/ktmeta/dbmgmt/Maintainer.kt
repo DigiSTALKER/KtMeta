@@ -44,6 +44,16 @@ object Maintainer {
     /**
      * Create empty table called registration.
      *
+     * DDL explanation:
+     * - id: Integer and primary key, auto increment.
+     * - db: Text, store supported dbs' identity.
+     * - user: Text or null, store database's username. If you use sqlite it should be null.
+     * - password: Text or null, store database's password after encryption. If you use sqlite it should be null.
+     * - name: Text, not null and unique, store the name of this database.
+     * - description: Text, not null, store the description of this database.
+     * - url: Text, not null and unique, store the jdbc url of this database.
+     * - protected: Integer, not full, store true as 1 and false as 0. If you use sqlite it should be 0.
+     *
      * Execute DDL below:
      * ```SQL
      * CREATE TABLE registration(
@@ -51,6 +61,7 @@ object Maintainer {
      *  db TEXT NOT NULL ,
      *  user TEXT,
      *  password TEXT,
+     *  name TEXT NOT NULL UNIQUE,
      *  description TEXT NOT NULL ,
      *  url TEXT NOT NULL UNIQUE ,
      *  protected INTEGER NOT NULL ,
@@ -70,6 +81,7 @@ object Maintainer {
                 db TEXT NOT NULL ,
                 user TEXT,
                 password TEXT,
+                name TEXT NOT NULL UNIQUE,
                 description TEXT NOT NULL ,
                 url TEXT NOT NULL UNIQUE ,
                 protected INTEGER NOT NULL ,
@@ -90,7 +102,7 @@ object Maintainer {
 
     /**
      * Insert a row to table.
-     * @param data List, contains values of 'db', 'user', 'password', 'description', 'url', 'protected'.
+     * @param data List, contains values of 'db', 'user', 'password', 'name', 'description', 'url', 'protected'.
      *
      * Check createTable()'s document for more information about these columns.
      *
@@ -100,8 +112,8 @@ object Maintainer {
      * */
     fun insertRow(data: List<Any>): Boolean {
         val sql = """
-                INSERT INTO registration(db, user, password, description, url, protected)
-                VALUES (${data[0]}, ${data[1]}, ${data[2]}, ${data[3]}, ${data[4]}, ${data[5]});
+                INSERT INTO registration(db, user, password, name, description, url, protected)
+                VALUES (${data[0]}, ${data[1]}, ${data[2]}, ${data[3]}, ${data[4]}, ${data[5]}, ${data[6]});
                 """.trimIndent()
         return connection.createStatement().use {
             try {

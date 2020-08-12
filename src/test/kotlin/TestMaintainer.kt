@@ -9,16 +9,18 @@ class TestMaintainer {
      * db TEXT NOT NULL ,
      * user TEXT,
      * password TEXT,
+     * name TEXT NOT NULL UNIQUE,
      * description TEXT NOT NULL ,
      * url TEXT NOT NULL ,
      * protected INTEGER NOT NULL ,
      * */
     private val legalData = listOf(
-        listOf("'Sqlite'", "null", "null", "'desc sqlite'", "'url 1'", '0'),
-        listOf("'Postgresql'", "'postgres'", "'postgres'", "'desc postgresql'", "'url 2'", '1')
+        listOf("'Sqlite'", "null", "null", "'test name1'", "'desc sqlite'", "'url 1'", '0'),
+        listOf("'Postgresql'", "'postgres'", "'postgres'", "'test name2'", "'desc postgresql'", "'url 2'", '1')
     )
 
-    private val illegalData = listOf("'Mysql'", "'mysql'", "'mysql'", "'desc mysql'", "'url 3'", '1')
+    private val illegalData =
+        listOf("'Mysql'", "'mysql'", "'mysql'", "'test name error'", "'desc mysql'", "'url 3'", '1')
 
     companion object {
         @JvmStatic
@@ -59,7 +61,7 @@ class TestMaintainer {
         assertEquals(false, Maintainer.insertRow(legalData[0]))
         val result = Maintainer.queryAllRow()
         println(result)
-        assertEquals(listOf(1, "Sqlite", "null", "null", "desc sqlite", "url 1", 0), result?.get(0))
+        assertEquals(listOf(1, "Sqlite", "null", "null", "test name1", "desc sqlite", "url 1", 0), result?.get(0))
     }
 
     @Order(4)
@@ -84,12 +86,12 @@ class TestMaintainer {
             "db == 'Sqlite' AND protected == 0"
         )
         assertEquals(
-            listOf(1, "Sqlite", "null", "null", "new desc sqlite", "url 1", 0).toString(),
+            listOf(1, "Sqlite", "null", "null", "test name1", "new desc sqlite", "url 1", 0).toString(),
             Maintainer.queryAllRow()?.get(0).toString()
         )
         Maintainer.deleteRow("db == 'Sqlite'")
         assertEquals(
-            listOf(2, "Postgresql", "postgres", "postgres", "desc postgresql", "url 2", '1').toString(),
+            listOf(2, "Postgresql", "postgres", "postgres", "test name2", "desc postgresql", "url 2", '1').toString(),
             Maintainer.queryAllRow()?.get(0).toString()
         )
     }
