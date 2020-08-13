@@ -17,13 +17,33 @@ object Maintainer {
     }
     private const val driverStr = "org.sqlite.JDBC"
     private var dbURL = "jdbc:sqlite:dbreg.db"
-    private var connection: Connection
+    private lateinit var connection: Connection
+    private var hasConnection: Boolean = false
 
     init {
         Class.forName(driverStr)
-        connection = DriverManager.getConnection(dbURL)
     }
 
+    private fun checkConnection() {
+        if (!hasConnection) {
+            connection = DriverManager.getConnection(dbURL)
+            hasConnection = true
+        }
+    }
+
+    /**
+     * Close connection, controlled by User.
+     * */
+    fun closeConnection() {
+        if (hasConnection) {
+            connection.close()
+            hasConnection = false
+        }
+    }
+
+    /**
+     * Set [newUrl] as dbURL
+     * */
     fun setDBUrl(newUrl: String): Boolean {
         if (!newUrl.contains("jdbc:sqlite")) return false
         if (!newUrl.contains("dbreg.db")) return false
@@ -36,10 +56,10 @@ object Maintainer {
      * */
     fun hasTable(): Boolean {
         val sql = "SELECT id FROM registration;"
+        checkConnection()
         connection.createStatement().use {
             return try {
                 val result = it.executeQuery(sql)
-                result.close()
                 true
             } catch (e: SQLException) {
                 // loggerM.error("SQL: $sql, $e")
@@ -79,6 +99,7 @@ object Maintainer {
      *
      * */
     fun createTable(): Boolean {
+        checkConnection()
         if (this.hasTable()) {
             return false
         }
@@ -118,6 +139,7 @@ object Maintainer {
      *
      * */
     fun insertRow(data: List<Any>): Boolean {
+        checkConnection()
         val sql = """
                 INSERT INTO registration(db, user, password, name, description, url, protected)
                 VALUES (${data[0]}, ${data[1]}, ${data[2]}, ${data[3]}, ${data[4]}, ${data[5]}, ${data[6]});
@@ -137,6 +159,7 @@ object Maintainer {
      * Return a list which contains all rows of registration table.
      * */
     fun queryAllRows(): List<List<Any>>? {
+        checkConnection()
         val result = mutableListOf<List<Any>>()
         val sql = "SELECT * FROM registration;"
         connection.createStatement().use { it ->
@@ -167,6 +190,7 @@ object Maintainer {
      * Update row(s) in registration table by condition [where].
      * */
     fun updateRow(column: String, newValue: String, where: String): Boolean {
+        checkConnection()
         require(column in columnNames) { "Column $column not exists." }
         val sql = """
                     UPDATE registration SET $column=$newValue WHERE $where;
@@ -186,6 +210,7 @@ object Maintainer {
      * Delete row(s) from registration table by condition(s) [where].
      * */
     fun deleteRow(where: String): Boolean {
+        checkConnection()
         val sql = """
                     DELETE FROM registration WHERE $where ;
                   """.trimIndent()
@@ -205,6 +230,7 @@ object Maintainer {
      * Drop table
      * */
     fun dropTable(): Boolean {
+        checkConnection()
         val sql = """
             DROP TABLE registration;
         """.trimIndent()

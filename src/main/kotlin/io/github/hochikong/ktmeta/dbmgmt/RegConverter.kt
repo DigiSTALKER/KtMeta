@@ -41,7 +41,7 @@ val SQLiteDBRegColumnConstrains = listOf(
 
 
 /**
- * Use this to parse each row of registration table.
+ * Use this to store single row of registration table and convert to list for Maintainer.
  * */
 data class RegRow(
     val id: Int = -1,
@@ -53,6 +53,9 @@ data class RegRow(
     var url: String = "",
     var protected: Boolean = false
 ) {
+    /**
+     * Convert data class to list for Maintainer.insertRow().
+     * */
     fun regIn(): List<Any> {
         if (db != SupportedDBs.NotSupported) {
             val result = mutableListOf<Any>()
@@ -105,6 +108,10 @@ data class RegRow(
     }
 }
 
+/**
+ * Use this to parse single row of registration table.
+ * @return Data class, RegRow
+ * */
 fun List<Any>.regOut(): RegRow {
     if (this.size != 8) throw ConvertError("List.regOut said: This list's size not equals to 8.")
     if (this[1] !in listOf(SupportedDBs.SQLite.identity, SupportedDBs.PostgreSQL.identity)) {
