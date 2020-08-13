@@ -35,10 +35,10 @@ data class DBConfigContainer(
     val name: String,
     val desc: String,
     val url: String,
-    val username: String?,
-    val password: String?
+    val username: String,
+    val password: String
 ) {
-    val protected = password != null
+    val protected = password != "null"
     val dialect: SqlDialect = when (type) {
         SupportedDBs.SQLite -> {
             SQLiteDialect()
@@ -56,6 +56,7 @@ data class DBConfigContainer(
         SupportedDBs.SQLite -> SupportedDBs.SQLite.dataSource
         SupportedDBs.NotSupported -> throw ConvertError("DBConfigContainer -> attr_dataSource said: This database not supported")
     }
+    val jdbcDriver: String = type.jdbcDriver
 }
 
 /**
