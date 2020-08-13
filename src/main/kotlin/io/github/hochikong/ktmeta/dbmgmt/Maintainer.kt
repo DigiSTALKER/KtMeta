@@ -16,12 +16,19 @@ object Maintainer {
         SQLiteDBRegColumnConstrains[it].first
     }
     private const val driverStr = "org.sqlite.JDBC"
-    private const val dbURL = "jdbc:sqlite:dbreg.db"
+    private var dbURL = "jdbc:sqlite:dbreg.db"
     private var connection: Connection
 
     init {
         Class.forName(driverStr)
         connection = DriverManager.getConnection(dbURL)
+    }
+
+    fun setDBUrl(newUrl: String): Boolean {
+        if (!newUrl.contains("jdbc:sqlite")) return false
+        if (!newUrl.contains("dbreg.db")) return false
+        dbURL = newUrl
+        return true
     }
 
     /**
@@ -129,7 +136,7 @@ object Maintainer {
     /**
      * Return a list which contains all rows of registration table.
      * */
-    fun queryAllRow(): List<List<Any>>? {
+    fun queryAllRows(): List<List<Any>>? {
         val result = mutableListOf<List<Any>>()
         val sql = "SELECT * FROM registration;"
         connection.createStatement().use { it ->

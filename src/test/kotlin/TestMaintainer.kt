@@ -59,7 +59,7 @@ class TestMaintainer {
     fun testQueryTable() {
         Maintainer.createTable()
         assertEquals(false, Maintainer.insertRow(legalData[0]))
-        val result = Maintainer.queryAllRow()
+        val result = Maintainer.queryAllRows()
         println(result)
         assertEquals(listOf(1, "Sqlite", "null", "null", "test name1", "desc sqlite", "url 1", 0), result?.get(0))
     }
@@ -87,12 +87,12 @@ class TestMaintainer {
         )
         assertEquals(
             listOf(1, "Sqlite", "null", "null", "test name1", "new desc sqlite", "url 1", 0).toString(),
-            Maintainer.queryAllRow()?.get(0).toString()
+            Maintainer.queryAllRows()?.get(0).toString()
         )
         Maintainer.deleteRow("db == 'Sqlite'")
         assertEquals(
             listOf(2, "Postgresql", "postgres", "postgres", "test name2", "desc postgresql", "url 2", '1').toString(),
-            Maintainer.queryAllRow()?.get(0).toString()
+            Maintainer.queryAllRows()?.get(0).toString()
         )
     }
 }

@@ -4,7 +4,8 @@
  */
 package io.github.hochikong.ktmeta.dbmgmt
 
-import io.github.hochikong.ktmeta.predefine.SupportedDBs
+import io.github.hochikong.ktmeta.predefined.ConvertError
+import io.github.hochikong.ktmeta.predefined.SupportedDBs
 import me.liuwj.ktorm.database.SqlDialect
 import me.liuwj.ktorm.support.postgresql.PostgreSqlDialect
 import me.liuwj.ktorm.support.sqlite.SQLiteDialect
@@ -37,7 +38,7 @@ data class DBConfigContainer(
     val username: String?,
     val password: String?
 ) {
-    val protected = username != null
+    val protected = password != null
     val dialect: SqlDialect = when (type) {
         SupportedDBs.SQLite -> {
             SQLiteDialect()
@@ -45,10 +46,47 @@ data class DBConfigContainer(
         SupportedDBs.PostgreSQL -> {
             PostgreSqlDialect()
         }
+        SupportedDBs.NotSupported -> {
+            throw ConvertError("DBConfigContainer -> attr_dialect said: This database not supported.")
+        }
     }
 
     val dataSource: String = when (type) {
         SupportedDBs.PostgreSQL -> SupportedDBs.PostgreSQL.dataSource
         SupportedDBs.SQLite -> SupportedDBs.SQLite.dataSource
+        SupportedDBs.NotSupported -> throw ConvertError("DBConfigContainer -> attr_dataSource said: This database not supported")
     }
+}
+
+/**
+ * Generate catalog by the return of Maintainer.queryAllRows
+ * */
+object DBRegCatalog {
+    private var catalog: MutableMap<String, RegRow> = mutableMapOf()
+
+    fun updateCatalog(queryResult: List<List<Any>>?): Boolean {
+        // refresh
+        if (catalog.isNotEmpty()) {
+            catalog = mutableMapOf()
+        }
+
+        if (queryResult != null) {
+            for (row in queryResult) {
+                val tmp = row.regOut()
+                catalog[tmp.name] = tmp
+            }
+            return true
+        }
+        return false
+    }
+
+    fun keys(): MutableSet<String> {
+        return catalog.keys
+    }
+
+    operator fun get(key: String): RegRow? {
+        if (key !in catalog.keys) return null
+        return catalog[key]
+    }
+
 }

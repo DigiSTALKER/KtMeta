@@ -2,7 +2,7 @@
  * @author Hochikong
  * Pre-defined Data
  * */
-package io.github.hochikong.ktmeta.predefine
+package io.github.hochikong.ktmeta.predefined
 
 
 /**
@@ -13,5 +13,12 @@ package io.github.hochikong.ktmeta.predefine
  * */
 enum class SupportedDBs(val identity: String, val jdbcDriver: String, val dataSource: String) {
     SQLite("Sqlite", "org.sqlite.JDBC", "org.sqlite.SQLiteDataSource"),
-    PostgreSQL("Postgresql", "org.postgresql.Driver", "org.postgresql.ds.PGSimpleDataSource");
+    PostgreSQL("Postgresql", "org.postgresql.Driver", "org.postgresql.ds.PGSimpleDataSource"),
+    NotSupported("", "", "")
 }
+
+/**
+ * Pre-defined exceptions.
+ * */
+class NoDatabasesIsAvailable(msg: String) : Exception(msg)
+class ConvertError(msg: String) : Exception(msg)
