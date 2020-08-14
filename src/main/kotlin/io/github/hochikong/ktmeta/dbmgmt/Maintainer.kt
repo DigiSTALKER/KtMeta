@@ -59,7 +59,7 @@ object Maintainer {
         checkConnection()
         connection.createStatement().use {
             return try {
-                val result = it.executeQuery(sql)
+                it.executeQuery(sql)
                 true
             } catch (e: SQLException) {
                 // loggerM.error("SQL: $sql, $e")

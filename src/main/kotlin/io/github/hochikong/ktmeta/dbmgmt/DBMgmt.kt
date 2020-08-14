@@ -7,6 +7,7 @@ import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
 import io.github.hochikong.ktmeta.predefined.NoDatabasesIsAvailable
 import io.github.hochikong.ktmeta.predefined.NoSuchDatabaseInRegistrationTable
+import io.github.hochikong.ktmeta.predefined.SupportedDBs
 import me.liuwj.ktorm.database.Database
 import org.slf4j.LoggerFactory
 import java.sql.Connection
@@ -15,11 +16,13 @@ import kotlin.properties.Delegates
 
 object DBMgmt {
     private val loggerDBMGMT = LoggerFactory.getLogger("ktmeta->dbmgmt")
-    private var regIsEmpty: Boolean = true
-    private val currentDatabases = mutableListOf<DBConfigContainer>()
+    var regIsEmpty: Boolean = true
+        private set
+    val currentDatabases = mutableListOf<DBConfigContainer>()
     private var queryResult: List<List<Any>>? by Delegates.observable(listOf()) { _, _, newValue ->
-        regIsEmpty = when (newValue) {
-            null -> true
+        regIsEmpty = when {
+            newValue == null -> true
+            newValue.isEmpty() -> true
             else -> {
                 DBRegCatalog.updateCatalog(newValue)
                 false
@@ -28,14 +31,13 @@ object DBMgmt {
     }
 
     init {
-        regIsEmpty = if (!Maintainer.hasTable()) {
+        if (!Maintainer.hasTable()) {
             Maintainer.createTable()
-            true
         } else {
             queryResult = Maintainer.queryAllRows()
-            false
         }
     }
+
 
     private fun checkRegIsEmpty(name: String): RegRow? {
         if (regIsEmpty) {
@@ -57,6 +59,66 @@ object DBMgmt {
 
 
     // APIs
+    /**
+     * Manually query and update database's catalog.
+     * */
+    fun queryReg(): Boolean {
+        queryResult = Maintainer.queryAllRows()
+        return true
+    }
+
+    /**
+     * Check database's catalog.
+     * @return list, ("catalog", empty or not(Boolean), all available databases(set))
+     * */
+    fun checkCatalog(): List<Any> {
+        return if (regIsEmpty) {
+            listOf("catalog", true, DBRegCatalog.keys())
+        } else {
+            listOf("catalog", false, DBRegCatalog.keys())
+        }
+    }
+
+    /**
+     * Add database configuration.
+     * */
+    fun addDatabase(
+        type: SupportedDBs,
+        name: String,
+        desc: String,
+        user: String,
+        password: String,
+        url: String
+    ): Boolean {
+        val tmp = RegRow(
+            id = -1,
+            db = type,
+            user = user,
+            password = password,
+            name = name,
+            description = desc,
+            url = url,
+            protected = password != "null"
+        )
+        if (Maintainer.insertRow(tmp.regIn())) {
+            queryReg()
+            return true
+        }
+        return false
+    }
+
+    /**
+     * Delete database configuration.
+     * */
+    fun removeDatabase(name: String): Boolean {
+        return if (checkRegIsEmpty(name) != null) {
+            Maintainer.deleteRow("name == $'$name'")
+            queryReg()
+        } else {
+            false
+        }
+    }
+
     /**
      * Return JDBC connection by database's [name]
      */
@@ -134,14 +196,14 @@ object DBMgmt {
             )
             val config = HikariConfig(configPath)
             config.jdbcUrl = configContainer.url
-            config.dataSourceClassName = configContainer.dataSource
+            // config.dataSourceClassName = configContainer.dataSource
             config.poolName = "ConnectionPoolOf${configContainer.name}"
             if (configContainer.username !== "null") config.username = configContainer.username
             if (configContainer.password != "null") config.password = configContainer.password
 
             val dataSource = HikariDataSource(config)
             addUsingDatabase(configContainer)
-            return Database.connect(dataSource)
+            return Database.connect(dataSource, configContainer.dialect)
         } else {
             throw NoSuchDatabaseInRegistrationTable("DBMGMT.getConnection said: Database $name not exists.")
         }
