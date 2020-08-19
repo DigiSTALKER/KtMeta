@@ -1,4 +1,3 @@
-import io.github.hochikong.ktmeta.driver.AbstractDriver
 import java.lang.reflect.Method
 import java.net.URL
 import java.net.URLClassLoader
@@ -18,6 +17,7 @@ fun main() {
     if (input.trim() == "password") {
         println("You can access the db.")
     }
+
 
     val path = "plugins/ktmeta-driver-1.0-SNAPSHOT.jar"
     val absp = "file:C:\\Users\\ckhoi\\IdeaProjects\\ktmeta\\plugins\\ktmeta-driver-1.0-SNAPSHOT.jar"
