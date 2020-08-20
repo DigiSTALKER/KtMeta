@@ -3,9 +3,9 @@ package io.github.hochikong.ktmeta.device
 /**
  * All devices should implement this interface.
  * */
-interface DriverAPI {
+interface DeviceAPI {
     fun setTargetDir(path: String): Boolean
-    fun getFullTree()
+    fun getFullTree(): List<FileRow>
     fun cd()
     fun pwd()
     fun readFile()
