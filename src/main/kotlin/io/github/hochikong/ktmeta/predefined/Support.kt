@@ -29,7 +29,7 @@ class PathNotExists(msg: String) : Exception(msg)
 /**
  * Pre-defined file type.
  * */
-enum class FileType {
-    File,
-    Directory
+enum class FileType(val identity: String) {
+    File("File"),
+    Directory("Directory")
 }

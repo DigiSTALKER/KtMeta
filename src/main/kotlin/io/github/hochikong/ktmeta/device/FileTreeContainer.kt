@@ -7,7 +7,10 @@ import io.github.hochikong.ktmeta.predefined.FileType
  * @param selfPath Absolute path of this file or directory.
  * @param rootPath Absolute path, mark as root path. If [selfPath] == [rootPath], [hasFather] will be false.
  * @param hasFather Root path has no father in FileRow, but it may be a child of a directory in filesystem.
- * @param fatherPath
+ * @param fatherPath Father path of [selfPath], but when hasFather is false, it will be ".".
+ * @param hasChild If [selfPath] is a directory with child dirs or files, it will be true. If [selfPath] is file,
+ * will be false.
+ * @param type If [selfPath] is a directory, it will be FileType.Directory or FileType.File in Support.kt.
  * */
 data class FileRow(
     val selfPath: String,
@@ -51,6 +54,9 @@ data class FileRow(
 
 }
 
+/**
+ * A factory method to return FileRow
+ * */
 fun fileRowBuilder(
     selfPath: String,
     rootPath: String,

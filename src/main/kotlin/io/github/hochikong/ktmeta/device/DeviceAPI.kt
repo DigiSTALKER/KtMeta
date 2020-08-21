@@ -6,10 +6,9 @@ package io.github.hochikong.ktmeta.device
 interface DeviceAPI {
     fun setTargetDir(path: String): Boolean
     fun getFullTree(): List<FileRow>
-    fun cd()
-    fun pwd()
-    fun readFile()
-    fun writeFile()
-    fun push()
-    fun pop()
+    fun pwd(): String
+    fun readFile(path: String)
+    fun writeFile(path: String)
+    fun push(path: String): Boolean
+    fun pop(): String
 }
