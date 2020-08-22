@@ -23,8 +23,7 @@ enum class SupportedDBs(val identity: String, val jdbcDriver: String, val dataSo
 class NoDatabasesIsAvailable(msg: String) : Exception(msg)
 class ConvertError(msg: String) : Exception(msg)
 class NoSuchDatabaseInRegistrationTable(msg: String) : Exception(msg)
-class PathNotAbsolute(msg: String) : Exception(msg)
-class PathNotExists(msg: String) : Exception(msg)
+
 
 /**
  * Pre-defined file type.
@@ -32,4 +31,13 @@ class PathNotExists(msg: String) : Exception(msg)
 enum class FileType(val identity: String) {
     File("File"),
     Directory("Directory")
+}
+
+
+/**
+ * Pre-defined size limit.
+ * */
+enum class SizeLimit {
+    Normal,
+    TooBig
 }

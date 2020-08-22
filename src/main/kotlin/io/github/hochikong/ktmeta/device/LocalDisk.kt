@@ -5,17 +5,14 @@ import io.github.hochikong.ktmeta.predefined.FileType
 import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
-import kotlin.math.abs
 
 
 /**
  * Local disk access API
  * */
-class LocalDisk(root: String) : DeviceAPI {
-    constructor() : this("")
-
+class LocalDisk : DeviceAPI {
     // absPath must be directory
-    var absPath: String = root
+    var initAbsPath: String = "."
         private set
 
     // path and its father path
@@ -24,8 +21,8 @@ class LocalDisk(root: String) : DeviceAPI {
 
     // path stack
     private var pathStack: MutableList<String> = mutableListOf()
-    fun checkStack() {
-        println(this.pathStack)
+    fun checkStack(): MutableList<String> {
+        return this.pathStack
     }
 
     /**
@@ -41,8 +38,9 @@ class LocalDisk(root: String) : DeviceAPI {
         if (!Files.isDirectory(f)) return false
         if (!Files.isReadable(f)) return false
         if (!Files.isWritable(f)) return false
-        absPath = path
+        initAbsPath = path
         pathStack.add(path)
+        scanTree(Paths.get(this.initAbsPath))
         return true
     }
 
@@ -62,7 +60,7 @@ class LocalDisk(root: String) : DeviceAPI {
                 result.add(
                     fileRowBuilder(
                         selfPath = it.toString(),
-                        rootPath = this.absPath,
+                        rootPath = this.initAbsPath,
                         hasFather = it.parent.toString().isNotEmpty(),
                         fatherPath = it.parent.toString(),
                         hasChild = when {
@@ -80,7 +78,14 @@ class LocalDisk(root: String) : DeviceAPI {
 
         val tmp = mutableMapOf<String, String>()
         result.filter { it.type == FileType.Directory }
-            .forEach { tmp[it.selfPath.replace(it.fatherPath, "father")] = it.fatherPath }
+            .forEach {
+                when {
+                    it.fatherPath != "." ->
+                        tmp[it.selfPath.replace("${it.fatherPath}\\", "")] = it.fatherPath
+                    else ->
+                        tmp["root"] = it.selfPath
+                }
+            }
 
         this.dirs = tmp.toMap()
 
@@ -88,22 +93,47 @@ class LocalDisk(root: String) : DeviceAPI {
     }
 
     /**
-     * Return a list of FileRow
+     * Return a list of FileRow.
      * */
     override fun getFullTree(): List<FileRow> {
-        return scanTree(Paths.get(this.absPath))
+        return scanTree(Paths.get(this.initAbsPath))
     }
 
+    /**
+     * Return current abs path.
+     * */
     override fun pwd(): String {
-        return pathStack.last()
+        return pathStack.last().toString()
     }
 
-    override fun readFile(path: String) {
-        TODO("Not yet implemented")
+    /**
+     * Just provide directory name as [dirname] to ls().
+     * */
+    override fun ls(dirname: String?): List<String> {
+        val queryAbsPath = if (dirname != null) pathSearch(dirname)[0] else pathStack.last()
+        return if (queryAbsPath.isNotEmpty()) {
+            Files.newDirectoryStream(Paths.get(queryAbsPath)).use { stream ->
+                stream.map { it.toString() }
+                    .toList()
+            }
+        } else {
+            listOf()
+        }
     }
 
-    override fun writeFile(path: String) {
-        TODO("Not yet implemented")
+    /**
+     * Return all files in dir [dirname] or in last element of current path.
+     * */
+    fun globFilter(dirname: String? = null, rule: String): List<String> {
+        val queryAbsPath = if (dirname != null) pathSearch(dirname)[0] else pathStack.last()
+        return if (queryAbsPath.isNotEmpty()) {
+            Files.newDirectoryStream(Paths.get(queryAbsPath), rule).use { stream ->
+                stream.map { it.toString() }
+                    .toList()
+            }
+        } else {
+            listOf()
+        }
     }
 
     private fun MutableList<String>.pop(): String? {
@@ -116,21 +146,46 @@ class LocalDisk(root: String) : DeviceAPI {
         }
     }
 
-    override fun push(path: String): Boolean {
-        if (this.dirs.isEmpty()) scanTree(Paths.get(this.absPath))
-
-        if (dirs.keys.any { it.contains(path) }) {
-            val values =
-                dirs.keys.filter { it.startsWith("father\\") && it.contains(path) }.map { "${dirs[it]}\\$it" }.toList()
-
-            pathStack.add(values[0])
+    /**
+     * Goto [dirname] dir by directory's name.
+     * */
+    override fun push(dirname: String): Boolean {
+        val queryR = pathSearch(dirname)
+        if (queryR.isNotEmpty()) {
+            pathStack.add(queryR[0])
             return true
         }
         return false
     }
 
+    /**
+     * Search [dirname] exists or not. If exists return its abs path.
+     * */
+    private fun pathSearch(dirname: String): List<String> {
+        if (this.dirs.isEmpty()) scanTree(Paths.get(this.initAbsPath))
+
+        return if (dirs.keys.any { it.contains(dirname) }) {
+            val r = dirs.keys
+                .filter { it.contains(dirname) }
+                .filter { it.replace(dirname, "").isBlank() }
+                .map {
+                    when (it) {
+                        "root" -> this.initAbsPath
+                        else -> "${dirs[it]}\\$dirname"
+                    }
+                }.toList()
+            // println("search result are: $r")
+            r
+        } else {
+            listOf()
+        }
+    }
+
+    /**
+     * Return to former directory.
+     * */
     override fun pop(): String {
-        return this.pathStack.pop() ?: absPath
+        return this.pathStack.pop() ?: initAbsPath
     }
 
     private fun typeOf(path: Path): FileType {
