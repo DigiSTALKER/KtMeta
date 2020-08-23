@@ -11,20 +11,19 @@
  *  limitations under the License.
  */
 
-package io.github.hochikong.ktmeta.device
+package device
 
+import io.github.hochikong.ktmeta.device.DriverMgmt
 import io.github.hochikong.ktmeta.predefined.Devices
-import io.github.hochikong.ktmeta.predefined.InitialDeviceFailed
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Test
 
-
-object DriverMgmt {
-    /**
-     * Return a device instance.
-     * */
-    fun getDevice(type: Devices): DeviceAPI {
-        val deviceClass = Class.forName(type.className)
-        val inst = deviceClass.newInstance()
-        if (inst is DeviceAPI) return inst
-        throw InitialDeviceFailed("DriverMgmt.getDevice failed!")
+class TestDriverMgmt {
+    @Test
+    fun testGetDevice() {
+        val obj = DriverMgmt.getDevice(Devices.LocalDevice)
+        assertEquals(true, obj.setTargetDir("C:\\Users\\ckhoi\\IdeaProjects\\ktmeta\\src\\test\\resources\\tree"))
+        val tree = obj.getFullTree()
+        tree.forEach { println(it) }
     }
 }
