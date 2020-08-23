@@ -13,3 +13,21 @@
 
 package io.github.hochikong.ktmeta.device
 
+import io.github.hochikong.ktmeta.predefined.Devices
+import io.github.hochikong.ktmeta.predefined.InitialDeviceFailed
+
+object DriverMgmt {
+    fun getDevice(type: Devices): DeviceAPI {
+        val deviceClass = Class.forName(type.className)
+        val inst = deviceClass.newInstance()
+        if (inst is DeviceAPI) return inst
+        throw InitialDeviceFailed("DriverMgmt.getDevice failed!")
+    }
+}
+
+fun main() {
+    val obj = DriverMgmt.getDevice(Devices.LocalDevice)
+    println(obj.setTargetDir("C:\\Users\\ckhoi\\IdeaProjects\\ktmeta\\src\\test\\resources\\tree"))
+    val tree = obj.getFullTree()
+    tree.forEach { println(it) }
+}

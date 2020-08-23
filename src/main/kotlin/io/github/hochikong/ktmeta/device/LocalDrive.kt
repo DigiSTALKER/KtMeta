@@ -23,7 +23,7 @@ import java.nio.file.Paths
 /**
  * Local disk access API
  * */
-class LocalDisk : DeviceAPI {
+class LocalDrive : DeviceAPI {
     // absPath must be directory
     var initAbsPath: String = "."
         private set

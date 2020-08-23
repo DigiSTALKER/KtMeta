@@ -36,7 +36,7 @@ enum class SupportedDBs(val identity: String, val jdbcDriver: String, val dataSo
 class NoDatabasesIsAvailable(msg: String) : Exception(msg)
 class ConvertError(msg: String) : Exception(msg)
 class NoSuchDatabaseInRegistrationTable(msg: String) : Exception(msg)
-
+class InitialDeviceFailed(msg: String) : Exception(msg)
 
 /**
  * Pre-defined file type.
@@ -53,4 +53,12 @@ enum class FileType(val identity: String) {
 enum class SizeLimit {
     Normal,
     TooBig
+}
+
+
+/**
+ * Pre-defined devices support
+ * */
+enum class Devices(val identity: String, val className: String) {
+    LocalDevice("LocalDrive", "io.github.hochikong.ktmeta.device.LocalDrive")
 }

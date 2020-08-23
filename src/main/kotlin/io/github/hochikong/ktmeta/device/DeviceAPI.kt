@@ -15,6 +15,30 @@ package io.github.hochikong.ktmeta.device
 
 /**
  * All devices should implement this interface.
+ *
+ * You can check my LocalDrive.kt for reference.
+ *
+ * # Explanations:
+ *
+ * ## Parameters:
+ *
+ * path -> It means absolute path(local filesystem) or a custom string as path(extension devices).
+ *
+ * dirname -> Just the name of a directory, e.g., path "C:\Users\jack" -> dir name is "jack".
+ *
+ * ## Functions:
+ *
+ * setTargetDir(path) -> Used to set root dir for the device. Your classes should check the path is valid or not.
+ *
+ * getFullTree() -> Return a list of FileRow, which contains all dirs and files as FileRow instances.
+ *
+ * pwd() -> Return current absolute path.
+ *
+ * ls(dirname) -> Return all dirs and files' abs path in current path(when dirname is null) or in dirname.
+ *
+ * push(dirname) -> Push into dirname.
+ *
+ * pop() -> Return to former dir.
  * */
 interface DeviceAPI {
     fun setTargetDir(path: String): Boolean
