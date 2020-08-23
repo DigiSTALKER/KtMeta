@@ -17,7 +17,7 @@ import io.github.hochikong.ktmeta.predefined.Devices
 import io.github.hochikong.ktmeta.predefined.InitialDeviceFailed
 
 
-object DriverMgmt {
+object DeviceMgmt {
     /**
      * Return a device instance.
      * */
@@ -25,6 +25,6 @@ object DriverMgmt {
         val deviceClass = Class.forName(type.className)
         val inst = deviceClass.newInstance()
         if (inst is DeviceAPI) return inst
-        throw InitialDeviceFailed("DriverMgmt.getDevice failed!")
+        throw InitialDeviceFailed("DeviceMgmt.getDevice failed!")
     }
 }

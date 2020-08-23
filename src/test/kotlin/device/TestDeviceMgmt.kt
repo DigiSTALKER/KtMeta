@@ -13,15 +13,15 @@
 
 package device
 
-import io.github.hochikong.ktmeta.device.DriverMgmt
+import io.github.hochikong.ktmeta.device.DeviceMgmt
 import io.github.hochikong.ktmeta.predefined.Devices
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
-class TestDriverMgmt {
+class TestDeviceMgmt {
     @Test
     fun testGetDevice() {
-        val obj = DriverMgmt.getDevice(Devices.LocalDevice)
+        val obj = DeviceMgmt.getDevice(Devices.LocalDevice)
         assertEquals(true, obj.setTargetDir("C:\\Users\\ckhoi\\IdeaProjects\\ktmeta\\src\\test\\resources\\tree"))
         val tree = obj.getFullTree()
         tree.forEach { println(it) }
