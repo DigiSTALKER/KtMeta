@@ -11,7 +11,7 @@
  *  limitations under the License.
  */
 
-package io.github.hochikong.ktmeta.references
+package references
 
 import java.nio.file.Files
 import java.nio.file.Paths
