@@ -22,8 +22,12 @@ class TestEncrytion {
     fun testEncryption() {
         val raw = "jasu87#^@5e24uwu25ee"
         val enc = Encryption.encrypt(raw)
-        assertEquals(true, Encryption.checkPassword(raw, enc))
+        assertEquals(true, Encryption.verify(raw, enc))
         println("raw password is $raw")
         println("encryption result: $enc")
+
+        val enc1 = Encryption.encrypt(raw)
+        println(enc1)
+        assertEquals(true, Encryption.verify(raw, enc1))
     }
 }

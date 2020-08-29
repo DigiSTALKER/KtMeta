@@ -24,7 +24,7 @@ const val DBVertListenAddr = "ktmeta.dbmgmt.DBMgmt"
  * DBVerticle message
  * @param from Who send this message
  * @param task Special string for different tasks: addDatabase, removeDatabase, queryReg, checkCatalog, grantDB.
- * @param arguments DBArguments for the title: a json string from jackson subclass of DBArguments.
+ * @param arguments DBVertArguments for the title: a json string from jackson subclass of DBVertArguments.
  * */
 data class DBVertUMsg(
     val from: String,
@@ -35,10 +35,10 @@ data class DBVertUMsg(
 /**
  * Vert.x headers for DBVerticle use.
  * */
-val DBMgmtHeader = mapOf("request" to "ktmeta.dbmgmt.DBMgmt")
+val DBVertHeader = mapOf("request" to "ktmeta.dbmgmt.DBMgmt")
 
 // -----------------------------------------------------------------------
-sealed class DBArguments
+sealed class DBVertArguments
 
 /**
  * Vert.x msg arguments data class for DBMgmt.addDatabase
@@ -50,27 +50,29 @@ data class AddDatabase(
     val user: String,
     val password: String,
     val url: String
-) : DBArguments()
+) : DBVertArguments()
 
 
 /**
  * Vert.x arguments data class for DBMgmt.removeDatabase
  * @param
  * */
-data class RemoveDatabase(val name: String) : DBArguments()
+data class RemoveDatabase(val name: String) : DBVertArguments()
 
 /**
  * Vert.x arguments data class for DBMgmt.getXXX
  * @param type Current supported type are: "JDBC", "KtormDB", "KtormPool"
+ * @param user Raw string of database's username
+ * @param password Raw string of database's password
  * */
-data class GrantDB(val name: String, val type: String) : DBArguments()
+data class GrantDB(val name: String, val type: String, val user: String, val password: String) : DBVertArguments()
 
 /**
  * Vert.x arguments data class for DBMgmt.queryReg
  * */
-data class QueryReg(val task: String = "QueryReg") : DBArguments()
+data class QueryReg(val task: String = "QueryReg") : DBVertArguments()
 
 /**
  * Vert.x msg title for DBMgmt.checkCatalog
  * */
-data class CheckCatalog(val task: String = "CheckCatalog") : DBArguments()
+data class CheckCatalog(val task: String = "CheckCatalog") : DBVertArguments()

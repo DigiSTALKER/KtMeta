@@ -29,7 +29,7 @@ object Encryption {
         return encryptor.encryptPassword(input)
     }
 
-    fun checkPassword(raw: String, encrypted: String): Boolean {
+    fun verify(raw: String, encrypted: String): Boolean {
         return encryptor.checkPassword(raw, encrypted)
     }
 

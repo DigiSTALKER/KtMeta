@@ -14,16 +14,16 @@
 package io.github.hochikong.ktmeta.dbmgmt
 
 import com.fasterxml.jackson.module.kotlin.readValue
+import io.github.hochikong.ktmeta.predefined.Encryption
 import io.github.hochikong.ktmeta.predefined.JSONMapper
 import io.vertx.core.AbstractVerticle
 
 class DBVerticle : AbstractVerticle() {
     override fun start() {
-        var uMSGDataClass: DBVertUMsg
-        val consumer = vertx.eventBus().consumer<String>(DBVertListenAddr)
-        consumer.handler { msg ->
+        vertx.eventBus().consumer<String>(DBVertListenAddr) { msg ->
+            val uMSGDataClass: DBVertUMsg
             when (msg.headers().get("request")) {
-                DBMgmtHeader["request"] -> {
+                DBVertHeader["request"] -> {
                     uMSGDataClass = JSONMapper.readValue(msg.body())
 
                     val result = executeMgmtTask(uMSGDataClass)
@@ -35,7 +35,7 @@ class DBVerticle : AbstractVerticle() {
                     }
 
                 }
-                else -> msg.fail(-1, "DBVerticle: Invalid headers ${msg.headers()}")
+                else -> msg.fail(1, "DBVerticle; Invalid headers; ${msg.headers()}")
             }
         }
     }
@@ -53,18 +53,18 @@ class DBVerticle : AbstractVerticle() {
                         url = args.url
                     )
                 ) {
-                    ResultMsg(true, args.name, "Add database ${args.name} done.")
+                    ResultMsg(true, args.name, "Add database '${args.name}' done.")
                 } else {
-                    ResultMsg(false, args.name, "Add database ${args.name} failed.")
+                    ResultMsg(false, args.name, "Add database '${args.name}' failed.")
                 }
             }
 
             "removeDatabase" -> {
                 val args = JSONMapper.readValue<RemoveDatabase>(uMSGDataClass.arguments)
                 return if (DBMgmt.removeDatabase(args.name)) {
-                    ResultMsg(true, args.name, "Remove database ${args.name} done.")
+                    ResultMsg(true, args.name, "Remove database '${args.name}' done.")
                 } else {
-                    ResultMsg(false, args.name, "Remove database ${args.name} failed.")
+                    ResultMsg(false, args.name, "Remove database '${args.name}' failed.")
                 }
             }
 
@@ -77,7 +77,7 @@ class DBVerticle : AbstractVerticle() {
                         ResultMsg(false, "failed", "Update catalog failed.")
                     }
                 } else {
-                    ResultMsg(false, "failed", "Illegal task ${args.task} in message.")
+                    ResultMsg(false, "failed", "Illegal task '${args.task}' in message.")
                 }
             }
 
@@ -91,11 +91,25 @@ class DBVerticle : AbstractVerticle() {
                         ResultMsg(false, "failed", "Check catalog failed.")
                     }
                 } else {
-                    ResultMsg(false, "failed", "Illegal task ${args.task} in message.")
+                    ResultMsg(false, "failed", "Illegal task '${args.task}' in message.")
                 }
             }
 
-            else -> ResultMsg(false, "failed", "Illegal task ${uMSGDataClass.task} in message.")
+            "grantDB" -> {
+                val args = JSONMapper.readValue<GrantDB>(uMSGDataClass.arguments)
+                DBMgmt.queryReg()
+                val query: RegRow? = DBRegCatalog[args.name]
+                if (query != null) {
+                    val r = Encryption.verify(args.user, query.user)
+                    val r1 = Encryption.verify(args.password, query.password)
+                    if (r1 && (r1 == r)) {
+                        ResultMsg(true, args.name, "Grant access on database '${args.name}' done.")
+                    }
+                }
+                ResultMsg(false, args.name, "Grant access on database '${args.name}' failed.")
+            }
+
+            else -> ResultMsg(false, "failed", "Illegal task '${uMSGDataClass.task}' in message.")
         }
     }
 }
