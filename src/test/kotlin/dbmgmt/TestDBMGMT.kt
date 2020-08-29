@@ -146,6 +146,7 @@ class TestDBMGMT {
     @Order(4)
     @Test
     fun testGetCon2() {
+        println("Current catalog: ${DBMgmt.checkCatalog()}")
         val x = DBMgmt.getConnection("sqlite_test")
         x.createStatement().use {
             it.execute(

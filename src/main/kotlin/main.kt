@@ -1,5 +1,9 @@
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.module.kotlin.KotlinModule
 import io.vertx.core.Vertx
+import io.vertx.core.VertxOptions
 import io.vertx.kotlin.core.deploymentOptionsOf
+import io.vertx.kotlin.core.eventbus.deliveryOptionsOf
 import java.util.*
 import kotlin.system.exitProcess
 
@@ -8,6 +12,7 @@ import kotlin.system.exitProcess
  * Test only
  * */
 fun main() {
+    val mapper = ObjectMapper().registerModule(KotlinModule())
     print("Enter your name: ")
     val input = Scanner(System.`in`).nextLine()
     if (input.trim() == "password") {
@@ -16,6 +21,8 @@ fun main() {
 
     val ids = mutableListOf<String>()
     val vertx = Vertx.vertx()
+    println("size is:  ${VertxOptions().eventLoopPoolSize}")
+
     vertx.deployVerticle(ConsumePrint::class.java.name) { res ->
         run {
             if (res.succeeded()) {
@@ -27,7 +34,7 @@ fun main() {
         }
     }
 
-    vertx.deployVerticle(Waste::class.java.name, deploymentOptionsOf(worker = true)) { res ->
+    vertx.deployVerticle("Waste", deploymentOptionsOf(worker = true)) { res ->
         run {
             if (res.succeeded()) {
                 println("Deployment id is: ${res.result()}")
@@ -37,6 +44,18 @@ fun main() {
             }
         }
     }
+
+    vertx.deployVerticle(WorkerV::class.java.name, deploymentOptionsOf(worker = true)) { res ->
+        run {
+            if (res.succeeded()) {
+                println("Deployment id is: ${res.result()}")
+                ids.add(res.result())
+            } else {
+                println("Deployment failed!")
+            }
+        }
+    }
+
 //    val restServer = RestMain()
 //    val loopServer = Coop()
 //    Thread(restServer).apply { start() }
@@ -58,20 +77,30 @@ fun main() {
 //    println(met.invoke(instance))
 //    urlClassLoader.close()
 
+    val keyForTest1 = listOf("waste", "no waste")
 
-    print("Enter to exit...")
+    println("Enter to exit...")
+    val read = object : Runnable {
+        @Volatile
+        var exit = false
+        override fun run() {
+            while (!exit) {
+                vertx.eventBus().consumer<String>("url3") { res ->
+                    println("Main received from url3: ${res.body()}")
+                }
+            }
+        }
+
+        fun close() {
+            exit = true
+        }
+    }
+    Thread(read).start()
     while (true) {
-        vertx.eventBus().consumer<String>("url2") { msg ->
-            println("From server test1: ${msg.body()}")
-        }
-        vertx.eventBus().consumer<String>("url1") { msg ->
-            println("From server test2: ${msg.body()}")
-        }
-
         val inputA = Scanner(System.`in`).nextLine().trim()
         if (inputA.isBlank()) {
             println("You are exiting!!!!!")
-            if (ids.isNotEmpty()) {
+            /*if (ids.isNotEmpty()) {
                 for (id in ids) {
                     vertx.undeploy(id) { res ->
                         run {
@@ -83,13 +112,45 @@ fun main() {
                         }
                     }
                 }
-            }
+            }*/
             vertx.close()
+            read.close()
             exitProcess(0)
-        } else if (inputA == "waste") {
-            vertx.eventBus().send("url2", inputA)
+        } else if (keyForTest1.contains(inputA)) {
+            when (inputA) {
+                "waste" -> {
+                    vertx.eventBus().request<String>(
+                        "url2",
+                        mapper.writeValueAsString(Person("cxk", 24)),
+                        deliveryOptionsOf(headers = mapOf("msg" to "waste"))
+                    ) { reply ->
+                        if (reply.succeeded()) {
+                            println("Main received reply ${reply.result().body()}")
+                        } else {
+                            println("Main received failed reply ${reply.result().body()}")
+                        }
+                    }
+                }
+                else -> {
+                    vertx.eventBus().request<String>(
+                        "url2",
+                        mapper.writeValueAsString(Person("css", 24)),
+                        deliveryOptionsOf(headers = mapOf("msg" to "no waste"))
+                    ) { reply ->
+                        if (reply.succeeded()) {
+                            println("Main received reply: ${reply.result().body()}")
+                        } else {
+                            println("Main received failed reply: ${reply.cause().message}")
+                        }
+                    }
+                }
+            }
+        } else if (inputA.contains("sleep")) {
+            vertx.eventBus().send("worker", inputA)
         } else {
-            vertx.eventBus().publish("url1", inputA)
+            vertx.eventBus().send("url1", inputA)
         }
     }
 }
+
+data class Person(val name: String, val age: Int)

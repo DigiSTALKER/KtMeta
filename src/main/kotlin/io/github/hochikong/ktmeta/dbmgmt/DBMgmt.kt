@@ -73,7 +73,7 @@ object DBMgmt {
 
     // APIs
     /**
-     * Manually query and update database's catalog.
+     * Manually query and update database's catalog by delegate.
      * */
     fun queryReg(): Boolean {
         queryResult = Maintainer.queryAllRows()
@@ -94,6 +94,8 @@ object DBMgmt {
 
     /**
      * Add database configuration.
+     * @param user A string after encryption.
+     * @param password A string after encryption.
      * */
     fun addDatabase(
         type: SupportedDBs,
@@ -103,6 +105,8 @@ object DBMgmt {
         password: String,
         url: String
     ): Boolean {
+        if (type == SupportedDBs.NotSupported) return false
+
         val tmp = RegRow(
             id = -1,
             db = type,

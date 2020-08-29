@@ -17,6 +17,9 @@
  * */
 package io.github.hochikong.ktmeta.predefined
 
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.module.kotlin.KotlinModule
+
 
 /**
  * Pre-defined supported DBs.
@@ -27,7 +30,11 @@ package io.github.hochikong.ktmeta.predefined
 enum class SupportedDBs(val identity: String, val jdbcDriver: String, val dataSource: String) {
     SQLite("Sqlite", "org.sqlite.JDBC", "org.sqlite.SQLiteDataSource"),
     PostgreSQL("Postgresql", "org.postgresql.Driver", "org.postgresql.ds.PGSimpleDataSource"),
-    NotSupported("", "", "")
+    NotSupported("", "", "");
+
+    override fun toString(): String {
+        return this.identity
+    }
 }
 
 /**
@@ -62,3 +69,8 @@ enum class SizeLimit {
 enum class Devices(val identity: String, val className: String) {
     LocalDevice("LocalDrive", "io.github.hochikong.ktmeta.device.LocalDrive")
 }
+
+/**
+ * Universal JSON Mapper
+ * */
+val JSONMapper: ObjectMapper = ObjectMapper().registerModule(KotlinModule())
