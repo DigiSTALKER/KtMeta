@@ -124,8 +124,7 @@ class TestDBMGMT {
         )
         assertEquals(true, x)
         assertEquals(false, DBMgmt.regIsEmpty)
-        println(DBRegCatalog.keys())
-        val y = DBMgmt.addDatabase(
+        DBMgmt.addDatabase(
             SupportedDBs.PostgreSQL,
             "pg_test",
             "the first pg",
@@ -133,6 +132,7 @@ class TestDBMGMT {
             "ktmeta",
             "jdbc:postgresql://localhost:5432/ktmetapg"
         )
+        println("After insert: ${DBMgmt.checkCatalog()}")
     }
 
     @Order(3)
@@ -234,8 +234,12 @@ class TestDBMGMT {
     @Order(7)
     @Test
     fun testRemove() {
+        println(DBMgmt.checkCatalog())
         assertEquals(false, DBMgmt.removeDatabase("nmsl"))
         assertEquals(true, DBMgmt.removeDatabase("pg_test"))
+        println(DBMgmt.checkCatalog())
+        assertEquals(true, DBMgmt.removeDatabase("sqlite_test"))
+        println(DBMgmt.checkCatalog())
         println(DBRegCatalog.keys())
     }
 }

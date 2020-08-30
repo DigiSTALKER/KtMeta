@@ -31,8 +31,8 @@ class TestVerticle {
 
     companion object {
         @JvmStatic
-        @AfterAll
         @BeforeAll
+        @AfterAll
         fun cleanUp() {
             println(File(".").canonicalPath)
             Maintainer.closeConnection()
@@ -62,7 +62,7 @@ class TestVerticle {
                 "DBVerticle; Invalid headers; request: ktmeta.dbmgmt.ERROR",
                 res.cause().message?.trim()
             )
-            println("invalid headers: ${res.cause().message}")
+            println("***invalid headers: ${res.cause().message}")
         }
 
         // invalid task
@@ -75,7 +75,7 @@ class TestVerticle {
                 "DBVerticle; Illegal task 'sb' in message.; failed",
                 res.cause().message?.trim()
             )
-            println("invalid task: ${res.cause().message}")
+            println("***invalid task: ${res.cause().message}")
         }
 
         // add db
@@ -100,7 +100,7 @@ class TestVerticle {
             deliveryOptionsOf(headers = DBVertHeader)
         ) { res ->
             assertEquals("DBVerticle; Add database 'testdb1' done.; testdb1", res.result().body().trim())
-            println("add succeeded: ${res.result().body()}")
+            println("***add succeeded: ${res.result().body()}")
         }
 
         // add again, raise exception
@@ -126,7 +126,7 @@ class TestVerticle {
         ) { res ->
             assertEquals("DBVerticle; Add database 'testdb1' failed.; testdb1", res.cause().message?.trim())
             if (res.failed()) {
-                println("add failed: because not null constrain ${res.cause().message}")
+                println("***add failed: because not null constrain ${res.cause().message}")
             }
         }
 
@@ -143,9 +143,105 @@ class TestVerticle {
             deliveryOptionsOf(headers = DBVertHeader)
         ) { res ->
             if (res.succeeded()) {
-                println(res.result().body())
+                assertEquals(
+                    "DBVerticle; Grant access on database 'testdb1' done.; testdb1",
+                    res.result().body().trim()
+                )
+                println("***grant db done: ${res.result().body()}")
             } else {
                 println(res.cause().message)
+            }
+        }
+
+        // queryReg
+        vertx.eventBus().request<String>(
+            DBVertListenAddr,
+            JSONMapper.writeValueAsString(
+                DBVertUMsg(
+                    "test",
+                    "queryReg",
+                    QueryReg
+                )
+            ),
+            deliveryOptionsOf(headers = DBVertHeader)
+        ) { res ->
+            if (res.succeeded()) {
+                assertEquals("DBVerticle; Update catalog done.; done", res.result().body().trim())
+                println("***query reg done: ${res.result().body()}")
+            } else {
+                println(res.cause().message)
+            }
+        }
+
+        // checkCatalog
+        vertx.eventBus().request<String>(
+            DBVertListenAddr,
+            JSONMapper.writeValueAsString(
+                DBVertUMsg(
+                    "test",
+                    "checkCatalog",
+                    CheckCatalog
+                )
+            ),
+            deliveryOptionsOf(headers = DBVertHeader)
+        ) { res ->
+            if (res.succeeded()) {
+                assertEquals("DBVerticle; Check catalog done.; [testdb1]", res.result().body())
+                println("***check catalog done: ${res.result().body()}")
+            } else {
+                println(res.cause().message)
+            }
+        }
+
+        // failed delete
+        vertx.eventBus().request<String>(
+            DBVertListenAddr,
+            JSONMapper.writeValueAsString(
+                DBVertUMsg(
+                    "test",
+                    "removeDatabase",
+                    JSONMapper.writeValueAsString(RemoveDatabase("nmsl"))
+                )
+            ),
+            deliveryOptionsOf(headers = DBVertHeader)
+        ) { res ->
+            if (res.failed()) println("***${res.cause().message}")
+        }
+
+        Thread.sleep(2000)
+
+        // successful
+        vertx.eventBus().request<String>(
+            DBVertListenAddr,
+            JSONMapper.writeValueAsString(
+                DBVertUMsg(
+                    "test",
+                    "removeDatabase",
+                    JSONMapper.writeValueAsString(RemoveDatabase("testdb1"))
+                )
+            ),
+            deliveryOptionsOf(headers = DBVertHeader)
+        ) { res ->
+            assertEquals("DBVerticle; Remove database 'testdb1' done.; testdb1", res.result().body().trim())
+            if (res.succeeded()) println("***${res.result().body()}")
+        }
+
+        // check fail
+        vertx.eventBus().request<String>(
+            DBVertListenAddr,
+            JSONMapper.writeValueAsString(
+                DBVertUMsg(
+                    "test",
+                    "checkCatalog",
+                    CheckCatalog
+                )
+            ),
+            deliveryOptionsOf(headers = DBVertHeader)
+        ) { ress ->
+            if (ress.succeeded()) {
+                println("sb ${ress.result().body()}")
+            } else {
+                println("***${ress.cause().message}")
             }
         }
 

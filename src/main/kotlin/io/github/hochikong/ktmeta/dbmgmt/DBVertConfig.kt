@@ -55,7 +55,6 @@ data class AddDatabase(
 
 /**
  * Vert.x arguments data class for DBMgmt.removeDatabase
- * @param
  * */
 data class RemoveDatabase(val name: String) : DBVertArguments()
 
@@ -70,9 +69,9 @@ data class GrantDB(val name: String, val type: String, val user: String, val pas
 /**
  * Vert.x arguments data class for DBMgmt.queryReg
  * */
-data class QueryReg(val task: String = "QueryReg") : DBVertArguments()
+const val QueryReg: String = "QueryReg"
 
 /**
  * Vert.x msg title for DBMgmt.checkCatalog
  * */
-data class CheckCatalog(val task: String = "CheckCatalog") : DBVertArguments()
+const val CheckCatalog: String = "CheckCatalog"

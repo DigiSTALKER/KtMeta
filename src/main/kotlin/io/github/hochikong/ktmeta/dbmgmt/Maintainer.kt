@@ -229,7 +229,6 @@ object Maintainer {
                   """.trimIndent()
         connection.createStatement().use {
             return try {
-                println(sql)
                 it.executeUpdate(sql)
                 true
             } catch (e: SQLException) {

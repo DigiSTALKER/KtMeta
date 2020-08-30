@@ -27,6 +27,7 @@ class DBVerticle : AbstractVerticle() {
                     uMSGDataClass = JSONMapper.readValue(msg.body())
 
                     val result = executeMgmtTask(uMSGDataClass)
+                    // println(result)
 
                     if (!result.succeeded) {
                         msg.fail(-1, "DBVerticle; ${result.msg}; ${result.result}")
@@ -69,29 +70,29 @@ class DBVerticle : AbstractVerticle() {
             }
 
             "queryReg" -> {
-                val args = JSONMapper.readValue<QueryReg>(uMSGDataClass.arguments)
-                if (args.task == "QueryReg") {
+                val args = uMSGDataClass.arguments
+                if (args == "QueryReg") {
                     return if (DBMgmt.queryReg()) {
                         ResultMsg(true, "done", "Update catalog done.")
                     } else {
                         ResultMsg(false, "failed", "Update catalog failed.")
                     }
                 } else {
-                    ResultMsg(false, "failed", "Illegal task '${args.task}' in message.")
+                    ResultMsg(false, "failed", "Illegal task '${args.toLowerCase()}' in message.")
                 }
             }
 
             "checkCatalog" -> {
-                val args = JSONMapper.readValue<CheckCatalog>(uMSGDataClass.arguments)
-                if (args.task == "CheckCatalog") {
+                val args = uMSGDataClass.arguments
+                if (args == "CheckCatalog") {
                     val catalog = DBMgmt.checkCatalog().last()
-                    return if ((catalog as List<*>).isNotEmpty()) {
+                    return if ((catalog as Set<*>).isNotEmpty()) {
                         ResultMsg(true, catalog.toString(), "Check catalog done.")
                     } else {
-                        ResultMsg(false, "failed", "Check catalog failed.")
+                        ResultMsg(false, "failed", "Check catalog failed because it is empty.")
                     }
                 } else {
-                    ResultMsg(false, "failed", "Illegal task '${args.task}' in message.")
+                    ResultMsg(false, "failed", "Illegal task '${args.toLowerCase()}' in message.")
                 }
             }
 
@@ -104,9 +105,18 @@ class DBVerticle : AbstractVerticle() {
                     val r1 = Encryption.verify(args.password, query.password)
                     if (r1 && (r1 == r)) {
                         ResultMsg(true, args.name, "Grant access on database '${args.name}' done.")
+                    } else {
+                        ResultMsg(
+                            false, args.name, "Grant access on database '${args.name}' failed, " +
+                                    "invalid username or password."
+                        )
                     }
+                } else {
+                    ResultMsg(
+                        false, args.name, "Grant access on database '${args.name}' failed, " +
+                                "no such database."
+                    )
                 }
-                ResultMsg(false, args.name, "Grant access on database '${args.name}' failed.")
             }
 
             else -> ResultMsg(false, "failed", "Illegal task '${uMSGDataClass.task}' in message.")

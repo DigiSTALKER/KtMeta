@@ -34,8 +34,14 @@ object DBMgmt {
     val currentDatabases = mutableListOf<DBConfigContainer>()
     private var queryResult: List<List<Any>>? by Delegates.observable(listOf()) { _, _, newValue ->
         regIsEmpty = when {
-            newValue == null -> true
-            newValue.isEmpty() -> true
+            newValue == null -> {
+                DBRegCatalog.updateCatalog(listOf())
+                true
+            }
+            newValue.isEmpty() -> {
+                DBRegCatalog.updateCatalog(listOf())
+                true
+            }
             else -> {
                 DBRegCatalog.updateCatalog(newValue)
                 false
@@ -53,6 +59,7 @@ object DBMgmt {
 
 
     private fun checkRegIsEmpty(name: String): RegRow? {
+        queryReg()
         if (regIsEmpty) {
             val msg = "DBMGMT.getConnection said: Database registration is empty."
             loggerDBMGMT.error(msg)
@@ -85,6 +92,7 @@ object DBMgmt {
      * @return list, ("catalog", empty or not(Boolean), all available databases(set))
      * */
     fun checkCatalog(): List<Any> {
+        queryReg()
         return if (regIsEmpty) {
             listOf("catalog", true, DBRegCatalog.keys())
         } else {
@@ -94,8 +102,8 @@ object DBMgmt {
 
     /**
      * Add database configuration.
-     * @param user A string after encryption.
-     * @param password A string after encryption.
+     * @param user A string after encryption or "null".
+     * @param password A string after encryption or "null".
      * */
     fun addDatabase(
         type: SupportedDBs,
@@ -129,7 +137,7 @@ object DBMgmt {
      * */
     fun removeDatabase(name: String): Boolean {
         return if (checkRegIsEmpty(name) != null) {
-            Maintainer.deleteRow("name == $'$name'")
+            Maintainer.deleteRow("name == '$name'")
             queryReg()
         } else {
             false
