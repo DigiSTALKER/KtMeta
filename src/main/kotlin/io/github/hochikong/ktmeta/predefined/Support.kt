@@ -67,10 +67,15 @@ enum class SizeLimit {
  * Pre-defined devices support
  * */
 enum class Devices(val identity: String, val className: String) {
-    LocalDevice("LocalDrive", "io.github.hochikong.ktmeta.device.LocalDrive")
+    LocalDevice("LocalDiskDriver", "io.github.hochikong.ktmeta.device.driver.LocalDiskDriver")
 }
 
 /**
  * Universal JSON Mapper
  * */
 val JSONMapper: ObjectMapper = ObjectMapper().registerModule(KotlinModule())
+
+/**
+ * Used by each executeMgmtTask
+ * */
+data class ResultMsg(val succeeded: Boolean, val result: Any, val msg: String)

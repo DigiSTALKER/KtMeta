@@ -16,7 +16,7 @@ package io.github.hochikong.ktmeta.device
 /**
  * All devices should implement this interface.
  *
- * You can check my LocalDrive.kt for reference.
+ * You can check my LocalDiskDriver.kt for reference.
  *
  * # Explanations:
  *

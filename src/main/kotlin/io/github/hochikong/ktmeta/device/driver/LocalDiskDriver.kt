@@ -11,8 +11,11 @@
  *  limitations under the License.
  */
 
-package io.github.hochikong.ktmeta.device
+package io.github.hochikong.ktmeta.device.driver
 
+import io.github.hochikong.ktmeta.device.DeviceAPI
+import io.github.hochikong.ktmeta.device.FileRow
+import io.github.hochikong.ktmeta.device.fileRowBuilder
 import io.github.hochikong.ktmeta.predefined.ConvertError
 import io.github.hochikong.ktmeta.predefined.FileType
 import java.nio.file.Files
@@ -23,7 +26,7 @@ import java.nio.file.Paths
 /**
  * Local disk access API
  * */
-class LocalDrive : DeviceAPI {
+class LocalDiskDriver : DeviceAPI {
     // absPath must be directory
     var initAbsPath: String = "."
         private set

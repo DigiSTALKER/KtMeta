@@ -13,18 +13,39 @@
 
 package io.github.hochikong.ktmeta.device
 
+import io.github.hochikong.ktmeta.device.driver.LocalDiskDriver
 import io.github.hochikong.ktmeta.predefined.Devices
 import io.github.hochikong.ktmeta.predefined.InitialDeviceFailed
 
 
 object DeviceMgmt {
     /**
-     * Return a device instance.
+     * Return a device instance by Devices type.
      * */
     fun getDevice(type: Devices): DeviceAPI {
-        val deviceClass = Class.forName(type.className)
+        return getDeviceByType(type.className)
+    }
+
+    /**
+     * Return a device instance by name
+     * */
+    private fun getDeviceByType(name: String): DeviceAPI {
+        val deviceClass = Class.forName(name)
         val inst = deviceClass.newInstance()
         if (inst is DeviceAPI) return inst
         throw InitialDeviceFailed("DeviceMgmt.getDevice failed!")
+    }
+
+    /**
+     * Return a device instance by Devices.identity
+     */
+    fun getDevice(identity: String): DeviceAPI {
+        val officialSupportIdentity = Devices.values().map { it.identity }.toList()
+        if (officialSupportIdentity.contains(identity)) {
+            when (identity) {
+                "LocalDiskDriver" -> return LocalDiskDriver()
+            }
+        }
+        throw InitialDeviceFailed("DeviceMgmt.getDevice failed, identity '$identity' not supported.")
     }
 }

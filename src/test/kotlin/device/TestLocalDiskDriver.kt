@@ -25,7 +25,7 @@ package device/*
  */
 
 import io.github.hochikong.ktmeta.device.FileRow
-import io.github.hochikong.ktmeta.device.LocalDrive
+import io.github.hochikong.ktmeta.device.driver.LocalDiskDriver
 import io.github.hochikong.ktmeta.predefined.FileType
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.MethodOrderer
@@ -34,7 +34,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestMethodOrder
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation::class)
-class TestLocalDrive {
+class TestLocalDiskDriver {
     private val path = "C:\\Users\\ckhoi\\IdeaProjects\\ktmeta\\src\\test\\resources\\tree"
     private val data = listOf(
         FileRow(
@@ -131,7 +131,7 @@ class TestLocalDrive {
     @Order(1)
     @Test
     fun testSetPath() {
-        val obj = LocalDrive()
+        val obj = LocalDiskDriver()
         assertEquals(false, obj.setTargetDir("./plugins"))
         assertEquals(false, obj.setTargetDir("$path\\nmsl"))
         assertEquals(true, obj.setTargetDir(path))
@@ -140,7 +140,7 @@ class TestLocalDrive {
     @Order(2)
     @Test
     fun testGetTree() {
-        val obj = LocalDrive()
+        val obj = LocalDiskDriver()
         assertEquals(true, obj.setTargetDir(path))
         val rows = obj.getFullTree()
         // File("logs.txt").writeText(rows.map { "$it \n" }.reduce { acc, s -> acc + s })
@@ -159,7 +159,7 @@ class TestLocalDrive {
             "C:\\Users\\ckhoi\\IdeaProjects\\ktmeta\\src\\test\\resources\\tree\\sub2\\sub22",
             "C:\\Users\\ckhoi\\IdeaProjects\\ktmeta\\src\\test\\resources\\tree\\sub2\\sub2a.txt"
         )
-        val x = LocalDrive()
+        val x = LocalDiskDriver()
         x.setTargetDir(path)
         assertEquals(true, x.push("sub2"))
         //println(x.dirs)

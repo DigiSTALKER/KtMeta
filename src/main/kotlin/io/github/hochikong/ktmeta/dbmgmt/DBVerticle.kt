@@ -16,6 +16,7 @@ package io.github.hochikong.ktmeta.dbmgmt
 import com.fasterxml.jackson.module.kotlin.readValue
 import io.github.hochikong.ktmeta.predefined.Encryption
 import io.github.hochikong.ktmeta.predefined.JSONMapper
+import io.github.hochikong.ktmeta.predefined.ResultMsg
 import io.vertx.core.AbstractVerticle
 
 class DBVerticle : AbstractVerticle() {
@@ -36,7 +37,7 @@ class DBVerticle : AbstractVerticle() {
                     }
 
                 }
-                else -> msg.fail(1, "DBVerticle; Invalid headers; ${msg.headers()}")
+                else -> msg.fail(-1, "DBVerticle; Invalid headers; ${msg.headers().toString().trim()}")
             }
         }
     }
@@ -123,8 +124,3 @@ class DBVerticle : AbstractVerticle() {
         }
     }
 }
-
-/**
- * Used by executeMgmtTask
- * */
-data class ResultMsg(val succeeded: Boolean, val result: Any, val msg: String)

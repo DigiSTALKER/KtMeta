@@ -67,11 +67,11 @@ data class RemoveDatabase(val name: String) : DBVertArguments()
 data class GrantDB(val name: String, val type: String, val user: String, val password: String) : DBVertArguments()
 
 /**
- * Vert.x arguments data class for DBMgmt.queryReg
+ * Vert.x argument for DBMgmt.queryReg
  * */
 const val QueryReg: String = "QueryReg"
 
 /**
- * Vert.x msg title for DBMgmt.checkCatalog
+ * Vert.x argument for DBMgmt.checkCatalog
  * */
 const val CheckCatalog: String = "CheckCatalog"

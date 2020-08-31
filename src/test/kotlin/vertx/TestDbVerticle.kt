@@ -11,7 +11,7 @@
  *  limitations under the License.
  */
 
-package dbmgmt
+package vertx
 
 import io.github.hochikong.ktmeta.dbmgmt.*
 import io.github.hochikong.ktmeta.predefined.Encryption
@@ -24,7 +24,7 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import java.io.File
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation::class)
-class TestVerticle {
+class TestDbVerticle {
     private val vertx = Vertx.vertx()
     private val username = "crrtt"
     private val password = "xoof24io6598!$%$%ds*$"
