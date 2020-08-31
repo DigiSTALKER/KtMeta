@@ -31,13 +31,13 @@ class DBVerticle : AbstractVerticle() {
                     // println(result)
 
                     if (!result.succeeded) {
-                        msg.fail(-1, "DBVerticle; ${result.msg}; ${result.result}")
+                        msg.fail(-1, "DBVerticle -> ${result.msg} -> ${result.result}")
                     } else {
-                        msg.reply("DBVerticle; ${result.msg}; ${result.result}")
+                        msg.reply("DBVerticle -> ${result.msg} -> ${result.result}")
                     }
 
                 }
-                else -> msg.fail(-1, "DBVerticle; Invalid headers; ${msg.headers().toString().trim()}")
+                else -> msg.fail(-1, "DBVerticle -> Invalid headers -> ${msg.headers().toString().trim()}")
             }
         }
     }

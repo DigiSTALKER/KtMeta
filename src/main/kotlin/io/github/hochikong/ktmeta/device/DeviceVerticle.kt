@@ -19,6 +19,8 @@ import io.github.hochikong.ktmeta.predefined.JSONMapper
 import io.github.hochikong.ktmeta.predefined.ResultMsg
 import io.github.hochikong.ktmeta.predefined.VertListLoads
 import io.vertx.core.AbstractVerticle
+import io.vertx.core.shareddata.LocalMap
+import io.vertx.core.shareddata.SharedData
 import java.util.*
 
 class DeviceVerticle : AbstractVerticle() {
@@ -26,13 +28,14 @@ class DeviceVerticle : AbstractVerticle() {
     private val deviceObjs = mutableMapOf<String, DeviceAPI>()
 
     override fun start() {
+        val shareDataInstance = vertx.sharedData()
         vertx.eventBus().consumer<String>(DeviceVertListenAddr) { msg ->
             val uMSGDataClass: DeviceVertUMsg
             when (msg.headers().get("request")) {
                 DeviceVertHeader["request"] -> {
                     uMSGDataClass = JSONMapper.readValue(msg.body())
 
-                    val result = executeMgmtTask(uMSGDataClass)
+                    val result = executeMgmtTask(uMSGDataClass, shareDataInstance)
                     if (!result.succeeded) {
                         msg.fail(-1, "DeviceVerticle -> ${result.msg} -> '${result.result}'")
                     } else {
@@ -45,7 +48,7 @@ class DeviceVerticle : AbstractVerticle() {
         }
     }
 
-    private fun executeMgmtTask(uMSGDataClass: DeviceVertUMsg): ResultMsg {
+    private fun executeMgmtTask(uMSGDataClass: DeviceVertUMsg, shareData: SharedData): ResultMsg {
         return when (uMSGDataClass.task) {
             "getDevice" -> {
                 // this condition only add cfg into deviceCFGs
@@ -88,7 +91,7 @@ class DeviceVerticle : AbstractVerticle() {
                     val actionDC: DeviceAction = JSONMapper.readValue(uMSGDataClass.arguments)
                     val uuid = actionDC.uuid
                     val path = actionDC.path
-                    executeAction(uuid, actionDC, path, uMSGDataClass.from)
+                    executeAction(uuid, actionDC, path, uMSGDataClass.from, shareData.getLocalMap("deviceResults"))
                 } catch (e: Exception) {
                     ResultMsg(false, e.toString(), "Execute action failed.")
                 }
@@ -102,7 +105,8 @@ class DeviceVerticle : AbstractVerticle() {
         uuid: String,
         actionDC: DeviceAction,
         path: String?,
-        sendToWho: String
+        sendToWho: String,
+        shareDataMap: LocalMap<String, String>
     ): ResultMsg {
         // when no such device configuration
         if (deviceCFGs[uuid] == null) {
@@ -151,7 +155,7 @@ class DeviceVerticle : AbstractVerticle() {
                 }
                 "ls" -> {
                     val elements: List<String> = currentDevice.ls(path)
-                    return ResultMsg(true, elements.reduce { acc, s -> "$acc\n$s" }, "Use '\\n' to split data.")
+                    return ResultMsg(true, elements.reduce { acc, s -> "$acc -> $s" }, "Use '->' to split data.")
                 }
                 "push" -> {
                     return if (path == null) {
@@ -188,7 +192,7 @@ class DeviceVerticle : AbstractVerticle() {
                         )
                         task.complete(asyncOutput)
                     }) { handler ->
-                        vertx.eventBus().send(sendToWho, handler.result())
+                        shareDataMap[taskUUID] = handler.result()
                     }
                     return ResultMsg(true, taskUUID, "You async reply uuid is '$taskUUID'")
                 }

@@ -13,12 +13,9 @@
 
 package vertx
 
-import com.fasterxml.jackson.module.kotlin.readValue
 import io.github.hochikong.ktmeta.device.*
-import io.github.hochikong.ktmeta.predefined.AsyncResultPacket
 import io.github.hochikong.ktmeta.predefined.Devices
 import io.github.hochikong.ktmeta.predefined.JSONMapper
-import io.vertx.core.AbstractVerticle
 import io.vertx.core.Vertx
 import io.vertx.kotlin.core.eventbus.deliveryOptionsOf
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -26,16 +23,7 @@ import org.junit.jupiter.api.Test
 
 class TestDeviceVerticle {
     private val vertx: Vertx = Vertx.vertx()
-    private val taskUUIDs = mutableListOf<String>()
-
-    class ReplyHandler : AbstractVerticle() {
-        override fun start() {
-            vertx.eventBus().consumer<String>("test") { res ->
-                val reply = JSONMapper.readValue<AsyncResultPacket>(res.body())
-
-            }
-        }
-    }
+    private val sd = vertx.sharedData()
 
     fun vrequest(
         header: Map<String, String> = DeviceVertHeader,
@@ -62,14 +50,7 @@ class TestDeviceVerticle {
 
     @Test
     fun testDeviceVerticle() {
-        vertx.deployVerticle(ReplyHandler::class.java.name) { promise ->
-            if (promise.succeeded()) {
-                println("deploy done: ${promise.result()}")
-            } else {
-                println("deploy failed.")
-            }
-        }
-
+        val localMap = sd.getLocalMap<String, String>("deviceResults")
         vertx.deployVerticle(DeviceVerticle::class.java.name) { promise ->
             if (promise.succeeded()) {
                 println("deploy done: ${promise.result()}")
@@ -132,6 +113,7 @@ class TestDeviceVerticle {
         )
         assertEquals("DeviceVerticle -> Device '$uuid' exists. -> '$uuid'", r5)
 
+        // async result
         val r6 = vrequest(
             args = DeviceVertUMsg(
                 "test",
@@ -145,9 +127,57 @@ class TestDeviceVerticle {
                 )
             )
         )
-        taskUUIDs.add(r6.split("->").last().replace("'", "").trim())
-        println("Current all task UUIDs are: $taskUUIDs")
+        val taskUUID = r6.split("->").last().replace("'", "").trim()
+        println("Current all task UUIDs are: $taskUUID")
+        println("share data: ${localMap[taskUUID]}")
+        assert(localMap[taskUUID]!!.contains("\"taskUUID\":\"$taskUUID\""))
 
-        Thread.sleep(5000)
+        // push
+        val r7 = vrequest(
+            args = DeviceVertUMsg(
+                "test",
+                "action",
+                JSONMapper.writeValueAsString(
+                    DeviceAction(
+                        uuid = uuid,
+                        action = "push",
+                        path = "sub11"
+                    )
+                )
+            )
+        )
+
+        // pwd
+        val r8 = vrequest(
+            args = DeviceVertUMsg(
+                "test",
+                "action",
+                JSONMapper.writeValueAsString(
+                    DeviceAction(
+                        uuid = uuid,
+                        action = "pwd",
+                        path = null
+                    )
+                )
+            )
+        )
+        assert(r8.contains("Current path: C:\\Users\\ckhoi\\IdeaProjects\\ktmeta\\src\\test\\resources\\tree\\sub1\\sub11"))
+
+        // ls
+        val r9 = vrequest(
+            args = DeviceVertUMsg(
+                "test",
+                "action",
+                JSONMapper.writeValueAsString(
+                    DeviceAction(
+                        uuid = uuid,
+                        action = "ls",
+                        path = "root"
+                    )
+                )
+            )
+        )
+
+        Thread.sleep(2000)
     }
 }

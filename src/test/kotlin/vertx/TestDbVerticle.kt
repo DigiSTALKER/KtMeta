@@ -59,7 +59,7 @@ class TestDbVerticle {
             deliveryOptionsOf(headers = mapOf("request" to "ktmeta.dbmgmt.ERROR"))
         ) { res ->
             assertEquals(
-                "DBVerticle; Invalid headers; request: ktmeta.dbmgmt.ERROR",
+                "DBVerticle -> Invalid headers -> request: ktmeta.dbmgmt.ERROR",
                 res.cause().message?.trim()
             )
             println("***invalid headers: ${res.cause().message}")
@@ -72,7 +72,7 @@ class TestDbVerticle {
             deliveryOptionsOf(headers = DBVertHeader)
         ) { res ->
             assertEquals(
-                "DBVerticle; Illegal task 'sb' in message.; failed",
+                "DBVerticle -> Illegal task 'sb' in message. -> failed",
                 res.cause().message?.trim()
             )
             println("***invalid task: ${res.cause().message}")
@@ -99,7 +99,7 @@ class TestDbVerticle {
             ),
             deliveryOptionsOf(headers = DBVertHeader)
         ) { res ->
-            assertEquals("DBVerticle; Add database 'testdb1' done.; testdb1", res.result().body().trim())
+            assertEquals("DBVerticle -> Add database 'testdb1' done. -> testdb1", res.result().body().trim())
             println("***add succeeded: ${res.result().body()}")
         }
 
@@ -124,7 +124,7 @@ class TestDbVerticle {
             ),
             deliveryOptionsOf(headers = DBVertHeader)
         ) { res ->
-            assertEquals("DBVerticle; Add database 'testdb1' failed.; testdb1", res.cause().message?.trim())
+            assertEquals("DBVerticle -> Add database 'testdb1' failed. -> testdb1", res.cause().message?.trim())
             if (res.failed()) {
                 println("***add failed: because not null constrain ${res.cause().message}")
             }
@@ -144,7 +144,7 @@ class TestDbVerticle {
         ) { res ->
             if (res.succeeded()) {
                 assertEquals(
-                    "DBVerticle; Grant access on database 'testdb1' done.; testdb1",
+                    "DBVerticle -> Grant access on database 'testdb1' done. -> testdb1",
                     res.result().body().trim()
                 )
                 println("***grant db done: ${res.result().body()}")
@@ -166,7 +166,7 @@ class TestDbVerticle {
             deliveryOptionsOf(headers = DBVertHeader)
         ) { res ->
             if (res.succeeded()) {
-                assertEquals("DBVerticle; Update catalog done.; done", res.result().body().trim())
+                assertEquals("DBVerticle -> Update catalog done. -> done", res.result().body().trim())
                 println("***query reg done: ${res.result().body()}")
             } else {
                 println(res.cause().message)
@@ -186,7 +186,7 @@ class TestDbVerticle {
             deliveryOptionsOf(headers = DBVertHeader)
         ) { res ->
             if (res.succeeded()) {
-                assertEquals("DBVerticle; Check catalog done.; [testdb1]", res.result().body())
+                assertEquals("DBVerticle -> Check catalog done. -> [testdb1]", res.result().body())
                 println("***check catalog done: ${res.result().body()}")
             } else {
                 println(res.cause().message)
@@ -222,7 +222,7 @@ class TestDbVerticle {
             ),
             deliveryOptionsOf(headers = DBVertHeader)
         ) { res ->
-            assertEquals("DBVerticle; Remove database 'testdb1' done.; testdb1", res.result().body().trim())
+            assertEquals("DBVerticle -> Remove database 'testdb1' done. -> testdb1", res.result().body().trim())
             if (res.succeeded()) println("***${res.result().body()}")
         }
 
