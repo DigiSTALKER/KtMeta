@@ -11,5 +11,5 @@
  * limitations under the License.
  */
 
-package io.github.hochikong.ktmeta.metadata
+package io.github.hochikong.ktmeta.metaplugin
 

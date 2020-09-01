@@ -18,6 +18,8 @@ plugins {
     id 'application'
 }
 
+mainClassName = 'MainKt'
+
 group 'io.github.hochikong'
 version '1.0-SNAPSHOT'
 
@@ -32,8 +34,7 @@ test {
 
 dependencies {
     // implementation files("libs/ktmeta-driver-api-1.0-SNAPSHOT.jar")
-/*    Useless in kotlin 1.4.0
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"*/
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
     implementation "io.vertx:vertx-core:3.9.2"
     implementation "io.vertx:vertx-hazelcast:3.9.2"
     implementation "io.vertx:vertx-lang-kotlin:3.9.2"
@@ -74,7 +75,7 @@ jar {
         attributes 'Main-Class': 'MainKt'
     }
     from {
-        configurations.runtime.collect {
+        configurations.runtimeClasspath.collect {
             it.isDirectory() ? it : zipTree(it)
         }
     }
