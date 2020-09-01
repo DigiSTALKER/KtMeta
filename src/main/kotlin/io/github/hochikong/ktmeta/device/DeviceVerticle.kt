@@ -20,7 +20,6 @@ import io.github.hochikong.ktmeta.predefined.ResultMsg
 import io.github.hochikong.ktmeta.predefined.VertListLoads
 import io.vertx.core.AbstractVerticle
 import io.vertx.core.shareddata.LocalMap
-import io.vertx.core.shareddata.SharedData
 import java.util.*
 
 class DeviceVerticle : AbstractVerticle() {
@@ -29,13 +28,16 @@ class DeviceVerticle : AbstractVerticle() {
 
     override fun start() {
         val shareDataInstance = vertx.sharedData()
+        val sharedMap: LocalMap<String, String> = shareDataInstance.getLocalMap(DeviceSharedMapName)
+
         vertx.eventBus().consumer<String>(DeviceVertListenAddr) { msg ->
             val uMSGDataClass: DeviceVertUMsg
             when (msg.headers().get("request")) {
                 DeviceVertHeader["request"] -> {
                     uMSGDataClass = JSONMapper.readValue(msg.body())
 
-                    val result = executeMgmtTask(uMSGDataClass, shareDataInstance)
+                    // analyze DeviceVertUMsg task
+                    val result = executeMgmtTask(uMSGDataClass, sharedMap)
                     if (!result.succeeded) {
                         msg.fail(-1, "DeviceVerticle -> ${result.msg} -> '${result.result}'")
                     } else {
@@ -48,7 +50,7 @@ class DeviceVerticle : AbstractVerticle() {
         }
     }
 
-    private fun executeMgmtTask(uMSGDataClass: DeviceVertUMsg, shareData: SharedData): ResultMsg {
+    private fun executeMgmtTask(uMSGDataClass: DeviceVertUMsg, shareDataMap: LocalMap<String, String>): ResultMsg {
         return when (uMSGDataClass.task) {
             "getDevice" -> {
                 // this condition only add cfg into deviceCFGs
@@ -91,7 +93,7 @@ class DeviceVerticle : AbstractVerticle() {
                     val actionDC: DeviceAction = JSONMapper.readValue(uMSGDataClass.arguments)
                     val uuid = actionDC.uuid
                     val path = actionDC.path
-                    executeAction(uuid, actionDC, path, uMSGDataClass.from, shareData.getLocalMap("deviceResults"))
+                    executeAction(uuid, actionDC, path, uMSGDataClass.from, shareDataMap)
                 } catch (e: Exception) {
                     ResultMsg(false, e.toString(), "Execute action failed.")
                 }
@@ -103,7 +105,7 @@ class DeviceVerticle : AbstractVerticle() {
 
     private fun executeAction(
         uuid: String,
-        actionDC: DeviceAction,
+        actionDataClass: DeviceAction,
         path: String?,
         sendToWho: String,
         shareDataMap: LocalMap<String, String>
@@ -134,7 +136,7 @@ class DeviceVerticle : AbstractVerticle() {
             }
 
             // check actions
-            when (actionDC.action) {
+            when (actionDataClass.action) {
                 // non blocking codes.
                 "setTargetDir" -> {
                     val realPath = if (path != null) {
@@ -155,7 +157,11 @@ class DeviceVerticle : AbstractVerticle() {
                 }
                 "ls" -> {
                     val elements: List<String> = currentDevice.ls(path)
-                    return ResultMsg(true, elements.reduce { acc, s -> "$acc -> $s" }, "Use '->' to split data.")
+                    return ResultMsg(
+                        true,
+                        JSONMapper.writeValueAsString(VertListLoads(elements)),
+                        "Use VertListLoads to parse data."
+                    )
                 }
                 "push" -> {
                     return if (path == null) {
@@ -178,7 +184,8 @@ class DeviceVerticle : AbstractVerticle() {
                 // may blocking code.
                 "getFullTree" -> {
                     val taskUUID: String =
-                        UUID.nameUUIDFromBytes("${actionDC.action} ${actionDC.path}".toByteArray()).toString()
+                        UUID.nameUUIDFromBytes("${actionDataClass.action} ${actionDataClass.path}".toByteArray())
+                            .toString()
                     vertx.executeBlocking<String>({ task ->
                         val result: List<FileRow> = currentDevice.getFullTree()
                         val fileRows: List<String> = result.map { JSONMapper.writeValueAsString(it) }.toList()
@@ -192,14 +199,17 @@ class DeviceVerticle : AbstractVerticle() {
                         )
                         task.complete(asyncOutput)
                     }) { handler ->
+                        // write data on localMap
                         shareDataMap[taskUUID] = handler.result()
+                        // notify receiver
+                        vertx.eventBus().send(sendToWho, "$taskUUID done.")
                     }
                     return ResultMsg(true, taskUUID, "You async reply uuid is '$taskUUID'")
                 }
 
 
                 else -> {
-                    return ResultMsg(false, actionDC.action, "Invalid action '${actionDC.action}'")
+                    return ResultMsg(false, actionDataClass.action, "Invalid action '${actionDataClass.action}'")
                 }
             }
         }

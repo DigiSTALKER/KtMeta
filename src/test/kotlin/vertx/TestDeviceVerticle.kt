@@ -50,7 +50,7 @@ class TestDeviceVerticle {
 
     @Test
     fun testDeviceVerticle() {
-        val localMap = sd.getLocalMap<String, String>("deviceResults")
+        val localMap = sd.getLocalMap<String, String>(DeviceSharedMapName)
         vertx.deployVerticle(DeviceVerticle::class.java.name) { promise ->
             if (promise.succeeded()) {
                 println("deploy done: ${promise.result()}")
@@ -177,6 +177,22 @@ class TestDeviceVerticle {
                 )
             )
         )
+
+        // pop
+        val r10 = vrequest(
+            args = DeviceVertUMsg(
+                "test",
+                "action",
+                JSONMapper.writeValueAsString(
+                    DeviceAction(
+                        uuid = uuid,
+                        action = "pop",
+                        path = null
+                    )
+                )
+            )
+        )
+
 
         Thread.sleep(2000)
     }

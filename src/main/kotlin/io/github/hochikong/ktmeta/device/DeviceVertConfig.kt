@@ -17,9 +17,14 @@ import io.github.hochikong.ktmeta.predefined.Devices
 import java.util.*
 
 /**
- * Actor listen address
+ * Actor listen address.
  * */
 const val DeviceVertListenAddr = "ktmeta.dbmgmt.DeviceMgmt"
+
+/**
+ * Shared data map unique name.
+ * */
+const val DeviceSharedMapName = "$DeviceVertListenAddr.async_result"
 
 /**
  * DeviceVerticle message

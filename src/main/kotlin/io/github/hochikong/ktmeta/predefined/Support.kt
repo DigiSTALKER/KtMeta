@@ -55,7 +55,7 @@ enum class FileType(val identity: String) {
 
 
 /**
- * Pre-defined size limit.
+ * Pre-defined file size limit.
  * */
 enum class SizeLimit {
     Normal,
