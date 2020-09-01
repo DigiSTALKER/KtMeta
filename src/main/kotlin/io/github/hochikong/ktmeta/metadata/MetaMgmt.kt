@@ -11,4 +11,5 @@
  * limitations under the License.
  */
 
-rootProject.name = 'ktmeta'
+package io.github.hochikong.ktmeta.metadata
+
