@@ -124,7 +124,7 @@ object DBMgmt {
     }
 
     /**
-     * Check database's catalog.
+     * Check database's catalog. Find out all database's name.
      * @return list, ("catalog", empty or not(Boolean), all available databases(set))
      * */
     fun checkCatalog(): List<Any> {
@@ -212,10 +212,39 @@ object DBMgmt {
     }
 
     /**
-     * Verify token.
+     * Get a token from tokenCache.
      * */
     private fun verifyToken(token: String): Token? {
         return tokenCache.getIfPresent(token)
+    }
+
+    /**
+     * Verify a token and return ConfigContainer.
+     * */
+    private fun getConfigContainer(
+        token: String,
+        queryRow: RegRow,
+        name: String
+    ): DBConfigContainer {
+        var realUsername = ""
+        var realPassword = ""
+        val gToken = verifyToken(token)
+        if (gToken != null) {
+            realUsername = gToken.username
+            realPassword = gToken.password
+        }
+
+        if (realUsername.isBlank()) throw IllegalStateException("You should grantDatabase() first.")
+        if (realPassword.isBlank()) throw IllegalStateException("You should grantDatabase() first.")
+
+        return DBConfigContainer(
+            type = queryRow.db,
+            name = name,
+            desc = queryRow.description,
+            url = queryRow.url,
+            username = realUsername,
+            password = realPassword
+        )
     }
 
     /**
@@ -282,31 +311,5 @@ object DBMgmt {
         } else {
             throw NoSuchDatabaseInRegistrationTable("DBMGMT.getConnection said: Database $name not exists.")
         }
-    }
-
-    private fun getConfigContainer(
-        token: String,
-        queryRow: RegRow,
-        name: String
-    ): DBConfigContainer {
-        var realUsername = ""
-        var realPassword = ""
-        val gToken = verifyToken(token)
-        if (gToken != null) {
-            realUsername = gToken.username
-            realPassword = gToken.password
-        }
-
-        if (realUsername.isBlank()) throw IllegalStateException("You should grantDatabase() first.")
-        if (realPassword.isBlank()) throw IllegalStateException("You should grantDatabase() first.")
-
-        return DBConfigContainer(
-            type = queryRow.db,
-            name = name,
-            desc = queryRow.description,
-            url = queryRow.url,
-            username = realUsername,
-            password = realPassword
-        )
     }
 }
