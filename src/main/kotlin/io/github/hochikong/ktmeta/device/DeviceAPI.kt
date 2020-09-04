@@ -29,6 +29,7 @@ package io.github.hochikong.ktmeta.device
  * ## Functions:
  *
  * setTargetDir(path) -> Used to set root dir for the device. Your classes should check the path is valid or not.
+ * You should put authentication logic in this method.
  *
  * getFullTree() -> Return a list of FileRow, which contains all dirs and files as FileRow instances.
  *
