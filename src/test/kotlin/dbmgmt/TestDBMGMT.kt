@@ -107,9 +107,7 @@ class TestDBMGMT {
     fun testquery() {
         DBMgmt.queryReg()
         assertEquals(true, DBMgmt.regIsEmpty)
-        assertEquals("catalog", DBMgmt.checkCatalog()[0])
         println(DBMgmt.checkCatalog())
-        println(DBMgmt.currentDatabases)
         assertThrows<NoDatabasesIsAvailable> { DBMgmt.getConnection("sb", "fake") }
     }
 

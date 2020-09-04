@@ -61,7 +61,7 @@ object DBMgmt {
     var regIsEmpty: Boolean = true
         private set
 
-    val currentDatabases = mutableListOf<DBConfigContainer>()
+//    val currentDatabases = mutableListOf<DBConfigContainer>()
 
     private var queryResult: List<List<Any>>? by Delegates.observable(listOf()) { _, _, newValue ->
         regIsEmpty = when {
@@ -104,14 +104,14 @@ object DBMgmt {
         return DBRegCatalog[name]
     }
 
-    private fun addUsingDatabase(config: DBConfigContainer) {
+    /*private fun addUsingDatabase(config: DBConfigContainer) {
         currentDatabases.add(config)
         loggerDBMGMT.info("Create new jdbc connection/database/connection pool for url ${config.name}")
         loggerDBMGMT.info(
             "Currently using databases: ${currentDatabases.map { it.name }}" +
                     "@${currentDatabases.map { it.url }} "
         )
-    }
+    }*/
 
 
     // APIs
@@ -127,13 +127,9 @@ object DBMgmt {
      * Check database's catalog. Find out all database's name.
      * @return list, ("catalog", empty or not(Boolean), all available databases(set))
      * */
-    fun checkCatalog(): List<Any> {
+    fun checkCatalog(): List<String> {
         queryReg()
-        return if (regIsEmpty) {
-            listOf("catalog", true, DBRegCatalog.keys())
-        } else {
-            listOf("catalog", false, DBRegCatalog.keys())
-        }
+        return DBRegCatalog.keys().toList()
     }
 
     /**
@@ -255,7 +251,7 @@ object DBMgmt {
         val queryRow: RegRow? = checkRegIsEmpty(name)
         if (queryRow != null) {
             configContainer = getConfigContainer(token, queryRow, name)
-            val con = if (configContainer.username != "null" && configContainer.password != "null") {
+            return if (configContainer.username != "null" && configContainer.password != "null") {
                 DriverManager.getConnection(
                     configContainer.url,
                     configContainer.username,
@@ -264,8 +260,6 @@ object DBMgmt {
             } else {
                 DriverManager.getConnection(configContainer.url)
             }
-            addUsingDatabase(configContainer)
-            return con
         } else {
             throw NoSuchDatabaseInRegistrationTable("DBMGMT.getConnection said: Database $name not exists.")
         }
