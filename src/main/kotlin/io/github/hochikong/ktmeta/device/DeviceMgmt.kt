@@ -14,15 +14,15 @@
 package io.github.hochikong.ktmeta.device
 
 import io.github.hochikong.ktmeta.device.driver.LocalDiskDriver
-import io.github.hochikong.ktmeta.predefined.Devices
 import io.github.hochikong.ktmeta.predefined.InitialDeviceFailed
+import io.github.hochikong.ktmeta.predefined.SupportedDevices
 
 
 object DeviceMgmt {
     /**
      * Return a device instance by Devices type.
      * */
-    fun getDevice(type: Devices): DeviceAPI {
+    fun getDevice(type: SupportedDevices): DeviceAPI {
         return getDeviceByType(type.className)
     }
 
@@ -40,7 +40,7 @@ object DeviceMgmt {
      * Return a device instance by Devices.identity
      */
     fun getDevice(identity: String): DeviceAPI {
-        val officialSupportIdentity = Devices.values().map { it.identity }.toList()
+        val officialSupportIdentity = SupportedDevices.values().map { it.identity }.toList()
         if (officialSupportIdentity.contains(identity)) {
             when (identity) {
                 "LocalDiskDriver" -> return LocalDiskDriver()

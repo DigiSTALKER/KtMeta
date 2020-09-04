@@ -14,8 +14,8 @@
 package device
 
 import io.github.hochikong.ktmeta.device.DeviceMgmt
-import io.github.hochikong.ktmeta.predefined.Devices
 import io.github.hochikong.ktmeta.predefined.InitialDeviceFailed
+import io.github.hochikong.ktmeta.predefined.SupportedDevices
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
@@ -23,7 +23,7 @@ import org.junit.jupiter.api.assertThrows
 class TestDeviceMgmt {
     @Test
     fun testGetDevice() {
-        val obj = DeviceMgmt.getDevice(Devices.LocalDevice)
+        val obj = DeviceMgmt.getDevice(SupportedDevices.LocalDevice)
         assertEquals(true, obj.setTargetDir("C:\\Users\\ckhoi\\IdeaProjects\\ktmeta\\src\\test\\resources\\tree"))
         val tree = obj.getFullTree()
         tree.forEach { println(it) }
@@ -32,7 +32,7 @@ class TestDeviceMgmt {
     @Test
     fun testGetDeviceByIdentity() {
         assertThrows<InitialDeviceFailed> { DeviceMgmt.getDevice("ssdad") }
-        val obj = DeviceMgmt.getDevice(Devices.LocalDevice.identity)
+        val obj = DeviceMgmt.getDevice(SupportedDevices.LocalDevice.identity)
         assertEquals(true, obj.setTargetDir("C:\\Users\\ckhoi\\IdeaProjects\\ktmeta\\src\\test\\resources\\tree"))
         println("current is ${obj.pwd()}")
     }

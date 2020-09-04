@@ -13,7 +13,7 @@
 
 package io.github.hochikong.ktmeta.device
 
-import io.github.hochikong.ktmeta.predefined.Devices
+import io.github.hochikong.ktmeta.predefined.SupportedDevices
 import java.util.*
 
 /**
@@ -52,7 +52,7 @@ sealed class DeviceVertArguments
  * @param deviceType Devices types.
  * This data class is also used for generate uuid according to a [targetDir] and [deviceType]
  * */
-data class DevicePathUUID(val targetDir: String, val deviceType: Devices) : DeviceVertArguments() {
+data class DevicePathUUID(val targetDir: String, val deviceType: SupportedDevices) : DeviceVertArguments() {
     fun toUUID(): String {
         return UUID.nameUUIDFromBytes("$targetDir $deviceType".toByteArray()).toString()
     }

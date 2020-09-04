@@ -11,7 +11,8 @@
  *  limitations under the License.
  */
 
-package dbmgmt/*
+package dbmgmt
+/*
  * Copyright 2020 Hochikong
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -27,6 +28,7 @@ package dbmgmt/*
 import io.github.hochikong.ktmeta.dbmgmt.DBMgmt
 import io.github.hochikong.ktmeta.dbmgmt.DBRegCatalog
 import io.github.hochikong.ktmeta.dbmgmt.Maintainer
+import io.github.hochikong.ktmeta.predefined.Encryption
 import io.github.hochikong.ktmeta.predefined.NoDatabasesIsAvailable
 import io.github.hochikong.ktmeta.predefined.NoSuchDatabaseInRegistrationTable
 import io.github.hochikong.ktmeta.predefined.SupportedDBs
@@ -108,7 +110,7 @@ class TestDBMGMT {
         assertEquals("catalog", DBMgmt.checkCatalog()[0])
         println(DBMgmt.checkCatalog())
         println(DBMgmt.currentDatabases)
-        assertThrows<NoDatabasesIsAvailable> { DBMgmt.getConnection("sb") }
+        assertThrows<NoDatabasesIsAvailable> { DBMgmt.getConnection("sb", "fake") }
     }
 
     @Order(2)
@@ -128,8 +130,8 @@ class TestDBMGMT {
             SupportedDBs.PostgreSQL,
             "pg_test",
             "the first pg",
-            "ktmeta_test",
-            "ktmeta",
+            Encryption.encrypt("ktmeta_test"),
+            Encryption.encrypt("ktmeta"),
             "jdbc:postgresql://localhost:5432/ktmetapg"
         )
         println("After insert: ${DBMgmt.checkCatalog()}")
@@ -138,16 +140,17 @@ class TestDBMGMT {
     @Order(3)
     @Test
     fun testGetCon() {
-        assertThrows<NoSuchDatabaseInRegistrationTable> { DBMgmt.getConnection("sb") }
-        assertThrows<NoSuchDatabaseInRegistrationTable> { DBMgmt.getDatabase("sb") }
-        assertThrows<NoSuchDatabaseInRegistrationTable> { DBMgmt.getPool("sb") }
+        assertThrows<NoSuchDatabaseInRegistrationTable> { DBMgmt.getConnection("sb", "fake") }
+        assertThrows<NoSuchDatabaseInRegistrationTable> { DBMgmt.getDatabase("sb", "fake") }
+        assertThrows<NoSuchDatabaseInRegistrationTable> { DBMgmt.getPool("sb", "fake") }
     }
 
     @Order(4)
     @Test
     fun testGetCon2() {
         println("Current catalog: ${DBMgmt.checkCatalog()}")
-        val x = DBMgmt.getConnection("sqlite_test")
+        val sqliteToken = DBMgmt.grantDatabase("sqlite_test", "null", "null")
+        val x = DBMgmt.getConnection("sqlite_test", sqliteToken)
         x.createStatement().use {
             it.execute(
                 """
@@ -187,7 +190,8 @@ class TestDBMGMT {
     @Order(5)
     @Test
     fun testGetDB() {
-        val x = DBMgmt.getDatabase("sqlite_test")
+        val sqliteToken = DBMgmt.grantDatabase("sqlite_test", "null", "null")
+        val x = DBMgmt.getDatabase("sqlite_test", sqliteToken)
         for (row in x.from(Demo).select()) {
             assertEquals(1, row[Demo.id])
             assertEquals("sb", row[Demo.name])
@@ -195,7 +199,7 @@ class TestDBMGMT {
             println(row[Demo.name])
         }
 
-        val y = DBMgmt.getPool("sqlite_test")
+        val y = DBMgmt.getPool("sqlite_test", sqliteToken)
         for (row in y.from(Demo).select()) {
             assertEquals(1, row[Demo.id])
             assertEquals("sb", row[Demo.name])
@@ -208,7 +212,8 @@ class TestDBMGMT {
     @Test
     fun testPG() {
         val tmp = mutableMapOf<Int, String>()
-        val x = DBMgmt.getDatabase("pg_test")
+        val pgToken = DBMgmt.grantDatabase("pg_test", "ktmeta_test", "ktmeta")
+        val x = DBMgmt.getDatabase("pg_test", pgToken)
         x.insertAndGenerateKey(PG) {
             PG.name to "them"
         }
@@ -222,7 +227,7 @@ class TestDBMGMT {
         assert(2 in tmp.keys)
         assertEquals("them", tmp[1])
         assertEquals("him", tmp[2])
-        DBMgmt.getConnection("pg_test").createStatement().use {
+        DBMgmt.getConnection("pg_test", pgToken).createStatement().use {
             it.executeUpdate(
                 """
                 DELETE FROM sb;
@@ -235,10 +240,20 @@ class TestDBMGMT {
     @Test
     fun testRemove() {
         println(DBMgmt.checkCatalog())
-        assertEquals(false, DBMgmt.removeDatabase("nmsl"))
-        assertEquals(true, DBMgmt.removeDatabase("pg_test"))
+        assertEquals(false, DBMgmt.removeDatabase("nmsl", "fake"))
+        assertEquals(
+            true, DBMgmt.removeDatabase(
+                "pg_test",
+                DBMgmt.grantDatabase("pg_test", "ktmeta_test", "ktmeta")
+            )
+        )
         println(DBMgmt.checkCatalog())
-        assertEquals(true, DBMgmt.removeDatabase("sqlite_test"))
+        assertEquals(
+            true, DBMgmt.removeDatabase(
+                "sqlite_test",
+                DBMgmt.grantDatabase("sqlite_test", "null", "null")
+            )
+        )
         println(DBMgmt.checkCatalog())
         println(DBRegCatalog.keys())
     }

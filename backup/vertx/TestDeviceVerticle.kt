@@ -13,7 +13,6 @@
 
 package vertx
 
-import io.github.hochikong.ktmeta.device.*
 import io.github.hochikong.ktmeta.predefined.Devices
 import io.github.hochikong.ktmeta.predefined.JSONMapper
 import io.vertx.core.Vertx

@@ -209,4 +209,9 @@ class LocalDiskDriver : DeviceAPI {
         if (Files.isRegularFile(path)) return FileType.File
         throw ConvertError("Path Conversion failed.")
     }
+
+
+    override fun readFile(path: String): Any {
+        TODO("Not yet implemented")
+    }
 }

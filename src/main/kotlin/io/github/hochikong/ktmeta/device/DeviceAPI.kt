@@ -47,4 +47,5 @@ interface DeviceAPI {
     fun ls(dirname: String? = null): List<String>
     fun push(dirname: String): Boolean
     fun pop(): String
+    fun readFile(path: String): Any
 }

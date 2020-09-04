@@ -16,8 +16,11 @@
  * */
 package io.github.hochikong.ktmeta.dbmgmt
 
+import com.google.common.cache.Cache
+import com.google.common.cache.CacheBuilder
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
+import io.github.hochikong.ktmeta.predefined.Encryption
 import io.github.hochikong.ktmeta.predefined.NoDatabasesIsAvailable
 import io.github.hochikong.ktmeta.predefined.NoSuchDatabaseInRegistrationTable
 import io.github.hochikong.ktmeta.predefined.SupportedDBs
@@ -25,13 +28,41 @@ import me.liuwj.ktorm.database.Database
 import org.slf4j.LoggerFactory
 import java.sql.Connection
 import java.sql.DriverManager
+import java.util.*
+import java.util.concurrent.TimeUnit
 import kotlin.properties.Delegates
 
 object DBMgmt {
+    private data class Token(val username: String, val password: String) {
+        override fun equals(other: Any?): Boolean {
+            if (this === other) return true
+            if (javaClass != other?.javaClass) return false
+
+            other as Token
+
+            if (username != other.username) return false
+            if (password != other.password) return false
+
+            return true
+        }
+
+        override fun hashCode(): Int {
+            var result = username.hashCode()
+            result = 31 * result + password.hashCode()
+            return result
+        }
+    }
+
+
+    private val securityKey = UUID.nameUUIDFromBytes("${System.currentTimeMillis()}".toByteArray()).toString()
+
     private val loggerDBMGMT = LoggerFactory.getLogger("ktmeta->dbmgmt")
+
     var regIsEmpty: Boolean = true
         private set
+
     val currentDatabases = mutableListOf<DBConfigContainer>()
+
     private var queryResult: List<List<Any>>? by Delegates.observable(listOf()) { _, _, newValue ->
         regIsEmpty = when {
             newValue == null -> {
@@ -48,6 +79,11 @@ object DBMgmt {
             }
         }
     }
+
+    private val tokenCache: Cache<String, Token> = CacheBuilder
+        .newBuilder()
+        .expireAfterWrite(4L, TimeUnit.HOURS)
+        .build()
 
     init {
         if (!Maintainer.hasTable()) {
@@ -135,30 +171,61 @@ object DBMgmt {
     /**
      * Delete database configuration.
      * */
-    fun removeDatabase(name: String): Boolean {
-        return if (checkRegIsEmpty(name) != null) {
-            Maintainer.deleteRow("name == '$name'")
-            queryReg()
+    fun removeDatabase(name: String, token: String): Boolean {
+        return if (tokenCache.getIfPresent(token) != null) {
+            if (checkRegIsEmpty(name) != null) {
+                Maintainer.deleteRow("name == '$name'")
+                queryReg()
+            } else {
+                false
+            }
         } else {
             false
         }
     }
 
     /**
-     * Return JDBC connection by database's [name]
-     */
-    fun getConnection(name: String): Connection {
-        val configContainer: DBConfigContainer
+     * Grant database access permission.
+     * @param name Database name.
+     * @param username Raw username.
+     * @param password Raw password.
+     * */
+    fun grantDatabase(name: String, username: String, password: String): String {
         val row: RegRow? = checkRegIsEmpty(name)
         if (row != null) {
-            configContainer = DBConfigContainer(
-                type = row.db,
-                name = name,
-                desc = row.description,
-                url = row.url,
-                username = row.user,
-                password = row.password
-            )
+            val usernamePass: Boolean = when {
+                (username == row.user) && (username == "null") -> true
+                else -> Encryption.verify(username, row.user)
+            }
+            val passwordPass: Boolean = when {
+                (password == row.password) && (password == "null") -> true
+                else -> Encryption.verify(password, row.password)
+            }
+            if (usernamePass && passwordPass) {
+                val token = Encryption.encrypt("$username$password$securityKey")
+                tokenCache.put(token, Token(username, password))
+                return token
+            }
+
+        }
+        throw NoSuchDatabaseInRegistrationTable("Your password or username is error.")
+    }
+
+    /**
+     * Verify token.
+     * */
+    private fun verifyToken(token: String): Token? {
+        return tokenCache.getIfPresent(token)
+    }
+
+    /**
+     * Return JDBC connection by database's [name]
+     */
+    fun getConnection(name: String, token: String): Connection {
+        val configContainer: DBConfigContainer
+        val queryRow: RegRow? = checkRegIsEmpty(name)
+        if (queryRow != null) {
+            configContainer = getConfigContainer(token, queryRow, name)
             val con = if (configContainer.username != "null" && configContainer.password != "null") {
                 DriverManager.getConnection(
                     configContainer.url,
@@ -178,27 +245,18 @@ object DBMgmt {
     /**
      * Return single Ktorm's database by database's [name]
      * */
-    fun getDatabase(name: String): Database {
+    fun getDatabase(name: String, token: String): Database {
         val configContainer: DBConfigContainer
-        val row = checkRegIsEmpty(name)
-        if (row != null) {
-            configContainer = DBConfigContainer(
-                type = row.db,
-                name = name,
-                desc = row.description,
-                url = row.url,
-                username = row.user,
-                password = row.password
-            )
-            val database = Database.connect(
+        val queryRow = checkRegIsEmpty(name)
+        if (queryRow != null) {
+            configContainer = getConfigContainer(token, queryRow, name)
+            return Database.connect(
                 url = configContainer.url,
                 driver = configContainer.jdbcDriver,
                 user = if (configContainer.username == "null") null else configContainer.username,
                 password = if (configContainer.password == "null") null else configContainer.password,
                 dialect = configContainer.dialect
             )
-            addUsingDatabase(configContainer)
-            return database
         } else {
             throw NoSuchDatabaseInRegistrationTable("DBMGMT.getConnection said: Database $name not exists.")
         }
@@ -207,18 +265,11 @@ object DBMgmt {
     /**
      * Return HikariCP connection pool by database's [name]
      * */
-    fun getPool(name: String, configPath: String = ".\\hikari.properties"): Database {
+    fun getPool(name: String, token: String, configPath: String = ".\\hikari.properties"): Database {
         val configContainer: DBConfigContainer
-        val row = checkRegIsEmpty(name)
-        if (row != null) {
-            configContainer = DBConfigContainer(
-                type = row.db,
-                name = name,
-                desc = row.description,
-                url = row.url,
-                username = row.user,
-                password = row.password
-            )
+        val queryRow = checkRegIsEmpty(name)
+        if (queryRow != null) {
+            configContainer = getConfigContainer(token, queryRow, name)
             val config = HikariConfig(configPath)
             config.jdbcUrl = configContainer.url
             // config.dataSourceClassName = configContainer.dataSource
@@ -227,10 +278,35 @@ object DBMgmt {
             if (configContainer.password != "null") config.password = configContainer.password
 
             val dataSource = HikariDataSource(config)
-            addUsingDatabase(configContainer)
             return Database.connect(dataSource, configContainer.dialect)
         } else {
             throw NoSuchDatabaseInRegistrationTable("DBMGMT.getConnection said: Database $name not exists.")
         }
+    }
+
+    private fun getConfigContainer(
+        token: String,
+        queryRow: RegRow,
+        name: String
+    ): DBConfigContainer {
+        var realUsername = ""
+        var realPassword = ""
+        val gToken = verifyToken(token)
+        if (gToken != null) {
+            realUsername = gToken.username
+            realPassword = gToken.password
+        }
+
+        if (realUsername.isBlank()) throw IllegalStateException("You should grantDatabase() first.")
+        if (realPassword.isBlank()) throw IllegalStateException("You should grantDatabase() first.")
+
+        return DBConfigContainer(
+            type = queryRow.db,
+            name = name,
+            desc = queryRow.description,
+            url = queryRow.url,
+            username = realUsername,
+            password = realPassword
+        )
     }
 }
