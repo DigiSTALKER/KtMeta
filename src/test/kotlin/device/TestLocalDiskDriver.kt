@@ -175,6 +175,10 @@ class TestLocalDiskDriver {
             files[0]
         )
         x.pop()
+        // at root dir
+        println(x.ls())
         println(x.globFilter("root", "*.txt"))
+        val file = x.readFile("C:\\Users\\ckhoi\\IdeaProjects\\ktmeta\\src\\test\\resources\\tree\\subb.txt")
+        println(file)
     }
 }

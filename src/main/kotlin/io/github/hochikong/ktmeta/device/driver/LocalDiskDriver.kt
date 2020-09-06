@@ -18,6 +18,7 @@ import io.github.hochikong.ktmeta.device.FileRow
 import io.github.hochikong.ktmeta.device.fileRowBuilder
 import io.github.hochikong.ktmeta.predefined.ConvertError
 import io.github.hochikong.ktmeta.predefined.FileType
+import java.io.IOException
 import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
@@ -211,7 +212,20 @@ class LocalDiskDriver : DeviceAPI {
     }
 
 
-    override fun readFile(path: String): Any {
-        TODO("Not yet implemented")
+    override fun readFile(path: String): String {
+        val file = Paths.get(path)
+        var empty = "empty"
+        if (Files.notExists(file) && !Files.exists(file)) return empty
+        if (file.toAbsolutePath() != file && file.toRealPath() != file) return empty
+        if (!Files.isRegularFile(file)) return empty
+        if (!Files.isReadable(file)) return empty
+        try {
+            val bytes = Files.readAllBytes(file)
+            empty = String(bytes)
+        } catch (e: IOException) {
+            println(e.toString())
+            println(e.printStackTrace())
+        }
+        return empty
     }
 }
