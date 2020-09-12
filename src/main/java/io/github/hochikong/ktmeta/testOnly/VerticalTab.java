@@ -3,15 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package io.github.hochikong.testOnly;
+package io.github.hochikong.ktmeta.testOnly;
 
 import com.formdev.flatlaf.intellijthemes.FlatSolarizedLightIJTheme;
-import io.github.hochikong.swingui.VerticalLabelUI;
+import io.github.hochikong.ktmeta.swingui.VerticalLabelUI;
 
 import javax.swing.*;
 import java.awt.*;
 
 /**
+ *
  * @author ckhoi
  */
 public class VerticalTab extends javax.swing.JFrame {

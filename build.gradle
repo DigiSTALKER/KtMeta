@@ -35,6 +35,8 @@ test {
 dependencies {
     implementation files("libs/ktmeta-basic-1.0-SNAPSHOT.jar")
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    implementation "com.formdev:flatlaf:0.41"
+    implementation "com.formdev:flatlaf-intellij-themes:0.41"
     implementation "io.vertx:vertx-core:3.9.2"
     implementation "io.vertx:vertx-hazelcast:3.9.2"
     implementation "io.vertx:vertx-lang-kotlin:3.9.2"

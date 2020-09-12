@@ -3,17 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package io.github.hochikong.swingui;
+package io.github.hochikong.ktmeta.swingui;
 
 /**
+ *
  * @author ckhoi
  */
-public class AddIndexWizard extends javax.swing.JDialog {
+public class AddDatabaseWizard extends javax.swing.JDialog {
 
     /**
-     * Creates new form AddIndexWizard
+     * Creates new form AddDatabaseWizard
      */
-    public AddIndexWizard(java.awt.Frame parent, boolean modal) {
+    public AddDatabaseWizard(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
@@ -60,20 +61,20 @@ public class AddIndexWizard extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AddIndexWizard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddDatabaseWizard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AddIndexWizard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddDatabaseWizard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AddIndexWizard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddDatabaseWizard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AddIndexWizard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddDatabaseWizard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                AddIndexWizard dialog = new AddIndexWizard(new javax.swing.JFrame(), true);
+                AddDatabaseWizard dialog = new AddDatabaseWizard(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

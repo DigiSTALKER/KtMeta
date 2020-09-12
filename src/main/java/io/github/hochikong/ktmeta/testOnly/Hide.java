@@ -8,6 +8,7 @@ package io.github.hochikong.testOnly;
 import javax.swing.*;
 
 /**
+ *
  * @author ckhoi
  */
 public class Hide extends javax.swing.JFrame {

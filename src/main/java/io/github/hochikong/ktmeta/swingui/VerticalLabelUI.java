@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package io.github.hochikong.swingui;
+package io.github.hochikong.ktmeta.swingui;
 
 /*
  * The contents of this file are subject to the Sapient Public License

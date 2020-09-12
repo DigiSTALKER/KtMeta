@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package io.github.hochikong.swingui;
+package io.github.hochikong.ktmeta.swingui;
 
 import com.formdev.flatlaf.intellijthemes.FlatSolarizedLightIJTheme;
 
@@ -12,6 +12,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import java.awt.image.BufferedImage;
 
 /**
+ *
  * @author ckhoi
  */
 public class KtmetaJFrame extends javax.swing.JFrame {
@@ -56,6 +57,7 @@ public class KtmetaJFrame extends javax.swing.JFrame {
         GeneralDownTabbedPaneTemplate = new javax.swing.JTabbedPane();
         QueryScrollPane = new javax.swing.JScrollPane();
         InfoScrollPane = new javax.swing.JScrollPane();
+        jTextPane1 = new javax.swing.JTextPane();
         RightSplit = new javax.swing.JPanel();
         MainMenuBar = new javax.swing.JMenuBar();
         FileMenu = new javax.swing.JMenu();
@@ -123,6 +125,10 @@ public class KtmetaJFrame extends javax.swing.JFrame {
         GeneralDownTabbedPaneTemplate.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         GeneralDownTabbedPaneTemplate.setTabPlacement(javax.swing.JTabbedPane.BOTTOM);
         GeneralDownTabbedPaneTemplate.addTab("Universal Query", QueryScrollPane);
+
+        jTextPane1.setEditable(false);
+        InfoScrollPane.setViewportView(jTextPane1);
+
         GeneralDownTabbedPaneTemplate.addTab("Info Output", InfoScrollPane);
 
         GeneralSplitPaneTemplate.setRightComponent(GeneralDownTabbedPaneTemplate);
@@ -190,9 +196,9 @@ public class KtmetaJFrame extends javax.swing.JFrame {
 
         HelpAboutItem.setIcon(new ImageIcon(new BufferedImage(20, 20, BufferedImage.TYPE_INT_ARGB)));
         HelpAboutItem.setText("About");
-        HelpAboutItem.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                HelpAboutItemMouseClicked(evt);
+        HelpAboutItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                HelpAboutItemActionPerformed(evt);
             }
         });
         HelpMenu.add(HelpAboutItem);
@@ -232,9 +238,9 @@ public class KtmetaJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
-    private void HelpAboutItemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HelpAboutItemMouseClicked
-
-    }//GEN-LAST:event_HelpAboutItemMouseClicked
+    protected void HelpAboutItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HelpAboutItemActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_HelpAboutItemActionPerformed
 
     /**
      * @param args the command line arguments
@@ -278,5 +284,6 @@ public class KtmetaJFrame extends javax.swing.JFrame {
     protected javax.swing.JMenuItem ToolsPrefItem;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
+    private javax.swing.JTextPane jTextPane1;
     // End of variables declaration//GEN-END:variables
 }
