@@ -1,12 +1,20 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright 2020 Hochikong
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 package io.github.hochikong.ktmeta.swingui;
 
+import com.formdev.flatlaf.intellijthemes.FlatSolarizedLightIJTheme;
+
 /**
- *
  * @author ckhoi
  */
 public class AddDatabaseWizard extends javax.swing.JDialog {
@@ -16,6 +24,15 @@ public class AddDatabaseWizard extends javax.swing.JDialog {
      */
     public AddDatabaseWizard(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+        initComponents();
+        // centre
+        this.setLocationRelativeTo(null);
+    }
+
+    public AddDatabaseWizard(java.awt.Frame parent, boolean modal, String[] SupportedDBs) {
+        super(parent, modal);
+        this.setLocationRelativeTo(null);
+        this.SupportedDatabaseList = SupportedDBs;
         initComponents();
     }
 
@@ -28,49 +45,140 @@ public class AddDatabaseWizard extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        LabelName = new javax.swing.JLabel();
+        FieldName = new javax.swing.JTextField();
+        LabelDesc = new javax.swing.JLabel();
+        FieldDesc = new javax.swing.JTextField();
+        LabelDB = new javax.swing.JLabel();
+        ComboBoxDB = new javax.swing.JComboBox<>();
+        LabelUsername = new javax.swing.JLabel();
+        FieldUsername = new javax.swing.JTextField();
+        LabelPassword = new javax.swing.JLabel();
+        FieldPassword = new javax.swing.JPasswordField();
+        LabelURL = new javax.swing.JLabel();
+        FieldURL = new javax.swing.JTextField();
+        BTNTestConn = new javax.swing.JButton();
+        ProgressBarTestConn = new javax.swing.JProgressBar();
+        BTNOKAddDB = new javax.swing.JButton();
+        BTNCancelAddDB = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Add Database");
+
+        LabelName.setText("Database : ");
+
+        LabelDesc.setText("Description : ");
+
+        LabelDB.setText("RDBMS : ");
+
+        ComboBoxDB.setModel(new javax.swing.DefaultComboBoxModel<>(SupportedDatabaseList));
+
+        LabelUsername.setText("Username : ");
+
+        LabelPassword.setText("Password : ");
+
+        LabelURL.setText("JDBC URL : ");
+
+        BTNTestConn.setText("Test Connection");
+        BTNTestConn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTNTestConnActionPerformed(evt);
+            }
+        });
+
+        ProgressBarTestConn.setIndeterminate(true);
+
+        BTNOKAddDB.setText("OK");
+
+        BTNCancelAddDB.setText("Cancel");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 400, Short.MAX_VALUE)
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(27, 27, 27)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                                .addComponent(LabelName)
+                                                                .addComponent(LabelDesc)
+                                                                .addComponent(LabelDB)
+                                                                .addComponent(LabelUsername)
+                                                                .addComponent(LabelPassword))
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addComponent(LabelURL)
+                                                                .addGap(14, 14, 14)))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                        .addComponent(FieldName)
+                                                        .addComponent(FieldDesc)
+                                                        .addComponent(ComboBoxDB, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(FieldUsername)
+                                                        .addComponent(FieldPassword)
+                                                        .addComponent(FieldURL, javax.swing.GroupLayout.DEFAULT_SIZE, 396, Short.MAX_VALUE)))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                        .addComponent(BTNOKAddDB)
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addComponent(BTNTestConn)
+                                                                .addGap(54, 54, 54)
+                                                                .addComponent(ProgressBarTestConn, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(BTNCancelAddDB)))
+                                .addContainerGap(43, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 300, Short.MAX_VALUE)
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(22, 22, 22)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(LabelName)
+                                        .addComponent(FieldName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(FieldDesc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(LabelDesc))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(ComboBoxDB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(LabelDB))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(FieldUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(LabelUsername))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(FieldPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(LabelPassword))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(FieldURL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(LabelURL))
+                                .addGap(33, 33, 33)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(BTNTestConn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(ProgressBarTestConn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(BTNOKAddDB)
+                                        .addComponent(BTNCancelAddDB))
+                                .addGap(26, 26, 26))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void BTNTestConnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNTestConnActionPerformed
+        KtBTNTestConnActionPerformed();
+    }//GEN-LAST:event_BTNTestConnActionPerformed
+
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AddDatabaseWizard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AddDatabaseWizard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AddDatabaseWizard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AddDatabaseWizard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
+        FlatSolarizedLightIJTheme.install();
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -86,6 +194,31 @@ public class AddDatabaseWizard extends javax.swing.JDialog {
         });
     }
 
+    /**
+     * Kotlin override
+     */
+    protected void KtBTNTestConnActionPerformed() {
+        // TODO
+    }
+
+    protected String[] SupportedDatabaseList;
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    protected javax.swing.JButton BTNCancelAddDB;
+    protected javax.swing.JButton BTNOKAddDB;
+    protected javax.swing.JButton BTNTestConn;
+    protected javax.swing.JComboBox<String> ComboBoxDB;
+    protected javax.swing.JTextField FieldDesc;
+    protected javax.swing.JTextField FieldName;
+    protected javax.swing.JPasswordField FieldPassword;
+    protected javax.swing.JTextField FieldURL;
+    protected javax.swing.JTextField FieldUsername;
+    protected javax.swing.JLabel LabelDB;
+    protected javax.swing.JLabel LabelDesc;
+    protected javax.swing.JLabel LabelName;
+    protected javax.swing.JLabel LabelPassword;
+    protected javax.swing.JLabel LabelURL;
+    protected javax.swing.JLabel LabelUsername;
+    protected javax.swing.JProgressBar ProgressBarTestConn;
     // End of variables declaration//GEN-END:variables
 }

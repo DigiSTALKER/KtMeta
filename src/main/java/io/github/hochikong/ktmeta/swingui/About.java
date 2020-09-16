@@ -1,7 +1,14 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright 2020 Hochikong
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 package io.github.hochikong.ktmeta.swingui;
 
@@ -23,6 +30,7 @@ public class About extends javax.swing.JDialog {
     public About(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        // display About at the centre of screen
         this.setLocationRelativeTo(null);
     }
 
@@ -37,13 +45,12 @@ public class About extends javax.swing.JDialog {
 
         PhotoLabel = new javax.swing.JLabel();
         InfoLabel = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextPane1 = new javax.swing.JTextPane();
+        InfoScrollPane = new javax.swing.JScrollPane();
+        InfoTextPane = new javax.swing.JTextPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setAlwaysOnTop(true);
         setUndecorated(true);
-        setOpacity(0.0F);
         setResizable(false);
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -53,13 +60,13 @@ public class About extends javax.swing.JDialog {
 
         PhotoLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/AboutHead.jpg"))); // NOI18N
 
-        jTextPane1.setEditable(false);
-        jTextPane1.setBorder(null);
-        jTextPane1.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 16)); // NOI18N
-        jScrollPane1.setViewportView(jTextPane1);
+        InfoTextPane.setEditable(false);
+        InfoTextPane.setBorder(null);
+        InfoTextPane.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 16)); // NOI18N
+        InfoScrollPane.setViewportView(InfoTextPane);
         OperatingSystemMXBean system = ManagementFactory.getOperatingSystemMXBean();
         RuntimeMXBean runtime = ManagementFactory.getRuntimeMXBean();
-        jTextPane1.setText("OS: " + system.getName()
+        InfoTextPane.setText("OS: " + system.getName()
                 + "; Arch: " + system.getArch()
                 + "; Cores: " + system.getAvailableProcessors()
                 + "\n"
@@ -72,16 +79,16 @@ public class About extends javax.swing.JDialog {
         InfoLabelLayout.setHorizontalGroup(
                 InfoLabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(InfoLabelLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jScrollPane1)
-                                .addContainerGap())
+                                .addGap(0, 0, 0)
+                                .addComponent(InfoScrollPane)
+                                .addGap(0, 0, 0))
         );
         InfoLabelLayout.setVerticalGroup(
                 InfoLabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(InfoLabelLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
-                                .addContainerGap())
+                                .addGap(0, 0, 0)
+                                .addComponent(InfoScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
+                                .addGap(0, 0, 0))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -129,8 +136,8 @@ public class About extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel InfoLabel;
+    protected javax.swing.JScrollPane InfoScrollPane;
+    protected javax.swing.JTextPane InfoTextPane;
     private javax.swing.JLabel PhotoLabel;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextPane jTextPane1;
     // End of variables declaration//GEN-END:variables
 }

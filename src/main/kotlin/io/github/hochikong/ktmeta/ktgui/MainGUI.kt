@@ -14,19 +14,36 @@
 package io.github.hochikong.ktmeta.ktgui
 
 import com.formdev.flatlaf.intellijthemes.FlatSolarizedLightIJTheme
-import io.github.hochikong.ktmeta.swingui.About
-import io.github.hochikong.ktmeta.swingui.KtmetaJFrame
-import java.awt.event.ActionEvent
+import io.github.hochikong.ktmeta.predefined.SupportedDBs
+import io.github.hochikong.ktmeta.swingui.AddDatabaseWizard
+import javax.swing.SwingWorker
 
-class MainGUI : KtmetaJFrame() {
-    val about = About(this, true).apply { isVisible = false }
-    override fun HelpAboutItemActionPerformed(evt: ActionEvent?) {
-        this.about.isVisible = true
+class MainGUI(supportedDBS: Array<String>) : AddDatabaseWizard(javax.swing.JFrame(), true, supportedDBS) {
+    val worker = object : SwingWorker<Unit, Unit>() {
+        override fun doInBackground() {
+            println("Sleep")
+            Thread.sleep(2000)
+            println("Wake up")
+            ProgressBarTestConn.isIndeterminate = false
+            for (i in 0..100) {
+                ProgressBarTestConn.value = i
+                Thread.sleep(100)
+            }
+        }
+
+        override fun done() {
+            println("Done")
+        }
+    }
+
+    override fun KtBTNTestConnActionPerformed() {
+        worker.execute()
     }
 }
 
 fun main() {
     FlatSolarizedLightIJTheme.install()
-    val gui = MainGUI()
+    val l: Array<String> = SupportedDBs.values().map { it.identity }.filter { it.isNotBlank() }.toTypedArray()
+    val gui = MainGUI(l)
     gui.isVisible = true
 }

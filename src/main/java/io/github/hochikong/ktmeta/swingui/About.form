@@ -5,7 +5,6 @@
     <Property name="defaultCloseOperation" type="int" value="2"/>
     <Property name="alwaysOnTop" type="boolean" value="true"/>
     <Property name="undecorated" type="boolean" value="true"/>
-    <Property name="opacity" type="float" value="0.0"/>
     <Property name="resizable" type="boolean" value="false"/>
   </Properties>
   <SyntheticProperties>
@@ -58,31 +57,32 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jScrollPane1" max="32767" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                  <Component id="InfoScrollPane" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jScrollPane1" pref="120" max="32767" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                  <Component id="InfoScrollPane" pref="126" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+        <Container class="javax.swing.JScrollPane" name="InfoScrollPane">
           <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="4"/>
             <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
           </AuxValues>
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JTextPane" name="jTextPane1">
+            <Component class="javax.swing.JTextPane" name="InfoTextPane">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -93,7 +93,8 @@
                 </Property>
               </Properties>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="OperatingSystemMXBean system = ManagementFactory.getOperatingSystemMXBean();&#xa;RuntimeMXBean runtime = ManagementFactory.getRuntimeMXBean();&#xa;jTextPane1.setText(&quot;OS: &quot;+system.getName()&#xa;+&quot;; Arch: &quot;+system.getArch()&#xa;+&quot;; Cores: &quot;+system.getAvailableProcessors()&#xa;+&quot;\n&quot;&#xa;+runtime.getVmName()&#xa;+&quot;; &quot;+runtime.getVmVendor()&#xa;+&quot;; \n&quot;+runtime.getSpecVersion()+runtime.getVmVersion());"/>
+                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="OperatingSystemMXBean system = ManagementFactory.getOperatingSystemMXBean();&#xa;RuntimeMXBean runtime = ManagementFactory.getRuntimeMXBean();&#xa;InfoTextPane.setText(&quot;OS: &quot;+system.getName()&#xa;+&quot;; Arch: &quot;+system.getArch()&#xa;+&quot;; Cores: &quot;+system.getAvailableProcessors()&#xa;+&quot;\n&quot;&#xa;+runtime.getVmName()&#xa;+&quot;; &quot;+runtime.getVmVendor()&#xa;+&quot;; \n&quot;+runtime.getSpecVersion()+runtime.getVmVersion());"/>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="4"/>
               </AuxValues>
             </Component>
           </SubComponents>
