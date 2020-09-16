@@ -15,6 +15,7 @@ package io.github.hochikong.ktmeta.swingui;
 import com.formdev.flatlaf.intellijthemes.FlatSolarizedLightIJTheme;
 
 /**
+ *
  * @author ckhoi
  */
 public class AddDatabaseWizard extends javax.swing.JDialog {
@@ -31,9 +32,9 @@ public class AddDatabaseWizard extends javax.swing.JDialog {
 
     public AddDatabaseWizard(java.awt.Frame parent, boolean modal, String[] SupportedDBs) {
         super(parent, modal);
+        initComponents();
         this.setLocationRelativeTo(null);
         this.SupportedDatabaseList = SupportedDBs;
-        initComponents();
     }
 
     /**
@@ -86,11 +87,19 @@ public class AddDatabaseWizard extends javax.swing.JDialog {
             }
         });
 
-        ProgressBarTestConn.setIndeterminate(true);
-
         BTNOKAddDB.setText("OK");
+        BTNOKAddDB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTNOKAddDBActionPerformed(evt);
+            }
+        });
 
         BTNCancelAddDB.setText("Cancel");
+        BTNCancelAddDB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTNCancelAddDBActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -110,7 +119,6 @@ public class AddDatabaseWizard extends javax.swing.JDialog {
                                                         .addGroup(layout.createSequentialGroup()
                                                                 .addComponent(LabelURL)
                                                                 .addGap(14, 14, 14)))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                                         .addComponent(FieldName)
                                                         .addComponent(FieldDesc)
@@ -174,6 +182,14 @@ public class AddDatabaseWizard extends javax.swing.JDialog {
         KtBTNTestConnActionPerformed();
     }//GEN-LAST:event_BTNTestConnActionPerformed
 
+    private void BTNOKAddDBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNOKAddDBActionPerformed
+        KtBTNOKAddDBActionPerformed();
+    }//GEN-LAST:event_BTNOKAddDBActionPerformed
+
+    private void BTNCancelAddDBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNCancelAddDBActionPerformed
+        KtBTNCancelAddDBActionPerformed();
+    }//GEN-LAST:event_BTNCancelAddDBActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -194,14 +210,22 @@ public class AddDatabaseWizard extends javax.swing.JDialog {
         });
     }
 
-    /**
-     * Kotlin override
-     */
+
+    //Kotlin override
     protected void KtBTNTestConnActionPerformed() {
         // TODO
     }
 
-    protected String[] SupportedDatabaseList;
+    protected void KtBTNOKAddDBActionPerformed() {
+        // TODO
+    }
+
+    protected void KtBTNCancelAddDBActionPerformed() {
+        // TODO
+    }
+
+    protected String[] SupportedDatabaseList = {"Item 1", "Item 2", "Item 3", "Item 4"};
+    // Override end
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     protected javax.swing.JButton BTNCancelAddDB;

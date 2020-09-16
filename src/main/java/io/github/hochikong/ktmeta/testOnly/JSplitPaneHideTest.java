@@ -14,7 +14,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 public class JSplitPaneHideTest extends JFrame {
     private final JButton leftBtn;
     private final JButton rightBtn;

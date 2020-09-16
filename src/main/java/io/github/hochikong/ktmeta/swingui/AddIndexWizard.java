@@ -12,8 +12,9 @@
  */
 package io.github.hochikong.ktmeta.swingui;
 
+import com.formdev.flatlaf.intellijthemes.FlatSolarizedLightIJTheme;
+
 /**
- *
  * @author ckhoi
  */
 public class AddIndexWizard extends javax.swing.JDialog {
@@ -24,6 +25,7 @@ public class AddIndexWizard extends javax.swing.JDialog {
     public AddIndexWizard(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -35,48 +37,121 @@ public class AddIndexWizard extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        LabelIndexName = new javax.swing.JLabel();
+        FieldIndexName = new javax.swing.JTextField();
+        LabelIndexDesc = new javax.swing.JLabel();
+        FieldIndexDesc = new javax.swing.JTextField();
+        LabelIndexURL = new javax.swing.JLabel();
+        FieldIndexURL = new javax.swing.JTextField();
+        BTNIndexTestConn = new javax.swing.JButton();
+        ProgressBarIndexTestConn = new javax.swing.JProgressBar();
+        BTNCancelAddIndex = new javax.swing.JButton();
+        BTNOKAddIndex = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        LabelIndexName.setText("Index name : ");
+
+        LabelIndexDesc.setText("Description : ");
+
+        LabelIndexURL.setText("Index URL :");
+
+        BTNIndexTestConn.setText("Test Connection");
+        BTNIndexTestConn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTNIndexTestConnActionPerformed(evt);
+            }
+        });
+
+        BTNCancelAddIndex.setText("Cancel");
+        BTNCancelAddIndex.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTNCancelAddIndexActionPerformed(evt);
+            }
+        });
+
+        BTNOKAddIndex.setText("OK");
+        BTNOKAddIndex.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTNOKAddIndexActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 400, Short.MAX_VALUE)
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(27, 27, 27)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGap(2, 2, 2)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(LabelIndexURL, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(LabelIndexName)
+                                                        .addComponent(LabelIndexDesc))
+                                                .addGap(10, 10, 10)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                        .addComponent(FieldIndexDesc, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 386, Short.MAX_VALUE)
+                                                        .addComponent(FieldIndexName, javax.swing.GroupLayout.Alignment.TRAILING)
+                                                        .addComponent(FieldIndexURL)))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                        .addComponent(BTNOKAddIndex)
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addComponent(BTNIndexTestConn)
+                                                                .addGap(54, 54, 54)
+                                                                .addComponent(ProgressBarIndexTestConn, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(BTNCancelAddIndex)))
+                                .addContainerGap(43, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 300, Short.MAX_VALUE)
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(22, 22, 22)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(LabelIndexName)
+                                        .addComponent(FieldIndexName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(FieldIndexDesc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(LabelIndexDesc))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(FieldIndexURL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(LabelIndexURL))
+                                .addGap(132, 132, 132)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(BTNIndexTestConn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(ProgressBarIndexTestConn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(BTNOKAddIndex)
+                                        .addComponent(BTNCancelAddIndex))
+                                .addGap(26, 26, 26))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void BTNCancelAddIndexActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNCancelAddIndexActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BTNCancelAddIndexActionPerformed
+
+    private void BTNIndexTestConnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNIndexTestConnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BTNIndexTestConnActionPerformed
+
+    private void BTNOKAddIndexActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNOKAddIndexActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BTNOKAddIndexActionPerformed
+
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AddIndexWizard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AddIndexWizard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AddIndexWizard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AddIndexWizard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+        FlatSolarizedLightIJTheme.install();
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -94,5 +169,15 @@ public class AddIndexWizard extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    protected javax.swing.JButton BTNCancelAddIndex;
+    protected javax.swing.JButton BTNIndexTestConn;
+    protected javax.swing.JButton BTNOKAddIndex;
+    protected javax.swing.JTextField FieldIndexDesc;
+    protected javax.swing.JTextField FieldIndexName;
+    protected javax.swing.JTextField FieldIndexURL;
+    protected javax.swing.JLabel LabelIndexDesc;
+    protected javax.swing.JLabel LabelIndexName;
+    protected javax.swing.JLabel LabelIndexURL;
+    protected javax.swing.JProgressBar ProgressBarIndexTestConn;
     // End of variables declaration//GEN-END:variables
 }
