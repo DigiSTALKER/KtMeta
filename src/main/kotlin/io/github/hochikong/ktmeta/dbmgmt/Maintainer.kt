@@ -86,10 +86,11 @@ object Maintainer {
      *
      * DDL explanation:
      * - id: Integer and primary key, auto increment.
-     * - db: Text, store supported dbs' identity.
+     * - dbms: Text, store supported dbs' identity.
+     * - alias: Text, store the alias of this database.
      * - user: Text or null, store database's username. If you use sqlite it should be null.
      * - password: Text or null, store database's password after encryption. If you use sqlite it should be null.
-     * - name: Text, not null and unique, store the name of this database.
+     * - database: Text, not null and unique, store the name of this database.
      * - description: Text, not null, store the description of this database.
      * - url: Text, not null and unique, store the jdbc url of this database.
      * - protected: Integer, not full, store true as 1 and false as 0. If you use sqlite it should be 0.
@@ -98,10 +99,11 @@ object Maintainer {
      * ```SQL
      * CREATE TABLE registration(
      *  id INTEGER PRIMARY KEY AUTOINCREMENT ,
-     *  db TEXT NOT NULL ,
+     *  dbms TEXT NOT NULL ,
+     *  alias TEXT NOT NULL,
      *  user TEXT,
      *  password TEXT,
-     *  name TEXT NOT NULL UNIQUE,
+     *  database TEXT NOT NULL UNIQUE,
      *  description TEXT NOT NULL ,
      *  url TEXT NOT NULL UNIQUE ,
      *  protected INTEGER NOT NULL ,
@@ -119,14 +121,15 @@ object Maintainer {
         val sql = """
             CREATE TABLE registration(
                 id INTEGER PRIMARY KEY AUTOINCREMENT ,
-                db TEXT NOT NULL ,
+                dbms TEXT NOT NULL ,
+                alias TEXT NOT NULL,
                 user TEXT,
                 password TEXT,
-                name TEXT NOT NULL UNIQUE,
+                database TEXT NOT NULL UNIQUE,
                 description TEXT NOT NULL ,
                 url TEXT NOT NULL UNIQUE ,
                 protected INTEGER NOT NULL ,
-                CONSTRAINT db_type_check CHECK ( db in ('Sqlite', 'Postgresql') ),
+                CONSTRAINT db_type_check CHECK ( dbms in ('Sqlite', 'Postgresql') ),
                 CONSTRAINT is_protected CHECK ( protected in (0, 1) )
             );
         """.trimIndent()
@@ -143,7 +146,7 @@ object Maintainer {
 
     /**
      * Insert a row to table.
-     * @param data List, contains values of 'db', 'user', 'password', 'name', 'description', 'url', 'protected'.
+     * @param data List, contains values of 'dbms', 'alias', 'user', 'password', 'database', 'description', 'url', 'protected'.
      *
      * Check createTable()'s document for more information about these columns.
      *
@@ -154,8 +157,8 @@ object Maintainer {
     fun insertRow(data: List<Any>): Boolean {
         checkConnection()
         val sql = """
-                INSERT INTO registration(db, user, password, name, description, url, protected)
-                VALUES (${data[0]}, ${data[1]}, ${data[2]}, ${data[3]}, ${data[4]}, ${data[5]}, ${data[6]});
+                INSERT INTO registration(dbms, alias, user, password, database, description, url, protected)
+                VALUES (${data[0]}, ${data[1]}, ${data[2]}, ${data[3]}, ${data[4]}, ${data[5]}, ${data[6]}, ${data[7]});
                 """.trimIndent()
         return connection.createStatement().use {
             try {

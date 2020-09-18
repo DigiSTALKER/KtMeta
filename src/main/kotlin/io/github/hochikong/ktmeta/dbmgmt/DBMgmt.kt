@@ -94,14 +94,14 @@ object DBMgmt {
     }
 
 
-    private fun checkRegIsEmpty(name: String): RegRow? {
+    private fun checkRegIsEmpty(database: String): RegRow? {
         queryReg()
         if (regIsEmpty) {
             val msg = "DBMGMT.getConnection said: Database registration is empty."
             loggerDBMGMT.error(msg)
             throw NoDatabasesIsAvailable(msg)
         }
-        return DBRegCatalog[name]
+        return DBRegCatalog[database]
     }
 
     /*private fun addUsingDatabase(config: DBConfigContainer) {
@@ -139,20 +139,22 @@ object DBMgmt {
      * */
     fun addDatabase(
         type: SupportedDBs,
-        name: String,
-        desc: String,
+        alias: String,
         user: String,
         password: String,
+        database: String,
+        desc: String,
         url: String
     ): Boolean {
         if (type == SupportedDBs.NotSupported) return false
 
         val tmp = RegRow(
             id = -1,
-            db = type,
+            dbms = type,
+            alias = alias,
             user = user,
             password = password,
-            name = name,
+            database = database,
             description = desc,
             url = url,
             protected = password != "null"
@@ -167,10 +169,10 @@ object DBMgmt {
     /**
      * Delete database configuration.
      * */
-    fun removeDatabase(name: String, token: String): Boolean {
+    fun removeDatabase(database: String, token: String): Boolean {
         return if (tokenCache.getIfPresent(token) != null) {
-            if (checkRegIsEmpty(name) != null) {
-                Maintainer.deleteRow("name == '$name'")
+            if (checkRegIsEmpty(database) != null) {
+                Maintainer.deleteRow("name == '$database'")
                 queryReg()
             } else {
                 false
@@ -182,12 +184,12 @@ object DBMgmt {
 
     /**
      * Grant database access permission.
-     * @param name Database name.
+     * @param database Database name.
      * @param username Raw username.
      * @param password Raw password.
      * */
-    fun grantDatabase(name: String, username: String, password: String): String {
-        val row: RegRow? = checkRegIsEmpty(name)
+    fun grantDatabase(database: String, username: String, password: String): String {
+        val row: RegRow? = checkRegIsEmpty(database)
         if (row != null) {
             val usernamePass: Boolean = when {
                 (username == row.user) && (username == "null") -> true
@@ -220,7 +222,7 @@ object DBMgmt {
     private fun getConfigContainer(
         token: String,
         queryRow: RegRow,
-        name: String
+        database: String
     ): DBConfigContainer {
         var realUsername = ""
         var realPassword = ""
@@ -234,8 +236,8 @@ object DBMgmt {
         if (realPassword.isBlank()) throw IllegalStateException("You should grantDatabase() first.")
 
         return DBConfigContainer(
-            type = queryRow.db,
-            name = name,
+            type = queryRow.dbms,
+            name = database,
             desc = queryRow.description,
             url = queryRow.url,
             username = realUsername,
@@ -244,13 +246,13 @@ object DBMgmt {
     }
 
     /**
-     * Return JDBC connection by database's [name]
+     * Return JDBC connection by database's [database]
      */
-    fun getConnection(name: String, token: String): Connection {
+    fun getConnection(database: String, token: String): Connection {
         val configContainer: DBConfigContainer
-        val queryRow: RegRow? = checkRegIsEmpty(name)
+        val queryRow: RegRow? = checkRegIsEmpty(database)
         if (queryRow != null) {
-            configContainer = getConfigContainer(token, queryRow, name)
+            configContainer = getConfigContainer(token, queryRow, database)
             return if (configContainer.username != "null" && configContainer.password != "null") {
                 DriverManager.getConnection(
                     configContainer.url,
@@ -261,18 +263,18 @@ object DBMgmt {
                 DriverManager.getConnection(configContainer.url)
             }
         } else {
-            throw NoSuchDatabaseInRegistrationTable("DBMGMT.getConnection said: Database $name not exists.")
+            throw NoSuchDatabaseInRegistrationTable("DBMGMT.getConnection said: Database $database not exists.")
         }
     }
 
     /**
-     * Return single Ktorm's database by database's [name]
+     * Return single Ktorm's database by database's [database]
      * */
-    fun getDatabase(name: String, token: String): Database {
+    fun getDatabase(database: String, token: String): Database {
         val configContainer: DBConfigContainer
-        val queryRow = checkRegIsEmpty(name)
+        val queryRow = checkRegIsEmpty(database)
         if (queryRow != null) {
-            configContainer = getConfigContainer(token, queryRow, name)
+            configContainer = getConfigContainer(token, queryRow, database)
             return Database.connect(
                 url = configContainer.url,
                 driver = configContainer.jdbcDriver,
@@ -281,18 +283,18 @@ object DBMgmt {
                 dialect = configContainer.dialect
             )
         } else {
-            throw NoSuchDatabaseInRegistrationTable("DBMGMT.getConnection said: Database $name not exists.")
+            throw NoSuchDatabaseInRegistrationTable("DBMGMT.getConnection said: Database $database not exists.")
         }
     }
 
     /**
-     * Return HikariCP connection pool by database's [name]
+     * Return HikariCP connection pool by database's [database]
      * */
-    fun getPool(name: String, token: String, configPath: String = ".\\hikari.properties"): Database {
+    fun getPool(database: String, token: String, configPath: String = ".\\hikari.properties"): Database {
         val configContainer: DBConfigContainer
-        val queryRow = checkRegIsEmpty(name)
+        val queryRow = checkRegIsEmpty(database)
         if (queryRow != null) {
-            configContainer = getConfigContainer(token, queryRow, name)
+            configContainer = getConfigContainer(token, queryRow, database)
             val config = HikariConfig(configPath)
             config.jdbcUrl = configContainer.url
             // config.dataSourceClassName = configContainer.dataSource
@@ -303,7 +305,7 @@ object DBMgmt {
             val dataSource = HikariDataSource(config)
             return Database.connect(dataSource, configContainer.dialect)
         } else {
-            throw NoSuchDatabaseInRegistrationTable("DBMGMT.getConnection said: Database $name not exists.")
+            throw NoSuchDatabaseInRegistrationTable("DBMGMT.getConnection said: Database $database not exists.")
         }
     }
 }

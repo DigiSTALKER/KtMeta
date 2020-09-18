@@ -24,6 +24,7 @@ class TestContainers {
     private val data = RegRow(
         -1,
         SupportedDBs.PostgreSQL,
+        "My postgres",
         "postgres",
         "postgres",
         "testdb",
@@ -34,6 +35,7 @@ class TestContainers {
     private val data1 = RegRow(
         -1,
         SupportedDBs.SQLite,
+        "My sqlite",
         "null",
         "null",
         "sqlite",
@@ -71,9 +73,10 @@ class TestContainers {
         val result = DBRegCatalog["testdb"]
         if (result != null) {
             assertEquals(1, result.id)
+            assertEquals("My postgres", result.alias)
             assertEquals("postgres", result.user)
             assertEquals("postgres", result.password)
-            assertEquals(SupportedDBs.PostgreSQL, result.db)
+            assertEquals(SupportedDBs.PostgreSQL, result.dbms)
             assertEquals("this is a test db", result.description)
             assertEquals("jdbc:postgresql", result.url)
             assertEquals(true, result.protected)
@@ -82,9 +85,10 @@ class TestContainers {
         val result1 = DBRegCatalog["sqlite"]
         if (result1 != null) {
             assertEquals(2, result1.id)
+            assertEquals("My sqlite", result1.alias)
             assertEquals("null", result1.user)
             assertEquals("null", result1.password)
-            assertEquals(SupportedDBs.SQLite, result1.db)
+            assertEquals(SupportedDBs.SQLite, result1.dbms)
             assertEquals("this is a test db for sqlite", result1.description)
             assertEquals("jdbc:sqlite", result1.url)
             assertEquals(false, result1.protected)

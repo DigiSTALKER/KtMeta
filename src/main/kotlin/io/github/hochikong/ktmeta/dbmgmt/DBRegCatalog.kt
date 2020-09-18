@@ -28,7 +28,7 @@ object DBRegCatalog {
         if (queryResult != null) {
             for (row in queryResult) {
                 val tmp = row.regOut()
-                catalog[tmp.name] = tmp
+                catalog[tmp.database] = tmp
             }
             return true
         }

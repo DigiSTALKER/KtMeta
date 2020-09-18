@@ -22,12 +22,13 @@ import org.junit.jupiter.api.Test
 
 class TestRegConverter {
     private val rawInput = RegRow(
-        -1, SupportedDBs.SQLite, "null", "null",
+        -1, SupportedDBs.SQLite, "SQLITE", "null", "null",
         "test db", "desc sqlite", "url 1", false
     )
-    private val input = listOf("'Sqlite'", "null", "null", "'test db'", "'desc sqlite'", "'url 1'", "0")
-    private val rawOutput = listOf(1, "Sqlite", "null", "null", "test db", "desc sqlite", "url 1", 0)
-    private val output = RegRow(1, SupportedDBs.SQLite, "null", "null", "test db", "desc sqlite", "url 1", false)
+    private val input = listOf("'Sqlite'", "'SQLITE'", "null", "null", "'test db'", "'desc sqlite'", "'url 1'", "0")
+    private val rawOutput = listOf(1, "Sqlite", "SQLITE", "null", "null", "test db", "desc sqlite", "url 1", 0)
+    private val output =
+        RegRow(1, SupportedDBs.SQLite, "SQLITE", "null", "null", "test db", "desc sqlite", "url 1", false)
 
     companion object {
         @AfterAll

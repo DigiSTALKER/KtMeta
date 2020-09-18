@@ -29,10 +29,11 @@ import io.github.hochikong.ktmeta.predefined.SupportedDBs
  * ```SQL
  * CREATE TABLE registration(
  *  id INTEGER PRIMARY KEY AUTOINCREMENT ,
- *  db TEXT NOT NULL ,
+ *  dbms TEXT NOT NULL ,
+ *  alias TEXT NOT NULL,
  *  user TEXT,
  *  password TEXT,
- *  name TEXT NOT NULL UNIQUE,
+ *  database TEXT NOT NULL UNIQUE,
  *  description TEXT NOT NULL ,
  *  url TEXT NOT NULL UNIQUE ,
  *  protected INTEGER NOT NULL ,
@@ -43,10 +44,11 @@ import io.github.hochikong.ktmeta.predefined.SupportedDBs
  * */
 val SQLiteDBRegColumnConstrains = listOf(
     Pair("id", 0),
-    Pair("db", 1),
+    Pair("dbms", 1),
+    Pair("alias", 1),
     Pair("user", 1),
     Pair("password", 1),
-    Pair("name", 1),
+    Pair("database", 1),
     Pair("description", 1),
     Pair("url", 1),
     Pair("protected", 0)
@@ -57,25 +59,27 @@ val SQLiteDBRegColumnConstrains = listOf(
  * Use this to store single row of registration table and convert to list for Maintainer.
  * */
 data class RegRow(
-    val id: Int = -1,
-    var db: SupportedDBs = SupportedDBs.NotSupported,
-    var user: String = "",
-    var password: String = "",
-    var name: String = "",
-    var description: String = "",
-    var url: String = "",
-    var protected: Boolean = false
+    val id: Int,
+    var dbms: SupportedDBs,
+    var alias: String,
+    var user: String,
+    var password: String,
+    var database: String,
+    var description: String,
+    var url: String,
+    var protected: Boolean
 ) {
     /**
      * Convert data class to list for Maintainer.insertRow().
      * */
     fun regIn(): List<Any> {
-        if (db != SupportedDBs.NotSupported) {
+        if (dbms != SupportedDBs.NotSupported) {
             val result = mutableListOf<Any>()
-            result.add("'${db.identity}'")
+            result.add("'${dbms.identity}'")
+            result.add(if (this.alias.isBlank()) "'${this.dbms} - ${this.database}'" else "'${this.alias}'")
             result.add(if (user == "null") "null" else "'$user'")
             result.add(if (password == "null") "null" else "'$password'")
-            result.add("'$name'")
+            result.add("'$database'")
             result.add("'$description'")
             result.add("'$url'")
             result.add(if (protected) 1 else 0)
@@ -92,10 +96,11 @@ data class RegRow(
         other as RegRow
 
         if (id != other.id) return false
-        if (db != other.db) return false
+        if (dbms != other.dbms) return false
+        if (alias != other.alias) return false
         if (user != other.user) return false
         if (password != other.password) return false
-        if (name != other.name) return false
+        if (database != other.database) return false
         if (description != other.description) return false
         if (url != other.url) return false
         if (protected != other.protected) return false
@@ -105,10 +110,11 @@ data class RegRow(
 
     override fun hashCode(): Int {
         var result = id
-        result = 31 * result + db.hashCode()
+        result = 31 * result + dbms.hashCode()
+        result = 31 * result + alias.hashCode()
         result = 31 * result + user.hashCode()
         result = 31 * result + password.hashCode()
-        result = 31 * result + name.hashCode()
+        result = 31 * result + database.hashCode()
         result = 31 * result + description.hashCode()
         result = 31 * result + url.hashCode()
         result = 31 * result + protected.hashCode()
@@ -116,8 +122,9 @@ data class RegRow(
     }
 
     override fun toString(): String {
-        return "RegRow(id=$id, db=$db, user='$user', password='$password', " +
-                "name='$name', description='$description', url='$url', protected=$protected)"
+        return "RegRow(id=$id, dbms=$dbms, alias='$alias', user='$user', " +
+                "password='$password', database='$database', description='$description', " +
+                "url='$url', protected=$protected)"
     }
 }
 
@@ -126,25 +133,26 @@ data class RegRow(
  * @return Data class, RegRow
  * */
 fun List<Any>.regOut(): RegRow {
-    if (this.size != 8) throw ConvertError("List.regOut said: This list's size not equals to 8.")
+    if (this.size != 9) throw ConvertError("List.regOut said: This list's size not equals to 9.")
     if (this[1] !in listOf(SupportedDBs.SQLite.identity, SupportedDBs.PostgreSQL.identity)) {
         throw ConvertError("List.regOut said: Database not supported.")
     }
-    if (this[7] !in listOf(0, 1)) throw ConvertError("List.regOut said: RegRow_attr_protected set failed.")
+    if (this[8] !in listOf(0, 1)) throw ConvertError("List.regOut said: RegRow_attr_protected set failed.")
 
     return RegRow(
         id = this[0] as Int,
-        db = when (this[1] as String) {
+        dbms = when (this[1] as String) {
             "Sqlite" -> SupportedDBs.SQLite
             "Postgresql" -> SupportedDBs.PostgreSQL
             else -> throw ConvertError("List.regOut attr_db said: Database not supported.")
         },
-        user = this[2] as String,
-        password = this[3] as String,
-        name = this[4] as String,
-        description = this[5] as String,
-        url = this[6] as String,
-        protected = this[7] as Int != 0
+        alias = this[2] as String,
+        user = this[3] as String,
+        password = this[4] as String,
+        database = this[5] as String,
+        description = this[6] as String,
+        url = this[7] as String,
+        protected = this[8] as Int != 0
     )
 }
 

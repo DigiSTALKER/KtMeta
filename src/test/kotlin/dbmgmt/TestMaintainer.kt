@@ -19,21 +19,31 @@ import org.junit.jupiter.api.Assertions.assertEquals
 class TestMaintainer {
     /**
      * id INTEGER PRIMARY KEY AUTOINCREMENT ,
-     * db TEXT NOT NULL ,
+     * dbms TEXT NOT NULL ,
+     * alias TEXT NOT NULL,
      * user TEXT,
      * password TEXT,
-     * name TEXT NOT NULL UNIQUE,
+     * database TEXT NOT NULL UNIQUE,
      * description TEXT NOT NULL ,
      * url TEXT NOT NULL ,
      * protected INTEGER NOT NULL ,
      * */
     private val legalData = listOf(
-        listOf("'Sqlite'", "null", "null", "'test name1'", "'desc sqlite'", "'url 1'", '0'),
-        listOf("'Postgresql'", "'postgres'", "'postgres'", "'test name2'", "'desc postgresql'", "'url 2'", '1')
+        listOf("'Sqlite'", "'Localhost-Sqlite'", "null", "null", "'test name1'", "'desc sqlite'", "'url 1'", '0'),
+        listOf(
+            "'Postgresql'",
+            "'Network-PG'",
+            "'postgres'",
+            "'postgres'",
+            "'test name2'",
+            "'desc postgresql'",
+            "'url 2'",
+            '1'
+        )
     )
 
     private val illegalData =
-        listOf("'Mysql'", "'mysql'", "'mysql'", "'test name error'", "'desc mysql'", "'url 3'", '1')
+        listOf("'Mysql'", "'Network-mysql'", "'mysql'", "'mysql'", "'test name error'", "'desc mysql'", "'url 3'", '1')
 
     companion object {
         @JvmStatic
@@ -74,7 +84,10 @@ class TestMaintainer {
         assertEquals(false, Maintainer.insertRow(legalData[0]))
         val result = Maintainer.queryAllRows()
         println(result)
-        assertEquals(listOf(1, "Sqlite", "null", "null", "test name1", "desc sqlite", "url 1", 0), result?.get(0))
+        assertEquals(
+            listOf(1, "Sqlite", "Localhost-Sqlite", "null", "null", "test name1", "desc sqlite", "url 1", 0),
+            result?.get(0)
+        )
     }
 
     @Order(4)
@@ -96,15 +109,35 @@ class TestMaintainer {
         Maintainer.updateRow(
             "description",
             "'new desc sqlite'",
-            "db == 'Sqlite' AND protected == 0"
+            "dbms == 'Sqlite' AND protected == 0"
         )
         assertEquals(
-            listOf(1, "Sqlite", "null", "null", "test name1", "new desc sqlite", "url 1", 0).toString(),
+            listOf(
+                1,
+                "Sqlite",
+                "Localhost-Sqlite",
+                "null",
+                "null",
+                "test name1",
+                "new desc sqlite",
+                "url 1",
+                0
+            ).toString(),
             Maintainer.queryAllRows()?.get(0).toString()
         )
-        Maintainer.deleteRow("db == 'Sqlite'")
+        Maintainer.deleteRow("dbms == 'Sqlite'")
         assertEquals(
-            listOf(2, "Postgresql", "postgres", "postgres", "test name2", "desc postgresql", "url 2", '1').toString(),
+            listOf(
+                2,
+                "Postgresql",
+                "Network-PG",
+                "postgres",
+                "postgres",
+                "test name2",
+                "desc postgresql",
+                "url 2",
+                '1'
+            ).toString(),
             Maintainer.queryAllRows()?.get(0).toString()
         )
     }

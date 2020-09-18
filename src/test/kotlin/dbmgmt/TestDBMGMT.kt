@@ -116,20 +116,22 @@ class TestDBMGMT {
     fun testInsert() {
         val x = DBMgmt.addDatabase(
             SupportedDBs.SQLite,
+            "MY SQLITE",
+            "null",
+            "null",
             "sqlite_test",
             "the first sqlite db",
-            "null",
-            "null",
             "jdbc:sqlite:d1.db"
         )
         assertEquals(true, x)
         assertEquals(false, DBMgmt.regIsEmpty)
         DBMgmt.addDatabase(
             SupportedDBs.PostgreSQL,
-            "pg_test",
-            "the first pg",
+            "MY PG",
             Encryption.encrypt("ktmeta_test"),
             Encryption.encrypt("ktmeta"),
+            "pg_test",
+            "the first pg",
             "jdbc:postgresql://localhost:5432/ktmetapg"
         )
         println("After insert: ${DBMgmt.checkCatalog()}")
