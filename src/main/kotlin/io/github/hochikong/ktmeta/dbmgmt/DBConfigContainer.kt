@@ -31,10 +31,11 @@ import me.liuwj.ktorm.support.sqlite.SQLiteDialect
  * ```SQL
  * CREATE TABLE registration(
  *  id INTEGER PRIMARY KEY AUTOINCREMENT ,
- *  db TEXT NOT NULL ,
+ *  dbms TEXT NOT NULL ,
+ *  alias TEXT NOT NULL,
  *  user TEXT,
  *  password TEXT,
- *  name TEXT NOT NULL UNIQUE,
+ *  database TEXT NOT NULL UNIQUE,
  *  description TEXT NOT NULL ,
  *  url TEXT NOT NULL UNIQUE ,
  *  protected INTEGER NOT NULL ,
@@ -71,3 +72,5 @@ data class DBConfigContainer(
     }
     val jdbcDriver: String = type.jdbcDriver
 }
+
+val RESIGTDB_COLUMN = listOf("id", "dbms", "alias", "user", "password", "database", "description", "url", "protected")
