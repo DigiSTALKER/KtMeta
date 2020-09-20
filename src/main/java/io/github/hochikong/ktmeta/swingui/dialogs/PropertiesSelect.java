@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ *
  * @author ckhoi
  */
 public class PropertiesSelect extends javax.swing.JDialog {

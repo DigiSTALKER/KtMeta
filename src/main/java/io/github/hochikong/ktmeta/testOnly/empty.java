@@ -13,6 +13,7 @@
 package io.github.hochikong.ktmeta.testOnly;
 
 /**
+ *
  * @author ckhoi
  */
 public class empty extends javax.swing.JFrame {

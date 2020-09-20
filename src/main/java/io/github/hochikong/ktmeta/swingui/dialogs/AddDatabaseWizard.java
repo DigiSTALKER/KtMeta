@@ -15,6 +15,7 @@ package io.github.hochikong.ktmeta.swingui.dialogs;
 import com.formdev.flatlaf.intellijthemes.FlatSolarizedLightIJTheme;
 
 /**
+ *
  * @author ckhoi
  */
 public class AddDatabaseWizard extends javax.swing.JDialog {

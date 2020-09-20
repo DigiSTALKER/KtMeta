@@ -19,6 +19,7 @@ import java.lang.management.OperatingSystemMXBean;
 import java.lang.management.RuntimeMXBean;
 
 /**
+ *
  * @author ckhoi
  */
 public class About extends javax.swing.JDialog {

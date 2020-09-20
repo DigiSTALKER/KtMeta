@@ -15,6 +15,7 @@ package io.github.hochikong.ktmeta.swingui.dialogs;
 import com.formdev.flatlaf.intellijthemes.FlatSolarizedLightIJTheme;
 
 /**
+ *
  * @author ckhoi
  */
 public class Preference extends javax.swing.JDialog {
@@ -114,7 +115,7 @@ public class Preference extends javax.swing.JDialog {
     }
 
     // Koltin override
-    protected String[] SupportedLanguages = new String[]{"English", "简体中文"};
+    protected String[] SupportedLanguages = new String[]{"English", "Simplified Chinese"};
     // end
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
