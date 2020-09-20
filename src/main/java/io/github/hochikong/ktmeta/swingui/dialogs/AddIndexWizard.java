@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.github.hochikong.ktmeta.swingui;
+package io.github.hochikong.ktmeta.swingui.dialogs;
 
 import com.formdev.flatlaf.intellijthemes.FlatSolarizedLightIJTheme;
 
@@ -44,9 +44,9 @@ public class AddIndexWizard extends javax.swing.JDialog {
         LabelIndexURL = new javax.swing.JLabel();
         FieldIndexURL = new javax.swing.JTextField();
         BTNIndexTestConn = new javax.swing.JButton();
-        ProgressBarIndexTestConn = new javax.swing.JProgressBar();
         BTNCancelAddIndex = new javax.swing.JButton();
         BTNOKAddIndex = new javax.swing.JButton();
+        jProgressBar1 = new javax.swing.JProgressBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -100,8 +100,9 @@ public class AddIndexWizard extends javax.swing.JDialog {
                                                         .addComponent(BTNOKAddIndex)
                                                         .addGroup(layout.createSequentialGroup()
                                                                 .addComponent(BTNIndexTestConn)
-                                                                .addGap(54, 54, 54)
-                                                                .addComponent(ProgressBarIndexTestConn, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                                .addGap(34, 34, 34)
+                                                                .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addGap(41, 41, 41)))
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                 .addComponent(BTNCancelAddIndex)))
                                 .addContainerGap(43, Short.MAX_VALUE))
@@ -121,11 +122,15 @@ public class AddIndexWizard extends javax.swing.JDialog {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(FieldIndexURL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(LabelIndexURL))
-                                .addGap(132, 132, 132)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(BTNIndexTestConn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(ProgressBarIndexTestConn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGap(132, 132, 132)
+                                                .addComponent(BTNIndexTestConn)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(51, 51, 51)))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(BTNOKAddIndex)
                                         .addComponent(BTNCancelAddIndex))
@@ -178,6 +183,6 @@ public class AddIndexWizard extends javax.swing.JDialog {
     protected javax.swing.JLabel LabelIndexDesc;
     protected javax.swing.JLabel LabelIndexName;
     protected javax.swing.JLabel LabelIndexURL;
-    protected javax.swing.JProgressBar ProgressBarIndexTestConn;
+    private javax.swing.JProgressBar jProgressBar1;
     // End of variables declaration//GEN-END:variables
 }

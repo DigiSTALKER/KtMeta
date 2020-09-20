@@ -6,7 +6,6 @@
 package io.github.hochikong.ktmeta.testOnly;
 
 import com.formdev.flatlaf.intellijthemes.FlatSolarizedLightIJTheme;
-import io.github.hochikong.ktmeta.swingui.VerticalLabelUI;
 
 import javax.swing.*;
 import java.awt.*;
@@ -131,6 +130,7 @@ public class VerticalTab extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                // no title
                 vt.jTabbedPane2.addTab(null, new JPanel());
                 JLabel labTab1 = new JLabel("TAB #1");
                 // labTab1.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 12));

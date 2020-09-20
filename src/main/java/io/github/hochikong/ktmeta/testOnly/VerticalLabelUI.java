@@ -1,4 +1,4 @@
-package io.github.hochikong.ktmeta.swingui;
+package io.github.hochikong.ktmeta.testOnly;
 
 /*
  * The contents of this file are subject to the Sapient Public License

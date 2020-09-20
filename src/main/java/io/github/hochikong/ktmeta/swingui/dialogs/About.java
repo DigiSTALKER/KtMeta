@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.github.hochikong.ktmeta.swingui;
+package io.github.hochikong.ktmeta.swingui.dialogs;
 
 import com.formdev.flatlaf.FlatDarculaLaf;
 
@@ -19,7 +19,6 @@ import java.lang.management.OperatingSystemMXBean;
 import java.lang.management.RuntimeMXBean;
 
 /**
- *
  * @author ckhoi
  */
 public class About extends javax.swing.JDialog {
@@ -110,7 +109,7 @@ public class About extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
-        this.setVisible(false);
+        KtformMouseClicked();
     }//GEN-LAST:event_formMouseClicked
 
     /**
@@ -133,6 +132,12 @@ public class About extends javax.swing.JDialog {
             }
         });
     }
+
+    //Kotlin override
+    protected void KtformMouseClicked() {
+
+    }
+    // end
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel InfoLabel;

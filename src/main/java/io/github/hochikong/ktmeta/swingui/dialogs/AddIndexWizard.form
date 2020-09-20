@@ -45,8 +45,9 @@
                           <Component id="BTNOKAddIndex" alignment="1" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="1" attributes="0">
                               <Component id="BTNIndexTestConn" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
-                              <Component id="ProgressBarIndexTestConn" min="-2" pref="204" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                              <Component id="jProgressBar1" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -75,12 +76,18 @@
                   <Component id="FieldIndexURL" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="LabelIndexURL" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="132" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="BTNIndexTestConn" alignment="0" max="32767" attributes="0"/>
-                  <Component id="ProgressBarIndexTestConn" alignment="0" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="132" max="-2" attributes="0"/>
+                      <Component id="BTNIndexTestConn" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="39" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="jProgressBar1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace pref="39" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="BTNOKAddIndex" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="BTNCancelAddIndex" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -141,11 +148,6 @@
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="4"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JProgressBar" name="ProgressBarIndexTestConn">
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="4"/>
-      </AuxValues>
-    </Component>
     <Component class="javax.swing.JButton" name="BTNCancelAddIndex">
       <Properties>
         <Property name="text" type="java.lang.String" value="Cancel"/>
@@ -167,6 +169,8 @@
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="4"/>
       </AuxValues>
+    </Component>
+    <Component class="javax.swing.JProgressBar" name="jProgressBar1">
     </Component>
   </SubComponents>
 </Form>
