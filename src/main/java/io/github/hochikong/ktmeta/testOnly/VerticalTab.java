@@ -48,12 +48,12 @@ public class VerticalTab extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
-                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 200, Short.MAX_VALUE)
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 200, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
-                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 270, Short.MAX_VALUE)
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 270, Short.MAX_VALUE)
         );
 
         jSplitPane1.setRightComponent(jPanel1);
@@ -65,12 +65,12 @@ public class VerticalTab extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
-                jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jTabbedPane2)
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jTabbedPane2)
         );
         jPanel3Layout.setVerticalGroup(
-                jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jTabbedPane2)
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jTabbedPane2)
         );
 
         jSplitPane1.setLeftComponent(jPanel3);
@@ -86,12 +86,12 @@ public class VerticalTab extends javax.swing.JFrame {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jSplitPane1)
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jSplitPane1)
         );
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jSplitPane1)
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jSplitPane1)
         );
 
         pack();
@@ -104,7 +104,7 @@ public class VerticalTab extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
 //        try {
 //            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -125,7 +125,7 @@ public class VerticalTab extends javax.swing.JFrame {
         //</editor-fold>
 
         FlatSolarizedLightIJTheme.install();
-
+        
         VerticalTab vt = new VerticalTab();
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -139,7 +139,7 @@ public class VerticalTab extends javax.swing.JFrame {
                 labTab1.setHorizontalAlignment(SwingConstants.CENTER);
                 labTab1.setUI(new VerticalLabelUI(false));
                 vt.jTabbedPane2.setTabComponentAt(0, labTab1);
-
+                
                 vt.jTabbedPane2.addTab(null, new JPanel());
                 JLabel labTab2 = new JLabel("TAB #2");
                 labTab2.setPreferredSize(new Dimension(12, 60));
@@ -147,7 +147,7 @@ public class VerticalTab extends javax.swing.JFrame {
                 labTab2.setHorizontalAlignment(SwingConstants.CENTER);
                 labTab2.setUI(new VerticalLabelUI(false));
                 vt.jTabbedPane2.setTabComponentAt(1, labTab2);
-
+                
                 vt.setVisible(true);
             }
         });

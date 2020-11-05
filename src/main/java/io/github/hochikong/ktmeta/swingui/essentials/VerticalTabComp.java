@@ -1,51 +1,26 @@
-package io.github.hochikong.ktmeta.testOnly;
-
-/*
- * The contents of this file are subject to the Sapient Public License
- * Version 1.0 (the "License"); you may not use this file except in compliance
- * with the License. You may obtain a copy of the License at
- * http://carbon.sf.net/License.html.
- *
- * Software distributed under the License is distributed on an "AS IS" basis,
- * WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License for
- * the specific language governing rights and limitations under the License.
- *
- * The Original Code is The Carbon Component Framework.
- *
- * The Initial Developer of the Original Code is Sapient Corporation
- *
- * Copyright (C) 2003 Sapient Corporation. All Rights Reserved.
- */
-
+package io.github.hochikong.ktmeta.swingui.essentials;
 
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicLabelUI;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 
-/**
- * This is the template for Classes.
- *
- *
- * @since carbon 1.0
- * @author Greg Hinkle, January 2002
- * @version $Revision: 1.4 $($Author: dvoet $ / $Date: 2003/05/05 21:21:27 $)
- * @copyright 2002 Sapient
- */
-public class VerticalLabelUI extends BasicLabelUI {
+
+public class VerticalTabComp extends BasicLabelUI {
     static {
-        labelUI = new VerticalLabelUI(false);
+        labelUI = new VerticalTabComp(false);
     }
 
     protected boolean clockwise;
 
 
-    public VerticalLabelUI(boolean clockwise) {
+    public VerticalTabComp(boolean clockwise) {
         super();
         this.clockwise = clockwise;
     }
 
 
+    @Override
     public Dimension getPreferredSize(JComponent c) {
         Dimension dim = super.getPreferredSize(c);
         return new Dimension( dim.height, dim.width );
@@ -56,6 +31,7 @@ public class VerticalLabelUI extends BasicLabelUI {
     private static final Rectangle paintViewR = new Rectangle();
     private static Insets paintViewInsets = new Insets(0, 0, 0, 0);
 
+    @Override
     public void paint(Graphics g, JComponent c) {
 
         JLabel label = (JLabel)c;

@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.github.hochikong.ktmeta.swingui.dialogs;
+package io.github.hochikong.ktmeta.swingui.dialogs.codegen;
 
 import com.formdev.flatlaf.intellijthemes.FlatSolarizedLightIJTheme;
 
@@ -23,19 +23,19 @@ import java.lang.management.RuntimeMXBean;
  *
  * @author ckhoi
  */
-public class About extends javax.swing.JDialog {
+public class impAbout extends javax.swing.JDialog {
 
     /**
      * Creates new form About
      */
-    public About(java.awt.Frame parent, boolean modal) {
+    public impAbout(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         // display About at the centre of screen
         this.setLocationRelativeTo(null);
     }
     
-    public About(java.awt.Frame parent, boolean modal, Image icon) {
+    public impAbout(java.awt.Frame parent, boolean modal, Image icon) {
         super(parent, modal);
         initComponents();
         this.setIconImage(icon);
@@ -112,11 +112,11 @@ public class About extends javax.swing.JDialog {
 
     //<Auto-Generate>
     private void LabelPhotoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LabelPhotoMouseClicked
-        // TODO add your handling code here:
+        impLabelPhotoMouseClicked(evt);
     }//GEN-LAST:event_LabelPhotoMouseClicked
 
     private void TextPaneInfoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TextPaneInfoMouseClicked
-        // TODO add your handling code here:
+        impTextPaneInfoMouseClicked(evt);
     }//GEN-LAST:event_TextPaneInfoMouseClicked
     //</Auto-Generate>
     
@@ -129,7 +129,7 @@ public class About extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                About dialog = new About(new javax.swing.JFrame(), true);
+                impAbout dialog = new impAbout(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -164,4 +164,9 @@ public class About extends javax.swing.JDialog {
     private javax.swing.JLabel LabelPhoto;
     protected javax.swing.JTextPane TextPaneInfo;
     // End of variables declaration//GEN-END:variables
+
+    //<Auto-Generate-Result>
+    protected void impLabelPhotoMouseClicked(java.awt.event.MouseEvent evt){}
+    protected void impTextPaneInfoMouseClicked(java.awt.event.MouseEvent evt){}
+    //</Auto-Generate-Result>
 }

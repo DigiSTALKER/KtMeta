@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.github.hochikong.ktmeta.swingui.dialogs;
+package io.github.hochikong.ktmeta.swingui.dialogs.codegen;
 
 import com.formdev.flatlaf.intellijthemes.FlatSolarizedLightIJTheme;
 
@@ -20,18 +20,18 @@ import java.awt.*;
  *
  * @author ckhoi
  */
-public class AddIndexWizard extends javax.swing.JDialog {
+public class impAddIndexWizard extends javax.swing.JDialog {
 
     /**
      * Creates new form AddIndexWizard
      */
-    public AddIndexWizard(java.awt.Frame parent, boolean modal) {
+    public impAddIndexWizard(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
     }
     
-    public AddIndexWizard(java.awt.Frame parent, boolean modal, Image icon){
+    public impAddIndexWizard(java.awt.Frame parent, boolean modal, Image icon){
         super(parent, modal);
         initComponents();
         this.setIconImage(icon);
@@ -177,31 +177,31 @@ public class AddIndexWizard extends javax.swing.JDialog {
 
     //</Auto-Generate>
     private void BTNCancelAddIndexActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNCancelAddIndexActionPerformed
-        // TODO add your handling code here:
+        impBTNCancelAddIndexActionPerformed(evt);
     }//GEN-LAST:event_BTNCancelAddIndexActionPerformed
 
     private void BTNIndexTestConnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNIndexTestConnActionPerformed
-        // TODO add your handling code here:
+        impBTNIndexTestConnActionPerformed(evt);
     }//GEN-LAST:event_BTNIndexTestConnActionPerformed
 
     private void BTNOKAddIndexActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNOKAddIndexActionPerformed
-        // TODO add your handling code here:
+        impBTNOKAddIndexActionPerformed(evt);
     }//GEN-LAST:event_BTNOKAddIndexActionPerformed
 
     private void FieldIndexNameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FieldIndexNameMouseClicked
-        // TODO add your handling code here:
+        impFieldIndexNameMouseClicked(evt);
 //        this.FieldIndexName.setForeground(new java.awt.Color(0, 0, 0));
 //        this.FieldIndexName.selectAll();
     }//GEN-LAST:event_FieldIndexNameMouseClicked
 
     private void FieldIndexDescMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FieldIndexDescMouseClicked
-        // TODO add your handling code here:
+        impFieldIndexDescMouseClicked(evt);
 //        this.FieldIndexDesc.setForeground(new java.awt.Color(0, 0, 0));
 //        this.FieldIndexDesc.selectAll();
     }//GEN-LAST:event_FieldIndexDescMouseClicked
 
     private void FieldIndexURLMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FieldIndexURLMouseClicked
-        // TODO add your handling code here:
+        impFieldIndexURLMouseClicked(evt);
 //        this.FieldIndexURL.setForeground(new java.awt.Color(0, 0, 0));
 //        this.FieldIndexURL.selectAll();
     }//GEN-LAST:event_FieldIndexURLMouseClicked
@@ -216,7 +216,7 @@ public class AddIndexWizard extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                AddIndexWizard dialog = new AddIndexWizard(new javax.swing.JFrame(), true);
+                impAddIndexWizard dialog = new impAddIndexWizard(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -243,4 +243,13 @@ public class AddIndexWizard extends javax.swing.JDialog {
     protected javax.swing.JLabel LabelIndexURL;
     protected javax.swing.JProgressBar ProgressBarTestConn;
     // End of variables declaration//GEN-END:variables
+
+    //<Auto-Generate-Result>
+    protected void impBTNCancelAddIndexActionPerformed(java.awt.event.ActionEvent evt){}
+    protected void impBTNIndexTestConnActionPerformed(java.awt.event.ActionEvent evt){}
+    protected void impBTNOKAddIndexActionPerformed(java.awt.event.ActionEvent evt){}
+    protected void impFieldIndexNameMouseClicked(java.awt.event.MouseEvent evt){}
+    protected void impFieldIndexDescMouseClicked(java.awt.event.MouseEvent evt){}
+    protected void impFieldIndexURLMouseClicked(java.awt.event.MouseEvent evt){}
+    //</Auto-Generate-Result>
 }

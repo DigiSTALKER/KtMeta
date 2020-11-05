@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.github.hochikong.ktmeta.swingui.dialogs;
+package io.github.hochikong.ktmeta.swingui.dialogs.codegen;
 
 import com.formdev.flatlaf.intellijthemes.FlatSolarizedLightIJTheme;
 
@@ -20,19 +20,19 @@ import java.awt.*;
  *
  * @author ckhoi
  */
-public class AddDatabaseWizard extends javax.swing.JDialog {
+public class impAddDatabaseWizard extends javax.swing.JDialog {
 
     /**
      * Creates new form AddDatabaseWizard
      */
-    public AddDatabaseWizard(java.awt.Frame parent, boolean modal) {
+    public impAddDatabaseWizard(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         // centre
         this.setLocationRelativeTo(null);
     }
 
-    public AddDatabaseWizard(java.awt.Frame parent, boolean modal, String[] SupportedDBList, Image icon) {
+    public impAddDatabaseWizard(java.awt.Frame parent, boolean modal, String[] SupportedDBList, Image icon) {
         super(parent, modal);
         this.supportedDatabaseList = SupportedDBList;
         initComponents();
@@ -242,39 +242,39 @@ public class AddDatabaseWizard extends javax.swing.JDialog {
 
     //<Auto-Generate>
     private void BTNOKAddDBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNOKAddDBActionPerformed
-        // TODO add your handling code here:
+        impBTNOKAddDBActionPerformed(evt);
     }//GEN-LAST:event_BTNOKAddDBActionPerformed
 
     private void BTNCancelAddDBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNCancelAddDBActionPerformed
-        // TODO add your handling code here:
+        impBTNCancelAddDBActionPerformed(evt);
     }//GEN-LAST:event_BTNCancelAddDBActionPerformed
 
     private void FieldAliasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FieldAliasMouseClicked
-        // TODO add your handling code here:
+        impFieldAliasMouseClicked(evt);
     }//GEN-LAST:event_FieldAliasMouseClicked
 
     private void FieldDescriptionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FieldDescriptionMouseClicked
-        // TODO add your handling code here:
+        impFieldDescriptionMouseClicked(evt);
     }//GEN-LAST:event_FieldDescriptionMouseClicked
 
     private void FieldJDBCURLMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FieldJDBCURLMouseClicked
-        // TODO add your handling code here:
+        impFieldJDBCURLMouseClicked(evt);
     }//GEN-LAST:event_FieldJDBCURLMouseClicked
 
     private void FieldUsernameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FieldUsernameMouseClicked
-        // TODO add your handling code here:
+        impFieldUsernameMouseClicked(evt);
     }//GEN-LAST:event_FieldUsernameMouseClicked
 
     private void FieldPasswordMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FieldPasswordMouseClicked
-        // TODO add your handling code here:
+        impFieldPasswordMouseClicked(evt);
     }//GEN-LAST:event_FieldPasswordMouseClicked
 
     private void BTNTestConnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNTestConnActionPerformed
-        // TODO add your handling code here:
+        impBTNTestConnActionPerformed(evt);
     }//GEN-LAST:event_BTNTestConnActionPerformed
 
     private void ComboBoxAvailableDBMSItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_ComboBoxAvailableDBMSItemStateChanged
-        // TODO add your handling code here:
+        impComboBoxAvailableDBMSItemStateChanged(evt);
     }//GEN-LAST:event_ComboBoxAvailableDBMSItemStateChanged
     //</Auto-Generate>
     
@@ -286,7 +286,7 @@ public class AddDatabaseWizard extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                AddDatabaseWizard dialog = new AddDatabaseWizard(new javax.swing.JFrame(), true);
+                impAddDatabaseWizard dialog = new impAddDatabaseWizard(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -324,4 +324,16 @@ public class AddDatabaseWizard extends javax.swing.JDialog {
     protected javax.swing.JLabel LabelUsername;
     protected javax.swing.JProgressBar PBarTestConnection;
     // End of variables declaration//GEN-END:variables
+
+    //<Auto-Generate-Result>
+    protected void impBTNOKAddDBActionPerformed(java.awt.event.ActionEvent evt){}
+    protected void impBTNCancelAddDBActionPerformed(java.awt.event.ActionEvent evt){}
+    protected void impFieldAliasMouseClicked(java.awt.event.MouseEvent evt){}
+    protected void impFieldDescriptionMouseClicked(java.awt.event.MouseEvent evt){}
+    protected void impFieldJDBCURLMouseClicked(java.awt.event.MouseEvent evt){}
+    protected void impFieldUsernameMouseClicked(java.awt.event.MouseEvent evt){}
+    protected void impFieldPasswordMouseClicked(java.awt.event.MouseEvent evt){}
+    protected void impBTNTestConnActionPerformed(java.awt.event.ActionEvent evt){}
+    protected void impComboBoxAvailableDBMSItemStateChanged(java.awt.event.ItemEvent evt){}
+    //</Auto-Generate-Result>
 }
