@@ -11,4 +11,27 @@
  * limitations under the License.
  */
 
-package io.github.hochikong.ktmeta.metaplugin
+package io.github.hochikong.ktmeta.shared
+
+import io.github.hochikong.ktmeta.device.DeviceAPI
+import java.util.concurrent.ConcurrentHashMap
+
+/**
+ * Shared device references singleton.
+ * Used by verticle to keep references of devices.
+ * */
+object SharedDeviceRef {
+    private val devRefs = ConcurrentHashMap<String, DeviceAPI>()
+
+    fun addRef(key: String, dev: DeviceAPI) {
+        devRefs[key] = dev
+    }
+
+    fun getRef(key: String): DeviceAPI? {
+        return devRefs[key]
+    }
+
+    fun removeRef(key: String) {
+        devRefs.remove(key)
+    }
+}

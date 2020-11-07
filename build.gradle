@@ -43,6 +43,7 @@ dependencies {
     implementation "org.jasypt:jasypt:1.9.3"
     implementation "org.elasticsearch.client:elasticsearch-rest-client:7.9.1"
     implementation "commons-io:commons-io:2.8.0"
+    implementation "com.squareup.okhttp3:okhttp:4.9.0"
     implementation "io.ktor:ktor-server-netty:1.4.0"
     implementation "io.ktor:ktor-jackson:1.4.0"
     implementation "io.ktor:ktor-client-apache:1.4.0"

@@ -11,7 +11,7 @@
  * limitations under the License.
  */
 
-package io.github.hochikong.ktmeta.rest
+package io.github.hochikong.ktmeta.elasticsearch
 
 import okhttp3.OkHttpClient
 import okhttp3.Request

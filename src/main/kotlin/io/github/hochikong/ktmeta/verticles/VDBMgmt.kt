@@ -11,20 +11,5 @@
  * limitations under the License.
  */
 
-package rest
+package io.github.hochikong.ktmeta.verticles
 
-import io.github.hochikong.ktmeta.elasticsearch.ESChecker
-import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Test
-
-class TestESChecker {
-    @Test
-    fun testESChecker() {
-        assertEquals(false, ESChecker.isAccessible("http://192.168.2.13:9200"))
-        assertEquals(true, ESChecker.isAccessible("http://localhost:9200"))
-        val tmp = ESChecker.isAccessibleReport("http://localhost:9200")
-        assertEquals(true, tmp!!.isAccessible)
-        assertEquals("OK", tmp.status)
-        println(tmp.jsonResp)
-    }
-}

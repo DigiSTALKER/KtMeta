@@ -27,7 +27,7 @@ import io.github.hochikong.ktmeta.predefined.SupportedDBs
  *
  * SQL DDL:
  * ```SQL
- * CREATE TABLE registration(
+ * CREATE TABLE db_registration(
  *  id INTEGER PRIMARY KEY AUTOINCREMENT ,
  *  dbms TEXT NOT NULL ,
  *  alias TEXT NOT NULL,
@@ -56,7 +56,7 @@ val SQLiteDBRegColumnConstrains = listOf(
 
 
 /**
- * Use this to store single row of registration table and convert to list for Maintainer.
+ * Use this to store single row of db_registration table and convert to list for Maintainer.
  * */
 data class RegRow(
     val id: Int,
@@ -129,7 +129,7 @@ data class RegRow(
 }
 
 /**
- * Use this to parse single row of registration table.
+ * Use this to parse single row of db_registration table.
  * @return Data class, RegRow
  * */
 fun List<Any>.regOut(): RegRow {

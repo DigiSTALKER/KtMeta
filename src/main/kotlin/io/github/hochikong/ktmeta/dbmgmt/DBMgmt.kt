@@ -97,7 +97,7 @@ object DBMgmt {
     private fun checkRegIsEmpty(database: String): RegRow? {
         queryReg()
         if (regIsEmpty) {
-            val msg = "DBMGMT.getConnection said: Database registration is empty."
+            val msg = "DBMGMT.getConnection said: Database db_registration is empty."
             loggerDBMGMT.error(msg)
             throw NoDatabasesIsAvailable(msg)
         }

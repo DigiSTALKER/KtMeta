@@ -29,7 +29,7 @@ import me.liuwj.ktorm.support.sqlite.SQLiteDialect
  *
  * DDL for reference:
  * ```SQL
- * CREATE TABLE registration(
+ * CREATE TABLE db_registration(
  *  id INTEGER PRIMARY KEY AUTOINCREMENT ,
  *  dbms TEXT NOT NULL ,
  *  alias TEXT NOT NULL,
