@@ -14,7 +14,7 @@
 package io.github.hochikong.ktmeta.dbmgmt
 
 /**
- * Generate catalog by the return of Maintainer.queryAllRows
+ * Generate catalog by the return of DBMaintainer.queryAllRows
  * */
 object DBRegCatalog {
     private var catalog: MutableMap<String, RegRow> = mutableMapOf()

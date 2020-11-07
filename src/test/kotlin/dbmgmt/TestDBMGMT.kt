@@ -25,9 +25,9 @@ package dbmgmt
  *  limitations under the License.
  */
 
-import io.github.hochikong.ktmeta.dbmgmt.DBMgmt
+import io.github.hochikong.ktmeta.dbmgmt.DBMaintainer
 import io.github.hochikong.ktmeta.dbmgmt.DBRegCatalog
-import io.github.hochikong.ktmeta.dbmgmt.Maintainer
+import io.github.hochikong.ktmeta.dbmgmt.DBResourcesProvider
 import io.github.hochikong.ktmeta.predefined.Encryption
 import io.github.hochikong.ktmeta.predefined.NoDatabasesIsAvailable
 import io.github.hochikong.ktmeta.predefined.NoSuchDatabaseInRegistrationTable
@@ -77,7 +77,7 @@ class TestDBMGMT {
         @JvmStatic
         @AfterAll
         fun aA() {
-            Maintainer.dropTable()
+            DBMaintainer.dropTable()
             Class.forName("org.postgresql.Driver")
             val x =
                 DriverManager.getConnection("jdbc:postgresql://localhost:5432/ktmetapg?user=ktmeta_test&password=ktmeta")
@@ -105,16 +105,16 @@ class TestDBMGMT {
     @Order(1)
     @Test
     fun testquery() {
-        DBMgmt.queryReg()
-        assertEquals(true, DBMgmt.regIsEmpty)
-        println(DBMgmt.checkCatalog())
-        assertThrows<NoDatabasesIsAvailable> { DBMgmt.getConnection("sb", "fake") }
+        DBResourcesProvider.queryReg()
+        assertEquals(true, DBResourcesProvider.regIsEmpty)
+        println(DBResourcesProvider.checkCatalog())
+        assertThrows<NoDatabasesIsAvailable> { DBResourcesProvider.getConnection("sb", "fake") }
     }
 
     @Order(2)
     @Test
     fun testInsert() {
-        val x = DBMgmt.addDatabase(
+        val x = DBResourcesProvider.addDatabase(
             SupportedDBs.SQLite,
             "MY SQLITE",
             "null",
@@ -124,8 +124,8 @@ class TestDBMGMT {
             "jdbc:sqlite:d1.db"
         )
         assertEquals(true, x)
-        assertEquals(false, DBMgmt.regIsEmpty)
-        DBMgmt.addDatabase(
+        assertEquals(false, DBResourcesProvider.regIsEmpty)
+        DBResourcesProvider.addDatabase(
             SupportedDBs.PostgreSQL,
             "MY PG",
             Encryption.encrypt("ktmeta_test"),
@@ -134,23 +134,23 @@ class TestDBMGMT {
             "the first pg",
             "jdbc:postgresql://localhost:5432/ktmetapg"
         )
-        println("After insert: ${DBMgmt.checkCatalog()}")
+        println("After insert: ${DBResourcesProvider.checkCatalog()}")
     }
 
     @Order(3)
     @Test
     fun testGetCon() {
-        assertThrows<NoSuchDatabaseInRegistrationTable> { DBMgmt.getConnection("sb", "fake") }
-        assertThrows<NoSuchDatabaseInRegistrationTable> { DBMgmt.getDatabase("sb", "fake") }
-        assertThrows<NoSuchDatabaseInRegistrationTable> { DBMgmt.getPool("sb", "fake") }
+        assertThrows<NoSuchDatabaseInRegistrationTable> { DBResourcesProvider.getConnection("sb", "fake") }
+        assertThrows<NoSuchDatabaseInRegistrationTable> { DBResourcesProvider.getDatabase("sb", "fake") }
+        assertThrows<NoSuchDatabaseInRegistrationTable> { DBResourcesProvider.getPool("sb", "fake") }
     }
 
     @Order(4)
     @Test
     fun testGetCon2() {
-        println("Current catalog: ${DBMgmt.checkCatalog()}")
-        val sqliteToken = DBMgmt.grantDatabase("sqlite_test", "null", "null")
-        val x = DBMgmt.getConnection("sqlite_test", sqliteToken)
+        println("Current catalog: ${DBResourcesProvider.checkCatalog()}")
+        val sqliteToken = DBResourcesProvider.grantDatabase("sqlite_test", "null", "null")
+        val x = DBResourcesProvider.getConnection("sqlite_test", sqliteToken)
         x.createStatement().use {
             it.execute(
                 """
@@ -190,8 +190,8 @@ class TestDBMGMT {
     @Order(5)
     @Test
     fun testGetDB() {
-        val sqliteToken = DBMgmt.grantDatabase("sqlite_test", "null", "null")
-        val x = DBMgmt.getDatabase("sqlite_test", sqliteToken)
+        val sqliteToken = DBResourcesProvider.grantDatabase("sqlite_test", "null", "null")
+        val x = DBResourcesProvider.getDatabase("sqlite_test", sqliteToken)
         for (row in x.from(Demo).select()) {
             assertEquals(1, row[Demo.id])
             assertEquals("sb", row[Demo.name])
@@ -199,7 +199,7 @@ class TestDBMGMT {
             println(row[Demo.name])
         }
 
-        val y = DBMgmt.getPool("sqlite_test", sqliteToken)
+        val y = DBResourcesProvider.getPool("sqlite_test", sqliteToken)
         for (row in y.from(Demo).select()) {
             assertEquals(1, row[Demo.id])
             assertEquals("sb", row[Demo.name])
@@ -212,8 +212,8 @@ class TestDBMGMT {
     @Test
     fun testPG() {
         val tmp = mutableMapOf<Int, String>()
-        val pgToken = DBMgmt.grantDatabase("pg_test", "ktmeta_test", "ktmeta")
-        val x = DBMgmt.getDatabase("pg_test", pgToken)
+        val pgToken = DBResourcesProvider.grantDatabase("pg_test", "ktmeta_test", "ktmeta")
+        val x = DBResourcesProvider.getDatabase("pg_test", pgToken)
         x.insertAndGenerateKey(PG) {
             PG.name to "them"
         }
@@ -227,7 +227,7 @@ class TestDBMGMT {
         assert(2 in tmp.keys)
         assertEquals("them", tmp[1])
         assertEquals("him", tmp[2])
-        DBMgmt.getConnection("pg_test", pgToken).createStatement().use {
+        DBResourcesProvider.getConnection("pg_test", pgToken).createStatement().use {
             it.executeUpdate(
                 """
                 DELETE FROM sb;
@@ -239,22 +239,22 @@ class TestDBMGMT {
     @Order(7)
     @Test
     fun testRemove() {
-        println(DBMgmt.checkCatalog())
-        assertEquals(false, DBMgmt.removeDatabase("nmsl", "fake"))
+        println(DBResourcesProvider.checkCatalog())
+        assertEquals(false, DBResourcesProvider.removeDatabase("nmsl", "fake"))
         assertEquals(
-            true, DBMgmt.removeDatabase(
+            true, DBResourcesProvider.removeDatabase(
                 "pg_test",
-                DBMgmt.grantDatabase("pg_test", "ktmeta_test", "ktmeta")
+                DBResourcesProvider.grantDatabase("pg_test", "ktmeta_test", "ktmeta")
             )
         )
-        println(DBMgmt.checkCatalog())
+        println(DBResourcesProvider.checkCatalog())
         assertEquals(
-            true, DBMgmt.removeDatabase(
+            true, DBResourcesProvider.removeDatabase(
                 "sqlite_test",
-                DBMgmt.grantDatabase("sqlite_test", "null", "null")
+                DBResourcesProvider.grantDatabase("sqlite_test", "null", "null")
             )
         )
-        println(DBMgmt.checkCatalog())
+        println(DBResourcesProvider.checkCatalog())
         println(DBRegCatalog.keys())
     }
 }

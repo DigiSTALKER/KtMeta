@@ -22,7 +22,7 @@ import java.sql.Connection
 import java.sql.DriverManager
 import java.sql.SQLException
 
-object Maintainer {
+object DBMaintainer {
     private val loggerM = LoggerFactory.getLogger("ktmeta->dbmgmt")
 
     private val columnNames = List(7) {
@@ -47,7 +47,7 @@ object Maintainer {
     /**
      * Close connection, controlled by User.
      * */
-    fun closeConnection() {
+    private fun closeConnection() {
         if (hasConnection) {
             connection.close()
             hasConnection = false
@@ -75,7 +75,6 @@ object Maintainer {
                 it.executeQuery(sql)
                 true
             } catch (e: SQLException) {
-                // loggerM.error("SQL: $sql, $e")
                 false
             }
         }
@@ -116,7 +115,7 @@ object Maintainer {
     fun createTable(): Boolean {
         checkConnection()
         if (this.hasTable()) {
-            return false
+            return true
         }
         val sql = """
             CREATE TABLE IF NOT EXISTS db_registration(
@@ -160,8 +159,8 @@ object Maintainer {
                 INSERT INTO db_registration(dbms, alias, user, password, database, description, url, protected)
                 VALUES (${data[0]}, ${data[1]}, ${data[2]}, ${data[3]}, ${data[4]}, ${data[5]}, ${data[6]}, ${data[7]});
                 """.trimIndent()
-        return connection.createStatement().use {
-            try {
+        connection.createStatement().use {
+            return try {
                 it.executeUpdate(sql)
                 true
             } catch (e: SQLException) {
@@ -194,6 +193,8 @@ object Maintainer {
                     result.add(tmp.toList())
                 }
                 queryResult.close()
+                // automatically close connection
+                closeConnection()
                 return result.toList()
             } catch (e: SQLException) {
                 loggerM.error("SQL: $sql, $e")
@@ -205,6 +206,7 @@ object Maintainer {
     /**
      * Update row(s) in db_registration table by condition [where].
      * */
+    @Deprecated("All config component should not use this")
     fun updateRow(column: String, newValue: String, where: String): Boolean {
         checkConnection()
         require(column in columnNames) { "Column $column not exists." }
@@ -223,13 +225,50 @@ object Maintainer {
     }
 
     /**
+     * Update row in db_registration table by id (recommend to use)
+     */
+    fun updateRowByID(id: Int, column: String, newValue: String): Boolean {
+        checkConnection()
+        require(column in columnNames) { "Column $column not exists." }
+        val sql = """
+            UPDATE db_registration SET $column=$newValue WHERE id = $id;
+        """.trimIndent()
+        connection.createStatement().use {
+            return try {
+                it.executeUpdate(sql)
+                true
+            } catch (e: SQLException) {
+                loggerM.error("SQL: $sql, $e")
+                false
+            }
+        }
+    }
+
+    /**
      * Delete row(s) from db_registration table by condition(s) [where].
      * */
+    @Deprecated("All config component should not use this")
     fun deleteRow(where: String): Boolean {
         checkConnection()
         val sql = """
                     DELETE FROM db_registration WHERE $where ;
                   """.trimIndent()
+        connection.createStatement().use {
+            return try {
+                it.executeUpdate(sql)
+                true
+            } catch (e: SQLException) {
+                loggerM.error("SQL: $sql, $e")
+                false
+            }
+        }
+    }
+
+    fun deleteRowByID(id: Int): Boolean {
+        checkConnection()
+        val sql = """
+            DELETE FROM db_registration WHERE id = $id;
+        """.trimIndent()
         connection.createStatement().use {
             return try {
                 it.executeUpdate(sql)
@@ -252,6 +291,8 @@ object Maintainer {
         connection.createStatement().use {
             return try {
                 it.execute(sql)
+                // automatically close connection
+                closeConnection()
                 true
             } catch (e: SQLException) {
                 loggerM.error("SQL: $sql, $e")

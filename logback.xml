@@ -20,6 +20,7 @@
         </encoder>
     </appender>
 
+    <!-- DB -->
     <appender name="dbmgmt" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <!--        <file>logs/ktmeta-dgmgmt.log</file>-->
         <prudent>true</prudent>
@@ -38,6 +39,27 @@
 
     <logger name="ktmeta->dbmgmt" level="info" additivity="false">
         <appender-ref ref="dbmgmt"/>
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+    <!-- ES -->
+    <appender name="esmgmt" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <prudent>true</prudent>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>logs/ktmeta-esmgmt.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <maxHistory>5</maxHistory>
+            <maxFileSize>20KB</maxFileSize>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%date %-5level [%thread] %logger{10} [%file:%line] -> %msg%n %n</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="ktmeta->esmgmt" level="info" additivity="false">
+        <appender-ref ref="esmgmt"/>
         <appender-ref ref="STDOUT"/>
     </logger>
 

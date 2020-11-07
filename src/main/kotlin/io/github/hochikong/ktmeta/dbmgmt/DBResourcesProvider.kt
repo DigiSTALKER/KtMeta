@@ -32,7 +32,7 @@ import java.util.*
 import java.util.concurrent.TimeUnit
 import kotlin.properties.Delegates
 
-object DBMgmt {
+object DBResourcesProvider {
     private data class Token(val username: String, val password: String) {
         override fun equals(other: Any?): Boolean {
             if (this === other) return true
@@ -86,10 +86,10 @@ object DBMgmt {
         .build()
 
     init {
-        if (!Maintainer.hasTable()) {
-            Maintainer.createTable()
+        if (!DBMaintainer.hasTable()) {
+            DBMaintainer.createTable()
         } else {
-            queryResult = Maintainer.queryAllRows()
+            queryResult = DBMaintainer.queryAllRows()
         }
     }
 
@@ -119,7 +119,7 @@ object DBMgmt {
      * Manually query and update database's catalog by delegate.
      * */
     fun queryReg(): Boolean {
-        queryResult = Maintainer.queryAllRows()
+        queryResult = DBMaintainer.queryAllRows()
         return true
     }
 
@@ -159,7 +159,7 @@ object DBMgmt {
             url = url,
             protected = password != "null"
         )
-        if (Maintainer.insertRow(tmp.regIn())) {
+        if (DBMaintainer.insertRow(tmp.regIn())) {
             queryReg()
             return true
         }
@@ -172,7 +172,7 @@ object DBMgmt {
     fun removeDatabase(database: String, token: String): Boolean {
         return if (tokenCache.getIfPresent(token) != null) {
             if (checkRegIsEmpty(database) != null) {
-                Maintainer.deleteRow("name == '$database'")
+                DBMaintainer.deleteRow("name == '$database'")
                 queryReg()
             } else {
                 false

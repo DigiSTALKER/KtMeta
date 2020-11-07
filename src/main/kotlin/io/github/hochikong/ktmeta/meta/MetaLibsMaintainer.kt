@@ -13,6 +13,8 @@
 
 package io.github.hochikong.ktmeta.meta
 
+import me.liuwj.ktorm.database.Database
+import me.liuwj.ktorm.support.sqlite.SQLiteDialect
 import java.sql.Connection
 import java.sql.DriverManager
 import java.sql.SQLException
@@ -22,21 +24,49 @@ import java.sql.SQLException
  * */
 object MetaLibsMaintainer {
     private const val driverStr = "org.sqlite.JDBC"
-    private var dbURL = "jdbc:sqlite:metalibs.db"
+    private var dbURL = "jdbc:sqlite:resources.db"
     private lateinit var connection: Connection
     private var hasConnection: Boolean = false
 
+    private lateinit var db: Database
+
+
+    init {
+        Class.forName(driverStr)
+    }
+
     private fun checkConnection() {
-        if (!MetaLibsMaintainer.hasConnection) {
-            MetaLibsMaintainer.connection = DriverManager.getConnection(MetaLibsMaintainer.dbURL)
-            MetaLibsMaintainer.hasConnection = true
+        if (!hasConnection) {
+            connection = DriverManager.getConnection(dbURL)
+            hasConnection = true
         }
     }
 
-    private fun hasTables(): Boolean {
-        val sql1 = "SELECT 1 FROM metalibs;"
-        val sql2 = "SELECT 1 FROM dbs;"
-        val sql3 = "SELECT 1 FROM indices;"
+    private fun closeConnection() {
+        if (hasConnection) {
+            connection.close()
+            hasConnection = false
+        }
+    }
+
+    private fun checkDatabase() {
+        db = Database.connect(
+            url = dbURL,
+            driver = driverStr,
+            dialect = SQLiteDialect()
+        )
+    }
+
+    fun hasTables(): Boolean {
+        val sql1 = """
+            SELECT 1 FROM metalibs;
+        """.trimIndent()
+        val sql2 = """
+            SELECT 1 FROM dbs;
+        """.trimIndent()
+        val sql3 = """
+            SELECT 1 FROM indices;
+        """.trimIndent()
         checkConnection()
         connection.createStatement().use {
             return try {
@@ -45,7 +75,6 @@ object MetaLibsMaintainer {
                 it.executeQuery(sql3)
                 true
             } catch (e: SQLException) {
-                // loggerM.error("SQL: $sql, $e")
                 false
             }
         }
@@ -77,7 +106,7 @@ object MetaLibsMaintainer {
      * name TEXT NOT NULL UNIQUE
      * );
      * */
-    private fun createTables(): Boolean {
+    fun createTables(): Boolean {
         checkConnection()
         val sqlDBS = """
             CREATE TABLE IF NOT EXISTS dbs
@@ -103,16 +132,27 @@ object MetaLibsMaintainer {
                 assign_index REFERENCES indices (name) UNIQUE
             );
         """.trimIndent()
+        connection.autoCommit = false
         connection.createStatement().use {
             return try {
                 it.execute(sqlDBS)
                 it.execute(sqlIND)
                 it.execute(sqlMeta)
+                connection.commit()
+                closeConnection()
                 true
             } catch (e: SQLException) {
+                connection.rollback()
                 false
             }
         }
     }
+//
+//    fun insertRow():Boolean{}
+//    fun queryAllRows(){}
+//    fun updateRow():Boolean{}
+//    fun deleteRow():Boolean{}
+//    fun dropTable():Boolean{}
+
 }
 

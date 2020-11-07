@@ -11,7 +11,7 @@ package dbmgmt/*
  *  limitations under the License.
  */
 
-import io.github.hochikong.ktmeta.dbmgmt.Maintainer
+import io.github.hochikong.ktmeta.dbmgmt.DBMaintainer
 import io.github.hochikong.ktmeta.dbmgmt.RegRow
 import io.github.hochikong.ktmeta.dbmgmt.regOut
 import io.github.hochikong.ktmeta.predefined.SupportedDBs
@@ -34,17 +34,17 @@ class TestRegConverter {
         @AfterAll
         @JvmStatic
         fun afterAll() {
-            Maintainer.dropTable()
+            DBMaintainer.dropTable()
         }
 
         @BeforeAll
         @JvmStatic
         fun beforeAll() {
-            if (!Maintainer.hasTable()) {
-                Maintainer.createTable()
+            if (!DBMaintainer.hasTable()) {
+                DBMaintainer.createTable()
             } else {
-                Maintainer.dropTable()
-                Maintainer.createTable()
+                DBMaintainer.dropTable()
+                DBMaintainer.createTable()
             }
         }
     }
@@ -57,8 +57,8 @@ class TestRegConverter {
 
     @Test
     fun testRegInOutWithDB() {
-        Maintainer.insertRow(rawInput.regIn())
-        val tmp = Maintainer.queryAllRows()?.get(0)
+        DBMaintainer.insertRow(rawInput.regIn())
+        val tmp = DBMaintainer.queryAllRows()?.get(0)
         println(tmp)
         println(tmp?.regOut())
         assertEquals(output, tmp?.regOut())

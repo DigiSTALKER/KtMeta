@@ -13,7 +13,7 @@
 
 /**
  * @author Hochikong
- * Convert input output for Maintainer and DBMgmt.
+ * Convert input output for DBMaintainer and DBResourcesProvider.
  * */
 package io.github.hochikong.ktmeta.dbmgmt
 
@@ -21,7 +21,7 @@ import io.github.hochikong.ktmeta.predefined.ConvertError
 import io.github.hochikong.ktmeta.predefined.SupportedDBs
 
 /**
- * Columns' type constrain for Maintainer use SQLite .
+ * Columns' type constrain for DBMaintainer use SQLite .
  *
  * When Pair.second is 0, it means column type is Int, 1 means String.
  *
@@ -56,7 +56,7 @@ val SQLiteDBRegColumnConstrains = listOf(
 
 
 /**
- * Use this to store single row of db_registration table and convert to list for Maintainer.
+ * Use this to store single row of db_registration table and convert to list for DBMaintainer.
  * */
 data class RegRow(
     val id: Int,
@@ -70,7 +70,7 @@ data class RegRow(
     var protected: Boolean
 ) {
     /**
-     * Convert data class to list for Maintainer.insertRow().
+     * Convert data class to list for DBMaintainer.insertRow().
      * */
     fun regIn(): List<Any> {
         if (dbms != SupportedDBs.NotSupported) {

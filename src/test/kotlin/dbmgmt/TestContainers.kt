@@ -11,8 +11,8 @@ package dbmgmt/*
  *  limitations under the License.
  */
 
+import io.github.hochikong.ktmeta.dbmgmt.DBMaintainer
 import io.github.hochikong.ktmeta.dbmgmt.DBRegCatalog
-import io.github.hochikong.ktmeta.dbmgmt.Maintainer
 import io.github.hochikong.ktmeta.dbmgmt.RegRow
 import io.github.hochikong.ktmeta.predefined.SupportedDBs
 import org.junit.jupiter.api.AfterAll
@@ -48,26 +48,26 @@ class TestContainers {
         @JvmStatic
         @BeforeAll
         fun bA() {
-            if (!Maintainer.hasTable()) {
-                Maintainer.createTable()
+            if (!DBMaintainer.hasTable()) {
+                DBMaintainer.createTable()
             } else {
-                Maintainer.dropTable()
-                Maintainer.createTable()
+                DBMaintainer.dropTable()
+                DBMaintainer.createTable()
             }
         }
 
         @JvmStatic
         @AfterAll
         fun aA() {
-            Maintainer.dropTable()
+            DBMaintainer.dropTable()
         }
     }
 
     @Test
     fun testDBRegCatalog() {
-        Maintainer.insertRow(data.regIn())
-        Maintainer.insertRow(data1.regIn())
-        DBRegCatalog.updateCatalog(Maintainer.queryAllRows())
+        DBMaintainer.insertRow(data.regIn())
+        DBMaintainer.insertRow(data1.regIn())
+        DBRegCatalog.updateCatalog(DBMaintainer.queryAllRows())
         assertEquals(2, DBRegCatalog.keys().size)
 
         val result = DBRegCatalog["testdb"]

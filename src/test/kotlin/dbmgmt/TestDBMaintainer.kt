@@ -11,12 +11,13 @@ package dbmgmt/*
  *  limitations under the License.
  */
 
-import io.github.hochikong.ktmeta.dbmgmt.Maintainer
+import io.github.hochikong.ktmeta.dbmgmt.DBMaintainer
+import io.github.hochikong.ktmeta.dbmgmt.regOut
 import org.junit.jupiter.api.*
 import org.junit.jupiter.api.Assertions.assertEquals
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation::class)
-class TestMaintainer {
+class TestDBMaintainer {
     /**
      * id INTEGER PRIMARY KEY AUTOINCREMENT ,
      * dbms TEXT NOT NULL ,
@@ -39,6 +40,16 @@ class TestMaintainer {
             "'desc postgresql'",
             "'url 2'",
             '1'
+        ),
+        listOf(
+            "'Sqlite'",
+            "'Test-Sqlite'",
+            "null",
+            "null",
+            "'test name 2'",
+            "'desc sqlite 2'",
+            "'url2'",
+            "0"
         )
     )
 
@@ -49,14 +60,14 @@ class TestMaintainer {
         @JvmStatic
         @AfterAll
         fun afterAll() {
-            Maintainer.dropTable()
+            DBMaintainer.dropTable()
         }
 
         @JvmStatic
         @BeforeAll
         fun beforAll() {
-            if (Maintainer.hasTable()) {
-                Maintainer.dropTable()
+            if (DBMaintainer.hasTable()) {
+                DBMaintainer.dropTable()
             }
         }
     }
@@ -65,24 +76,24 @@ class TestMaintainer {
     @Test
     fun testMaintainer() {
         println("tm")
-        assertEquals(false, Maintainer.hasTable())
-        Maintainer.createTable()
+        assertEquals(false, DBMaintainer.hasTable())
+        DBMaintainer.createTable()
     }
 
     @Order(2)
     @Test
     fun testInsertTable() {
-        assertEquals(false, Maintainer.createTable())
-        assertEquals(true, Maintainer.insertRow(legalData[0]))
-        assertEquals(true, Maintainer.insertRow(legalData[1]))
+        assertEquals(true, DBMaintainer.createTable())
+        assertEquals(true, DBMaintainer.insertRow(legalData[0]))
+        assertEquals(true, DBMaintainer.insertRow(legalData[1]))
     }
 
     @Order(3)
     @Test
     fun testQueryTable() {
-        Maintainer.createTable()
-        assertEquals(false, Maintainer.insertRow(legalData[0]))
-        val result = Maintainer.queryAllRows()
+        DBMaintainer.createTable()
+        assertEquals(false, DBMaintainer.insertRow(legalData[0]))
+        val result = DBMaintainer.queryAllRows()
         println(result)
         assertEquals(
             listOf(1, "Sqlite", "Localhost-Sqlite", "null", "null", "test name1", "desc sqlite", "url 1", 0),
@@ -93,20 +104,20 @@ class TestMaintainer {
     @Order(4)
     @Test
     fun testIllegal() {
-        assertEquals(false, Maintainer.insertRow(illegalData))
+        assertEquals(false, DBMaintainer.insertRow(illegalData))
     }
 
     @Order(5)
     @Test
     fun testUpdateAndDelete() {
         assertThrows<IllegalArgumentException> {
-            Maintainer.updateRow(
+            DBMaintainer.updateRow(
                 "sb",
                 "222",
                 "protected == 1"
             )
         }
-        Maintainer.updateRow(
+        DBMaintainer.updateRow(
             "description",
             "'new desc sqlite'",
             "dbms == 'Sqlite' AND protected == 0"
@@ -123,9 +134,9 @@ class TestMaintainer {
                 "url 1",
                 0
             ).toString(),
-            Maintainer.queryAllRows()?.get(0).toString()
+            DBMaintainer.queryAllRows()?.get(0).toString()
         )
-        Maintainer.deleteRow("dbms == 'Sqlite'")
+        DBMaintainer.deleteRow("dbms == 'Sqlite'")
         assertEquals(
             listOf(
                 2,
@@ -138,7 +149,35 @@ class TestMaintainer {
                 "url 2",
                 '1'
             ).toString(),
-            Maintainer.queryAllRows()?.get(0).toString()
+            DBMaintainer.queryAllRows()?.get(0).toString()
         )
+        println("currnet all rows ${DBMaintainer.queryAllRows()}")
+    }
+
+    @Order(5)
+    @Test
+    fun testUpdateAndDeleteByUpdate() {
+        assertEquals(true, DBMaintainer.insertRow(legalData[2]))
+        val rr = DBMaintainer.queryAllRows()!![1].regOut()
+        println("\n Order 5 is $rr")
+
+        DBMaintainer.updateRowByID(3, "alias", "'test-sqlite fix'")
+        assertEquals(
+            listOf(
+                3,
+                "Sqlite",
+                "test-sqlite fix",
+                "null",
+                "null",
+                "test name 2",
+                "desc sqlite 2",
+                "url2",
+                "0"
+            ).toString(), DBMaintainer.queryAllRows()?.get(1).toString()
+        )
+
+        assertEquals(true, DBMaintainer.deleteRowByID(2))
+
+        println("\n Last result ${DBMaintainer.queryAllRows()}")
     }
 }
