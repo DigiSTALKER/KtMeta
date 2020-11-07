@@ -69,7 +69,7 @@ object ESMaintainer {
         }
     }
 
-    fun hasTables(): Boolean {
+    fun hasTable(): Boolean {
         val sql = """
             SELECT 1 FROM indices_registration;
         """.trimIndent()
@@ -127,12 +127,12 @@ object ESMaintainer {
     fun insertRow(name: String, desc: String, url: String): Boolean {
         checkDatabase()
         return try {
-            db.insert(indices_registration) {
+            val ef = db.insert(indices_registration) {
                 it.ind_name to name
                 it.ind_desc to desc
                 it.ind_url to url
             }
-            true
+            ef > 0
         } catch (e: SQLiteException) {
             loggerM.error("Ktorm: $e")
             false
@@ -146,6 +146,7 @@ object ESMaintainer {
             for (row in db.from(indices_registration).select()) {
                 result.add(
                     ESRegRow(
+                        row[indices_registration.id] ?: -1,
                         row[indices_registration.ind_name] ?: "null",
                         row[indices_registration.ind_desc] ?: "null",
                         row[indices_registration.ind_url] ?: "null"
@@ -181,10 +182,10 @@ object ESMaintainer {
     fun deleteRowByID(id: Int): Boolean {
         checkDatabase()
         return try {
-            db.delete(indices_registration) {
+            val ef = db.delete(indices_registration) {
                 it.id eq id
             }
-            true
+            ef > 0
         } catch (e: SQLiteException) {
             loggerM.error("Ktorm: $e")
             false

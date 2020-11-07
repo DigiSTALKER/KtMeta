@@ -13,8 +13,8 @@
 
 package io.github.hochikong.ktmeta.elasticsearch
 
-data class ESRegRow(val name: String, val desc: String, val url: String) {
+data class ESRegRow(val id: Int, val name: String, val desc: String, val url: String) {
     companion object {
-        val columnNames = listOf("name", "desc", "url")
+        val columnNames = listOf("id", "index_name", "index_desc", "index_url")
     }
 }
