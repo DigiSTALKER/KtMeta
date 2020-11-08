@@ -55,7 +55,7 @@ public class LaunchView extends javax.swing.JFrame {
         ProgressBarLaunching = new javax.swing.JProgressBar();
         LabelLaunchingStatus = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setAlwaysOnTop(true);
         setMaximumSize(new java.awt.Dimension(606, 376));
         setMinimumSize(new java.awt.Dimension(606, 376));

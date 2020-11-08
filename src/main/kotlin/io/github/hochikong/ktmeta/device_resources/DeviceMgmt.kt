@@ -11,9 +11,9 @@
  * limitations under the License.
  */
 
-package io.github.hochikong.ktmeta.device
+package io.github.hochikong.ktmeta.device_resources
 
-import io.github.hochikong.ktmeta.device.driver.LocalDiskDriver
+import io.github.hochikong.ktmeta.device_resources.driver.LocalDiskDriver
 import io.github.hochikong.ktmeta.predefined.InitialDeviceFailed
 import io.github.hochikong.ktmeta.predefined.SupportedDevices
 

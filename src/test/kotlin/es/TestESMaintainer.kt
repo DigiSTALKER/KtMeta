@@ -13,7 +13,7 @@
 
 package es
 
-import io.github.hochikong.ktmeta.elasticsearch.ESMaintainer
+import io.github.hochikong.ktmeta.es_resources.ESMaintainer
 import org.junit.jupiter.api.*
 import org.junit.jupiter.api.Assertions.assertEquals
 
@@ -38,6 +38,7 @@ class TestESMaintainer {
     @Order(1)
     @Test
     fun testInit() {
+        assertEquals(false, ESMaintainer.insertRow("es", "ind", "htp"))
         assertEquals(false, ESMaintainer.hasTable())
         ESMaintainer.createTable()
     }

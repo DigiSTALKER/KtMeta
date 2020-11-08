@@ -24,8 +24,8 @@ package device/*
  *  limitations under the License.
  */
 
-import io.github.hochikong.ktmeta.device.FileRow
-import io.github.hochikong.ktmeta.device.driver.LocalDiskDriver
+import io.github.hochikong.ktmeta.device_resources.FileRow
+import io.github.hochikong.ktmeta.device_resources.driver.LocalDiskDriver
 import io.github.hochikong.ktmeta.predefined.FileType
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.MethodOrderer

@@ -11,11 +11,11 @@
  * limitations under the License.
  */
 
-package io.github.hochikong.ktmeta.device.driver
+package io.github.hochikong.ktmeta.device_resources.driver
 
-import io.github.hochikong.ktmeta.device.DeviceAPI
-import io.github.hochikong.ktmeta.device.FileRow
-import io.github.hochikong.ktmeta.device.fileRowBuilder
+import io.github.hochikong.ktmeta.device_resources.DeviceAPI
+import io.github.hochikong.ktmeta.device_resources.FileRow
+import io.github.hochikong.ktmeta.device_resources.fileRowBuilder
 import io.github.hochikong.ktmeta.predefined.ConvertError
 import io.github.hochikong.ktmeta.predefined.FileType
 import java.io.IOException

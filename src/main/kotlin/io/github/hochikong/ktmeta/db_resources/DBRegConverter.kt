@@ -15,7 +15,7 @@
  * @author Hochikong
  * Convert input output for DBMaintainer and DBResourcesProvider.
  * */
-package io.github.hochikong.ktmeta.dbmgmt
+package io.github.hochikong.ktmeta.db_resources
 
 import io.github.hochikong.ktmeta.predefined.ConvertError
 import io.github.hochikong.ktmeta.predefined.SupportedDBs
@@ -27,7 +27,7 @@ import io.github.hochikong.ktmeta.predefined.SupportedDBs
  *
  * SQL DDL:
  * ```SQL
- * CREATE TABLE db_registration(
+ * CREATE TABLE dbs_registration(
  *  id INTEGER PRIMARY KEY AUTOINCREMENT ,
  *  dbms TEXT NOT NULL ,
  *  alias TEXT NOT NULL,
@@ -56,7 +56,7 @@ val SQLiteDBRegColumnConstrains = listOf(
 
 
 /**
- * Use this to store single row of db_registration table and convert to list for DBMaintainer.
+ * Use this to store single row of dbs_registration table and convert to list for DBMaintainer.
  * */
 data class RegRow(
     val id: Int,
@@ -129,7 +129,7 @@ data class RegRow(
 }
 
 /**
- * Use this to parse single row of db_registration table.
+ * Use this to parse single row of dbs_registration table.
  * @return Data class, RegRow
  * */
 fun List<Any>.regOut(): RegRow {

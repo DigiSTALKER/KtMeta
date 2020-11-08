@@ -11,7 +11,7 @@
  *  limitations under the License.
  */
 
-package dbmgmt
+package db
 /*
  * Copyright 2020 Hochikong
  *  Licensed under the Apache License, Version 2.0 (the "License");
@@ -25,9 +25,9 @@ package dbmgmt
  *  limitations under the License.
  */
 
-import io.github.hochikong.ktmeta.dbmgmt.DBMaintainer
-import io.github.hochikong.ktmeta.dbmgmt.DBRegCatalog
-import io.github.hochikong.ktmeta.dbmgmt.DBResourcesProvider
+import io.github.hochikong.ktmeta.db_resources.DBMaintainer
+import io.github.hochikong.ktmeta.db_resources.DBRegCatalog
+import io.github.hochikong.ktmeta.db_resources.DBResourcesProvider
 import io.github.hochikong.ktmeta.predefined.Encryption
 import io.github.hochikong.ktmeta.predefined.NoDatabasesIsAvailable
 import io.github.hochikong.ktmeta.predefined.NoSuchDatabaseInRegistrationTable

@@ -71,7 +71,7 @@ public class impMetaAdvanceSearch extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         ListRulesDisplay = new javax.swing.JList<>();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("i18n/Frames/MetaAdvanceSearch_trans"); // NOI18N
         setTitle(bundle.getString("ADVANCE SEARCH")); // NOI18N
 

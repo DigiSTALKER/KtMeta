@@ -55,7 +55,7 @@ public class impMetaPreviewManager extends javax.swing.JFrame {
         BTNNextPage = new javax.swing.JButton();
         BTNDeletePreview = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle(this.customTitle);
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentResized(java.awt.event.ComponentEvent evt) {

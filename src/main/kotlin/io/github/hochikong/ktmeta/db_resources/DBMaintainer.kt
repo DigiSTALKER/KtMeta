@@ -13,9 +13,9 @@
 
 /**
  * @author Hochikong
- * Use sqlite to save db db_registration info.
+ * Use sqlite to save db dbs_registration info.
  * */
-package io.github.hochikong.ktmeta.dbmgmt
+package io.github.hochikong.ktmeta.db_resources
 
 import org.slf4j.LoggerFactory
 import java.sql.Connection
@@ -65,10 +65,10 @@ object DBMaintainer {
     }
 
     /**
-     * Check resources.db contains db_registration table or not.
+     * Check resources.db contains dbs_registration table or not.
      * */
     fun hasTable(): Boolean {
-        val sql = "SELECT 1 FROM db_registration;"
+        val sql = "SELECT 1 FROM dbs_registration;"
         checkConnection()
         connection.createStatement().use {
             return try {
@@ -81,7 +81,7 @@ object DBMaintainer {
     }
 
     /**
-     * Create empty table called db_registration.
+     * Create empty table called dbs_registration.
      *
      * DDL explanation:
      * - id: Integer and primary key, auto increment.
@@ -96,7 +96,7 @@ object DBMaintainer {
      *
      * Execute DDL below:
      * ```SQL
-     * CREATE TABLE db_registration(
+     * CREATE TABLE dbs_registration(
      *  id INTEGER PRIMARY KEY AUTOINCREMENT ,
      *  dbms TEXT NOT NULL ,
      *  alias TEXT NOT NULL,
@@ -118,7 +118,7 @@ object DBMaintainer {
             return true
         }
         val sql = """
-            CREATE TABLE IF NOT EXISTS db_registration(
+            CREATE TABLE IF NOT EXISTS dbs_registration(
                 id INTEGER PRIMARY KEY AUTOINCREMENT ,
                 dbms TEXT NOT NULL ,
                 alias TEXT NOT NULL,
@@ -156,7 +156,7 @@ object DBMaintainer {
     fun insertRow(data: List<Any>): Boolean {
         checkConnection()
         val sql = """
-                INSERT INTO db_registration(dbms, alias, user, password, database, description, url, protected)
+                INSERT INTO dbs_registration(dbms, alias, user, password, database, description, url, protected)
                 VALUES (${data[0]}, ${data[1]}, ${data[2]}, ${data[3]}, ${data[4]}, ${data[5]}, ${data[6]}, ${data[7]});
                 """.trimIndent()
         connection.createStatement().use {
@@ -171,12 +171,12 @@ object DBMaintainer {
     }
 
     /**
-     * Return a list which contains all rows of db_registration table.
+     * Return a list which contains all rows of dbs_registration table.
      * */
     fun queryAllRows(): List<List<Any>>? {
         checkConnection()
         val result = mutableListOf<List<Any>>()
-        val sql = "SELECT * FROM db_registration;"
+        val sql = "SELECT * FROM dbs_registration;"
         connection.createStatement().use { it ->
             try {
                 val queryResult = it.executeQuery(sql)
@@ -204,14 +204,14 @@ object DBMaintainer {
     }
 
     /**
-     * Update row(s) in db_registration table by condition [where].
+     * Update row(s) in dbs_registration table by condition [where].
      * */
     @Deprecated("All config component should not use this")
     fun updateRow(column: String, newValue: String, where: String): Boolean {
         checkConnection()
         require(column in columnNames) { "Column $column not exists." }
         val sql = """
-                    UPDATE db_registration SET $column=$newValue WHERE $where;
+                    UPDATE dbs_registration SET $column=$newValue WHERE $where;
                 """.trimIndent()
         connection.createStatement().use {
             return try {
@@ -225,13 +225,13 @@ object DBMaintainer {
     }
 
     /**
-     * Update row in db_registration table by id (recommend to use)
+     * Update row in dbs_registration table by id (recommend to use)
      */
     fun updateRowByID(id: Int, column: String, newValue: String): Boolean {
         checkConnection()
         require(column in columnNames) { "Column $column not exists." }
         val sql = """
-            UPDATE db_registration SET $column=$newValue WHERE id = $id;
+            UPDATE dbs_registration SET $column=$newValue WHERE id = $id;
         """.trimIndent()
         connection.createStatement().use {
             return try {
@@ -245,13 +245,13 @@ object DBMaintainer {
     }
 
     /**
-     * Delete row(s) from db_registration table by condition(s) [where].
+     * Delete row(s) from dbs_registration table by condition(s) [where].
      * */
     @Deprecated("All config component should not use this")
     fun deleteRow(where: String): Boolean {
         checkConnection()
         val sql = """
-                    DELETE FROM db_registration WHERE $where ;
+                    DELETE FROM dbs_registration WHERE $where ;
                   """.trimIndent()
         connection.createStatement().use {
             return try {
@@ -267,7 +267,7 @@ object DBMaintainer {
     fun deleteRowByID(id: Int): Boolean {
         checkConnection()
         val sql = """
-            DELETE FROM db_registration WHERE id = $id;
+            DELETE FROM dbs_registration WHERE id = $id;
         """.trimIndent()
         connection.createStatement().use {
             return try {
@@ -286,7 +286,7 @@ object DBMaintainer {
     fun dropTable(): Boolean {
         checkConnection()
         val sql = """
-            DROP TABLE db_registration;
+            DROP TABLE dbs_registration;
         """.trimIndent()
         connection.createStatement().use {
             return try {

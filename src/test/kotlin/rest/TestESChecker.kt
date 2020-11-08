@@ -13,7 +13,7 @@
 
 package rest
 
-import io.github.hochikong.ktmeta.elasticsearch.ESChecker
+import io.github.hochikong.ktmeta.es_resources.ESChecker
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 

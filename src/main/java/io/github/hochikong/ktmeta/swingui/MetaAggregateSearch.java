@@ -73,7 +73,7 @@ public class MetaAggregateSearch extends javax.swing.JFrame {
         });
         PopupMenuSearch.add(PMSearch);
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle(bundle.getString("AGGREGATE SEARCH")); // NOI18N
 
         LabelTarget.setText(bundle.getString("TARGET METADATA LIBRARY : ")); // NOI18N

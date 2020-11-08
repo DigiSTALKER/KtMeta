@@ -11,7 +11,7 @@
  * limitations under the License.
  */
 
-package io.github.hochikong.ktmeta.shared
+package io.github.hochikong.ktmeta.shared_resources
 
 import me.liuwj.ktorm.database.Database
 import java.sql.Connection

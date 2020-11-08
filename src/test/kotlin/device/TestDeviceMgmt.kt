@@ -13,7 +13,7 @@
 
 package device
 
-import io.github.hochikong.ktmeta.device.DeviceMgmt
+import io.github.hochikong.ktmeta.device_resources.DeviceMgmt
 import io.github.hochikong.ktmeta.predefined.InitialDeviceFailed
 import io.github.hochikong.ktmeta.predefined.SupportedDevices
 import org.junit.jupiter.api.Assertions.assertEquals

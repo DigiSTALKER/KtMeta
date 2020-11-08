@@ -11,7 +11,7 @@
  * limitations under the License.
  */
 
-package io.github.hochikong.ktmeta.dbmgmt
+package io.github.hochikong.ktmeta.db_resources
 
 /**
  * Generate catalog by the return of DBMaintainer.queryAllRows

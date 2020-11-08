@@ -11,7 +11,7 @@
  * limitations under the License.
  */
 
-package io.github.hochikong.ktmeta.device
+package io.github.hochikong.ktmeta.device_resources
 
 import io.github.hochikong.ktmeta.predefined.FileType
 

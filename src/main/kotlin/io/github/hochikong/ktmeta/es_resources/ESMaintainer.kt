@@ -11,7 +11,7 @@
  * limitations under the License.
  */
 
-package io.github.hochikong.ktmeta.elasticsearch
+package io.github.hochikong.ktmeta.es_resources
 
 import me.liuwj.ktorm.database.Database
 import me.liuwj.ktorm.dsl.*
@@ -27,11 +27,11 @@ import java.sql.DriverManager
 import java.sql.SQLException
 
 /**
- * ElasticSearch indices manager
+ * ElasticSearch indices registration manager
  * */
 
 object ESMaintainer {
-    private val loggerM = LoggerFactory.getLogger("ktmeta->dbmgmt")
+    private val loggerM = LoggerFactory.getLogger("ktmeta->esmgmt")
     private const val driverStr = "org.sqlite.JDBC"
     private var dbURL = "jdbc:sqlite:resources.db"
     private lateinit var connection: Connection

@@ -11,7 +11,7 @@
  * limitations under the License.
  */
 
-package io.github.hochikong.ktmeta.meta
+package io.github.hochikong.ktmeta.metalib_resources
 
 import me.liuwj.ktorm.database.Database
 import me.liuwj.ktorm.support.sqlite.SQLiteDialect
@@ -20,7 +20,7 @@ import java.sql.DriverManager
 import java.sql.SQLException
 
 /**
- * Metadata libraries manager
+ * Metadata libraries registration manager
  * */
 object MetaLibsMaintainer {
     private const val driverStr = "org.sqlite.JDBC"
@@ -61,18 +61,10 @@ object MetaLibsMaintainer {
         val sql1 = """
             SELECT 1 FROM metalibs;
         """.trimIndent()
-        val sql2 = """
-            SELECT 1 FROM dbs;
-        """.trimIndent()
-        val sql3 = """
-            SELECT 1 FROM indices;
-        """.trimIndent()
         checkConnection()
         connection.createStatement().use {
             return try {
                 it.executeQuery(sql1)
-                it.executeQuery(sql2)
-                it.executeQuery(sql3)
                 true
             } catch (e: SQLException) {
                 false
@@ -91,52 +83,23 @@ object MetaLibsMaintainer {
      * assign_db REFERENCES dbs (name) UNIQUE,
      * assign_index REFERENCES indices (name) UNIQUE
      * );
-     *
-     *
-     * DDL of 'dbs' table:
-     * CREATE TABLE IF NOT EXISTS dbs
-     * (
-     * name TEXT NOT NULL UNIQUE
-     * );
-     *
-     *
-     * DDL of 'indices' table:
-     * CREATE TABLE IF NOT EXISTS indices
-     * (
-     * name TEXT NOT NULL UNIQUE
-     * );
      * */
     fun createTables(): Boolean {
         checkConnection()
-        val sqlDBS = """
-            CREATE TABLE IF NOT EXISTS dbs
-            (
-                name TEXT NOT NULL UNIQUE
-            );
-        """.trimIndent()
-
-        val sqlIND = """
-            CREATE TABLE IF NOT EXISTS indices
-            (
-                name TEXT NOT NULL UNIQUE
-            );
-        """.trimIndent()
-
         val sqlMeta = """
             CREATE TABLE IF NOT EXISTS metalibs
             (
                 id   INTEGER PRIMARY KEY AUTOINCREMENT,
                 name TEXT NOT NULL UNIQUE ,
                 desc TEXT NOT NULL ,
-                assign_db REFERENCES dbs (name) UNIQUE ,
-                assign_index REFERENCES indices (name) UNIQUE
+                assign_plugin REFERENCES plugins (name) ,
+                assign_db REFERENCES dbs_registration (database) UNIQUE ,
+                assign_index REFERENCES indices_registration (index_name) UNIQUE
             );
         """.trimIndent()
         connection.autoCommit = false
         connection.createStatement().use {
             return try {
-                it.execute(sqlDBS)
-                it.execute(sqlIND)
                 it.execute(sqlMeta)
                 connection.commit()
                 closeConnection()

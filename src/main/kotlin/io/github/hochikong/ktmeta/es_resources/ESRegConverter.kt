@@ -11,27 +11,16 @@
  * limitations under the License.
  */
 
-package io.github.hochikong.ktmeta.shared
+package io.github.hochikong.ktmeta.es_resources
 
-import io.github.hochikong.ktmeta.device.DeviceAPI
-import java.util.concurrent.ConcurrentHashMap
-
-/**
- * Shared device references singleton.
- * Used by verticle to keep references of devices.
- * */
-object SharedDeviceRef {
-    private val devRefs = ConcurrentHashMap<String, DeviceAPI>()
-
-    fun addRef(key: String, dev: DeviceAPI) {
-        devRefs[key] = dev
-    }
-
-    fun getRef(key: String): DeviceAPI? {
-        return devRefs[key]
-    }
-
-    fun removeRef(key: String) {
-        devRefs.remove(key)
+/*CREATE TABLE IF NOT EXISTS indices_registration(
+id INTEGER PRIMARY KEY AUTOINCREMENT ,
+index_name TEXT NOT NULL UNIQUE ,
+index_desc TEXT NOT NULL ,
+index_url TEXT NOT NULL UNIQUE
+);*/
+data class ESRegRow(val id: Int, val name: String, val desc: String, val url: String) {
+    companion object {
+        val columnNames = listOf("id", "index_name", "index_desc", "index_url")
     }
 }

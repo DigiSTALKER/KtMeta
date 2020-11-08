@@ -14,7 +14,7 @@
 /**
  * @author Hochikong
  * */
-package io.github.hochikong.ktmeta.dbmgmt
+package io.github.hochikong.ktmeta.db_resources
 
 import com.google.common.cache.Cache
 import com.google.common.cache.CacheBuilder
@@ -97,7 +97,7 @@ object DBResourcesProvider {
     private fun checkRegIsEmpty(database: String): RegRow? {
         queryReg()
         if (regIsEmpty) {
-            val msg = "DBMGMT.getConnection said: Database db_registration is empty."
+            val msg = "DBMGMT.getConnection said: Database dbs_registration is empty."
             loggerDBMGMT.error(msg)
             throw NoDatabasesIsAvailable(msg)
         }

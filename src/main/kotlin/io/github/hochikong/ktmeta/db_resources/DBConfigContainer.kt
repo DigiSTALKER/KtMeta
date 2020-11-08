@@ -15,7 +15,7 @@
  * @author Hochikong
  * This is container file, contains classes and data classes
  */
-package io.github.hochikong.ktmeta.dbmgmt
+package io.github.hochikong.ktmeta.db_resources
 
 import io.github.hochikong.ktmeta.predefined.ConvertError
 import io.github.hochikong.ktmeta.predefined.SupportedDBs
@@ -29,7 +29,7 @@ import me.liuwj.ktorm.support.sqlite.SQLiteDialect
  *
  * DDL for reference:
  * ```SQL
- * CREATE TABLE db_registration(
+ * CREATE TABLE dbs_registration(
  *  id INTEGER PRIMARY KEY AUTOINCREMENT ,
  *  dbms TEXT NOT NULL ,
  *  alias TEXT NOT NULL,
