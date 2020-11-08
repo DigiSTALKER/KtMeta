@@ -92,6 +92,8 @@ public class impSettings extends javax.swing.JDialog {
         LabelPluginDescription = new javax.swing.JLabel();
         PanelPluginRegist = new javax.swing.JPanel();
         BTNRegistPlugin = new javax.swing.JButton();
+        BTNUpgradePlugin = new javax.swing.JButton();
+        BTNRemovePlugin = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("i18n/Dialogs/Settings_trans"); // NOI18N
@@ -315,6 +317,7 @@ public class impSettings extends javax.swing.JDialog {
         TablePlugins.setAutoCreateRowSorter(true);
         TablePlugins.setModel(this.pluginsModel);
         TablePlugins.setRowSorter(this.sorter);
+        TablePlugins.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(TablePlugins);
         TablePlugins.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         TablePlugins.getSelectionModel().addListSelectionListener(buildRowSelectionEventHandler());
@@ -332,6 +335,22 @@ public class impSettings extends javax.swing.JDialog {
             }
         });
 
+        BTNUpgradePlugin.setText("Upgrade Plugin");
+        BTNUpgradePlugin.setFocusable(false);
+        BTNUpgradePlugin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTNUpgradePluginActionPerformed(evt);
+            }
+        });
+
+        BTNRemovePlugin.setText("Remove Plugin");
+        BTNRemovePlugin.setFocusable(false);
+        BTNRemovePlugin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTNRemovePluginActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout PanelPluginRegistLayout = new javax.swing.GroupLayout(PanelPluginRegist);
         PanelPluginRegist.setLayout(PanelPluginRegistLayout);
         PanelPluginRegistLayout.setHorizontalGroup(
@@ -339,13 +358,20 @@ public class impSettings extends javax.swing.JDialog {
             .addGroup(PanelPluginRegistLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(BTNRegistPlugin)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(BTNUpgradePlugin)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(BTNRemovePlugin)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         PanelPluginRegistLayout.setVerticalGroup(
             PanelPluginRegistLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelPluginRegistLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(BTNRegistPlugin)
+                .addGroup(PanelPluginRegistLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BTNRegistPlugin)
+                    .addComponent(BTNUpgradePlugin)
+                    .addComponent(BTNRemovePlugin))
                 .addContainerGap(13, Short.MAX_VALUE))
         );
 
@@ -443,6 +469,14 @@ public class impSettings extends javax.swing.JDialog {
     private void BTNApplyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNApplyActionPerformed
         impBTNApplyActionPerformed(evt);
     }//GEN-LAST:event_BTNApplyActionPerformed
+
+    private void BTNUpgradePluginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNUpgradePluginActionPerformed
+        impBTNUpgradePluginActionPerformed(evt);
+    }//GEN-LAST:event_BTNUpgradePluginActionPerformed
+
+    private void BTNRemovePluginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNRemovePluginActionPerformed
+        impBTNRemovePluginActionPerformed(evt);
+    }//GEN-LAST:event_BTNRemovePluginActionPerformed
     //</Auto-Generate>
 
     /**
@@ -587,6 +621,8 @@ public class impSettings extends javax.swing.JDialog {
     protected javax.swing.JButton BTNCancel;
     protected javax.swing.JButton BTNOK;
     protected javax.swing.JButton BTNRegistPlugin;
+    protected javax.swing.JButton BTNRemovePlugin;
+    protected javax.swing.JButton BTNUpgradePlugin;
     protected javax.swing.JCheckBox CheckBoxEnableCustomFont;
     protected javax.swing.JComboBox<String> ComboBoxFontSelector;
     protected javax.swing.JComboBox<String> ComboBoxFontStyleSelector;
@@ -625,5 +661,7 @@ public class impSettings extends javax.swing.JDialog {
     protected void impBTNOKActionPerformed(java.awt.event.ActionEvent evt){}
     protected void impBTNCancelActionPerformed(java.awt.event.ActionEvent evt){}
     protected void impBTNApplyActionPerformed(java.awt.event.ActionEvent evt){}
+    protected void impBTNUpgradePluginActionPerformed(java.awt.event.ActionEvent evt){}
+    protected void impBTNRemovePluginActionPerformed(java.awt.event.ActionEvent evt){}
     //</Auto-Generate-Result>
 }

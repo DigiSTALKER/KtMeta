@@ -13,6 +13,7 @@
 package io.github.hochikong.ktmeta.swingui;
 
 import com.formdev.flatlaf.intellijthemes.FlatSolarizedLightIJTheme;
+import io.github.hochikong.ktmeta.swingui.essentials.SimpleResultPanelContainer;
 import io.github.hochikong.ktmeta.swingui.essentials.VerticalTabComp;
 
 import javax.swing.*;
@@ -136,6 +137,8 @@ public class KtmetaMainFrameDesign extends javax.swing.JFrame {
         CheckBoxQQueryOnDB = new javax.swing.JCheckBox();
         CheckBoxQQueryOnES = new javax.swing.JCheckBox();
         PanelInfoOutput = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
         TabbedPaneSplitRight = new javax.swing.JTabbedPane();
         PanelRightPreview = new javax.swing.JPanel();
         LabelRightAbstract = new javax.swing.JLabel();
@@ -522,6 +525,32 @@ public class KtmetaMainFrameDesign extends javax.swing.JFrame {
 
         PanelQuery.addTab("Info", PanelInfoOutput);
 
+        jButton1.setText("Test");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton1)
+                .addContainerGap(800, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addComponent(jButton1)
+                .addContainerGap(98, Short.MAX_VALUE))
+        );
+
+        PanelQuery.addTab("tab3", jPanel1);
+
         SplitPaneVTGeneral.setRightComponent(PanelQuery);
 
         javax.swing.GroupLayout PanelSplitCenterLayout = new javax.swing.GroupLayout(PanelSplitCenter);
@@ -745,6 +774,11 @@ public class KtmetaMainFrameDesign extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        SimpleResultPanelContainer tmp = new SimpleResultPanelContainer(buildSearchResultModel());
+        this.TabbedPaneQueryResult.addTab("TEST", tmp);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     // *************************************************************************
     // my custom codes
     // Used by TabbedPaneSplitRight to keep the reference of JLabels.
@@ -921,10 +955,12 @@ public class KtmetaMainFrameDesign extends javax.swing.JFrame {
     protected javax.swing.JTree TreeDatabases;
     protected javax.swing.JTree TreeIndices;
     protected javax.swing.JTree TreeMetadataLibs;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;

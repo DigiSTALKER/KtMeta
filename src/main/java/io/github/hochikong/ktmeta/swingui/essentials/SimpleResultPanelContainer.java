@@ -52,13 +52,17 @@ public class SimpleResultPanelContainer extends javax.swing.JPanel {
         BTNGotoLastPage = new javax.swing.JButton();
         jSeparator3 = new javax.swing.JSeparator();
         BTNRefresh = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JSeparator();
+        BTNDeleteRow = new javax.swing.JButton();
+        BTNAddRow = new javax.swing.JButton();
         SRPScrollPane = new javax.swing.JScrollPane();
         TableResult = new javax.swing.JTable();
 
         PanelResultToolbar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(64, 131, 201)));
 
         BTNGotoFirstPage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/ico/16pix/angle-double-left.png"))); // NOI18N
-        BTNGotoFirstPage.setToolTipText("First page");
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("i18n/OtherComponents/SimpleResultPanelContainer_trans"); // NOI18N
+        BTNGotoFirstPage.setToolTipText(bundle.getString("FIRST PAGE")); // NOI18N
         BTNGotoFirstPage.setFocusable(false);
         BTNGotoFirstPage.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -67,7 +71,7 @@ public class SimpleResultPanelContainer extends javax.swing.JPanel {
         });
 
         BTNGotoPreviousPage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/ico/16pix/angle-left.png"))); // NOI18N
-        BTNGotoPreviousPage.setToolTipText("Previous page");
+        BTNGotoPreviousPage.setToolTipText(bundle.getString("PREVIOUS PAGE")); // NOI18N
         BTNGotoPreviousPage.setFocusable(false);
         BTNGotoPreviousPage.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -85,7 +89,7 @@ public class SimpleResultPanelContainer extends javax.swing.JPanel {
         LabelResultRows.setToolTipText("");
 
         BTNGotoNextPage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/ico/16pix/angle-right.png"))); // NOI18N
-        BTNGotoNextPage.setToolTipText("Next page");
+        BTNGotoNextPage.setToolTipText(bundle.getString("NEXT PAGE")); // NOI18N
         BTNGotoNextPage.setFocusable(false);
         BTNGotoNextPage.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -94,7 +98,7 @@ public class SimpleResultPanelContainer extends javax.swing.JPanel {
         });
 
         BTNGotoLastPage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/ico/16pix/angle-double-right.png"))); // NOI18N
-        BTNGotoLastPage.setToolTipText("Last page");
+        BTNGotoLastPage.setToolTipText(bundle.getString("LAST PAGE")); // NOI18N
         BTNGotoLastPage.setFocusable(false);
         BTNGotoLastPage.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -106,11 +110,32 @@ public class SimpleResultPanelContainer extends javax.swing.JPanel {
         jSeparator3.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
         BTNRefresh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/ico/16pix/sync-alt.png"))); // NOI18N
-        BTNRefresh.setToolTipText("Refresh");
+        BTNRefresh.setToolTipText(bundle.getString("REFRESH")); // NOI18N
         BTNRefresh.setFocusable(false);
         BTNRefresh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BTNRefreshActionPerformed(evt);
+            }
+        });
+
+        jSeparator1.setForeground(new java.awt.Color(204, 204, 204));
+        jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
+
+        BTNDeleteRow.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/ico/16pix/delete.png"))); // NOI18N
+        BTNDeleteRow.setToolTipText(bundle.getString("DELETE SELECTED METADATA")); // NOI18N
+        BTNDeleteRow.setFocusable(false);
+        BTNDeleteRow.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTNDeleteRowActionPerformed(evt);
+            }
+        });
+
+        BTNAddRow.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/ico/16pix/add.png"))); // NOI18N
+        BTNAddRow.setToolTipText(bundle.getString("ADD NEW METADATA")); // NOI18N
+        BTNAddRow.setFocusable(false);
+        BTNAddRow.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTNAddRowActionPerformed(evt);
             }
         });
 
@@ -135,23 +160,35 @@ public class SimpleResultPanelContainer extends javax.swing.JPanel {
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(BTNRefresh)
-                .addContainerGap(519, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(BTNDeleteRow)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(BTNAddRow)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         PanelResultToolbarLayout.setVerticalGroup(
             PanelResultToolbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelResultToolbarLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(PanelResultToolbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(BTNRefresh)
-                    .addGroup(PanelResultToolbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(BTNGotoLastPage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(BTNGotoNextPage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(BTNGotoFirstPage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(BTNGotoPreviousPage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(SpinnerMaxRows, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addComponent(LabelResultRows, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jSeparator3)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(BTNDeleteRow, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PanelResultToolbarLayout.createSequentialGroup()
+                        .addGroup(PanelResultToolbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(BTNRefresh)
+                            .addGroup(PanelResultToolbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(BTNGotoLastPage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(BTNGotoNextPage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(BTNGotoFirstPage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(BTNGotoPreviousPage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(SpinnerMaxRows, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                .addComponent(LabelResultRows, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jSeparator3)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(BTNAddRow, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         TableResult.setAutoCreateRowSorter(true);
@@ -200,6 +237,14 @@ public class SimpleResultPanelContainer extends javax.swing.JPanel {
     private void BTNRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNRefreshActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_BTNRefreshActionPerformed
+
+    private void BTNDeleteRowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNDeleteRowActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BTNDeleteRowActionPerformed
+
+    private void BTNAddRowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNAddRowActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BTNAddRowActionPerformed
     //</Auto-Generate>
 
     private TableModel injectModel = new javax.swing.table.DefaultTableModel(
@@ -219,6 +264,8 @@ public class SimpleResultPanelContainer extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    protected javax.swing.JButton BTNAddRow;
+    protected javax.swing.JButton BTNDeleteRow;
     protected javax.swing.JButton BTNGotoFirstPage;
     protected javax.swing.JButton BTNGotoLastPage;
     protected javax.swing.JButton BTNGotoNextPage;
@@ -229,6 +276,7 @@ public class SimpleResultPanelContainer extends javax.swing.JPanel {
     private javax.swing.JScrollPane SRPScrollPane;
     protected javax.swing.JSpinner SpinnerMaxRows;
     protected javax.swing.JTable TableResult;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator3;
     // End of variables declaration//GEN-END:variables
 }
