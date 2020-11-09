@@ -13,7 +13,7 @@
 
 package io.github.hochikong.ktmeta.metaplugin
 
-/*CREATE TABLE IF NOT EXISTS meta_plugins_registration(
+/*CREATE TABLE IF NOT EXISTS metaplugins_registration(
 id INTEGER PRIMARY KEY AUTOINCREMENT ,
 plugin_name TEXT NOT NULL UNIQUE ,
 plugin_version TEXT NOT NULL UNIQUE ,
@@ -21,14 +21,14 @@ plugin_class_name TEXT NOT NULL ,
 plugin_desc TEXT NOT NULL ,
 plugin_helper TEXT NOT NULL
 );*/
-data class MetaPluginRegRow(
+data class MPRegRow(
     val id: Int,
     val plugin_name: String,
     val plugin_version: String,
     val plugin_class_name: String,
     val plugin_desc: String,
     val plugin_helper: String
-){
+) {
     companion object {
         val columnNames = listOf(
             "id",

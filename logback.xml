@@ -29,7 +29,7 @@
             <level>INFO</level>
         </filter>
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
-            <fileNamePattern>logs/ktmeta-db.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <fileNamePattern>logs/ktmeta-dbmgmt.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
             <maxHistory>5</maxHistory>
             <maxFileSize>20KB</maxFileSize>
         </rollingPolicy>
@@ -72,6 +72,22 @@
         </encoder>
     </appender>
 
+    <!-- MetaLibs -->
+    <appender name="mlmgmt" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <prudent>true</prudent>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>logs/ktmeta-mlmgmt.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <maxHistory>5</maxHistory>
+            <maxFileSize>20KB</maxFileSize>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%date %-5level [%thread] %logger{10} [%file:%line] -> %msg%n %n</pattern>
+        </encoder>
+    </appender>
+
     <logger name="ktmeta->esmgmt" level="info" additivity="false">
         <appender-ref ref="esmgmt"/>
         <appender-ref ref="STDOUT"/>
@@ -84,6 +100,11 @@
 
     <logger name="ktmeta->mpmgmt" level="info" additivity="false">
         <appender-ref ref="mpmgmt"/>
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+    <logger name="ktmeta->mlmgmt" level="info" additivity="false">
+        <appender-ref ref="mlmgmt"/>
         <appender-ref ref="STDOUT"/>
     </logger>
 

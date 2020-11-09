@@ -13,14 +13,14 @@
 
 package io.github.hochikong.ktmeta.metalib_resources
 
-/*CREATE TABLE IF NOT EXISTS metalibs
+/*CREATE TABLE IF NOT EXISTS metalibs_registration
 (
-id   INTEGER PRIMARY KEY AUTOINCREMENT,
-name TEXT NOT NULL UNIQUE ,
-desc TEXT NOT NULL ,
-assign_plugin REFERENCES plugins (name) ,
-assign_db REFERENCES dbs (name) UNIQUE ,
-assign_index REFERENCES indices (name) UNIQUE
+id       INTEGER PRIMARY KEY AUTOINCREMENT,
+lib_name TEXT                                                    NOT NULL UNIQUE,
+lib_desc TEXT                                                    NOT NULL,
+assign_plugin REFERENCES metaplugins_registration (plugin_name) NOT NULL,
+assign_db REFERENCES dbs_registration (database) UNIQUE,
+assign_index REFERENCES indices_registration (index_name) UNIQUE
 );*/
 data class MLRegRow(
     val id: Int,
@@ -31,6 +31,13 @@ data class MLRegRow(
     val index: String
 ) {
     companion object {
-        val columnNames = listOf("id", "name", "desc", "assign_plugin", "assign_db", "assign_index")
+        val columnNames = listOf(
+            "id",
+            "lib_name",
+            "lib_desc",
+            "assign_plugin",
+            "assign_db",
+            "assign_index"
+        )
     }
 }

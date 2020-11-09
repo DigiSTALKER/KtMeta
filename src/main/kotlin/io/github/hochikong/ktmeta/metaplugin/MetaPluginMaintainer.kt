@@ -70,7 +70,7 @@ object MetaPluginMaintainer {
 
     fun hasTable(): Boolean {
         val sql = """
-            SELECT 1 FROM meta_plugins_registration;
+            SELECT 1 FROM metaplugins_registration;
         """.trimIndent()
         checkConnection()
         connection.createStatement().use {
@@ -85,8 +85,8 @@ object MetaPluginMaintainer {
     }
 
     /**
-     * DDL of meta_plugins_registration:
-     * CREATE TABLE IF NOT EXISTS meta_plugins_registration(
+     * DDL of metaplugins_registration:
+     * CREATE TABLE IF NOT EXISTS metaplugins_registration(
      * id INTEGER PRIMARY KEY AUTOINCREMENT ,
      * plugin_name TEXT NOT NULL UNIQUE ,
      * plugin_version TEXT NOT NULL UNIQUE ,
@@ -105,7 +105,7 @@ object MetaPluginMaintainer {
      * */
     fun createTable(): Boolean {
         val sql = """
-            CREATE TABLE IF NOT EXISTS meta_plugins_registration(
+            CREATE TABLE IF NOT EXISTS metaplugins_registration(
                 id INTEGER PRIMARY KEY AUTOINCREMENT ,
                 plugin_name TEXT NOT NULL UNIQUE ,
                 plugin_version TEXT NOT NULL UNIQUE ,
@@ -127,7 +127,7 @@ object MetaPluginMaintainer {
         }
     }
 
-    object meta_plugins_registration : Table<Nothing>("meta_plugins_registration") {
+    object metaplugins_registration : Table<Nothing>("metaplugins_registration") {
         val id = int("id").primaryKey()
         val p_name = varchar("plugin_name")
         val p_version = varchar("plugin_version")
@@ -145,7 +145,7 @@ object MetaPluginMaintainer {
     ): Boolean {
         checkDatabase()
         return try {
-            val ef = db.insert(meta_plugins_registration) {
+            val ef = db.insert(metaplugins_registration) {
                 it.p_name to p_name
                 it.p_version to p_version
                 it.p_cname to p_cname
@@ -159,19 +159,19 @@ object MetaPluginMaintainer {
         }
     }
 
-    fun queryAllRows(): List<MetaPluginRegRow> {
+    fun queryAllRows(): List<MPRegRow> {
         checkDatabase()
-        val result = mutableListOf<MetaPluginRegRow>()
+        val result = mutableListOf<MPRegRow>()
         try {
-            for (row in db.from(meta_plugins_registration).select()) {
+            for (row in db.from(metaplugins_registration).select()) {
                 result.add(
-                    MetaPluginRegRow(
-                        row[meta_plugins_registration.id] ?: -1,
-                        row[meta_plugins_registration.p_name] ?: "null",
-                        row[meta_plugins_registration.p_version] ?: "null",
-                        row[meta_plugins_registration.p_cname] ?: "null",
-                        row[meta_plugins_registration.p_desc] ?: "null",
-                        row[meta_plugins_registration.p_helper] ?: "null"
+                    MPRegRow(
+                        row[metaplugins_registration.id] ?: -1,
+                        row[metaplugins_registration.p_name] ?: "null",
+                        row[metaplugins_registration.p_version] ?: "null",
+                        row[metaplugins_registration.p_cname] ?: "null",
+                        row[metaplugins_registration.p_desc] ?: "null",
+                        row[metaplugins_registration.p_helper] ?: "null"
                     )
                 )
             }
@@ -184,9 +184,9 @@ object MetaPluginMaintainer {
 
     fun updateRowByID(id: Int, column: String, newValue: String): Boolean {
         checkConnection()
-        require(column in MetaPluginRegRow.columnNames) { "Column $column not exists." }
+        require(column in MPRegRow.columnNames) { "Column $column not exists." }
         val sql = """
-            UPDATE meta_plugins_registration SET $column = $newValue WHERE id = $id;
+            UPDATE metaplugins_registration SET $column = $newValue WHERE id = $id;
         """.trimIndent()
         connection.createStatement().use {
             return try {
@@ -204,7 +204,7 @@ object MetaPluginMaintainer {
     fun deleteRowByID(id: Int): Boolean {
         checkDatabase()
         return try {
-            val ef = db.delete(meta_plugins_registration) {
+            val ef = db.delete(metaplugins_registration) {
                 it.id eq id
             }
             ef > 0
@@ -217,7 +217,7 @@ object MetaPluginMaintainer {
     fun dropTable(): Boolean {
         checkConnection()
         val sql = """
-            DROP TABLE meta_plugins_registration;
+            DROP TABLE metaplugins_registration;
         """.trimIndent()
         connection.createStatement().use {
             return try {
