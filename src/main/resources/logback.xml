@@ -22,14 +22,14 @@
 
 
     <!-- DB -->
-    <appender name="db" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <appender name="dbdao" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <!--        <file>logs/ktmeta-dgmgmt.log</file>-->
         <prudent>true</prudent>
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
             <level>INFO</level>
         </filter>
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
-            <fileNamePattern>logs/ktmeta-dbmgmt.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <fileNamePattern>logs/ktmeta-dbdao.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
             <maxHistory>5</maxHistory>
             <maxFileSize>20KB</maxFileSize>
         </rollingPolicy>
@@ -37,16 +37,21 @@
             <pattern>%date %-5level [%thread] %logger{10} [%file:%line] -> %msg%n %n</pattern>
         </encoder>
     </appender>
+
+    <logger name="ktmeta-dao-db" level="info" additivity="false">
+        <appender-ref ref="dbdao"/>
+        <appender-ref ref="STDOUT"/>
+    </logger>
 
 
     <!-- ES -->
-    <appender name="esmgmt" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <appender name="esdao" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <prudent>true</prudent>
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
             <level>INFO</level>
         </filter>
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
-            <fileNamePattern>logs/ktmeta-esmgmt.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <fileNamePattern>logs/ktmeta-esdao.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
             <maxHistory>5</maxHistory>
             <maxFileSize>20KB</maxFileSize>
         </rollingPolicy>
@@ -54,16 +59,21 @@
             <pattern>%date %-5level [%thread] %logger{10} [%file:%line] -> %msg%n %n</pattern>
         </encoder>
     </appender>
+
+    <logger name="ktmeta-dao-es" level="info" additivity="false">
+        <appender-ref ref="esdao"/>
+        <appender-ref ref="STDOUT"/>
+    </logger>
 
 
     <!-- MetaPlugin -->
-    <appender name="mpmgmt" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <appender name="mpdao" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <prudent>true</prudent>
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
             <level>INFO</level>
         </filter>
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
-            <fileNamePattern>logs/ktmeta-mpmgmt.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <fileNamePattern>logs/ktmeta-mpdao.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
             <maxHistory>5</maxHistory>
             <maxFileSize>20KB</maxFileSize>
         </rollingPolicy>
@@ -71,15 +81,21 @@
             <pattern>%date %-5level [%thread] %logger{10} [%file:%line] -> %msg%n %n</pattern>
         </encoder>
     </appender>
+
+    <logger name="ktmeta-dao-mp" level="info" additivity="false">
+        <appender-ref ref="mpdao"/>
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
 
     <!-- MetaLibs -->
-    <appender name="mlmgmt" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <appender name="mldao" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <prudent>true</prudent>
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
             <level>INFO</level>
         </filter>
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
-            <fileNamePattern>logs/ktmeta-mlmgmt.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <fileNamePattern>logs/ktmeta-mldao.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
             <maxHistory>5</maxHistory>
             <maxFileSize>20KB</maxFileSize>
         </rollingPolicy>
@@ -88,25 +104,11 @@
         </encoder>
     </appender>
 
-    <logger name="ktmeta->esmgmt" level="info" additivity="false">
-        <appender-ref ref="esmgmt"/>
+    <logger name="ktmeta-dao-ml" level="info" additivity="false">
+        <appender-ref ref="mldao"/>
         <appender-ref ref="STDOUT"/>
     </logger>
 
-    <logger name="ktmeta->db" level="info" additivity="false">
-        <appender-ref ref="db"/>
-        <appender-ref ref="STDOUT"/>
-    </logger>
-
-    <logger name="ktmeta->mpmgmt" level="info" additivity="false">
-        <appender-ref ref="mpmgmt"/>
-        <appender-ref ref="STDOUT"/>
-    </logger>
-
-    <logger name="ktmeta->mlmgmt" level="info" additivity="false">
-        <appender-ref ref="mlmgmt"/>
-        <appender-ref ref="STDOUT"/>
-    </logger>
 
     <root level="debug">
         <appender-ref ref="STDOUT"/>

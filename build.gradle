@@ -15,6 +15,7 @@ plugins {
     id 'java'
     id 'org.jetbrains.kotlin.jvm' version '1.4.0'
     id 'org.jetbrains.dokka' version '0.10.1'
+    id 'org.jetbrains.kotlin.kapt' version '1.4.0'
     id 'application'
 }
 
@@ -43,6 +44,7 @@ dependencies {
     implementation "org.jasypt:jasypt:1.9.3"
     implementation "org.elasticsearch.client:elasticsearch-rest-client:7.9.1"
     implementation "commons-io:commons-io:2.8.0"
+    implementation "com.google.inject:guice:4.2.3"
     implementation "com.squareup.okhttp3:okhttp:4.9.0"
     implementation "io.ktor:ktor-server-netty:1.4.0"
     implementation "io.ktor:ktor-jackson:1.4.0"
@@ -86,3 +88,4 @@ jar {
         }
     }
 }
+
