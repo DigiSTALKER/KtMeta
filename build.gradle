@@ -19,7 +19,7 @@ plugins {
     id 'application'
 }
 
-//mainClassName = 'MainKt'
+mainClassName = 'MainKt'
 
 group 'io.github.hochikong'
 version '1.0-SNAPSHOT'
