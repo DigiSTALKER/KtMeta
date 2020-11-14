@@ -16,7 +16,8 @@ Still working in progress.
 * Add MySQL and H2 support.
 * Something I'am still thinking.
 
-##ScreenShots:
+## ScreenShots:
+
 ![Windows](screenshots/IntellijTheme.png)
 
 ![Linux](screenshots/OnLinux.png)  
