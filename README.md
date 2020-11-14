@@ -4,7 +4,8 @@
 Metadata Management Tools on JVM  
 Still working in progress.  
 
-##Current Status/Support
+## Current Status/Support
+
 * User can use SQLite, PostgreSQL or ElasticSearch to store metadata.
 * Using Ktorm ORM to manage databases, simple but easy to use.
 * Using HikariCP for Ktorm as connection pool.
@@ -17,7 +18,7 @@ Still working in progress.
 
 ##ScreenShots:
 ![Windows](screenshots/IntellijTheme.png)
-  
+
 ![Linux](screenshots/OnLinux.png)  
 
 ![Add DB](screenshots/AddDBResource.png) 
