@@ -2,7 +2,7 @@
 ![logo](src/main/resources/imgs/AboutHead.png)  
 
 Metadata Management Tools on JVM  
-Still working in progress.
+Still working in progress.  
 
 ##Current Status/Support
 * User can use SQLite, PostgreSQL or ElasticSearch to store metadata.
@@ -16,21 +16,21 @@ Still working in progress.
 * Something I'am still thinking.
 
 ##ScreenShots:
-![Windows](screenshots/Intellij Theme.png)
+![Windows](screenshots/IntellijTheme.png)
   
-![Linux](screenshots/On Linux.png)  
+![Linux](screenshots/OnLinux.png)  
 
-![Add DB](screenshots/Add DB Resource.png) 
+![Add DB](screenshots/AddDBResource.png) 
 
-![Advance Search](screenshots/Advacne Search.png)  
+![Advance Search](screenshots/AdvacneSearch.png)  
 
-![Aggr Search](screenshots/Aggr Search.png)  
+![Aggr Search](screenshots/AggrSearch.png)  
 
-![Import Metadata](screenshots/Import Metadata.png)  
+![Import Metadata](screenshots/ImportMetadata.png)  
 
 ![Password](screenshots/Password.png)
 
-![Preview Manager](screenshots/Preview Manager.png)  
+![Preview Manager](screenshots/PreviewManager.png)  
 
 ![Settings](screenshots/Settings.png)
 
