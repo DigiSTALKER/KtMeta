@@ -12,7 +12,6 @@ Still working in progress.
 * More ...
 
 ## Roadmap
-* Running on Java 11.
 * Add MySQL and H2 support.
 * Something I'am still thinking.
 
