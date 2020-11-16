@@ -58,7 +58,7 @@ public class impSimpleResultPanelContainer extends javax.swing.JPanel {
         SRPScrollPane = new javax.swing.JScrollPane();
         TableResult = new javax.swing.JTable();
 
-        PanelResultToolbar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(64, 131, 201)));
+        PanelResultToolbar.setBorder(javax.swing.BorderFactory.createCompoundBorder());
 
         BTNGotoFirstPage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/ico/16pix/angle-double-left.png"))); // NOI18N
         java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("i18n/OtherComponents/SimpleResultPanelContainer_trans"); // NOI18N
@@ -209,7 +209,7 @@ public class impSimpleResultPanelContainer extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(PanelResultToolbar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(SRPScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 467, Short.MAX_VALUE))
+                .addComponent(SRPScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 469, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

@@ -13,7 +13,6 @@
 package io.github.hochikong.ktmeta.swingui;
 
 import com.formdev.flatlaf.intellijthemes.FlatSolarizedLightIJTheme;
-import io.github.hochikong.ktmeta.swingui.essentials.SimpleResultPanelContainer;
 import io.github.hochikong.ktmeta.swingui.essentials.VerticalTabComp;
 
 import javax.swing.*;
@@ -118,8 +117,6 @@ public class KtmetaMainFrame extends javax.swing.JFrame {
         CheckBoxFTOnDB = new javax.swing.JCheckBox();
         CheckBoxFTOnES = new javax.swing.JCheckBox();
         PanelInfoOutput = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
         TabbedPaneSplitRight = new javax.swing.JTabbedPane();
         PanelRightPreview = new javax.swing.JPanel();
         jScrollPane8 = new javax.swing.JScrollPane();
@@ -399,7 +396,6 @@ public class KtmetaMainFrame extends javax.swing.JFrame {
         SplitPaneRightTabbedPane.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(74, 136, 190), 2, true));
         SplitPaneRightTabbedPane.setTabPlacement(javax.swing.JTabbedPane.LEFT);
 
-        PanelMetaLibs.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         PanelMetaLibs.setPreferredSize(new java.awt.Dimension(220, 811));
 
         jScrollPane3.setMinimumSize(new java.awt.Dimension(2, 19));
@@ -422,11 +418,11 @@ public class KtmetaMainFrame extends javax.swing.JFrame {
         PanelMetaLibs.setLayout(PanelMetaLibsLayout);
         PanelMetaLibsLayout.setHorizontalGroup(
             PanelMetaLibsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
         );
         PanelMetaLibsLayout.setVerticalGroup(
             PanelMetaLibsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 803, Short.MAX_VALUE)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 811, Short.MAX_VALUE)
         );
 
         SplitPaneRightTabbedPane.addTab("MetaLibs", PanelMetaLibs);
@@ -437,7 +433,6 @@ public class KtmetaMainFrame extends javax.swing.JFrame {
         VerticalTabLabels.get("MetaLibsVT").setUI(new VerticalTabComp(false));
         SplitPaneRightTabbedPane.setTabComponentAt(0, VerticalTabLabels.get("MetaLibsVT"));
 
-        PanelResources.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         PanelResources.setPreferredSize(new java.awt.Dimension(230, 811));
 
         jSplitPane1.setDividerLocation(400);
@@ -476,11 +471,11 @@ public class KtmetaMainFrame extends javax.swing.JFrame {
         PanelResources.setLayout(PanelResourcesLayout);
         PanelResourcesLayout.setHorizontalGroup(
             PanelResourcesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
+            .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
         );
         PanelResourcesLayout.setVerticalGroup(
             PanelResourcesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 803, Short.MAX_VALUE)
+            .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 811, Short.MAX_VALUE)
         );
 
         SplitPaneRightTabbedPane.addTab("Resources", PanelResources);
@@ -496,7 +491,6 @@ public class KtmetaMainFrame extends javax.swing.JFrame {
         SplitPaneSubRight.setDividerLocation(860);
         SplitPaneSubRight.setDividerSize(2);
 
-        PanelSplitCenter.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(74, 136, 199), 2, true));
         PanelSplitCenter.setMinimumSize(new java.awt.Dimension(100, 100));
         PanelSplitCenter.setPreferredSize(new java.awt.Dimension(900, 700));
 
@@ -505,11 +499,11 @@ public class KtmetaMainFrame extends javax.swing.JFrame {
         SplitPaneVTGeneral.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
         SplitPaneVTGeneral.setPreferredSize(new java.awt.Dimension(900, 856));
 
-        TabbedPaneQueryResult.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        TabbedPaneQueryResult.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(74, 136, 199), 2, true));
         TabbedPaneQueryResult.setPreferredSize(new java.awt.Dimension(900, 650));
         SplitPaneVTGeneral.setLeftComponent(TabbedPaneQueryResult);
 
-        PanelQuery.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        PanelQuery.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(74, 136, 199), 2, true));
         PanelQuery.setTabPlacement(javax.swing.JTabbedPane.BOTTOM);
         PanelQuery.setMinimumSize(new java.awt.Dimension(104, 40));
         PanelQuery.setPreferredSize(new java.awt.Dimension(1280, 200));
@@ -618,45 +612,19 @@ public class KtmetaMainFrame extends javax.swing.JFrame {
 
         PanelQuery.addTab(bundle.getString("INFO"), PanelInfoOutput); // NOI18N
 
-        jButton1.setText("Test");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jButton1)
-                .addContainerGap(744, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addComponent(jButton1)
-                .addContainerGap(123, Short.MAX_VALUE))
-        );
-
-        PanelQuery.addTab("tab3", jPanel1);
-
         SplitPaneVTGeneral.setRightComponent(PanelQuery);
 
         javax.swing.GroupLayout PanelSplitCenterLayout = new javax.swing.GroupLayout(PanelSplitCenter);
         PanelSplitCenter.setLayout(PanelSplitCenterLayout);
         PanelSplitCenterLayout.setHorizontalGroup(
             PanelSplitCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(SplitPaneVTGeneral, javax.swing.GroupLayout.DEFAULT_SIZE, 856, Short.MAX_VALUE)
+            .addComponent(SplitPaneVTGeneral, javax.swing.GroupLayout.DEFAULT_SIZE, 810, Short.MAX_VALUE)
         );
         PanelSplitCenterLayout.setVerticalGroup(
             PanelSplitCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelSplitCenterLayout.createSequentialGroup()
                 .addGap(0, 0, 0)
-                .addComponent(SplitPaneVTGeneral, javax.swing.GroupLayout.DEFAULT_SIZE, 811, Short.MAX_VALUE))
+                .addComponent(SplitPaneVTGeneral, javax.swing.GroupLayout.DEFAULT_SIZE, 815, Short.MAX_VALUE))
         );
 
         SplitPaneSubRight.setLeftComponent(PanelSplitCenter);
@@ -749,7 +717,7 @@ public class KtmetaMainFrame extends javax.swing.JFrame {
                     .addComponent(LabelRightPreview)
                     .addComponent(BTNRightPreviewManager))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 336, Short.MAX_VALUE)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -759,11 +727,11 @@ public class KtmetaMainFrame extends javax.swing.JFrame {
         PanelRightPreview.setLayout(PanelRightPreviewLayout);
         PanelRightPreviewLayout.setHorizontalGroup(
             PanelRightPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 239, Short.MAX_VALUE)
+            .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 285, Short.MAX_VALUE)
         );
         PanelRightPreviewLayout.setVerticalGroup(
             PanelRightPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 807, Short.MAX_VALUE)
+            .addComponent(jScrollPane8)
         );
 
         TabbedPaneSplitRight.addTab("Preview", PanelRightPreview);
@@ -1133,11 +1101,6 @@ public class KtmetaMainFrame extends javax.swing.JFrame {
     private void MenuItemImportMetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemImportMetaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_MenuItemImportMetaActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        SimpleResultPanelContainer c = new SimpleResultPanelContainer();
-        TabbedPaneQueryResult.addTab("TEST", c);
-    }//GEN-LAST:event_jButton1ActionPerformed
     //</Auto-Generate>
 
 
@@ -1151,6 +1114,11 @@ public class KtmetaMainFrame extends javax.swing.JFrame {
      */
     public static void main(String[] args) {
         /* Install theme */
+        //FlatArcDarkIJTheme.install();
+        //FlatCobalt2IJTheme.install();
+        //FlatGradiantoDeepOceanIJTheme.install();
+        //FlatGruvboxDarkSoftIJTheme.install();
+        //FlatNordIJTheme.install();
         FlatSolarizedLightIJTheme.install();
         //FlatDarculaLaf.install();
         //FlatIntelliJLaf.install();
@@ -1266,8 +1234,6 @@ public class KtmetaMainFrame extends javax.swing.JFrame {
     protected javax.swing.JTree TreeDatabases;
     protected javax.swing.JTree TreeIndices;
     protected javax.swing.JTree TreeMetadataLibs;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;

@@ -25,7 +25,7 @@
           <Group type="102" alignment="0" attributes="0">
               <Component id="PanelResultToolbar" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-              <Component id="SRPScrollPane" pref="467" max="32767" attributes="0"/>
+              <Component id="SRPScrollPane" pref="469" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -34,10 +34,8 @@
     <Container class="javax.swing.JPanel" name="PanelResultToolbar">
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
-            <LineBorder>
-              <Color PropertyName="color" blue="c9" green="83" red="40" type="rgb"/>
-            </LineBorder>
+          <Border info="org.netbeans.modules.form.compat2.border.CompoundBorderInfo">
+            <CompoundBorder/>
           </Border>
         </Property>
       </Properties>

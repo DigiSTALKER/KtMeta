@@ -1,0 +1,82 @@
+/*
+ * Copyright 2020 Hochikong
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+import java.nio.*
+import java.nio.file.*
+
+/**
+ * This will completely re-write a file, be careful.
+ *
+ * Simple Usage:
+ *
+ * modifyFile("C:\whatever\whatever.txt") {*   if(it.contains("soil"))
+ *      return null  // remove dirty word
+ *   else
+ *      return it
+ *}*
+ * The closure must return the line passed in to keep it in the file or alter it, any alteration
+ * will be written in its place.
+ *
+ * To delete an entire line instead of changing it, return null
+ * To add more lines after a given line return: it + "\n" + moreLines
+ *
+ * Notice that you add "\n" before your additional lines and not after the last
+ * one because this method will normally add one for you.
+ */
+def modifyFile(srcFile, Closure c) {
+    modifyFile(srcFile, srcFile, c)
+}
+
+def modifyFile(srcFile, destFile, Closure c = { println it; return it }) {
+    StringBuffer ret = new StringBuffer()
+    File src = new File(srcFile)
+    File dest = new File(destFile)
+
+    src.withReader { reader ->
+        reader.eachLine {
+            def line = c(it)
+            if (line != null) {
+                ret.append(line)
+                ret.append("\n")
+            }
+        }
+    }
+    dest.delete()
+    dest.write(ret.toString())
+}
+
+def copyFile(String originFile, String destFile, boolean overwrite = false) {
+
+    Path origPath = Paths.get(originFile)
+    Path destPath = Paths.get(destFile)
+    def fileAtDestination = destPath.toFile()
+    if (fileAtDestination.exists()) {
+        if (overwrite) {
+            fileAtDestination.delete()
+            Files.copy(origPath, destPath)
+        } else {
+            println("Won't overwrite existing file $fileAtDestination")
+            println("Call 'copyFile(orig, dest, true)' to delete the existing file first")
+        }
+    } else {
+        // There's no file at the destination yet
+        Files.copy(origPath, destPath)
+    }
+}
+
+// Define methods visible to other Gradle scripts
+ext {
+    // Use .& syntax to convert method to closure.
+    modifyFile = this.&modifyFile
+    copyFile = this.&copyFile
+}

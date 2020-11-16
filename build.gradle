@@ -19,6 +19,8 @@ plugins {
     id 'application'
 }
 
+apply from: 'filecopy.gradle'
+
 mainClassName = 'MainKt'
 
 group 'io.github.hochikong'
@@ -89,3 +91,27 @@ jar {
     }
 }
 
+startScripts {
+    // If clean the build dir, the task will failed.
+    def startScriptDir = outputDir.getAbsolutePath()
+    println("I am here $startScriptDir")
+    def winStartupScript = startScriptDir + "/" + applicationName + ".bat"
+    def winStartupScriptNoConsole = startScriptDir + "/" + applicationName + "WithoutConsole.bat"
+    copyFile(winStartupScript, winStartupScriptNoConsole, true)
+
+    modifyFile(winStartupScript) {
+        // javaw.exe doesn't have a console
+        if(it.contains("java.exe")){
+            return it.replace("java.exe", "javaw.exe")
+        }
+        // Command that launches the app
+        else if(it.startsWith("\"%JAVA_EXE%\" %DEFAULT_JVM_OPTS%")){
+            return "start \"\" /b " + it
+        }
+        // Leave the line unchanged
+        else{
+            return it
+        }
+    }
+
+}
