@@ -11,7 +11,7 @@
  * limitations under the License.
  */
 
-package io.github.hochikong.ktmeta.device_resources
+package io.github.hochikong.ktmeta.service.device_resources
 
 /**
  * All devices should implement this interface.
@@ -28,7 +28,7 @@ package io.github.hochikong.ktmeta.device_resources
  *
  * ## Functions:
  *
- * setTargetDir(path) -> Used to set root dir for the device. Your classes should check the path is valid or not.
+ * setTargetDir(path) -> Used to set root dir for the service.device. Your classes should check the path is valid or not.
  * You should put authentication logic in this method.
  *
  * getFullTree() -> Return a list of FileRow, which contains all dirs and files as FileRow instances.

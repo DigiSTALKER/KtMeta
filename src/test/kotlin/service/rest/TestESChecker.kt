@@ -11,9 +11,9 @@
  * limitations under the License.
  */
 
-package rest
+package service.rest
 
-import io.github.hochikong.ktmeta.es_resources.ESChecker
+import io.github.hochikong.ktmeta.service.es_resources.ESChecker
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 

@@ -11,11 +11,11 @@
  *  limitations under the License.
  */
 
-package device
+package service.device
 
-import io.github.hochikong.ktmeta.device_resources.DeviceMgmt
 import io.github.hochikong.ktmeta.predefined.InitialDeviceFailed
 import io.github.hochikong.ktmeta.predefined.SupportedDevices
+import io.github.hochikong.ktmeta.service.device_resources.DeviceMgmt
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows

@@ -17,7 +17,6 @@ import com.zaxxer.hikari.HikariDataSource
 import io.github.hochikong.ktmeta.dao.*
 import me.liuwj.ktorm.database.Database
 import me.liuwj.ktorm.dsl.*
-import me.liuwj.ktorm.support.sqlite.SQLiteDialect
 import org.slf4j.LoggerFactory
 import org.sqlite.SQLiteException
 
@@ -51,7 +50,7 @@ object MPResourceDAO : ResourcesDAOAPI {
     }
 
     init {
-        db = Database.connect(dataSource, SQLiteDialect())
+        db = Database.connect(dataSource)
         checkTable()
     }
 

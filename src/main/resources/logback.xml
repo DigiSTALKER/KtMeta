@@ -60,7 +60,7 @@
         </encoder>
     </appender>
 
-    <logger name="ktmeta-dao-es" level="info" additivity="false">
+    <logger name="ktmeta-dao-service.es" level="info" additivity="false">
         <appender-ref ref="esdao"/>
         <appender-ref ref="STDOUT"/>
     </logger>

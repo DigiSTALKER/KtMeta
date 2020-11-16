@@ -21,6 +21,7 @@ plugins {
 
 apply from: 'filecopy.gradle'
 
+// must set
 mainClassName = 'MainKt'
 
 group 'io.github.hochikong'
@@ -36,36 +37,52 @@ test {
 }
 
 dependencies {
-    implementation files("libs/ktmeta-basic-1.0-SNAPSHOT.jar")
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
-    implementation "com.formdev:flatlaf:0.41"
-    implementation "com.formdev:flatlaf-intellij-themes:0.41"
-    implementation "io.vertx:vertx-core:3.9.2"
-    implementation "io.vertx:vertx-hazelcast:3.9.2"
-    implementation "io.vertx:vertx-lang-kotlin:3.9.2"
-    implementation "org.jasypt:jasypt:1.9.3"
-    implementation "org.elasticsearch.client:elasticsearch-rest-client:7.9.1"
-    implementation "commons-io:commons-io:2.8.0"
-    implementation "com.google.inject:guice:4.2.3"
-    implementation "com.squareup.okhttp3:okhttp:4.9.0"
-    implementation "io.ktor:ktor-server-netty:1.4.0"
-    implementation "io.ktor:ktor-jackson:1.4.0"
-    implementation "io.ktor:ktor-client-apache:1.4.0"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.9"
-    implementation "com.fasterxml.jackson.module:jackson-module-kotlin:2.11.0"
-    implementation "com.zaxxer:HikariCP:3.4.5"
-    implementation "org.slf4j:slf4j-api:1.7.30"
-    implementation "ch.qos.logback:logback-classic:1.2.3"
-    implementation "ch.qos.logback:logback-core:1.2.3"
-    implementation "me.liuwj.ktorm:ktorm-core:3.0.0"
-    implementation "me.liuwj.ktorm:ktorm-support-sqlite:3.0.0"
-    implementation "me.liuwj.ktorm:ktorm-support-postgresql:3.0.0"
-    implementation "org.xerial:sqlite-jdbc:3.32.3.1"
-    implementation "org.postgresql:postgresql:42.2.14"
-    implementation "com.google.guava:guava:29.0-jre"
-    testImplementation "org.junit.jupiter:junit-jupiter-api:5.6.2"
-    testImplementation "org.junit.jupiter:junit-jupiter-params:5.6.2"
-    runtimeOnly "org.junit.jupiter:junit-jupiter-engine:5.6.2"
+    implementation files('libs/ktmeta-basic-1.0-SNAPSHOT.jar')
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
+
+    // Swing themes
+    implementation 'com.formdev:flatlaf:0.41'
+    implementation 'com.formdev:flatlaf-intellij-themes:0.41'
+
+    // Vertx
+    implementation 'io.vertx:vertx-core:3.9.2'
+    implementation 'io.vertx:vertx-hazelcast:3.9.2'
+    implementation 'io.vertx:vertx-lang-kotlin:3.9.2'
+
+    // Encryption
+    implementation 'org.jasypt:jasypt:1.9.3'
+
+    // Others
+    implementation 'commons-io:commons-io:2.8.0'
+    implementation 'com.google.inject:guice:4.2.3'
+    implementation 'com.google.guava:guava:29.0-jre'
+
+    // Web HTTP
+    implementation 'com.squareup.okhttp3:okhttp:4.9.0'
+    implementation 'io.ktor:ktor-server-netty:1.4.0'
+    implementation 'io.ktor:ktor-jackson:1.4.0'
+    implementation 'io.ktor:ktor-client-apache:1.4.0'
+
+    // Coroutine
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.9'
+
+    // JSON
+    implementation 'com.fasterxml.jackson.module:jackson-module-kotlin:2.11.0'
+
+    // Log, Database
+    implementation 'com.zaxxer:HikariCP:3.4.5'
+    implementation 'org.slf4j:slf4j-api:1.7.30'
+    implementation 'ch.qos.logback:logback-classic:1.2.3'
+    implementation 'ch.qos.logback:logback-core:1.2.3'
+    implementation 'org.jdbi:jdbi3-core:3.17.0'
+    implementation 'me.liuwj.ktorm:ktorm-core:3.0.0'
+    implementation 'org.xerial:sqlite-jdbc:3.32.3.1'
+    implementation 'org.postgresql:postgresql:42.2.14'
+
+    // Testing
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter-params:5.6.2'
+    runtimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.6.2'
 }
 
 dokka {

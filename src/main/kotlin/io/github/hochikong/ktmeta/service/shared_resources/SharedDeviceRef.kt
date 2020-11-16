@@ -11,13 +11,13 @@
  * limitations under the License.
  */
 
-package io.github.hochikong.ktmeta.shared_resources
+package io.github.hochikong.ktmeta.service.shared_resources
 
-import io.github.hochikong.ktmeta.device_resources.DeviceAPI
+import io.github.hochikong.ktmeta.service.device_resources.DeviceAPI
 import java.util.concurrent.ConcurrentHashMap
 
 /**
- * Shared device references singleton.
+ * Shared service.device references singleton.
  * Used by verticle to keep references of devices.
  * */
 object SharedDeviceRef {

@@ -36,17 +36,20 @@ CONSTRAINT db_type_check CHECK ( dbms IN ('Sqlite', 'Postgresql') )
 object DBRegTable : Table<Nothing>(DBRecord.tableName) {
     val id = int("id").primaryKey()
     val dbms = varchar("dbms")
-    val name = varchar("database")
+    val db_name = varchar("database")
     val desc = text("desc")
     val url = varchar("url")
     val user = varchar("user")
     val password = varchar("password")
 }
 
+/**
+ * Password And Username must be encrypted.
+ * */
 data class DBRecord(
     val id: Int = -1,
     val dbms: String,
-    val name: String,
+    val db_name: String,
     val desc: String,
     val url: String,
     val user: String,

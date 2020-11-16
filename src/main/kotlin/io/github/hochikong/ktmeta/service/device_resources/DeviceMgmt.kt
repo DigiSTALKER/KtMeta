@@ -11,23 +11,23 @@
  * limitations under the License.
  */
 
-package io.github.hochikong.ktmeta.device_resources
+package io.github.hochikong.ktmeta.service.device_resources
 
-import io.github.hochikong.ktmeta.device_resources.driver.LocalDiskDriver
 import io.github.hochikong.ktmeta.predefined.InitialDeviceFailed
 import io.github.hochikong.ktmeta.predefined.SupportedDevices
+import io.github.hochikong.ktmeta.service.device_resources.impl.LocalDiskDriver
 
 
 object DeviceMgmt {
     /**
-     * Return a device instance by Devices type.
+     * Return a service.device instance by Devices type.
      * */
     fun getDevice(type: SupportedDevices): DeviceAPI {
         return getDeviceByType(type.className)
     }
 
     /**
-     * Return a device instance by name
+     * Return a service.device instance by name
      * */
     private fun getDeviceByType(name: String): DeviceAPI {
         val deviceClass = Class.forName(name)
@@ -37,7 +37,7 @@ object DeviceMgmt {
     }
 
     /**
-     * Return a device instance by Devices.identity
+     * Return a service.device instance by Devices.identity
      */
     fun getDevice(identity: String): DeviceAPI {
         val officialSupportIdentity = SupportedDevices.values().map { it.identity }.toList()

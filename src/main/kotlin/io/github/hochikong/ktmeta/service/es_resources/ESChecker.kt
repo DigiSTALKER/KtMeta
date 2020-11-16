@@ -11,7 +11,7 @@
  * limitations under the License.
  */
 
-package io.github.hochikong.ktmeta.es_resources
+package io.github.hochikong.ktmeta.service.es_resources
 
 import okhttp3.OkHttpClient
 import okhttp3.Request

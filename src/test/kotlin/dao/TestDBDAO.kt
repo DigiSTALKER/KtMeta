@@ -36,7 +36,7 @@ class TestDBDAO {
 
     private val dbData = DBRecord(
         dbms = "Sqlite",
-        name = "db1",
+        db_name = "db1",
         desc = "desc1",
         url = "url1",
         user = "null",
@@ -55,9 +55,13 @@ class TestDBDAO {
     @Order(2)
     @Test
     fun testUpdate() {
-        assertEquals(true, DBResourceDAO.updateRecord(1, dbData.copy(name = "new db1")))
+        assertEquals(true, DBResourceDAO.updateRecord(1, dbData.copy(db_name = "new db1")))
         println("Order 2: ${DBResourceDAO.getAllRecords()}")
         assertEquals(false, DBResourceDAO.updateRecord(2, dbData))
+        val x = DBResourceDAO.getRecordByName("new db1")
+        println("Order 2: $x")
+        assert(x is DBRecord)
+        assert(DBResourceDAO.getRecordByName("SB") == null)
     }
 
     @Order(3)

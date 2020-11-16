@@ -11,16 +11,20 @@
  * limitations under the License.
  */
 
-package io.github.hochikong.ktmeta.es_resources
+package io.github.hochikong.ktmeta.service.db_resources
 
-/*CREATE TABLE IF NOT EXISTS indices_registration(
-id INTEGER PRIMARY KEY AUTOINCREMENT ,
-index_name TEXT NOT NULL UNIQUE ,
-index_desc TEXT NOT NULL ,
-index_url TEXT NOT NULL UNIQUE
-);*/
-data class ESRegRow(val id: Int, val name: String, val desc: String, val url: String) {
-    companion object {
-        val columnNames = listOf("id", "index_name", "index_desc", "index_url")
-    }
+import me.liuwj.ktorm.database.Database
+import javax.sql.DataSource
+
+interface DBProviderInterface {
+    /**
+     * Return Ktorm database with connection pool
+     * */
+    fun getDatabase(db: String, user: String? = null, password: String? = null): Database?
+
+    /**
+     * Return jdbc datasource, provide by HikariCP
+     * */
+    fun getDataSource(db: String, user: String? = null, password: String? = null): DataSource?
+
 }

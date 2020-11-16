@@ -11,7 +11,7 @@
  *  limitations under the License.
  */
 
-package device/*
+package service.device/*
  * Copyright 2020 Hochikong
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -24,9 +24,9 @@ package device/*
  *  limitations under the License.
  */
 
-import io.github.hochikong.ktmeta.device_resources.FileRow
-import io.github.hochikong.ktmeta.device_resources.driver.LocalDiskDriver
 import io.github.hochikong.ktmeta.predefined.FileType
+import io.github.hochikong.ktmeta.service.device_resources.FileRow
+import io.github.hochikong.ktmeta.service.device_resources.impl.LocalDiskDriver
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.MethodOrderer
 import org.junit.jupiter.api.Order

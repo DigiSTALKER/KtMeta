@@ -17,7 +17,6 @@ import com.zaxxer.hikari.HikariDataSource
 import io.github.hochikong.ktmeta.dao.*
 import me.liuwj.ktorm.database.Database
 import me.liuwj.ktorm.dsl.*
-import me.liuwj.ktorm.support.sqlite.SQLiteDialect
 import org.slf4j.LoggerFactory
 import org.sqlite.SQLiteException
 
@@ -51,7 +50,7 @@ object DBResourceDAO : ResourcesDAOAPI {
     }
 
     init {
-        db = Database.connect(dataSource, SQLiteDialect())
+        db = Database.connect(dataSource)
         checkTable()
     }
 
@@ -59,10 +58,10 @@ object DBResourceDAO : ResourcesDAOAPI {
         val r = record as DBRecord
         val ef = db.insert(DBRegTable) {
             it.dbms to r.dbms
-            it.name to r.name
+            it.db_name to r.db_name
             it.desc to r.desc
             it.url to r.url
-            it.user to r.url
+            it.user to r.user
             it.password to r.password
         }
         logger.info("Insert: $r")
@@ -73,10 +72,10 @@ object DBResourceDAO : ResourcesDAOAPI {
         val r = newRecord as DBRecord
         val ef = db.update(DBRegTable) {
             it.dbms to r.dbms
-            it.name to r.name
+            it.db_name to r.db_name
             it.desc to r.desc
             it.url to r.url
-            it.user to r.url
+            it.user to r.user
             it.password to r.password
             where {
                 it.id eq id
@@ -86,6 +85,25 @@ object DBResourceDAO : ResourcesDAOAPI {
         return ef > 0
     }
 
+    fun getRecordByName(dbName: String): DBRecord? {
+        // DBRegTable.name is unique
+        var r: DBRecord? = null
+        for (row in db.from(DBRegTable).select().where { DBRegTable.db_name eq dbName }) {
+            if (row[DBRegTable.db_name] != null && row[DBRegTable.db_name] == dbName) {
+                r = DBRecord(
+                    row[DBRegTable.id]!!,
+                    row[DBRegTable.dbms]!!,
+                    row[DBRegTable.db_name]!!,
+                    row[DBRegTable.desc]!!,
+                    row[DBRegTable.url]!!,
+                    row[DBRegTable.user]!!,
+                    row[DBRegTable.password]!!
+                )
+            }
+        }
+        return r
+    }
+
     override fun getAllRecords(): List<ResourcesRecord> {
         val result = mutableListOf<DBRecord>()
         for (row in db.from(DBRegTable).select()) {
@@ -93,7 +111,7 @@ object DBResourceDAO : ResourcesDAOAPI {
                 DBRecord(
                     row[DBRegTable.id] ?: -1,
                     row[DBRegTable.dbms] ?: "null",
-                    row[DBRegTable.name] ?: "null",
+                    row[DBRegTable.db_name] ?: "null",
                     row[DBRegTable.desc] ?: "null",
                     row[DBRegTable.url] ?: "null",
                     row[DBRegTable.user] ?: "null",
@@ -122,4 +140,16 @@ object DBResourceDAO : ResourcesDAOAPI {
         logger.info("Drop Table")
         return true
     }
+}
+
+fun main() {
+    val dbData = DBRecord(
+        dbms = "Sqlite",
+        db_name = "db1",
+        desc = "desc1",
+        url = "url1",
+        user = "null",
+        password = "null"
+    )
+    DBResourceDAO.insertRecord(dbData)
 }

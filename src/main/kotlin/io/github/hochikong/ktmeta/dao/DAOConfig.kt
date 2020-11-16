@@ -16,9 +16,9 @@ package io.github.hochikong.ktmeta.dao
 import com.zaxxer.hikari.HikariConfig
 
 object DAOConfig {
-    private const val driverName = "org.sqlite.JDBC"
-    private const val dbURL = "jdbc:sqlite:resources.db"
-    private const val poolConfigPath = ".\\hikari.properties"
+    const val driverName = "org.sqlite.JDBC"
+    const val dbURL = "jdbc:sqlite:resources.db"
+    const val poolConfigPath = ".\\hikari.properties"
     val logKey = mapOf(
         DBRecord.tableName to "ktmeta-dao-db",
         ESRecord.tableName to "ktmeta-dao-es",
