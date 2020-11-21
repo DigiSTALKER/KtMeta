@@ -52,16 +52,18 @@ dependencies {
     // Encryption
     implementation 'org.jasypt:jasypt:1.9.3'
 
-    // Others
+    // Enhance
     implementation 'commons-io:commons-io:2.8.0'
     implementation 'com.google.inject:guice:4.2.3'
     implementation 'com.google.guava:guava:29.0-jre'
+    implementation 'cglib:cglib:3.3.0'
 
     // Web HTTP
     implementation 'com.squareup.okhttp3:okhttp:4.9.0'
     implementation 'io.ktor:ktor-server-netty:1.4.0'
     implementation 'io.ktor:ktor-jackson:1.4.0'
     implementation 'io.ktor:ktor-client-apache:1.4.0'
+    implementation 'org.elasticsearch.client:elasticsearch-rest-high-level-client:7.9.3'
 
     // Coroutine
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.9'
@@ -111,7 +113,7 @@ jar {
 startScripts {
     // If clean the build dir, the task will failed.
     def startScriptDir = outputDir.getAbsolutePath()
-    println("I am here $startScriptDir")
+    // println("I am here $startScriptDir")
     def winStartupScript = startScriptDir + "/" + applicationName + ".bat"
     def winStartupScriptNoConsole = startScriptDir + "/" + applicationName + "WithoutConsole.bat"
     copyFile(winStartupScript, winStartupScriptNoConsole, true)

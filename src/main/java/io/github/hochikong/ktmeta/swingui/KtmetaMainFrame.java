@@ -153,6 +153,9 @@ public class KtmetaMainFrame extends javax.swing.JFrame {
         MenuItemExportToCSV = new javax.swing.JMenuItem();
         ToolsMenu = new javax.swing.JMenu();
         MenuItemPluginsMenu = new javax.swing.JMenuItem();
+        MenuES = new javax.swing.JMenu();
+        MenuItemCheckESConn = new javax.swing.JMenuItem();
+        MenuItemCreateMapping = new javax.swing.JMenuItem();
         HelpMenu = new javax.swing.JMenu();
         MenuItemAbout = new javax.swing.JMenuItem();
 
@@ -881,6 +884,26 @@ public class KtmetaMainFrame extends javax.swing.JFrame {
         });
         ToolsMenu.add(MenuItemPluginsMenu);
 
+        MenuES.setText(bundle.getString("ELASTICSEARCH")); // NOI18N
+
+        MenuItemCheckESConn.setText(bundle.getString("CHECK CONNECTION")); // NOI18N
+        MenuItemCheckESConn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuItemCheckESConnActionPerformed(evt);
+            }
+        });
+        MenuES.add(MenuItemCheckESConn);
+
+        MenuItemCreateMapping.setText(bundle.getString("CREATE MAPPING")); // NOI18N
+        MenuItemCreateMapping.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuItemCreateMappingActionPerformed(evt);
+            }
+        });
+        MenuES.add(MenuItemCreateMapping);
+
+        ToolsMenu.add(MenuES);
+
         MainMenuBar.add(ToolsMenu);
 
         HelpMenu.setText(bundle.getString("HELP")); // NOI18N
@@ -1101,6 +1124,14 @@ public class KtmetaMainFrame extends javax.swing.JFrame {
     private void MenuItemImportMetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemImportMetaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_MenuItemImportMetaActionPerformed
+
+    private void MenuItemCheckESConnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemCheckESConnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MenuItemCheckESConnActionPerformed
+
+    private void MenuItemCreateMappingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemCreateMappingActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MenuItemCreateMappingActionPerformed
     //</Auto-Generate>
 
 
@@ -1174,10 +1205,13 @@ public class KtmetaMainFrame extends javax.swing.JFrame {
     protected javax.swing.JMenuBar MainMenuBar;
     protected javax.swing.JSplitPane MainSplitPane;
     protected javax.swing.JToolBar MainToolBar;
+    protected javax.swing.JMenu MenuES;
     protected javax.swing.JMenu MenuExportTable;
     protected javax.swing.JMenuItem MenuItemAbout;
     protected javax.swing.JMenuItem MenuItemAddDatabase;
     protected javax.swing.JMenuItem MenuItemAddIndex;
+    protected javax.swing.JMenuItem MenuItemCheckESConn;
+    protected javax.swing.JMenuItem MenuItemCreateMapping;
     protected javax.swing.JMenuItem MenuItemExit;
     protected javax.swing.JMenuItem MenuItemExportToCSV;
     protected javax.swing.JMenuItem MenuItemImportMeta;

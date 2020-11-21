@@ -18,7 +18,7 @@ import io.github.hochikong.ktmeta.predefined.SupportedDevices
 import io.github.hochikong.ktmeta.service.device_resources.impl.LocalDiskDriver
 
 
-object DeviceMgmt {
+object DeviceProvider {
     /**
      * Return a service.device instance by Devices type.
      * */
@@ -33,7 +33,7 @@ object DeviceMgmt {
         val deviceClass = Class.forName(name)
         val inst = deviceClass.newInstance()
         if (inst is DeviceAPI) return inst
-        throw InitialDeviceFailed("DeviceMgmt.getDevice failed!")
+        throw InitialDeviceFailed("DeviceProvider.getDevice failed!")
     }
 
     /**
@@ -46,6 +46,6 @@ object DeviceMgmt {
                 "LocalDiskDriver" -> return LocalDiskDriver()
             }
         }
-        throw InitialDeviceFailed("DeviceMgmt.getDevice failed, identity '$identity' not supported.")
+        throw InitialDeviceFailed("DeviceProvider.getDevice failed, identity '$identity' not supported.")
     }
 }

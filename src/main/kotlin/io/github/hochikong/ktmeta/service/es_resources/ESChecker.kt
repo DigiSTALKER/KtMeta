@@ -16,15 +16,22 @@ package io.github.hochikong.ktmeta.service.es_resources
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import java.util.concurrent.TimeUnit
+import kotlin.properties.Delegates
 
 
 /**
  * Simple object to check the ElasticSearch REST service url can be accessed or not.
  * */
 object ESChecker {
-    private val client = OkHttpClient.Builder()
-        .connectTimeout(10, TimeUnit.SECONDS)
+    private var client = OkHttpClient.Builder()
+        .connectTimeout(5, TimeUnit.SECONDS)
         .build()
+
+    var timeoutInSecond by Delegates.observable(5) { _, _, newValue ->
+        run {
+            client = OkHttpClient.Builder().connectTimeout(newValue.toLong(), TimeUnit.SECONDS).build()
+        }
+    }
 
     fun isAccessibleReport(url: String): ESCheckResult? {
         val request = Request.Builder()

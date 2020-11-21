@@ -141,15 +141,3 @@ object DBResourceDAO : ResourcesDAOAPI {
         return true
     }
 }
-
-fun main() {
-    val dbData = DBRecord(
-        dbms = "Sqlite",
-        db_name = "db1",
-        desc = "desc1",
-        url = "url1",
-        user = "null",
-        password = "null"
-    )
-    DBResourceDAO.insertRecord(dbData)
-}

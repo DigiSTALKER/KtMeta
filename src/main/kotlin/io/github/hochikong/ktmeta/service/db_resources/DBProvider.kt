@@ -27,8 +27,8 @@ import javax.sql.DataSource
  * Provider of databases' connections.
  * Use this Object to retrieve connection: JDBC connection or Ktorm Database
  * */
-object DBProvider : DBProviderInterface {
-    override fun getDatabase(db: String, user: String?, password: String?): Database? {
+object DBProvider{
+    fun getDatabase(db: String, user: String?=null, password: String?=null): Database? {
         val ds = getDataSource(db, user, password)
         return if (ds != null) {
             Database.connect(dataSource = ds)
@@ -37,7 +37,7 @@ object DBProvider : DBProviderInterface {
         }
     }
 
-    override fun getDataSource(db: String, user: String?, password: String?): DataSource? {
+    fun getDataSource(db: String, user: String?=null, password: String?=null): DataSource? {
         val query = DBResourceDAO.getRecordByName(db)
         if (query is DBRecord) {
             val config = HikariConfig(DAOConfig.poolConfigPath)

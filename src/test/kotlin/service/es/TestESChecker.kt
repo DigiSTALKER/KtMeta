@@ -11,7 +11,7 @@
  * limitations under the License.
  */
 
-package service.rest
+package service.es
 
 import io.github.hochikong.ktmeta.service.es_resources.ESChecker
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -20,7 +20,11 @@ import org.junit.jupiter.api.Test
 class TestESChecker {
     @Test
     fun testESChecker() {
+        println("5 seconds")
         assertEquals(false, ESChecker.isAccessible("http://192.168.2.13:9200"))
+        println("1 seconds")
+        ESChecker.timeoutInSecond = 1
+        assertEquals(false, ESChecker.isAccessible("http://192.157.2.13"))
         assertEquals(true, ESChecker.isAccessible("http://localhost:9200"))
         val tmp = ESChecker.isAccessibleReport("http://localhost:9200")
         assertEquals(true, tmp!!.isAccessible)

@@ -15,15 +15,15 @@ package service.device
 
 import io.github.hochikong.ktmeta.predefined.InitialDeviceFailed
 import io.github.hochikong.ktmeta.predefined.SupportedDevices
-import io.github.hochikong.ktmeta.service.device_resources.DeviceMgmt
+import io.github.hochikong.ktmeta.service.device_resources.DeviceProvider
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
-class TestDeviceMgmt {
+class TestDeviceProvider {
     @Test
     fun testGetDevice() {
-        val obj = DeviceMgmt.getDevice(SupportedDevices.LocalDevice)
+        val obj = DeviceProvider.getDevice(SupportedDevices.LocalDevice)
         assertEquals(true, obj.setTargetDir("C:\\Users\\ckhoi\\IdeaProjects\\ktmeta\\src\\test\\resources\\tree"))
         val tree = obj.getFullTree()
         tree.forEach { println(it) }
@@ -31,8 +31,8 @@ class TestDeviceMgmt {
 
     @Test
     fun testGetDeviceByIdentity() {
-        assertThrows<InitialDeviceFailed> { DeviceMgmt.getDevice("ssdad") }
-        val obj = DeviceMgmt.getDevice(SupportedDevices.LocalDevice.identity)
+        assertThrows<InitialDeviceFailed> { DeviceProvider.getDevice("ssdad") }
+        val obj = DeviceProvider.getDevice(SupportedDevices.LocalDevice.identity)
         assertEquals(true, obj.setTargetDir("C:\\Users\\ckhoi\\IdeaProjects\\ktmeta\\src\\test\\resources\\tree"))
         println("current is ${obj.pwd()}")
     }

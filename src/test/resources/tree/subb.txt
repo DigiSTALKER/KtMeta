@@ -8808,7 +8808,7 @@ request that our API will handle. We will just have to specify a queryset that r
 
 the objects in the queryset attribute and the serializer class in the  serializer_class 
 
-attribute for each subclass that we declare. The generic classes will do the service.rest for us. In
+attribute for each subclass that we declare. The generic classes will do the service.es for us. In
 
 addition, we will declare a name attribute with the string name we will use to identify the 
 
