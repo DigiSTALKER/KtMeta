@@ -11,12 +11,15 @@
  * limitations under the License.
  */
 
+import java.io.File
+
 plugins {
     id 'java'
     id 'org.jetbrains.kotlin.jvm'
     id 'org.jetbrains.dokka'
     id 'org.jetbrains.kotlin.kapt'
     id 'application'
+    id 'distribution'
 }
 
 apply from: 'filecopy.gradle'
@@ -32,7 +35,7 @@ test {
 }
 
 dependencies {
-    implementation files('libs/ktmeta-basic-1.0-SNAPSHOT.jar')
+    implementation project(':ktmeta-api')
     implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
 
     // Swing themes
@@ -79,7 +82,7 @@ dependencies {
     // Testing
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.2'
     testImplementation 'org.junit.jupiter:junit-jupiter-params:5.6.2'
-    runtimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.6.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.6.2'
 }
 
 dokka {
@@ -95,6 +98,7 @@ compileTestKotlin {
 }
 
 jar {
+    archiveBaseName='KtMetaDesktop'
     manifest {
         attributes 'Main-Class': 'MainKt'
     }
@@ -105,27 +109,36 @@ jar {
     }
 }
 
-//startScripts {
-//    // If clean the build dir, the task will failed.
-//    def startScriptDir = outputDir.getAbsolutePath()
-//    // println("I am here $startScriptDir")
-//    def winStartupScript = startScriptDir + "/" + applicationName + ".bat"
-//    def winStartupScriptNoConsole = startScriptDir + "/" + applicationName + "WithoutConsole.bat"
-//    copyFile(winStartupScript, winStartupScriptNoConsole, true)
-//
-//    modifyFile(winStartupScript) {
-//        // javaw.exe doesn't have a console
-//        if(it.contains("java.exe")){
-//            return it.replace("java.exe", "javaw.exe")
-//        }
-//        // Command that launches the app
-//        else if(it.startsWith("\"%JAVA_EXE%\" %DEFAULT_JVM_OPTS%")){
-//            return "start \"\" /b " + it
-//        }
-//        // Leave the line unchanged
-//        else{
-//            return it
-//        }
-//    }
-//
-//}
+distributions {
+    main {
+        distributionBaseName = 'KtMetaDesktop'
+    }
+}
+
+startScripts {
+    // If clean the build dir, the task will failed.
+    def startScriptDir = outputDir.getAbsolutePath()
+    if (!new File(startScriptDir).exists()) {
+        println("Start scripts manipulation skipped.")
+    }else{
+        // println("I am here $startScriptDir")
+        def winStartupScript = startScriptDir + "/" + applicationName + ".bat"
+        def winStartupScriptNoConsole = startScriptDir + "/" + applicationName + "WithoutConsole.bat"
+        copyFile(winStartupScript, winStartupScriptNoConsole, true)
+
+        modifyFile(winStartupScript) {
+            // javaw.exe doesn't have a console
+            if(it.contains("java.exe")){
+                return it.replace("java.exe", "javaw.exe")
+            }
+            // Command that launches the app
+            else if(it.startsWith("\"%JAVA_EXE%\" %DEFAULT_JVM_OPTS%")){
+                return "start \"\" /b " + it
+            }
+            // Leave the line unchanged
+            else{
+                return it
+            }
+        }
+    }
+}
