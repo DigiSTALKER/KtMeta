@@ -1,5 +1,5 @@
 # KtMeta
-![logo](src/main/resources/imgs/AboutHead.png)  
+![logo](screenshots/AboutHead.png)  
 
 Metadata Management Tools on JVM  
 Still working in progress.  
