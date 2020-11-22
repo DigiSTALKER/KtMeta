@@ -1,0 +1,131 @@
+/*
+ * Copyright 2020 Hochikong
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+plugins {
+    id 'java'
+    id 'org.jetbrains.kotlin.jvm'
+    id 'org.jetbrains.dokka'
+    id 'org.jetbrains.kotlin.kapt'
+    id 'application'
+}
+
+apply from: 'filecopy.gradle'
+
+// must set
+mainClassName = 'MainKt'
+
+group 'io.github.hochikong'
+version '1.0-SNAPSHOT'
+
+test {
+    useJUnitPlatform()
+}
+
+dependencies {
+    implementation files('libs/ktmeta-basic-1.0-SNAPSHOT.jar')
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
+
+    // Swing themes
+    implementation 'com.formdev:flatlaf:0.41'
+    implementation 'com.formdev:flatlaf-intellij-themes:0.41'
+
+    // Vertx
+    implementation 'io.vertx:vertx-core:3.9.2'
+    implementation 'io.vertx:vertx-hazelcast:3.9.2'
+    implementation 'io.vertx:vertx-lang-kotlin:3.9.2'
+
+    // Encryption
+    implementation 'org.jasypt:jasypt:1.9.3'
+
+    // Enhance
+    implementation 'commons-io:commons-io:2.8.0'
+    implementation 'com.google.inject:guice:4.2.3'
+    implementation 'com.google.guava:guava:29.0-jre'
+    implementation 'cglib:cglib:3.3.0'
+
+    // Web HTTP
+    implementation 'com.squareup.okhttp3:okhttp:4.9.0'
+    implementation 'io.ktor:ktor-server-netty:1.4.0'
+    implementation 'io.ktor:ktor-jackson:1.4.0'
+    implementation 'io.ktor:ktor-client-apache:1.4.0'
+    implementation 'org.elasticsearch.client:elasticsearch-rest-high-level-client:7.9.3'
+
+    // Coroutine
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.9'
+
+    // JSON
+    implementation 'com.fasterxml.jackson.module:jackson-module-kotlin:2.11.0'
+
+    // Log, Database
+    implementation 'com.zaxxer:HikariCP:3.4.5'
+    implementation 'org.slf4j:slf4j-api:1.7.30'
+    implementation 'ch.qos.logback:logback-classic:1.2.3'
+    implementation 'ch.qos.logback:logback-core:1.2.3'
+    implementation 'org.jdbi:jdbi3-core:3.17.0'
+    implementation 'me.liuwj.ktorm:ktorm-core:3.0.0'
+    implementation 'org.xerial:sqlite-jdbc:3.32.3.1'
+    implementation 'org.postgresql:postgresql:42.2.14'
+
+    // Testing
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter-params:5.6.2'
+    runtimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.6.2'
+}
+
+dokka {
+    outputFormat = 'html'
+    outputDirectory = "$buildDir/dokka"
+}
+
+compileKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+compileTestKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'MainKt'
+    }
+    from {
+        configurations.runtimeClasspath.collect {
+            it.isDirectory() ? it : zipTree(it)
+        }
+    }
+}
+
+//startScripts {
+//    // If clean the build dir, the task will failed.
+//    def startScriptDir = outputDir.getAbsolutePath()
+//    // println("I am here $startScriptDir")
+//    def winStartupScript = startScriptDir + "/" + applicationName + ".bat"
+//    def winStartupScriptNoConsole = startScriptDir + "/" + applicationName + "WithoutConsole.bat"
+//    copyFile(winStartupScript, winStartupScriptNoConsole, true)
+//
+//    modifyFile(winStartupScript) {
+//        // javaw.exe doesn't have a console
+//        if(it.contains("java.exe")){
+//            return it.replace("java.exe", "javaw.exe")
+//        }
+//        // Command that launches the app
+//        else if(it.startsWith("\"%JAVA_EXE%\" %DEFAULT_JVM_OPTS%")){
+//            return "start \"\" /b " + it
+//        }
+//        // Leave the line unchanged
+//        else{
+//            return it
+//        }
+//    }
+//
+//}

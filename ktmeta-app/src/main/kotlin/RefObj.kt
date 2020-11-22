@@ -11,6 +11,6 @@
  * limitations under the License.
  */
 
-rootProject.name = 'ktmeta'
-include 'ktmeta-app'
-include 'ktmeta-api'
+object RefObj {
+    val maps: MutableMap<String, Int> = mutableMapOf()
+}

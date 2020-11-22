@@ -11,6 +11,11 @@
  * limitations under the License.
  */
 
-rootProject.name = 'ktmeta'
-include 'ktmeta-app'
-include 'ktmeta-api'
+package io.github.hochikong.ktmeta.metaplugin
+
+abstract class AbstractMetaPluginES : AbstractMetaPlugin() {
+    /**
+     * Export json data to ElasticSearch.
+     * */
+    abstract fun exportToES(documents: List<String>)
+}

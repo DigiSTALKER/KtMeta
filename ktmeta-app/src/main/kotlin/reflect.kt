@@ -1,3 +1,5 @@
+import java.util.jar.JarFile
+
 /*
  * Copyright 2020 Hochikong
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -11,6 +13,11 @@
  * limitations under the License.
  */
 
-rootProject.name = 'ktmeta'
-include 'ktmeta-app'
-include 'ktmeta-api'
+fun main() {
+    val path = "plugins/ktmeta-basic-1.0-SNAPSHOT.jar"
+    val absp = "file:C:\\Users\\ckhoi\\IdeaProjects\\ktmeta\\plugins\\ktmeta-basic-1.0-SNAPSHOT.jar"
+    val m = JarFile(path).manifest
+    val ma = m.mainAttributes
+    val classNames = ma.keys.filter { it.toString().startsWith("PluginRootName") }.map { ma[it] }.toList()
+    println(classNames)
+}
