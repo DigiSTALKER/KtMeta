@@ -44,6 +44,7 @@ dependencies {
 
     // Vertx
     implementation 'io.vertx:vertx-core:3.9.2'
+    implementation 'io.vertx:vertx-service-factory:3.9.2'
     implementation 'io.vertx:vertx-hazelcast:3.9.2'
     implementation 'io.vertx:vertx-lang-kotlin:3.9.2'
 

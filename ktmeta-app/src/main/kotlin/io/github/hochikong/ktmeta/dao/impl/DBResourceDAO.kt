@@ -63,6 +63,7 @@ object DBResourceDAO : ResourcesDAOAPI {
             it.url to r.url
             it.user to r.user
             it.password to r.password
+            it.save_passwd to r.save_passwd
         }
         logger.info("Insert: $r")
         return ef > 0
@@ -77,6 +78,7 @@ object DBResourceDAO : ResourcesDAOAPI {
             it.url to r.url
             it.user to r.user
             it.password to r.password
+            it.save_passwd to r.save_passwd
             where {
                 it.id eq id
             }
@@ -97,7 +99,8 @@ object DBResourceDAO : ResourcesDAOAPI {
                     row[DBRegTable.desc]!!,
                     row[DBRegTable.url]!!,
                     row[DBRegTable.user]!!,
-                    row[DBRegTable.password]!!
+                    row[DBRegTable.password]!!,
+                    row[DBRegTable.save_passwd]!!
                 )
             }
         }
@@ -115,7 +118,8 @@ object DBResourceDAO : ResourcesDAOAPI {
                     row[DBRegTable.desc] ?: "null",
                     row[DBRegTable.url] ?: "null",
                     row[DBRegTable.user] ?: "null",
-                    row[DBRegTable.password] ?: "null"
+                    row[DBRegTable.password] ?: "null",
+                    row[DBRegTable.save_passwd] ?: -1
                 )
             )
         }

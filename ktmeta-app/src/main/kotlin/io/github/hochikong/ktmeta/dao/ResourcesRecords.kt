@@ -23,14 +23,16 @@ sealed class ResourcesRecord
 /*
 CREATE TABLE IF NOT EXISTS dbs_registration
 (
-id       INTEGER PRIMARY KEY AUTOINCREMENT,
-dbms     TEXT NOT NULL,
-database TEXT NOT NULL UNIQUE,
-desc     TEXT NOT NULL,
-url      TEXT NOT NULL UNIQUE,
-user     TEXT,
-password TEXT,
-CONSTRAINT db_type_check CHECK ( dbms IN ('Sqlite', 'Postgresql') )
+    id          INTEGER PRIMARY KEY AUTOINCREMENT,
+    dbms        TEXT    NOT NULL,
+    database    TEXT    NOT NULL UNIQUE,
+    desc        TEXT    NOT NULL,
+    url         TEXT    NOT NULL UNIQUE,
+    user        TEXT,
+    password    TEXT,
+    save_passwd INTEGER NOT NULL,
+    CONSTRAINT db_type_check CHECK ( dbms IN ('Sqlite', 'Postgresql') ),
+    CONSTRAINT save_passwd_or_not CHECK ( save_passwd IN (0, 1))
 );
 */
 object DBRegTable : Table<Nothing>(DBRecord.tableName) {
@@ -41,6 +43,7 @@ object DBRegTable : Table<Nothing>(DBRecord.tableName) {
     val url = varchar("url")
     val user = varchar("user")
     val password = varchar("password")
+    val save_passwd = int("save_passwd")
 }
 
 /**
@@ -53,22 +56,25 @@ data class DBRecord(
     val desc: String,
     val url: String,
     val user: String,
-    val password: String
+    val password: String,
+    val save_passwd: Int
 ) : ResourcesRecord() {
     companion object {
         const val tableName = "dbs_registration"
         val ddl = """
             CREATE TABLE IF NOT EXISTS dbs_registration
-            (
-                id       INTEGER PRIMARY KEY AUTOINCREMENT,
-                dbms     TEXT NOT NULL,
-                database TEXT NOT NULL UNIQUE,
-                desc     TEXT NOT NULL,
-                url      TEXT NOT NULL UNIQUE,
-                user     TEXT,
-                password TEXT,
-                CONSTRAINT db_type_check CHECK ( dbms IN ('Sqlite', 'Postgresql') )
-            );
+(
+    id          INTEGER PRIMARY KEY AUTOINCREMENT,
+    dbms        TEXT    NOT NULL,
+    database    TEXT    NOT NULL UNIQUE,
+    desc        TEXT    NOT NULL,
+    url         TEXT    NOT NULL UNIQUE,
+    user        TEXT,
+    password    TEXT,
+    save_passwd INTEGER NOT NULL,
+    CONSTRAINT db_type_check CHECK ( dbms IN ('Sqlite', 'Postgresql') ),
+    CONSTRAINT save_passwd_or_not CHECK ( save_passwd IN (0, 1))
+);
         """.trimIndent()
     }
 }

@@ -29,21 +29,20 @@ import com.fasterxml.jackson.module.kotlin.KotlinModule
  * */
 enum class SupportedDBs(val identity: String, val jdbcDriver: String, val dataSource: String) {
     SQLite("Sqlite", "org.sqlite.JDBC", "org.sqlite.SQLiteDataSource"),
-    PostgreSQL("Postgresql", "org.postgresql.Driver", "org.postgresql.ds.PGSimpleDataSource"),
-    NotSupported("", "", "");
+    PostgreSQL("Postgresql", "org.postgresql.Driver", "org.postgresql.ds.PGSimpleDataSource");
 
     override fun toString(): String {
         return this.identity
     }
 }
 
+
 /**
  * Pre-defined exceptions.
  * */
-class NoDatabasesIsAvailable(msg: String) : Exception(msg)
 class ConvertError(msg: String) : Exception(msg)
-class NoSuchDatabaseInRegistrationTable(msg: String) : Exception(msg)
 class InitialDeviceFailed(msg: String) : Exception(msg)
+
 
 /**
  * Pre-defined file type.
@@ -55,36 +54,14 @@ enum class FileType(val identity: String) {
 
 
 /**
- * Pre-defined file size limit.
- * */
-enum class SizeLimit {
-    Normal,
-    TooBig
-}
-
-
-/**
  * Pre-defined devices support
  * */
 enum class SupportedDevices(val identity: String, val className: String) {
-    LocalDevice("LocalDiskDriver", "io.github.hochikong.ktmeta.device_resources.driver.LocalDiskDriver")
+    LocalDevice("LocalDiskDriver", "io.github.hochikong.ktmeta.service.device.impl.LocalDiskDriver")
 }
+
 
 /**
  * Universal JSON Mapper
  * */
 val JSONMapper: ObjectMapper = ObjectMapper().registerModule(KotlinModule())
-
-/**
- * Used by each executeMgmtTask
- * */
-data class ResultMsg(val succeeded: Boolean, val result: Any, val msg: String)
-
-/**
- * Supported database connection object.
- * */
-enum class SupportedDBCon(val identity: String) {
-    JDBCCon("JDBC Connection"),
-    KtormCon("Ktorm single database"),
-    KtormPool("Ktrom database connection pool")
-}

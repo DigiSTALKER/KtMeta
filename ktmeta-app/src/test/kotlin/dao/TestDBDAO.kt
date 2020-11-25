@@ -40,7 +40,8 @@ class TestDBDAO {
         desc = "desc1",
         url = "url1",
         user = "null",
-        password = "null"
+        password = "null",
+        save_passwd = 0
     )
 
 

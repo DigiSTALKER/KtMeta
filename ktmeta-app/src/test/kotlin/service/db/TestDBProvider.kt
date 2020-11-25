@@ -74,7 +74,8 @@ class TestDBProvider {
                 "mydb desc",
                 "jdbc:sqlite:testCache/mytestdb.db",
                 "null",
-                "null"
+                "null",
+                0
             )
         )
         DBResourceDAO.insertRecord(
@@ -85,7 +86,8 @@ class TestDBProvider {
                 "mydb2 desc",
                 "jdbc:postgresql://localhost:5432/ktmetapg",
                 Encryption.encrypt("ktmeta_test"),
-                Encryption.encrypt("ktmeta")
+                Encryption.encrypt("ktmeta"),
+                1
             )
         )
 

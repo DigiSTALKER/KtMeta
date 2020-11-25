@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-rootProject.name = 'ktmeta'
-include 'ktmeta-app'
-include 'ktmeta-api'
 
+package io.github.hochikong.ktmeta.metaplugin
+
+interface MetaPluginESAPI
