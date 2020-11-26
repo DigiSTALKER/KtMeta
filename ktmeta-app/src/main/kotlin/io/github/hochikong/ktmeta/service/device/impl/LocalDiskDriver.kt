@@ -13,8 +13,8 @@
 
 package io.github.hochikong.ktmeta.service.device.impl
 
-import io.github.hochikong.ktmeta.predefined.ConvertError
-import io.github.hochikong.ktmeta.predefined.FileType
+import io.github.hochikong.ktmeta.common.ConvertError
+import io.github.hochikong.ktmeta.common.FileType
 import io.github.hochikong.ktmeta.service.device.DeviceAPI
 import io.github.hochikong.ktmeta.service.device.FileRow
 import io.github.hochikong.ktmeta.service.device.fileRowBuilder

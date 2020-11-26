@@ -15,7 +15,7 @@
  * @author Hochikong
  * Pre-defined Data
  * */
-package io.github.hochikong.ktmeta.predefined
+package io.github.hochikong.ktmeta.common
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.KotlinModule

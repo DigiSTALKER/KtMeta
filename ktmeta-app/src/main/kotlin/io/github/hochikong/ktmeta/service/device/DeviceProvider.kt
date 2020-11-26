@@ -13,8 +13,8 @@
 
 package io.github.hochikong.ktmeta.service.device
 
-import io.github.hochikong.ktmeta.predefined.InitialDeviceFailed
-import io.github.hochikong.ktmeta.predefined.SupportedDevices
+import io.github.hochikong.ktmeta.common.InitialDeviceFailed
+import io.github.hochikong.ktmeta.common.SupportedDevices
 import io.github.hochikong.ktmeta.service.device.impl.LocalDiskDriver
 
 

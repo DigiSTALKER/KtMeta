@@ -11880,7 +11880,7 @@ access to games. Only the user that created the game will be able to make change
 
 game, and therefore, we will make the necessary changes in our API to make a game have 
 
-an owner user. We will use predefined permission classes and a customized permission 
+an owner user. We will use common permission classes and a customized permission
 
 class to define the explained permission policies. 
 

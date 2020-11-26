@@ -15,10 +15,10 @@ package io.github.hochikong.ktmeta.service.db
 
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
+import io.github.hochikong.ktmeta.common.Encryption
 import io.github.hochikong.ktmeta.dao.DAOConfig
 import io.github.hochikong.ktmeta.dao.DBRecord
 import io.github.hochikong.ktmeta.dao.impl.DBResourceDAO
-import io.github.hochikong.ktmeta.predefined.Encryption
 import me.liuwj.ktorm.database.Database
 import javax.sql.DataSource
 

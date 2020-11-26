@@ -13,7 +13,7 @@
 
 package io.github.hochikong.ktmeta.service.device
 
-import io.github.hochikong.ktmeta.predefined.FileType
+import io.github.hochikong.ktmeta.common.FileType
 
 /**
  * Data class for building files tree.

@@ -12,5 +12,5 @@
  */
 rootProject.name = 'ktmeta'
 include 'ktmeta-app'
-include 'ktmeta-api'
+include 'ktmeta-metaplugin'
 

@@ -35,7 +35,6 @@ test {
 }
 
 dependencies {
-    implementation project(':ktmeta-api')
     implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
 
     // Swing themes

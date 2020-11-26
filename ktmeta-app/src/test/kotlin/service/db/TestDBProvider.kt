@@ -15,9 +15,9 @@ package service.db
 
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
+import io.github.hochikong.ktmeta.common.Encryption
 import io.github.hochikong.ktmeta.dao.DBRecord
 import io.github.hochikong.ktmeta.dao.impl.DBResourceDAO
-import io.github.hochikong.ktmeta.predefined.Encryption
 import io.github.hochikong.ktmeta.service.db.DBProvider
 import org.junit.jupiter.api.*
 import org.junit.jupiter.api.Assertions.assertEquals

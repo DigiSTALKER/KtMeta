@@ -11,9 +11,9 @@
  * limitations under the License.
  */
 
-package predefined
+package common
 
-import io.github.hochikong.ktmeta.predefined.Encryption
+import io.github.hochikong.ktmeta.common.Encryption
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 

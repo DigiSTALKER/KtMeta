@@ -11,7 +11,7 @@
  * limitations under the License.
  */
 
-package io.github.hochikong.ktmeta.predefined
+package io.github.hochikong.ktmeta.common
 
 import org.jasypt.util.password.ConfigurablePasswordEncryptor
 import org.jasypt.util.text.AES256TextEncryptor
