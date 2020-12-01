@@ -24,23 +24,6 @@ import java.awt.*;
  */
 public class AddCustomTags extends javax.swing.JDialog {
 
-    //<My-Custom>
-    protected Object[][] tagsData;
-    protected javax.swing.JButton BTNCancelAddTags;
-    protected javax.swing.JButton BTNOKAddTags;
-    protected javax.swing.JMenuItem MenuItemRemoveTag;
-    protected javax.swing.JMenuItem MenuItemRenameTag;
-    protected javax.swing.JPopupMenu PopupMenuTagsOps;
-    protected javax.swing.JTable TableUserCustomTags;
-    protected javax.swing.JTextField TextFieldAddTag;
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BTNAddTag;
-    //</Auto-Generate>
-    private javax.swing.JLabel LabelAddTag;
-    private javax.swing.JLabel LabelCurrentTags;
-    private javax.swing.JScrollPane jScrollPane2;
-    //</My-Custom>
-
     /**
      * Creates new form AddIndexWizard
      */
@@ -50,33 +33,13 @@ public class AddCustomTags extends javax.swing.JDialog {
         HideHead();
         this.setLocationRelativeTo(null);
     }
+    
     public AddCustomTags(java.awt.Frame parent, boolean modal, Object[][] TagsData, Image icon){
         super(parent, modal);
         this.tagsData = TagsData;
         initComponents();
         HideHead();
         this.setIconImage(icon);
-    }
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        FlatSolarizedLightIJTheme.install();
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                AddCustomTags dialog = new AddCustomTags(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
     }
 
     /**
@@ -99,6 +62,7 @@ public class AddCustomTags extends javax.swing.JDialog {
         LabelAddTag = new javax.swing.JLabel();
         TextFieldAddTag = new javax.swing.JTextField();
         BTNAddTag = new javax.swing.JButton();
+        BTNRemoveTag = new javax.swing.JButton();
 
         java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("i18n/Dialogs/AddCustomTags_trans"); // NOI18N
         MenuItemRemoveTag.setText(bundle.getString("REMOVE")); // NOI18N
@@ -158,26 +122,34 @@ public class AddCustomTags extends javax.swing.JDialog {
             }
         });
 
+        BTNRemoveTag.setText("Remove Selected Tag");
+        BTNRemoveTag.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTNRemoveTagActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(33, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(BTNRemoveTag)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(BTNOKAddTags)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(BTNCancelAddTags))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(LabelAddTag)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(TextFieldAddTag, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(BTNAddTag))
-                        .addComponent(LabelCurrentTags)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 668, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(LabelAddTag)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(TextFieldAddTag, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(BTNAddTag))
+                    .addComponent(LabelCurrentTags, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 668, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(33, 33, 33))
         );
         layout.setVerticalGroup(
@@ -195,7 +167,8 @@ public class AddCustomTags extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BTNOKAddTags)
-                    .addComponent(BTNCancelAddTags))
+                    .addComponent(BTNCancelAddTags)
+                    .addComponent(BTNRemoveTag))
                 .addContainerGap(71, Short.MAX_VALUE))
         );
 
@@ -227,9 +200,53 @@ public class AddCustomTags extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_MenuItemRenameTagActionPerformed
 
+    private void BTNRemoveTagActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNRemoveTagActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BTNRemoveTagActionPerformed
+    //</Auto-Generate>
+    
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        FlatSolarizedLightIJTheme.install();
+
+        /* Create and display the dialog */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                AddCustomTags dialog = new AddCustomTags(new javax.swing.JFrame(), true);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+                dialog.setVisible(true);
+            }
+        });
+    }
+    
+    //<My-Custom>
+    protected Object[][] tagsData;
+    
     protected void HideHead(){
         // Like IDEA style
         this.getRootPane().setWindowDecorationStyle(JRootPane.FRAME);
     }
+    //</My-Custom>
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BTNAddTag;
+    protected javax.swing.JButton BTNCancelAddTags;
+    protected javax.swing.JButton BTNOKAddTags;
+    protected javax.swing.JButton BTNRemoveTag;
+    private javax.swing.JLabel LabelAddTag;
+    private javax.swing.JLabel LabelCurrentTags;
+    protected javax.swing.JMenuItem MenuItemRemoveTag;
+    protected javax.swing.JMenuItem MenuItemRenameTag;
+    protected javax.swing.JPopupMenu PopupMenuTagsOps;
+    protected javax.swing.JTable TableUserCustomTags;
+    protected javax.swing.JTextField TextFieldAddTag;
+    private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
 }

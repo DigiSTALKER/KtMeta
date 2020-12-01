@@ -23,11 +23,6 @@ import java.awt.*;
  */
 public class LaunchView extends javax.swing.JFrame {
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    protected javax.swing.JLabel LabelLaunchingStatus;
-    protected javax.swing.JPanel PanelBackgroundPicture;
-    protected javax.swing.JProgressBar ProgressBarLaunching;
-
     /**
      * Creates new form LaunchView
      */
@@ -35,24 +30,10 @@ public class LaunchView extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
     }
-
+    
     public LaunchView(Image icon) {
         initComponents();
         this.setIconImage(icon);
-    }
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        FlatSolarizedLightIJTheme.install();
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new LaunchView().setVisible(true);
-            }
-        });
     }
 
     /**
@@ -121,5 +102,24 @@ public class LaunchView extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        FlatSolarizedLightIJTheme.install();
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new LaunchView().setVisible(true);
+            }
+        });
+    }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    protected javax.swing.JLabel LabelLaunchingStatus;
+    protected javax.swing.JPanel PanelBackgroundPicture;
+    protected javax.swing.JProgressBar ProgressBarLaunching;
     // End of variables declaration//GEN-END:variables
 }

@@ -7,26 +7,29 @@ import java.awt.geom.AffineTransform;
 
 
 public class VerticalTabComp extends BasicLabelUI {
-    private static final Rectangle paintIconR = new Rectangle();
-    private static final Rectangle paintTextR = new Rectangle();
-    private static final Rectangle paintViewR = new Rectangle();
-    private static Insets paintViewInsets = new Insets(0, 0, 0, 0);
-
     static {
         labelUI = new VerticalTabComp(false);
     }
 
     protected boolean clockwise;
+
+
     public VerticalTabComp(boolean clockwise) {
         super();
         this.clockwise = clockwise;
     }
+
 
     @Override
     public Dimension getPreferredSize(JComponent c) {
         Dimension dim = super.getPreferredSize(c);
         return new Dimension( dim.height, dim.width );
     }
+
+    private static final Rectangle paintIconR = new Rectangle();
+    private static final Rectangle paintTextR = new Rectangle();
+    private static final Rectangle paintViewR = new Rectangle();
+    private static Insets paintViewInsets = new Insets(0, 0, 0, 0);
 
     @Override
     public void paint(Graphics g, JComponent c) {

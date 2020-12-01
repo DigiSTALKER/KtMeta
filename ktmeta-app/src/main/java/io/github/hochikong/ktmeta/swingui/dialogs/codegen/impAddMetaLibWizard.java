@@ -23,27 +23,6 @@ import java.awt.*;
  */
 public class impAddMetaLibWizard extends javax.swing.JDialog {
 
-    //<My-Custom>
-    protected String[] supportedPlugins = {"Plugin 1", "Plugin 2"};
-    protected String[] availableDatabases = {"DB1", "DB2"};
-    protected String[] availableIndices = {"Index 1", "Index 2"};
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    protected javax.swing.JButton BTNCancelAddMetaLib;
-    protected javax.swing.JButton BTNOKAddMetaLib;
-    protected javax.swing.JComboBox<String> ComboBoxAvailableDBs;
-    protected javax.swing.JComboBox<String> ComboBoxAvailableIndices;
-    protected javax.swing.JComboBox<String> ComboBoxAvailablePlugins;
-    protected javax.swing.JTextField FieldAlias;
-    protected javax.swing.JTextField FieldDescription;
-    //</Auto-Generate>
-    protected javax.swing.JLabel LabelAlias;
-    protected javax.swing.JLabel LabelAssignPlugin;
-    protected javax.swing.JLabel LabelDescription;
-    private javax.swing.JLabel LabelAssignDB;
-    private javax.swing.JLabel LabelAssignIndex;
-    //</My-Custom>
-
-
     /**
      * Creates new form AddIndexWizard
      */
@@ -53,6 +32,7 @@ public class impAddMetaLibWizard extends javax.swing.JDialog {
         HideHead();
         this.setLocationRelativeTo(null);
     }
+
     public impAddMetaLibWizard(java.awt.Frame parent, boolean modal,
             Image icon,
             String[] SupportedPluginsList,
@@ -66,29 +46,6 @@ public class impAddMetaLibWizard extends javax.swing.JDialog {
         initComponents();
         HideHead();
         this.setIconImage(icon);
-    }
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        FlatSolarizedLightIJTheme.install();
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                impAddMetaLibWizard dialog = new impAddMetaLibWizard(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-
-                dialog.BTNCancelAddMetaLib.requestFocusInWindow();
-                dialog.setVisible(true);
-            }
-        });
     }
 
     /**
@@ -272,11 +229,56 @@ public class impAddMetaLibWizard extends javax.swing.JDialog {
     private void ComboBoxAvailableIndicesItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_ComboBoxAvailableIndicesItemStateChanged
         impComboBoxAvailableIndicesItemStateChanged(evt);
     }//GEN-LAST:event_ComboBoxAvailableIndicesItemStateChanged
+    //</Auto-Generate>
 
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        FlatSolarizedLightIJTheme.install();
+
+        /* Create and display the dialog */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                impAddMetaLibWizard dialog = new impAddMetaLibWizard(new javax.swing.JFrame(), true);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+
+                dialog.BTNCancelAddMetaLib.requestFocusInWindow();
+                dialog.setVisible(true);
+            }
+        });
+    }
+
+    //<My-Custom>
+    protected String[] supportedPlugins = {"Plugin 1", "Plugin 2"};
+    protected String[] availableDatabases = {"DB1", "DB2"};
+    protected String[] availableIndices = {"Index 1", "Index 2"};
+    
     protected void HideHead(){
         // Like IDEA style
         this.getRootPane().setWindowDecorationStyle(JRootPane.FRAME);
     }
+    //</My-Custom>
+
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    protected javax.swing.JButton BTNCancelAddMetaLib;
+    protected javax.swing.JButton BTNOKAddMetaLib;
+    protected javax.swing.JComboBox<String> ComboBoxAvailableDBs;
+    protected javax.swing.JComboBox<String> ComboBoxAvailableIndices;
+    protected javax.swing.JComboBox<String> ComboBoxAvailablePlugins;
+    protected javax.swing.JTextField FieldAlias;
+    protected javax.swing.JTextField FieldDescription;
+    protected javax.swing.JLabel LabelAlias;
+    private javax.swing.JLabel LabelAssignDB;
+    private javax.swing.JLabel LabelAssignIndex;
+    protected javax.swing.JLabel LabelAssignPlugin;
+    protected javax.swing.JLabel LabelDescription;
     // End of variables declaration//GEN-END:variables
 
     //<Auto-Generate-Result>

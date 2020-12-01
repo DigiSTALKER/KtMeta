@@ -28,18 +28,6 @@ import java.awt.*;
  */
 public class TaskManager extends javax.swing.JDialog {
 
-    //<My-Custom>
-    protected TasksTableModel tasksModel = new TasksTableModel();
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    protected javax.swing.JButton BTNKillTask;
-    protected javax.swing.JPanel PanelRunningTasks;
-    protected javax.swing.JPanel PanelToolBar;
-    //</Auto-Generate>
-    protected javax.swing.JTabbedPane TabbedPaneTM;
-    protected javax.swing.JTable TableTasks;
-    private javax.swing.JScrollPane jScrollPane1;
-    //</My-Custom>
-
     /**
      * Creates new form TaskManager
      */
@@ -49,33 +37,13 @@ public class TaskManager extends javax.swing.JDialog {
         HideHead();
         this.setLocationRelativeTo(null);
     }
+    
     public TaskManager(java.awt.Frame parent, boolean modal, Image icon, Object[][] Tasks) {
         super(parent, modal);
         this.tasksModel = new TasksTableModel(Tasks);
         initComponents();
         HideHead();
         this.setIconImage(icon);
-    }
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        FlatSolarizedLightIJTheme.install();
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                TaskManager dialog = new TaskManager(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
     }
 
     /**
@@ -170,10 +138,44 @@ public class TaskManager extends javax.swing.JDialog {
     private void BTNKillTaskActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNKillTaskActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_BTNKillTaskActionPerformed
+    //</Auto-Generate>
+    
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        FlatSolarizedLightIJTheme.install();
 
+        /* Create and display the dialog */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                TaskManager dialog = new TaskManager(new javax.swing.JFrame(), true);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+                dialog.setVisible(true);
+            }
+        });
+    }
+    
+    //<My-Custom>
+    protected TasksTableModel tasksModel = new TasksTableModel();
+    
     protected void HideHead(){
         // Like IDEA style
         this.getRootPane().setWindowDecorationStyle(JRootPane.FRAME);
     }
+    //</My-Custom>
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    protected javax.swing.JButton BTNKillTask;
+    protected javax.swing.JPanel PanelRunningTasks;
+    protected javax.swing.JPanel PanelToolBar;
+    protected javax.swing.JTabbedPane TabbedPaneTM;
+    protected javax.swing.JTable TableTasks;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

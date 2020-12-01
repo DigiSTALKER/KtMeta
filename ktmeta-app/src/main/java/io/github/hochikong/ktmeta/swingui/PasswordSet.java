@@ -23,17 +23,6 @@ import java.awt.*;
  */
 public class PasswordSet extends javax.swing.JFrame {
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    protected javax.swing.JButton BTNFinishSetting;
-    protected javax.swing.JButton BTNUpdatePasswd;
-    protected javax.swing.JPasswordField PasswordFieldFirst;
-    protected javax.swing.JPasswordField PasswordFieldSecond;
-    private javax.swing.JLabel LabelEnterAgain;
-    //</Auto-Generate>
-    private javax.swing.JLabel LabelHelper;
-    private javax.swing.JLabel LabelPassword;
-    //</My-Custom>
-    private javax.swing.JLabel LabelSetTips;
     /**
      * Creates new form LaunchInital
      */
@@ -42,24 +31,11 @@ public class PasswordSet extends javax.swing.JFrame {
         HideHead();
         this.setLocationRelativeTo(null);
     }
+    
     public PasswordSet(Image icon){
         initComponents();
         HideHead();
         this.setIconImage(icon);
-    }
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        FlatSolarizedLightIJTheme.install();
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new PasswordSet().setVisible(true);
-            }
-        });
     }
 
     /**
@@ -166,11 +142,37 @@ public class PasswordSet extends javax.swing.JFrame {
     private void BTNFinishSettingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNFinishSettingActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_BTNFinishSettingActionPerformed
+    //</Auto-Generate>
+    
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        FlatSolarizedLightIJTheme.install();
 
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new PasswordSet().setVisible(true);
+            }
+        });
+    }
+    
     //<My-Custom>
     protected void HideHead(){
         // Like IDEA style
         this.getRootPane().setWindowDecorationStyle(JRootPane.FRAME);
     }
+    //</My-Custom>
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    protected javax.swing.JButton BTNFinishSetting;
+    protected javax.swing.JButton BTNUpdatePasswd;
+    private javax.swing.JLabel LabelEnterAgain;
+    private javax.swing.JLabel LabelHelper;
+    private javax.swing.JLabel LabelPassword;
+    private javax.swing.JLabel LabelSetTips;
+    protected javax.swing.JPasswordField PasswordFieldFirst;
+    protected javax.swing.JPasswordField PasswordFieldSecond;
     // End of variables declaration//GEN-END:variables
 }

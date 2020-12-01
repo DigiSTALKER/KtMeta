@@ -27,30 +27,6 @@ import java.awt.event.KeyEvent;
  */
 public class MetaAggregateSearch extends javax.swing.JFrame {
 
-    //<My-Custom>
-    protected String[] metaLibs = new String[] {"Lib 1", "Lib 2"};
-    // Called by CTRL+ENTER
-    protected Action quickSearch = new AbstractAction() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            System.out.println("hit me");
-        }
-    };
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    protected javax.swing.JButton BTNGatherAttrs;
-    protected javax.swing.JCheckBox CheckBoxCreateNewTab;
-    protected javax.swing.JCheckBox CheckBoxSearchOnDB;
-    protected javax.swing.JCheckBox CheckBoxSearchOnES;
-    protected javax.swing.JComboBox<String> ComboBoxTargetMetaLib;
-    //</Auto-Generate>
-    protected javax.swing.JMenuItem PMSearch;
-    protected javax.swing.JTable TableAttrs;
-    protected javax.swing.ButtonGroup buttonGroupOnWhere;
-    private javax.swing.JLabel LabelTarget;
-    //</My-Custom>
-    private javax.swing.JPopupMenu PopupMenuSearch;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JScrollPane jScrollPane1;
     /**
      * Creates new form HeuristicSearch
      */
@@ -59,25 +35,12 @@ public class MetaAggregateSearch extends javax.swing.JFrame {
         HideHead();
         setLocationRelativeTo(null);
     }
+    
     public MetaAggregateSearch(String[] MetaLibs, Image icon) {
         this.metaLibs = MetaLibs;
         initComponents();
         HideHead();
         this.setIconImage(icon);
-    }
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        FlatSolarizedLightIJTheme.install();
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new MetaAggregateSearch().setVisible(true);
-            }
-        });
     }
 
     /**
@@ -226,10 +189,51 @@ public class MetaAggregateSearch extends javax.swing.JFrame {
     private void BTNGatherAttrsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNGatherAttrsActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_BTNGatherAttrsActionPerformed
+    //</Auto-Generate>
+    
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        FlatSolarizedLightIJTheme.install();
 
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new MetaAggregateSearch().setVisible(true);
+            }
+        });
+    }
+    
+    //<My-Custom>
+    protected String[] metaLibs = new String[] {"Lib 1", "Lib 2"};
+    
+    // Called by CTRL+ENTER
+    protected Action quickSearch = new AbstractAction() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            System.out.println("hit me");
+        }
+    };
+    
     protected void HideHead(){
         // Like IDEA style
         this.getRootPane().setWindowDecorationStyle(JRootPane.FRAME);
     }
+    //</My-Custom>
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    protected javax.swing.JButton BTNGatherAttrs;
+    protected javax.swing.JCheckBox CheckBoxCreateNewTab;
+    protected javax.swing.JCheckBox CheckBoxSearchOnDB;
+    protected javax.swing.JCheckBox CheckBoxSearchOnES;
+    protected javax.swing.JComboBox<String> ComboBoxTargetMetaLib;
+    private javax.swing.JLabel LabelTarget;
+    protected javax.swing.JMenuItem PMSearch;
+    private javax.swing.JPopupMenu PopupMenuSearch;
+    protected javax.swing.JTable TableAttrs;
+    protected javax.swing.ButtonGroup buttonGroupOnWhere;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

@@ -23,22 +23,6 @@ import java.awt.*;
  */
 public class impMetaPreviewManager extends javax.swing.JFrame {
 
-    private final Object[] options = {java.util.ResourceBundle.getBundle("i18n/Frames/MetaPreviewManager_trans").getString("A PICTURE"), java.util.ResourceBundle.getBundle("i18n/Frames/MetaPreviewManager_trans").getString("A TEXT")};
-    private final String tipForOptionPane = java.util.ResourceBundle.getBundle("i18n/Frames/MetaPreviewManager_trans").getString("CHOOSE WHAT YOU WANT TO ADD AS PREVIEW : ");
-    private final String titleForOptionPane = java.util.ResourceBundle.getBundle("i18n/Frames/MetaPreviewManager_trans").getString("ADD PREVIEW ? ");
-    //<My-Custom>
-    protected String customTitle = java.util.ResourceBundle.getBundle("i18n/Frames/MetaPreviewManager_trans").getString("PREVIEW MANANGER -- ENLARGE PREVIEW : 1/1 PAGE");
-    // Text or base64 code:
-    protected String previewContent;
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    protected javax.swing.JButton BTNAddPreview;
-    protected javax.swing.JButton BTNDeletePreview;
-    protected javax.swing.JButton BTNNextPage;
-    //</Auto-Generate>
-    protected javax.swing.JButton BTNPreviousPage;
-    protected javax.swing.JLabel LabelForPreview;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane1;
     /**
      * Creates new form PreviewManager
      */
@@ -53,20 +37,6 @@ public class impMetaPreviewManager extends javax.swing.JFrame {
         initComponents();
         HideHead();
         this.setIconImage(icon);
-    }
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        FlatSolarizedLightIJTheme.install();
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new impMetaPreviewManager().setVisible(true);
-            }
-        });
     }
 
     /**
@@ -162,15 +132,15 @@ public class impMetaPreviewManager extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
+
     //<Auto-Generate>
     private void BTNAddPreviewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNAddPreviewActionPerformed
         impBTNAddPreviewActionPerformed(evt);
 //        int whatPreviewYouChoose = JOptionPane.showOptionDialog(
-//                this.LabelForPreview,
-//                tipForOptionPane,
+//                this.LabelForPreview, 
+//                tipForOptionPane, 
 //                titleForOptionPane,
-//                JOptionPane.YES_NO_CANCEL_OPTION,
+//                JOptionPane.YES_NO_CANCEL_OPTION, 
 //                JOptionPane.QUESTION_MESSAGE,
 //                null,
 //                options,
@@ -178,7 +148,6 @@ public class impMetaPreviewManager extends javax.swing.JFrame {
 //                );
 //        System.out.println(whatPreviewYouChoose);
     }//GEN-LAST:event_BTNAddPreviewActionPerformed
-    //</My-Custom>
 
     private void BTNPreviousPageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNPreviousPageActionPerformed
         impBTNPreviousPageActionPerformed(evt);
@@ -195,6 +164,30 @@ public class impMetaPreviewManager extends javax.swing.JFrame {
     private void formComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentResized
         impformComponentResized(evt);
     }//GEN-LAST:event_formComponentResized
+    //</Auto-Generate>
+    
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        FlatSolarizedLightIJTheme.install();
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new impMetaPreviewManager().setVisible(true);
+            }
+        });
+    }
+    
+    //<My-Custom>
+    protected String customTitle = java.util.ResourceBundle.getBundle("i18n/Frames/MetaPreviewManager_trans").getString("PREVIEW MANANGER -- ENLARGE PREVIEW : 1/1 PAGE");
+    private final Object[] options = {java.util.ResourceBundle.getBundle("i18n/Frames/MetaPreviewManager_trans").getString("A PICTURE"), java.util.ResourceBundle.getBundle("i18n/Frames/MetaPreviewManager_trans").getString("A TEXT")};
+    private final String tipForOptionPane = java.util.ResourceBundle.getBundle("i18n/Frames/MetaPreviewManager_trans").getString("CHOOSE WHAT YOU WANT TO ADD AS PREVIEW : ");
+    private final String titleForOptionPane = java.util.ResourceBundle.getBundle("i18n/Frames/MetaPreviewManager_trans").getString("ADD PREVIEW ? ");
+    
+    // Text or base64 code:
+    protected String previewContent;
 
     protected void setPreview(String content) {
         if (content != null) {
@@ -207,11 +200,21 @@ public class impMetaPreviewManager extends javax.swing.JFrame {
             this.LabelForPreview.setIcon(image);
         }
     }
-
+    
     protected void HideHead(){
         // Like IDEA style
         this.getRootPane().setWindowDecorationStyle(JRootPane.FRAME);
     }
+    //</My-Custom>
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    protected javax.swing.JButton BTNAddPreview;
+    protected javax.swing.JButton BTNDeletePreview;
+    protected javax.swing.JButton BTNNextPage;
+    protected javax.swing.JButton BTNPreviousPage;
+    protected javax.swing.JLabel LabelForPreview;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 
     //<Auto-Generate-Result>

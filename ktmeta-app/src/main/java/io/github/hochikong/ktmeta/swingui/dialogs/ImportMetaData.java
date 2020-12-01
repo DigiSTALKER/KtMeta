@@ -23,17 +23,6 @@ import java.awt.*;
  */
 public class ImportMetaData extends javax.swing.JDialog {
 
-    //<My-Custom>
-    protected String[] metaLibs = new String[] {"Lib 1", "Lib 2"};
-    protected javax.swing.JComboBox<String> ComboBoxTargetMetaLib;
-    protected javax.swing.JTabbedPane TabbedPaneTools;
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BTNImportFromDisk;
-    private javax.swing.JLabel LabelImportFromDisk;
-    //</Auto-Generate>
-    private javax.swing.JLabel LabelTarget;
-    private javax.swing.JPanel PanelOfficialTools;
-    
     /**
      * Creates new form ImportMetaData
      */
@@ -43,34 +32,12 @@ public class ImportMetaData extends javax.swing.JDialog {
         HideHead();
         this.setLocationRelativeTo(null);
     }
-    //</My-Custom>
-
+    
     public ImportMetaData(java.awt.Frame parent, boolean modal, Image icon){
         super(parent, modal);
         initComponents();
         HideHead();
         this.setIconImage(icon);
-    }
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        FlatSolarizedLightIJTheme.install();
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                ImportMetaData dialog = new ImportMetaData(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
     }
 
     /**
@@ -176,10 +143,44 @@ public class ImportMetaData extends javax.swing.JDialog {
     private void BTNImportFromDiskActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNImportFromDiskActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_BTNImportFromDiskActionPerformed
+    //</Auto-Generate>
+    
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        FlatSolarizedLightIJTheme.install();
 
+        /* Create and display the dialog */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                ImportMetaData dialog = new ImportMetaData(new javax.swing.JFrame(), true);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+                dialog.setVisible(true);
+            }
+        });
+    }
+    
+    //<My-Custom>   
+    protected String[] metaLibs = new String[] {"Lib 1", "Lib 2"};
+    
     protected void HideHead(){
         // Like IDEA style
         this.getRootPane().setWindowDecorationStyle(JRootPane.FRAME);
     }
+    //</My-Custom>
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BTNImportFromDisk;
+    protected javax.swing.JComboBox<String> ComboBoxTargetMetaLib;
+    private javax.swing.JLabel LabelImportFromDisk;
+    private javax.swing.JLabel LabelTarget;
+    private javax.swing.JPanel PanelOfficialTools;
+    protected javax.swing.JTabbedPane TabbedPaneTools;
     // End of variables declaration//GEN-END:variables
 }

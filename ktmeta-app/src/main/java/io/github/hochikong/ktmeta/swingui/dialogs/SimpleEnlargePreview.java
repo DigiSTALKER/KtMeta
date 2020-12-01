@@ -23,13 +23,6 @@ import java.awt.*;
  */
 public class SimpleEnlargePreview extends javax.swing.JDialog {
 
-    //<My-Custom>
-    // Text or base64 code:
-    protected String previewContent;
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    protected javax.swing.JLabel LabelShow;
-    private javax.swing.JScrollPane jScrollPane1;
-
     /**
      * Creates new form SimpleEnlargePreview
      */
@@ -45,27 +38,6 @@ public class SimpleEnlargePreview extends javax.swing.JDialog {
         initComponents();
         HideHead();
         this.setIconImage(icon);
-    }
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        FlatSolarizedLightIJTheme.install();
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                SimpleEnlargePreview dialog = new SimpleEnlargePreview(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
     }
 
     /**
@@ -102,23 +74,52 @@ public class SimpleEnlargePreview extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        FlatSolarizedLightIJTheme.install();
+
+        /* Create and display the dialog */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                SimpleEnlargePreview dialog = new SimpleEnlargePreview(new javax.swing.JFrame(), true);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+                dialog.setVisible(true);
+            }
+        });
+    }
     
+    //<My-Custom>
+    // Text or base64 code:
+    protected String previewContent;
+
     public void setPreview(String content) {
         if (content != null) {
             this.LabelShow.setText(content);
         }
     }
-    //</My-Custom>
 
     public void setPreview(ImageIcon image) {
         if (image != null) {
             this.LabelShow.setIcon(image);
         }
     }
-
+    
     protected void HideHead(){
         // Like IDEA style
         this.getRootPane().setWindowDecorationStyle(JRootPane.FRAME);
     }
+    //</My-Custom>
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    protected javax.swing.JLabel LabelShow;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

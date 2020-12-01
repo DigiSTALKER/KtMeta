@@ -23,28 +23,6 @@ import java.awt.*;
  */
 public class AddDatabaseWizard extends javax.swing.JDialog {
 
-    //<My-Custom>
-    protected String[] supportedDatabaseList = {"Postgresql", "Sqlite"};
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    protected javax.swing.JButton BTNCancelAddDB;
-    protected javax.swing.JButton BTNOKAddDB;
-    protected javax.swing.JButton BTNTestConn;
-    protected javax.swing.JCheckBox CheckBoxRememberPassword;
-    protected javax.swing.JComboBox<String> ComboBoxAvailableDBMS;
-    protected javax.swing.JTextField FieldDescription;
-    protected javax.swing.JTextField FieldJDBCURL;
-    protected javax.swing.JTextField FieldName;
-    protected javax.swing.JPasswordField FieldPassword;
-    protected javax.swing.JTextField FieldUsername;
-    protected javax.swing.JLabel LabelDBMS;
-    //</Auto-Generate>
-    protected javax.swing.JLabel LabelDescription;
-    protected javax.swing.JLabel LabelJDBCURL;
-    protected javax.swing.JLabel LabelName;
-    //</My-Custom>
-    protected javax.swing.JLabel LabelPassword;
-    protected javax.swing.JLabel LabelUsername;
-    protected javax.swing.JProgressBar PBarTestConnection;
     /**
      * Creates new form AddDatabaseWizard
      */
@@ -55,35 +33,13 @@ public class AddDatabaseWizard extends javax.swing.JDialog {
         // centre
         this.setLocationRelativeTo(null);
     }
+
     public AddDatabaseWizard(java.awt.Frame parent, boolean modal, String[] SupportedDBList, Image icon) {
         super(parent, modal);
         this.supportedDatabaseList = SupportedDBList;
         initComponents();
         HideHead();
         this.setIconImage(icon);
-    }
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        FlatSolarizedLightIJTheme.install();
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                AddDatabaseWizard dialog = new AddDatabaseWizard(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-
-                // must request focus
-                dialog.BTNCancelAddDB.requestFocusInWindow();
-                dialog.setVisible(true);
-            }
-        });
     }
 
     /**
@@ -323,10 +279,57 @@ public class AddDatabaseWizard extends javax.swing.JDialog {
     private void ComboBoxAvailableDBMSItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_ComboBoxAvailableDBMSItemStateChanged
         // TODO add your handling code here:
     }//GEN-LAST:event_ComboBoxAvailableDBMSItemStateChanged
+    //</Auto-Generate>
+    
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        FlatSolarizedLightIJTheme.install();
+        /* Create and display the dialog */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                AddDatabaseWizard dialog = new AddDatabaseWizard(new javax.swing.JFrame(), true);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
 
+                // must request focus
+                dialog.BTNCancelAddDB.requestFocusInWindow();
+                dialog.setVisible(true);
+            }
+        });
+    }
+
+    //<My-Custom>
+    protected String[] supportedDatabaseList = {"Postgresql", "Sqlite"};
+    
     protected void HideHead(){
         // Like IDEA style
         this.getRootPane().setWindowDecorationStyle(JRootPane.FRAME);
     }
+    //</My-Custom>
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    protected javax.swing.JButton BTNCancelAddDB;
+    protected javax.swing.JButton BTNOKAddDB;
+    protected javax.swing.JButton BTNTestConn;
+    protected javax.swing.JCheckBox CheckBoxRememberPassword;
+    protected javax.swing.JComboBox<String> ComboBoxAvailableDBMS;
+    protected javax.swing.JTextField FieldDescription;
+    protected javax.swing.JTextField FieldJDBCURL;
+    protected javax.swing.JTextField FieldName;
+    protected javax.swing.JPasswordField FieldPassword;
+    protected javax.swing.JTextField FieldUsername;
+    protected javax.swing.JLabel LabelDBMS;
+    protected javax.swing.JLabel LabelDescription;
+    protected javax.swing.JLabel LabelJDBCURL;
+    protected javax.swing.JLabel LabelName;
+    protected javax.swing.JLabel LabelPassword;
+    protected javax.swing.JLabel LabelUsername;
+    protected javax.swing.JProgressBar PBarTestConnection;
     // End of variables declaration//GEN-END:variables
 }

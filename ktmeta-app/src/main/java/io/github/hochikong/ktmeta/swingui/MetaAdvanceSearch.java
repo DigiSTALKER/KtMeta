@@ -23,34 +23,6 @@ import java.awt.*;
  */
 public class MetaAdvanceSearch extends javax.swing.JFrame {
 
-    //<My-Custom>
-    protected DefaultListModel<String> rulesModel = new DefaultListModel();
-    protected String[] metaLibs = new String[] {"Lib 1", "Lib 2"};
-    protected String[] metaAttributes = new String[] { "Attr 1", "Attr 2", "Attr 3", "Attr 4" };
-    protected String[] searchConditions = new String[] {"LIKE", "Equals"};
-    protected String[] ruleConnectors = new String[] {"And", "Or"};
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    protected javax.swing.JButton BTNAddRule;
-    protected javax.swing.JButton BTNResetRules;
-    //</Auto-Generate>
-    protected javax.swing.JCheckBox CheckBoxCreateNewTab;
-    protected javax.swing.JCheckBox CheckBoxSearchOnDB;
-    protected javax.swing.JCheckBox CheckBoxSearchOnES;
-    protected javax.swing.JComboBox<String> ComboBoxAttribute;
-    protected javax.swing.JComboBox<String> ComboBoxMatchConditions;
-    protected javax.swing.JComboBox<String> ComboBoxRulesConnector;
-    protected javax.swing.JComboBox<String> ComboBoxTargetMetaLib;
-    //</My-Custom>
-    protected javax.swing.JList<String> ListRulesDisplay;
-    protected javax.swing.JPanel PanelRulesEditor;
-    protected javax.swing.JTextField TextFieldSearchInput;
-    protected javax.swing.ButtonGroup buttonGroupOnWhere;
-    private javax.swing.JButton BTNRemoveRule;
-    private javax.swing.JLabel LabelAttribute;
-    private javax.swing.JLabel LabelTarget;
-    private javax.swing.JLabel LabelThen;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JScrollPane jScrollPane1;
     /**
      * Creates new form MetaAdvanceSearch
      */
@@ -60,6 +32,7 @@ public class MetaAdvanceSearch extends javax.swing.JFrame {
         HideHead();
         setLocationRelativeTo(null);
     }
+    
     public MetaAdvanceSearch(String[] MetaLibs, String[] MetaAttrs, String[] SearchCond, String[] RuleConn, Image icon) {
         this.rulesModel.addElement(java.util.ResourceBundle.getBundle("i18n/Frames/MetaAdvanceSearch_trans").getString("NO RULES"));
         this.metaLibs = MetaLibs;
@@ -69,20 +42,6 @@ public class MetaAdvanceSearch extends javax.swing.JFrame {
         initComponents();
         HideHead();
         this.setIconImage(icon);
-    }
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        FlatSolarizedLightIJTheme.install();
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new MetaAdvanceSearch().setVisible(true);
-            }
-        });
     }
 
     /**
@@ -287,10 +246,55 @@ public class MetaAdvanceSearch extends javax.swing.JFrame {
     private void BTNRemoveRuleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNRemoveRuleActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_BTNRemoveRuleActionPerformed
+    //</Auto-Generate>
+    
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        FlatSolarizedLightIJTheme.install();
 
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new MetaAdvanceSearch().setVisible(true);
+            }
+        });
+    }
+    
+    //<My-Custom>
+    protected DefaultListModel<String> rulesModel = new DefaultListModel();
+    
+    protected String[] metaLibs = new String[] {"Lib 1", "Lib 2"};
+    protected String[] metaAttributes = new String[] { "Attr 1", "Attr 2", "Attr 3", "Attr 4" };
+    protected String[] searchConditions = new String[] {"LIKE", "Equals"};
+    protected String[] ruleConnectors = new String[] {"And", "Or"};
+    
     protected void HideHead(){
         // Like IDEA style
         this.getRootPane().setWindowDecorationStyle(JRootPane.FRAME);
     }
+    //</My-Custom>
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    protected javax.swing.JButton BTNAddRule;
+    private javax.swing.JButton BTNRemoveRule;
+    protected javax.swing.JButton BTNResetRules;
+    protected javax.swing.JCheckBox CheckBoxCreateNewTab;
+    protected javax.swing.JCheckBox CheckBoxSearchOnDB;
+    protected javax.swing.JCheckBox CheckBoxSearchOnES;
+    protected javax.swing.JComboBox<String> ComboBoxAttribute;
+    protected javax.swing.JComboBox<String> ComboBoxMatchConditions;
+    protected javax.swing.JComboBox<String> ComboBoxRulesConnector;
+    protected javax.swing.JComboBox<String> ComboBoxTargetMetaLib;
+    private javax.swing.JLabel LabelAttribute;
+    private javax.swing.JLabel LabelTarget;
+    private javax.swing.JLabel LabelThen;
+    protected javax.swing.JList<String> ListRulesDisplay;
+    protected javax.swing.JPanel PanelRulesEditor;
+    protected javax.swing.JTextField TextFieldSearchInput;
+    protected javax.swing.ButtonGroup buttonGroupOnWhere;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

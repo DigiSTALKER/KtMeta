@@ -25,22 +25,6 @@ import java.lang.management.RuntimeMXBean;
  */
 public class About extends javax.swing.JDialog {
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    protected javax.swing.JScrollPane InfoScrollPane;
-    protected javax.swing.JTextPane TextPaneInfo;
-    //<My-Custom>
-    OperatingSystemMXBean system = ManagementFactory.getOperatingSystemMXBean();
-    RuntimeMXBean runtime = ManagementFactory.getRuntimeMXBean();
-    protected String ButtomText = "OS: " + system.getName()
-            + " ; Arch: " + system.getArch()
-            + " ; Cores: " + system.getAvailableProcessors()
-            + "\n"
-            + runtime.getVmName()
-            + " ; " + runtime.getVmVendor()
-            + " ; \n" + runtime.getSpecVersion() + runtime.getVmVersion();
-    //</Auto-Generate>
-    private javax.swing.JPanel LabelInfo;
-    private javax.swing.JLabel LabelPhoto;
     /**
      * Creates new form About
      */
@@ -50,33 +34,12 @@ public class About extends javax.swing.JDialog {
         // display About at the centre of screen
         this.setLocationRelativeTo(null);
     }
+    
     public About(java.awt.Frame parent, boolean modal, Image icon) {
         super(parent, modal);
         initComponents();
         this.setIconImage(icon);
     }
-    
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        FlatSolarizedLightIJTheme.install();
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                About dialog = new About(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
-    //</My-Custom>
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -155,9 +118,50 @@ public class About extends javax.swing.JDialog {
     private void TextPaneInfoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TextPaneInfoMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_TextPaneInfoMouseClicked
+    //</Auto-Generate>
+    
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        FlatSolarizedLightIJTheme.install();
 
+        /* Create and display the dialog */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                About dialog = new About(new javax.swing.JFrame(), true);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+                dialog.setVisible(true);
+            }
+        });
+    }
+
+    //<My-Custom>  
+    OperatingSystemMXBean system = ManagementFactory.getOperatingSystemMXBean();
+    RuntimeMXBean runtime = ManagementFactory.getRuntimeMXBean();
+    protected String ButtomText = "OS: " + system.getName()
+            + " ; Arch: " + system.getArch()
+            + " ; Cores: " + system.getAvailableProcessors()
+            + "\n"
+            + runtime.getVmName()
+            + " ; " + runtime.getVmVendor()
+            + " ; \n" + runtime.getSpecVersion() + runtime.getVmVersion();
+    
     protected void diaDispose(){
         this.dispose();
     }
+    //</My-Custom>
+
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    protected javax.swing.JScrollPane InfoScrollPane;
+    private javax.swing.JPanel LabelInfo;
+    private javax.swing.JLabel LabelPhoto;
+    protected javax.swing.JTextPane TextPaneInfo;
     // End of variables declaration//GEN-END:variables
 }

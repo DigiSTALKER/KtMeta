@@ -29,72 +29,6 @@ import java.awt.*;
  */
 public class impSettings extends javax.swing.JDialog {
 
-    // RGB color, for example "43,43,43"
-//    private String[] SupportedThemeBackgroundColors = new String[]{
-//        "238,232,213",
-//        "238,238,238",
-//        "214,217,223",
-//        "60,63,65",
-//        "242,242,242",
-//        "228,230,235",
-//        "50,50,50"
-//    };
-    private final String[] SupportedFontStyle = new String[]{"Plain", "Bold", "Italic", "Bold Italic"};
-    protected Object[][] pluginsData = {
-        {"Plugin 1", new Boolean(true)},
-        {"1 Plugin 2", new Boolean(false)}
-    };
-    protected String[] pluginsDescs = {
-        "<html>First line<br>Second line</html>",
-        "<html>SECOND line<br>Third line</html>"
-    };
-    protected TableRowSorter<PluginsTableModel> sorter;
-    // use readData to get the data
-    protected PluginsTableModel pluginsModel;
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    protected javax.swing.JButton BTNApply;
-    protected javax.swing.JButton BTNCancel;
-    protected javax.swing.JButton BTNOK;
-    protected javax.swing.JButton BTNRegistPlugin;
-    protected javax.swing.JButton BTNRemovePlugin;
-    protected javax.swing.JButton BTNUpgradePlugin;
-    protected javax.swing.JCheckBox CheckBoxEnableCustomFont;
-    protected javax.swing.JComboBox<String> ComboBoxFontSelector;
-    protected javax.swing.JComboBox<String> ComboBoxFontStyleSelector;
-    protected javax.swing.JComboBox<String> ComboBoxLanguage;
-    //</Auto-Generate>
-    protected javax.swing.JComboBox<String> ComboBoxThemeSelector;
-    protected javax.swing.JLabel LabelPluginDescription;
-    protected javax.swing.JPanel PanelAppearance;
-    protected javax.swing.JPanel PanelGeneral;
-    protected javax.swing.JPanel PanelOperations;
-    protected javax.swing.JPanel PanelPluginRegist;
-    protected javax.swing.JPanel PanelPlugins;
-    protected javax.swing.JPanel PanelPluginsSearch;
-    protected javax.swing.JSpinner SpinnerFontSize;
-    protected javax.swing.JSplitPane SplitPanePlugins;
-    protected javax.swing.JTable TablePlugins;
-    protected javax.swing.JTabbedPane TabsConfig;
-    protected javax.swing.JTextField TextFieldSearch;
-    private String[] supportedLanguages = new String[]{"English", "Simplified Chinese"};
-    //</My-Custom>
-    private String[] supportedThemes = new String[]{
-        "FlatSolarizedLightIJTheme",
-        "Metal",
-        "Nimbus",
-        "FlatDarculaLaf",
-        "FlatIntelliJLaf",
-        "FlatCyanLightIJTheme",
-        "FlatHiberbeeDarkIJTheme"
-    };
-    private javax.swing.JLabel LabelFontSize;
-    private javax.swing.JLabel LabelLanguage;
-    private javax.swing.JLabel LabelPreviewCustomFont;
-    private javax.swing.JLabel LabelSearch;
-    private javax.swing.JLabel LabelStyles;
-    private javax.swing.JLabel LabelThemes;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSeparator jSeparator1;
     /**
      * Creates new form Preference
      */
@@ -104,6 +38,7 @@ public class impSettings extends javax.swing.JDialog {
         HideHead();
         this.setLocationRelativeTo(null);
     }
+
     public impSettings(java.awt.Frame parent, boolean modal,
             String[] Languages,
             String[] Themes,
@@ -119,27 +54,6 @@ public class impSettings extends javax.swing.JDialog {
         initComponents();
         HideHead();
         this.setIconImage(icon);
-    }
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        FlatSolarizedLightIJTheme.install();
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                impSettings dialog = new impSettings(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
     }
 
     /**
@@ -566,16 +480,72 @@ public class impSettings extends javax.swing.JDialog {
     private void BTNRemovePluginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNRemovePluginActionPerformed
         impBTNRemovePluginActionPerformed(evt);
     }//GEN-LAST:event_BTNRemovePluginActionPerformed
+    //</Auto-Generate>
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        FlatSolarizedLightIJTheme.install();
+
+        /* Create and display the dialog */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                impSettings dialog = new impSettings(new javax.swing.JFrame(), true);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+                dialog.setVisible(true);
+            }
+        });
+    }
 
     //<My-Custom>
     private boolean CustomFontEnable() {
         return this.ComboBoxFontSelector.isEnabled();
     }
-
+    
     protected void HideHead(){
         // Like IDEA style
         this.getRootPane().setWindowDecorationStyle(JRootPane.FRAME);
     }
+
+    private String[] supportedLanguages = new String[]{"English", "Simplified Chinese"};
+
+    private String[] supportedThemes = new String[]{
+        "FlatSolarizedLightIJTheme",
+        "Metal",
+        "Nimbus",
+        "FlatDarculaLaf",
+        "FlatIntelliJLaf",
+        "FlatCyanLightIJTheme",
+        "FlatHiberbeeDarkIJTheme"
+    };
+
+    // RGB color, for example "43,43,43"
+//    private String[] SupportedThemeBackgroundColors = new String[]{
+//        "238,232,213",
+//        "238,238,238",
+//        "214,217,223",
+//        "60,63,65",
+//        "242,242,242",
+//        "228,230,235",
+//        "50,50,50"
+//    };
+    private final String[] SupportedFontStyle = new String[]{"Plain", "Bold", "Italic", "Bold Italic"};
+
+    protected Object[][] pluginsData = {
+        {"Plugin 1", new Boolean(true)},
+        {"1 Plugin 2", new Boolean(false)}
+    };
+    
+    protected String[] pluginsDescs = {
+        "<html>First line<br>Second line</html>",
+        "<html>SECOND line<br>Third line</html>"
+    };
 
     /**
      * Update custom font preview according to user's selection.
@@ -603,6 +573,11 @@ public class impSettings extends javax.swing.JDialog {
         int realFontSize = Integer.parseInt(this.SpinnerFontSize.getModel().getValue().toString());
         this.LabelPreviewCustomFont.setFont(new Font(fontChoice, realStyle, realFontSize));
     }
+
+    protected TableRowSorter<PluginsTableModel> sorter;
+
+    // use readData to get the data
+    protected PluginsTableModel pluginsModel;
 
     protected void newFilter() {
         RowFilter<PluginsTableModel, Object> rf = null;
@@ -642,11 +617,45 @@ public class impSettings extends javax.swing.JDialog {
         };
         return handler;
     }
+    //</My-Custom>
 
     @Override
     public void pack() {
         super.pack(); //To change body of generated methods, choose Tools | Templates.
     }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    protected javax.swing.JButton BTNApply;
+    protected javax.swing.JButton BTNCancel;
+    protected javax.swing.JButton BTNOK;
+    protected javax.swing.JButton BTNRegistPlugin;
+    protected javax.swing.JButton BTNRemovePlugin;
+    protected javax.swing.JButton BTNUpgradePlugin;
+    protected javax.swing.JCheckBox CheckBoxEnableCustomFont;
+    protected javax.swing.JComboBox<String> ComboBoxFontSelector;
+    protected javax.swing.JComboBox<String> ComboBoxFontStyleSelector;
+    protected javax.swing.JComboBox<String> ComboBoxLanguage;
+    protected javax.swing.JComboBox<String> ComboBoxThemeSelector;
+    private javax.swing.JLabel LabelFontSize;
+    private javax.swing.JLabel LabelLanguage;
+    protected javax.swing.JLabel LabelPluginDescription;
+    private javax.swing.JLabel LabelPreviewCustomFont;
+    private javax.swing.JLabel LabelSearch;
+    private javax.swing.JLabel LabelStyles;
+    private javax.swing.JLabel LabelThemes;
+    protected javax.swing.JPanel PanelAppearance;
+    protected javax.swing.JPanel PanelGeneral;
+    protected javax.swing.JPanel PanelOperations;
+    protected javax.swing.JPanel PanelPluginRegist;
+    protected javax.swing.JPanel PanelPlugins;
+    protected javax.swing.JPanel PanelPluginsSearch;
+    protected javax.swing.JSpinner SpinnerFontSize;
+    protected javax.swing.JSplitPane SplitPanePlugins;
+    protected javax.swing.JTable TablePlugins;
+    protected javax.swing.JTabbedPane TabsConfig;
+    protected javax.swing.JTextField TextFieldSearch;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
     // End of variables declaration//GEN-END:variables
 
     //<Auto-Generate-Result>

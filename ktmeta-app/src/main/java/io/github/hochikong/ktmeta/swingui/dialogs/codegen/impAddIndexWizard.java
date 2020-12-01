@@ -23,19 +23,6 @@ import java.awt.*;
  */
 public class impAddIndexWizard extends javax.swing.JDialog {
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    protected javax.swing.JButton BTNCancelAddIndex;
-    protected javax.swing.JButton BTNIndexTestConn;
-    protected javax.swing.JButton BTNOKAddIndex;
-    protected javax.swing.JTextField FieldIndexDesc;
-    protected javax.swing.JTextField FieldIndexName;
-    protected javax.swing.JTextField FieldIndexURL;
-    protected javax.swing.JLabel LabelIndexDesc;
-    protected javax.swing.JLabel LabelIndexName;
-    protected javax.swing.JLabel LabelIndexURL;
-    //</Auto-Generate>
-    protected javax.swing.JProgressBar ProgressBarTestConn;
-    
     /**
      * Creates new form AddIndexWizard
      */
@@ -45,37 +32,12 @@ public class impAddIndexWizard extends javax.swing.JDialog {
         HideHead();
         this.setLocationRelativeTo(null);
     }
-    //</My-Custom>
-
-
+    
     public impAddIndexWizard(java.awt.Frame parent, boolean modal, Image icon){
         super(parent, modal);
         initComponents();
         HideHead();
         this.setIconImage(icon);
-    }
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        FlatSolarizedLightIJTheme.install();
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                impAddIndexWizard dialog = new impAddIndexWizard(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-
-                dialog.BTNCancelAddIndex.requestFocusInWindow();
-                dialog.setVisible(true);
-            }
-        });
     }
 
     /**
@@ -245,12 +207,50 @@ public class impAddIndexWizard extends javax.swing.JDialog {
 //        this.FieldIndexURL.setForeground(new java.awt.Color(0, 0, 0));
 //        this.FieldIndexURL.selectAll();
     }//GEN-LAST:event_FieldIndexURLMouseClicked
+    //</Auto-Generate>
 
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        FlatSolarizedLightIJTheme.install();
+
+        /* Create and display the dialog */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                impAddIndexWizard dialog = new impAddIndexWizard(new javax.swing.JFrame(), true);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+
+                dialog.BTNCancelAddIndex.requestFocusInWindow();
+                dialog.setVisible(true);
+            }
+        });
+    }
+    
     //<My-Custom>
     protected void HideHead(){
         // Like IDEA style
         this.getRootPane().setWindowDecorationStyle(JRootPane.FRAME);
     }
+    //</My-Custom>
+
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    protected javax.swing.JButton BTNCancelAddIndex;
+    protected javax.swing.JButton BTNIndexTestConn;
+    protected javax.swing.JButton BTNOKAddIndex;
+    protected javax.swing.JTextField FieldIndexDesc;
+    protected javax.swing.JTextField FieldIndexName;
+    protected javax.swing.JTextField FieldIndexURL;
+    protected javax.swing.JLabel LabelIndexDesc;
+    protected javax.swing.JLabel LabelIndexName;
+    protected javax.swing.JLabel LabelIndexURL;
+    protected javax.swing.JProgressBar ProgressBarTestConn;
     // End of variables declaration//GEN-END:variables
 
     //<Auto-Generate-Result>

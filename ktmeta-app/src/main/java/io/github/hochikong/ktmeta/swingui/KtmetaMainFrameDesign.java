@@ -29,140 +29,6 @@ import java.util.HashMap;
  */
 public class KtmetaMainFrameDesign extends javax.swing.JFrame {
 
-    // *************************************************************************
-    // my custom codes
-    // Used by TabbedPaneSplitRight to keep the reference of JLabels.
-    private final int testIndex = 0;
-    protected HashMap<String, JLabel> rightVerticalTabLabels = new HashMap<>();
-    // Used by TreeDatabases, TreeIndices and TreeMetadataLibs to store which rows are selected.
-    protected int[] databaseTreeSelectionRows;
-    protected int[] indicesTreeSelectionRows;
-    protected int[] metadatalibsTreeSelectionRows;
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    protected javax.swing.JButton BTNAddDatabase;
-    protected javax.swing.JButton BTNAddESIndex;
-    protected javax.swing.JButton BTNAddMetaLib;
-    protected javax.swing.JButton BTNGotoFirstPage;
-    // end
-    protected javax.swing.JButton BTNGotoLastPage;
-    protected javax.swing.JButton BTNGotoNextPage;
-    protected javax.swing.JButton BTNGotoPreviousPage;
-    protected javax.swing.JButton BTNQQueryHelper;
-    protected javax.swing.JButton BTNQuickQuerySearch;
-    // end
-    protected javax.swing.JButton BTNRefresh;
-    protected javax.swing.JButton BTNRightPreviewEnlargeShotcut;
-    
-    //</My-Custom>
-    protected javax.swing.JPanel BottomPanel;
-    protected javax.swing.JCheckBox CheckBoxQQueryCreateNewTab;
-    protected javax.swing.JCheckBox CheckBoxQQueryOnDB;
-    protected javax.swing.JCheckBox CheckBoxQQueryOnES;
-    protected javax.swing.JComboBox<String> ComboBoxQQueryAvailableMetaLibs;
-    protected javax.swing.JMenu EditMenu;
-    protected javax.swing.JMenu FileMenu;
-    protected javax.swing.JMenu HelpMenu;
-    protected javax.swing.JLabel LabelResultRows;
-    protected javax.swing.JMenuBar MainMenuBar;
-    protected javax.swing.JSplitPane MainSplitPane;
-    protected javax.swing.JToolBar MainToolBar;
-    protected javax.swing.JMenuItem MenuItemAbout;
-    protected javax.swing.JMenuItem MenuItemAddDatabase;
-    protected javax.swing.JMenuItem MenuItemAddIndex;
-    protected javax.swing.JMenuItem MenuItemExit;
-    protected javax.swing.JMenuItem MenuItemNewMetaLib;
-    protected javax.swing.JMenuItem MenuItemScanMetas;
-    protected javax.swing.JMenuItem MenuItemSettings;
-    protected javax.swing.JMenuItem PMAbstractCopyAll;
-    protected javax.swing.JMenuItem PMDBPropertiesEdit;
-    protected javax.swing.JMenuItem PMDetailsExportToFile;
-    protected javax.swing.JMenuItem PMExportDatabaseData;
-    protected javax.swing.JMenuItem PMExportJSON;
-    protected javax.swing.JMenuItem PMImportDataToDB;
-    protected javax.swing.JMenuItem PMIndexPropertiesEdit;
-    protected javax.swing.JMenuItem PMMetaLibProperties;
-    protected javax.swing.JMenuItem PMRemoveDatabase;
-    protected javax.swing.JMenuItem PMRemoveIndex;
-    protected javax.swing.JMenuItem PMRemoveMetaLib;
-    protected javax.swing.JMenuItem PMRenameDatabase;
-    protected javax.swing.JMenuItem PMRenameIndices;
-    protected javax.swing.JMenuItem PMRenameMetaLib;
-    protected javax.swing.JMenuItem PMSyncToES;
-    protected javax.swing.JMenuItem PMTagsAddCustom;
-    protected javax.swing.JMenuItem PMTagsCopyAll;
-    protected javax.swing.JMenuItem PMTagsCopySelected;
-    protected javax.swing.JMenuItem PMViewEnlarge;
-    protected javax.swing.JPanel PanelInfoOutput;
-    protected javax.swing.JTabbedPane PanelQuery;
-    protected javax.swing.JPanel PanelResultTemplate;
-    protected javax.swing.JPanel PanelResultToolbar;
-    protected javax.swing.JPanel PanelRightPreview;
-    protected javax.swing.JPanel PanelSplitCenter;
-    protected javax.swing.JPopupMenu PopupMenuAbstract;
-    protected javax.swing.JPopupMenu PopupMenuDatabasesTree;
-    protected javax.swing.JPopupMenu PopupMenuIndicesTree;
-    protected javax.swing.JPopupMenu PopupMenuMetaLibsTree;
-    protected javax.swing.JPopupMenu PopupMenuMetadataDetails;
-    protected javax.swing.JPopupMenu PopupMenuPreview;
-    protected javax.swing.JPopupMenu PopupMenuTags;
-    protected javax.swing.JPanel RightDetailsPane;
-    protected javax.swing.JLabel RightPreviewLabel;
-    protected javax.swing.JTextPane RightTextPaneAbstract;
-    protected javax.swing.JTextPane RightTextPaneMetaDoc;
-    protected javax.swing.JTextPane RightTextPaneTags;
-    protected javax.swing.JSpinner SpinnerMaxRows;
-    protected javax.swing.JSplitPane SplitPaneSubRight;
-    protected javax.swing.JSplitPane SplitPaneVTGeneral;
-    protected javax.swing.JTabbedPane TabbedPaneQueryResult;
-    protected javax.swing.JTabbedPane TabbedPaneSplitRight;
-    protected javax.swing.JTable TableResult;
-    protected javax.swing.JTextField TextFieldQQuerySearch;
-    protected javax.swing.JPanel ToolBarPanel;
-    protected javax.swing.JMenu ToolsMenu;
-    private javax.swing.ButtonGroup ButtonGroupOnAttr;
-    private javax.swing.ButtonGroup ButtonGroupOnWhere;
-    private javax.swing.JLabel LabelQQueryOnMetaLib;
-    private javax.swing.JLabel LabelQQuerySearch;
-    private javax.swing.JLabel LabelRightAbstract;
-    private javax.swing.JLabel LabelRightPreview;
-    private javax.swing.JLabel LabelRightTags;
-    private javax.swing.JMenuItem PMAbstractCopySelected;
-    private javax.swing.JPanel PanelQuickQuery;
-    private javax.swing.JLabel RightLabelMetadataDoc;
-    private javax.swing.JScrollPane SRPScrollPane;
-    private javax.swing.JPanel SplitPaneSubLeft;
-    private javax.swing.JSplitPane SplitPaneSubVTLeft;
-    private javax.swing.JTabbedPane SubLeftDown;
-    private javax.swing.JTabbedPane SubLeftUpTab;
-    private javax.swing.JTree TreeDatabases;
-    private javax.swing.JTree TreeIndices;
-    private javax.swing.JTree TreeMetadataLibs;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JScrollPane jScrollPane7;
-    private javax.swing.JPopupMenu.Separator jSeparator1;
-    private javax.swing.JPopupMenu.Separator jSeparator10;
-    private javax.swing.JPopupMenu.Separator jSeparator12;
-    private javax.swing.JPopupMenu.Separator jSeparator13;
-    private javax.swing.JToolBar.Separator jSeparator14;
-    private javax.swing.JPopupMenu.Separator jSeparator2;
-    private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JPopupMenu.Separator jSeparator4;
-    private javax.swing.JPopupMenu.Separator jSeparator5;
-    private javax.swing.JPopupMenu.Separator jSeparator6;
-    private javax.swing.JPopupMenu.Separator jSeparator7;
-    private javax.swing.JPopupMenu.Separator jSeparator8;
-    private javax.swing.JPopupMenu.Separator jSeparator9;
     /**
      * Creates new form KtmetaJFrame
      */
@@ -172,24 +38,6 @@ public class KtmetaMainFrameDesign extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setIcon();
         // this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-    }
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        /* Install theme */
-        FlatSolarizedLightIJTheme.install();
-        //FlatDarculaLaf.install();
-        //FlatIntelliJLaf.install();
-        //FlatCyanLightIJTheme.install();
-        //FlatHiberbeeDarkIJTheme.install();
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new KtmetaMainFrameDesign().setVisible(true);
-            }
-        });
     }
 
     /**
@@ -931,10 +779,23 @@ public class KtmetaMainFrameDesign extends javax.swing.JFrame {
         this.TabbedPaneQueryResult.addTab("TEST", tmp);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    // *************************************************************************
+    // my custom codes
+    // Used by TabbedPaneSplitRight to keep the reference of JLabels.
+    private final int testIndex = 0;
+    
+    protected HashMap<String, JLabel> rightVerticalTabLabels = new HashMap<>();
+
+    // Used by TreeDatabases, TreeIndices and TreeMetadataLibs to store which rows are selected.
+    protected int[] databaseTreeSelectionRows;
+    protected int[] indicesTreeSelectionRows;
+    protected int[] metadatalibsTreeSelectionRows;
+
     private int[] updateSelectionRows(javax.swing.event.TreeSelectionEvent evt) {
         JTree treeSource = (JTree) evt.getSource();
         return treeSource.getSelectionRows();
     }
+    // end
 
     @Override
     public void layout() {
@@ -954,7 +815,7 @@ public class KtmetaMainFrameDesign extends javax.swing.JFrame {
                 }
         );
     }
-
+    
     protected TableModel buildSearchResultModel(Object[][] data){
         return new javax.swing.table.DefaultTableModel(data, new String[]{"Result ", "Match on: "});
     }
@@ -971,11 +832,154 @@ public class KtmetaMainFrameDesign extends javax.swing.JFrame {
             this.RightPreviewLabel.setIcon(new ImageIcon(dimg));
         }
     }
+    // end
 
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        /* Install theme */
+        FlatSolarizedLightIJTheme.install();
+        //FlatDarculaLaf.install();
+        //FlatIntelliJLaf.install();
+        //FlatCyanLightIJTheme.install();
+        //FlatHiberbeeDarkIJTheme.install();
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new KtmetaMainFrameDesign().setVisible(true);
+            }
+        });
+    }
+    
     //<My-Custom>
     private void setIcon(){
         Image img = new ImageIcon(getClass().getResource("/imgs/LOGO.png")).getImage();
         this.setIconImage(img);
     }
+    
+    //</My-Custom>
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    protected javax.swing.JButton BTNAddDatabase;
+    protected javax.swing.JButton BTNAddESIndex;
+    protected javax.swing.JButton BTNAddMetaLib;
+    protected javax.swing.JButton BTNGotoFirstPage;
+    protected javax.swing.JButton BTNGotoLastPage;
+    protected javax.swing.JButton BTNGotoNextPage;
+    protected javax.swing.JButton BTNGotoPreviousPage;
+    protected javax.swing.JButton BTNQQueryHelper;
+    protected javax.swing.JButton BTNQuickQuerySearch;
+    protected javax.swing.JButton BTNRefresh;
+    protected javax.swing.JButton BTNRightPreviewEnlargeShotcut;
+    protected javax.swing.JPanel BottomPanel;
+    private javax.swing.ButtonGroup ButtonGroupOnAttr;
+    private javax.swing.ButtonGroup ButtonGroupOnWhere;
+    protected javax.swing.JCheckBox CheckBoxQQueryCreateNewTab;
+    protected javax.swing.JCheckBox CheckBoxQQueryOnDB;
+    protected javax.swing.JCheckBox CheckBoxQQueryOnES;
+    protected javax.swing.JComboBox<String> ComboBoxQQueryAvailableMetaLibs;
+    protected javax.swing.JMenu EditMenu;
+    protected javax.swing.JMenu FileMenu;
+    protected javax.swing.JMenu HelpMenu;
+    private javax.swing.JLabel LabelQQueryOnMetaLib;
+    private javax.swing.JLabel LabelQQuerySearch;
+    protected javax.swing.JLabel LabelResultRows;
+    private javax.swing.JLabel LabelRightAbstract;
+    private javax.swing.JLabel LabelRightPreview;
+    private javax.swing.JLabel LabelRightTags;
+    protected javax.swing.JMenuBar MainMenuBar;
+    protected javax.swing.JSplitPane MainSplitPane;
+    protected javax.swing.JToolBar MainToolBar;
+    protected javax.swing.JMenuItem MenuItemAbout;
+    protected javax.swing.JMenuItem MenuItemAddDatabase;
+    protected javax.swing.JMenuItem MenuItemAddIndex;
+    protected javax.swing.JMenuItem MenuItemExit;
+    protected javax.swing.JMenuItem MenuItemNewMetaLib;
+    protected javax.swing.JMenuItem MenuItemScanMetas;
+    protected javax.swing.JMenuItem MenuItemSettings;
+    protected javax.swing.JMenuItem PMAbstractCopyAll;
+    private javax.swing.JMenuItem PMAbstractCopySelected;
+    protected javax.swing.JMenuItem PMDBPropertiesEdit;
+    protected javax.swing.JMenuItem PMDetailsExportToFile;
+    protected javax.swing.JMenuItem PMExportDatabaseData;
+    protected javax.swing.JMenuItem PMExportJSON;
+    protected javax.swing.JMenuItem PMImportDataToDB;
+    protected javax.swing.JMenuItem PMIndexPropertiesEdit;
+    protected javax.swing.JMenuItem PMMetaLibProperties;
+    protected javax.swing.JMenuItem PMRemoveDatabase;
+    protected javax.swing.JMenuItem PMRemoveIndex;
+    protected javax.swing.JMenuItem PMRemoveMetaLib;
+    protected javax.swing.JMenuItem PMRenameDatabase;
+    protected javax.swing.JMenuItem PMRenameIndices;
+    protected javax.swing.JMenuItem PMRenameMetaLib;
+    protected javax.swing.JMenuItem PMSyncToES;
+    protected javax.swing.JMenuItem PMTagsAddCustom;
+    protected javax.swing.JMenuItem PMTagsCopyAll;
+    protected javax.swing.JMenuItem PMTagsCopySelected;
+    protected javax.swing.JMenuItem PMViewEnlarge;
+    protected javax.swing.JPanel PanelInfoOutput;
+    protected javax.swing.JTabbedPane PanelQuery;
+    private javax.swing.JPanel PanelQuickQuery;
+    protected javax.swing.JPanel PanelResultTemplate;
+    protected javax.swing.JPanel PanelResultToolbar;
+    protected javax.swing.JPanel PanelRightPreview;
+    protected javax.swing.JPanel PanelSplitCenter;
+    protected javax.swing.JPopupMenu PopupMenuAbstract;
+    protected javax.swing.JPopupMenu PopupMenuDatabasesTree;
+    protected javax.swing.JPopupMenu PopupMenuIndicesTree;
+    protected javax.swing.JPopupMenu PopupMenuMetaLibsTree;
+    protected javax.swing.JPopupMenu PopupMenuMetadataDetails;
+    protected javax.swing.JPopupMenu PopupMenuPreview;
+    protected javax.swing.JPopupMenu PopupMenuTags;
+    protected javax.swing.JPanel RightDetailsPane;
+    private javax.swing.JLabel RightLabelMetadataDoc;
+    protected javax.swing.JLabel RightPreviewLabel;
+    protected javax.swing.JTextPane RightTextPaneAbstract;
+    protected javax.swing.JTextPane RightTextPaneMetaDoc;
+    protected javax.swing.JTextPane RightTextPaneTags;
+    private javax.swing.JScrollPane SRPScrollPane;
+    protected javax.swing.JSpinner SpinnerMaxRows;
+    private javax.swing.JPanel SplitPaneSubLeft;
+    protected javax.swing.JSplitPane SplitPaneSubRight;
+    private javax.swing.JSplitPane SplitPaneSubVTLeft;
+    protected javax.swing.JSplitPane SplitPaneVTGeneral;
+    private javax.swing.JTabbedPane SubLeftDown;
+    private javax.swing.JTabbedPane SubLeftUpTab;
+    protected javax.swing.JTabbedPane TabbedPaneQueryResult;
+    protected javax.swing.JTabbedPane TabbedPaneSplitRight;
+    protected javax.swing.JTable TableResult;
+    protected javax.swing.JTextField TextFieldQQuerySearch;
+    protected javax.swing.JPanel ToolBarPanel;
+    protected javax.swing.JMenu ToolsMenu;
+    private javax.swing.JTree TreeDatabases;
+    private javax.swing.JTree TreeIndices;
+    private javax.swing.JTree TreeMetadataLibs;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JPopupMenu.Separator jSeparator10;
+    private javax.swing.JPopupMenu.Separator jSeparator12;
+    private javax.swing.JPopupMenu.Separator jSeparator13;
+    private javax.swing.JToolBar.Separator jSeparator14;
+    private javax.swing.JPopupMenu.Separator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JPopupMenu.Separator jSeparator4;
+    private javax.swing.JPopupMenu.Separator jSeparator5;
+    private javax.swing.JPopupMenu.Separator jSeparator6;
+    private javax.swing.JPopupMenu.Separator jSeparator7;
+    private javax.swing.JPopupMenu.Separator jSeparator8;
+    private javax.swing.JPopupMenu.Separator jSeparator9;
     // End of variables declaration//GEN-END:variables
 }

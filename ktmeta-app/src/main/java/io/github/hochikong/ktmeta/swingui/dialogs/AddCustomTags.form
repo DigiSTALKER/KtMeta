@@ -68,23 +68,23 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace pref="33" max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
+              <Group type="103" groupAlignment="1" max="-2" attributes="0">
                   <Group type="102" attributes="0">
+                      <Component id="BTNRemoveTag" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                       <Component id="BTNOKAddTags" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="BTNCancelAddTags" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Group type="102" attributes="0">
-                          <Component id="LabelAddTag" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="TextFieldAddTag" min="-2" pref="388" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Component id="BTNAddTag" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Component id="LabelCurrentTags" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="jScrollPane2" min="-2" pref="668" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="LabelAddTag" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="TextFieldAddTag" min="-2" pref="388" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="BTNAddTag" min="-2" max="-2" attributes="0"/>
                   </Group>
+                  <Component id="LabelCurrentTags" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPane2" alignment="0" min="-2" pref="668" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
           </Group>
@@ -107,6 +107,7 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="BTNOKAddTags" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="BTNCancelAddTags" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="BTNRemoveTag" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="71" max="32767" attributes="0"/>
           </Group>
@@ -215,6 +216,17 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BTNAddTagActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="BTNRemoveTag">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Remove Selected Tag"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BTNRemoveTagActionPerformed"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="4"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>

@@ -16,20 +16,6 @@ import java.awt.*;
  */
 public class SetESMapping extends javax.swing.JDialog {
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    protected javax.swing.JButton BTNClearTextArea;
-    protected javax.swing.JButton BTNCreateMapping;
-    protected javax.swing.JButton BTNResetMapping;
-    protected javax.swing.JSpinner SpinnerESPort;
-    protected javax.swing.JTextArea TextAreaJSONSample;
-    protected javax.swing.JTextField TextFieldESHost;
-    protected javax.swing.JTextField TextFieldESIndex;
-    private javax.swing.JLabel LabelESHost;
-    //</Auto-Generate>
-    private javax.swing.JLabel LabelESIndex;
-    private javax.swing.JLabel LabelESPort;
-    //</My-Custom>
-    private javax.swing.JScrollPane jScrollPane1;
     /**
      * Creates new form NewMapping
      */
@@ -39,33 +25,12 @@ public class SetESMapping extends javax.swing.JDialog {
         HideHead();
         this.setLocationRelativeTo(null);
     }
+    
     public SetESMapping(java.awt.Frame parent, boolean modal, Image icon) {
         super(parent, modal);
         initComponents();
         HideHead();
         this.setIconImage(icon);
-    }
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        FlatSolarizedLightIJTheme.install();
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                SetESMapping dialog = new SetESMapping(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.TextAreaJSONSample.requestFocusInWindow();
-                dialog.setVisible(true);
-            }
-        });
     }
 
     /**
@@ -220,11 +185,48 @@ public class SetESMapping extends javax.swing.JDialog {
     private void BTNClearTextAreaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNClearTextAreaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_BTNClearTextAreaActionPerformed
-
+    //</Auto-Generate>
+    
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        FlatSolarizedLightIJTheme.install();
+        
+        /* Create and display the dialog */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                SetESMapping dialog = new SetESMapping(new javax.swing.JFrame(), true);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+                dialog.TextAreaJSONSample.requestFocusInWindow();
+                dialog.setVisible(true);
+            }
+        });
+    }
+    
     //<My-Custom>
     protected void HideHead(){
         // Like IDEA style
         this.getRootPane().setWindowDecorationStyle(JRootPane.FRAME);
     }
+    //</My-Custom>
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    protected javax.swing.JButton BTNClearTextArea;
+    protected javax.swing.JButton BTNCreateMapping;
+    protected javax.swing.JButton BTNResetMapping;
+    private javax.swing.JLabel LabelESHost;
+    private javax.swing.JLabel LabelESIndex;
+    private javax.swing.JLabel LabelESPort;
+    protected javax.swing.JSpinner SpinnerESPort;
+    protected javax.swing.JTextArea TextAreaJSONSample;
+    protected javax.swing.JTextField TextFieldESHost;
+    protected javax.swing.JTextField TextFieldESIndex;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

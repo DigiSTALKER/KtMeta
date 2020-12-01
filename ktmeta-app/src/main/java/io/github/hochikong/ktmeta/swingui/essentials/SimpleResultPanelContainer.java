@@ -22,37 +22,13 @@ import java.util.Random;
  */
 public class SimpleResultPanelContainer extends javax.swing.JPanel {
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    protected javax.swing.JButton BTNAddRow;
-    protected javax.swing.JButton BTNDeleteRow;
-    protected javax.swing.JButton BTNGotoFirstPage;
-    protected javax.swing.JButton BTNGotoLastPage;
-    protected javax.swing.JButton BTNGotoNextPage;
-    protected javax.swing.JButton BTNGotoPreviousPage;
-    protected javax.swing.JButton BTNRefresh;
-    protected javax.swing.JLabel LabelResultRows;
-    protected javax.swing.JPanel PanelResultToolbar;
-    protected javax.swing.JSpinner SpinnerMaxRows;
-    protected javax.swing.JTable TableResult;
-    //</Auto-Generate>
-    private TableModel injectModel = new javax.swing.table.DefaultTableModel(
-            new Object[][]{
-                {getRandomString(), getRandomString()},
-                {getRandomString(), getRandomString()}
-            },
-            new String[]{
-                "Result : ", "Match on : "
-            }
-    );
-    private javax.swing.JScrollPane SRPScrollPane;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator3;
     /**
      * Creates new form NewJPanel
      */
     public SimpleResultPanelContainer() {
         initComponents();
     }
+
     public SimpleResultPanelContainer(TableModel model) {
         this.injectModel = model;
         initComponents();
@@ -269,11 +245,38 @@ public class SimpleResultPanelContainer extends javax.swing.JPanel {
     private void BTNAddRowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNAddRowActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_BTNAddRowActionPerformed
+    //</Auto-Generate>
+
+    private TableModel injectModel = new javax.swing.table.DefaultTableModel(
+            new Object[][]{
+                {getRandomString(), getRandomString()},
+                {getRandomString(), getRandomString()}
+            },
+            new String[]{
+                "Result : ", "Match on : "
+            }
+    );
 
     private String getRandomString() {
         byte[] array = new byte[7]; // length is bounded by 7
         new Random().nextBytes(array);
         return new String(array, StandardCharsets.UTF_8);
     }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    protected javax.swing.JButton BTNAddRow;
+    protected javax.swing.JButton BTNDeleteRow;
+    protected javax.swing.JButton BTNGotoFirstPage;
+    protected javax.swing.JButton BTNGotoLastPage;
+    protected javax.swing.JButton BTNGotoNextPage;
+    protected javax.swing.JButton BTNGotoPreviousPage;
+    protected javax.swing.JButton BTNRefresh;
+    protected javax.swing.JLabel LabelResultRows;
+    protected javax.swing.JPanel PanelResultToolbar;
+    private javax.swing.JScrollPane SRPScrollPane;
+    protected javax.swing.JSpinner SpinnerMaxRows;
+    protected javax.swing.JTable TableResult;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator3;
     // End of variables declaration//GEN-END:variables
 }

@@ -23,20 +23,6 @@ import java.awt.*;
  */
 public class TextPreviewDialog extends javax.swing.JDialog {
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    protected javax.swing.JButton BTNCancelAddTextPreview;
-    protected javax.swing.JButton BTNClearEditor;
-    protected javax.swing.JButton BTNOKAddTextPreview;
-    protected javax.swing.JLabel LabelEditorPreview;
-    protected javax.swing.JTextArea TextAreaEditor;
-    private javax.swing.JLabel LabelEditor;
-    private javax.swing.JLabel LabelPreview;
-    //</Auto-Generate>
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    //</My-Custom>
-
-
     /**
      * Creates new form TextPreviewDialog
      */
@@ -46,32 +32,12 @@ public class TextPreviewDialog extends javax.swing.JDialog {
         HideHead();
         this.setLocationRelativeTo(null);
     }
+    
     public TextPreviewDialog(java.awt.Frame parent, boolean modal, Image icon) {
         super(parent, modal);
         initComponents();
         HideHead();
         this.setIconImage(icon);
-    }
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        FlatSolarizedLightIJTheme.install();
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                TextPreviewDialog dialog = new TextPreviewDialog(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
     }
 
     /**
@@ -203,11 +169,46 @@ public class TextPreviewDialog extends javax.swing.JDialog {
     private void TextAreaEditorCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_TextAreaEditorCaretUpdate
         // TODO add your handling code here:
     }//GEN-LAST:event_TextAreaEditorCaretUpdate
+    //</Auto-Generate>
+    
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        FlatSolarizedLightIJTheme.install();
 
+        /* Create and display the dialog */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                TextPreviewDialog dialog = new TextPreviewDialog(new javax.swing.JFrame(), true);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+                dialog.setVisible(true);
+            }
+        });
+    }
+    
     //<My-Custom>
     protected void HideHead(){
         // Like IDEA style
         this.getRootPane().setWindowDecorationStyle(JRootPane.FRAME);
     }
+    //</My-Custom>
+
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    protected javax.swing.JButton BTNCancelAddTextPreview;
+    protected javax.swing.JButton BTNClearEditor;
+    protected javax.swing.JButton BTNOKAddTextPreview;
+    private javax.swing.JLabel LabelEditor;
+    protected javax.swing.JLabel LabelEditorPreview;
+    private javax.swing.JLabel LabelPreview;
+    protected javax.swing.JTextArea TextAreaEditor;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
 }

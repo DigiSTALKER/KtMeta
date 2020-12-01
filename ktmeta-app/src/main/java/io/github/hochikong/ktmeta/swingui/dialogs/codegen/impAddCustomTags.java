@@ -24,23 +24,6 @@ import java.awt.*;
  */
 public class impAddCustomTags extends javax.swing.JDialog {
 
-    //<My-Custom>
-    protected Object[][] tagsData;
-    protected javax.swing.JButton BTNCancelAddTags;
-    protected javax.swing.JButton BTNOKAddTags;
-    protected javax.swing.JMenuItem MenuItemRemoveTag;
-    protected javax.swing.JMenuItem MenuItemRenameTag;
-    protected javax.swing.JPopupMenu PopupMenuTagsOps;
-    protected javax.swing.JTable TableUserCustomTags;
-    protected javax.swing.JTextField TextFieldAddTag;
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BTNAddTag;
-    //</Auto-Generate>
-    private javax.swing.JLabel LabelAddTag;
-    private javax.swing.JLabel LabelCurrentTags;
-    private javax.swing.JScrollPane jScrollPane2;
-    //</My-Custom>
-
     /**
      * Creates new form AddIndexWizard
      */
@@ -50,33 +33,13 @@ public class impAddCustomTags extends javax.swing.JDialog {
         HideHead();
         this.setLocationRelativeTo(null);
     }
+    
     public impAddCustomTags(java.awt.Frame parent, boolean modal, Object[][] TagsData, Image icon){
         super(parent, modal);
         this.tagsData = TagsData;
         initComponents();
         HideHead();
         this.setIconImage(icon);
-    }
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        FlatSolarizedLightIJTheme.install();
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                impAddCustomTags dialog = new impAddCustomTags(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
     }
 
     /**
@@ -226,11 +189,50 @@ public class impAddCustomTags extends javax.swing.JDialog {
     private void MenuItemRenameTagActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemRenameTagActionPerformed
         impMenuItemRenameTagActionPerformed(evt);
     }//GEN-LAST:event_MenuItemRenameTagActionPerformed
+    //</Auto-Generate>
+    
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        FlatSolarizedLightIJTheme.install();
 
+        /* Create and display the dialog */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                impAddCustomTags dialog = new impAddCustomTags(new javax.swing.JFrame(), true);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+                dialog.setVisible(true);
+            }
+        });
+    }
+    
+    //<My-Custom>
+    protected Object[][] tagsData;
+    
     protected void HideHead(){
         // Like IDEA style
         this.getRootPane().setWindowDecorationStyle(JRootPane.FRAME);
     }
+    //</My-Custom>
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BTNAddTag;
+    protected javax.swing.JButton BTNCancelAddTags;
+    protected javax.swing.JButton BTNOKAddTags;
+    private javax.swing.JLabel LabelAddTag;
+    private javax.swing.JLabel LabelCurrentTags;
+    protected javax.swing.JMenuItem MenuItemRemoveTag;
+    protected javax.swing.JMenuItem MenuItemRenameTag;
+    protected javax.swing.JPopupMenu PopupMenuTagsOps;
+    protected javax.swing.JTable TableUserCustomTags;
+    protected javax.swing.JTextField TextFieldAddTag;
+    private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
 
     //<Auto-Generate-Result>
