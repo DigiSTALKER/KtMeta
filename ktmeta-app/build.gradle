@@ -20,6 +20,7 @@ plugins {
     id 'org.jetbrains.kotlin.kapt'
     id 'application'
     id 'distribution'
+    id 'io.ebean' version '12.6.1'
 }
 
 apply from: 'filecopy.gradle'
@@ -42,10 +43,10 @@ dependencies {
     implementation 'com.formdev:flatlaf-intellij-themes:0.41'
 
     // Vertx
-    implementation 'io.vertx:vertx-core:3.9.2'
-    implementation 'io.vertx:vertx-service-factory:3.9.2'
-    implementation 'io.vertx:vertx-hazelcast:3.9.2'
-    implementation 'io.vertx:vertx-lang-kotlin:3.9.2'
+    implementation 'io.vertx:vertx-core:4.0.0'
+    implementation 'io.vertx:vertx-service-factory:4.0.0'
+    implementation 'io.vertx:vertx-hazelcast:4.0.0'
+    implementation 'io.vertx:vertx-lang-kotlin:4.0.0'
 
     // Encryption
     implementation 'org.jasypt:jasypt:1.9.3'
@@ -75,6 +76,9 @@ dependencies {
     implementation 'ch.qos.logback:logback-classic:1.2.3'
     implementation 'ch.qos.logback:logback-core:1.2.3'
     implementation 'org.jdbi:jdbi3-core:3.17.0'
+    implementation 'io.ebean:ebean:12.6.1'
+    implementation 'io.ebean:ebean-querybean:12.6.1'
+    kapt 'io.ebean:kotlin-querybean-generator:12.6.1'
     implementation 'me.liuwj.ktorm:ktorm-core:3.0.0'
     implementation 'org.xerial:sqlite-jdbc:3.32.3.1'
     implementation 'org.postgresql:postgresql:42.2.14'
@@ -82,7 +86,16 @@ dependencies {
     // Testing
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.2'
     testImplementation 'org.junit.jupiter:junit-jupiter-params:5.6.2'
+    testImplementation 'io.ebean:ebean-test:12.6.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.6.2'
+}
+
+ebean {
+    debugLevel = 1
+}
+
+test {
+    testLogging.showStandardStreams = true
 }
 
 dokka {

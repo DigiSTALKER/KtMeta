@@ -58,7 +58,7 @@ interface BasicMetaPluginAPI {
     fun putAbstract(id: Int, content: String?): String
 
     /**
-     * Similar with putAbstract().
+     * Similar to putAbstract().
      *
      * If [override] is true, new [tags] will cover the old one.
      * If [override] is false, new [tags] will append to the old one.
@@ -66,7 +66,7 @@ interface BasicMetaPluginAPI {
     fun putCustomTags(id: Int, tags: List<String>?, override: Boolean): List<String>
 
     /**
-     * Similar with putAbstract()
+     * Similar to putAbstract()
      * Preview can be a text or a base64 code convert from a photo.
      *
      * If [override] is true, new [previews] will cover the old one.
