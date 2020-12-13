@@ -62,16 +62,22 @@ public class MetaAdvanceSearch extends javax.swing.JFrame {
         PanelRulesEditor = new javax.swing.JPanel();
         LabelAttribute = new javax.swing.JLabel();
         ComboBoxAttribute = new javax.swing.JComboBox<>();
-        BTNAddRule = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        BTNRemoveRule = new javax.swing.JButton();
-        BTNResetRules = new javax.swing.JButton();
+        BTNAddRuleToPreview = new javax.swing.JButton();
         ComboBoxMatchConditions = new javax.swing.JComboBox<>();
         TextFieldSearchInput = new javax.swing.JTextField();
         LabelThen = new javax.swing.JLabel();
         ComboBoxRulesConnector = new javax.swing.JComboBox<>();
+        CheckBoxIsCompoundRule = new javax.swing.JCheckBox();
+        LabelRulePreview = new javax.swing.JLabel();
+        LabelRulePreviewZone = new javax.swing.JLabel();
+        BTNCommitPreview = new javax.swing.JButton();
+        BTNDiscardPreview = new javax.swing.JButton();
+        PanelSearchRules = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         ListRulesDisplay = new javax.swing.JList<>();
+        BTNResetRules = new javax.swing.JButton();
+        BTNRemoveSelectedRule = new javax.swing.JButton();
+        BTNSearch = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("i18n/Frames/MetaAdvanceSearch_trans"); // NOI18N
@@ -95,32 +101,17 @@ public class MetaAdvanceSearch extends javax.swing.JFrame {
         buttonGroupOnWhere.add(CheckBoxSearchOnES);
         CheckBoxSearchOnES.setText(bundle.getString("ON ELASTICSEARCH")); // NOI18N
 
-        PanelRulesEditor.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Rules Editor", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Microsoft YaHei UI", 0, 14), new java.awt.Color(74, 136, 199))); // NOI18N
+        PanelRulesEditor.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Rules Builder - Add rules to make the searching more precisely ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Microsoft YaHei UI", 0, 12), new java.awt.Color(74, 136, 199))); // NOI18N
 
         LabelAttribute.setText(bundle.getString("ATTRIBUTE : ")); // NOI18N
 
         ComboBoxAttribute.setModel(new javax.swing.DefaultComboBoxModel<>(this.metaAttributes));
 
-        BTNAddRule.setText(bundle.getString("ADD")); // NOI18N
-        BTNAddRule.addActionListener(new java.awt.event.ActionListener() {
+        BTNAddRuleToPreview.setText(bundle.getString("ADD")); // NOI18N
+        BTNAddRuleToPreview.setFocusable(false);
+        BTNAddRuleToPreview.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BTNAddRuleActionPerformed(evt);
-            }
-        });
-
-        jLabel2.setText(bundle.getString("ADD RULES TO MAKE SEARCHING MORE PRECISELY ")); // NOI18N
-
-        BTNRemoveRule.setText(bundle.getString("REMOVE")); // NOI18N
-        BTNRemoveRule.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BTNRemoveRuleActionPerformed(evt);
-            }
-        });
-
-        BTNResetRules.setText(bundle.getString("RESET")); // NOI18N
-        BTNResetRules.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BTNResetRulesActionPerformed(evt);
+                BTNAddRuleToPreviewActionPerformed(evt);
             }
         });
 
@@ -130,6 +121,34 @@ public class MetaAdvanceSearch extends javax.swing.JFrame {
 
         ComboBoxRulesConnector.setModel(new javax.swing.DefaultComboBoxModel<>(this.ruleConnectors));
 
+        CheckBoxIsCompoundRule.setText(bundle.getString("AS COMPOUND RULE")); // NOI18N
+        CheckBoxIsCompoundRule.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                CheckBoxIsCompoundRuleItemStateChanged(evt);
+            }
+        });
+
+        LabelRulePreview.setText(bundle.getString("RULE PREVIEW : ")); // NOI18N
+
+        LabelRulePreviewZone.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        LabelRulePreviewZone.setText("Preview");
+        LabelRulePreviewZone.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(74, 136, 199), 2, true));
+
+        BTNCommitPreview.setText(bundle.getString("COMMIT")); // NOI18N
+        BTNCommitPreview.setFocusable(false);
+        BTNCommitPreview.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTNCommitPreviewActionPerformed(evt);
+            }
+        });
+
+        BTNDiscardPreview.setText(bundle.getString("DISCARD")); // NOI18N
+        BTNDiscardPreview.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTNDiscardPreviewActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout PanelRulesEditorLayout = new javax.swing.GroupLayout(PanelRulesEditor);
         PanelRulesEditor.setLayout(PanelRulesEditorLayout);
         PanelRulesEditorLayout.setHorizontalGroup(
@@ -138,37 +157,38 @@ public class MetaAdvanceSearch extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(PanelRulesEditorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PanelRulesEditorLayout.createSequentialGroup()
-                        .addComponent(LabelAttribute)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(ComboBoxAttribute, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(ComboBoxMatchConditions, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(TextFieldSearchInput, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(12, 12, 12)
-                        .addComponent(LabelThen)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(ComboBoxRulesConnector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(20, Short.MAX_VALUE))
+                        .addComponent(CheckBoxIsCompoundRule)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(PanelRulesEditorLayout.createSequentialGroup()
-                        .addGroup(PanelRulesEditorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(PanelRulesEditorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(PanelRulesEditorLayout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelRulesEditorLayout.createSequentialGroup()
-                                .addComponent(BTNResetRules)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(BTNAddRule)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(BTNRemoveRule)
-                        .addGap(18, 18, 18))))
+                                .addGroup(PanelRulesEditorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(LabelRulePreview)
+                                    .addComponent(BTNCommitPreview)
+                                    .addComponent(BTNDiscardPreview))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(LabelRulePreviewZone, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(BTNAddRuleToPreview)
+                            .addGroup(PanelRulesEditorLayout.createSequentialGroup()
+                                .addComponent(LabelAttribute)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(ComboBoxAttribute, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(ComboBoxMatchConditions, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(TextFieldSearchInput, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(12, 12, 12)
+                                .addComponent(LabelThen)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(ComboBoxRulesConnector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(20, Short.MAX_VALUE))))
         );
         PanelRulesEditorLayout.setVerticalGroup(
             PanelRulesEditorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelRulesEditorLayout.createSequentialGroup()
-                .addGap(8, 8, 8)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(4, 4, 4)
+                .addComponent(CheckBoxIsCompoundRule)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(PanelRulesEditorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(LabelAttribute)
                     .addComponent(ComboBoxAttribute, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -176,16 +196,78 @@ public class MetaAdvanceSearch extends javax.swing.JFrame {
                     .addComponent(TextFieldSearchInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(LabelThen)
                     .addComponent(ComboBoxRulesConnector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
-                .addGroup(PanelRulesEditorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BTNAddRule)
-                    .addComponent(BTNRemoveRule)
-                    .addComponent(BTNResetRules))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(BTNAddRuleToPreview)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(PanelRulesEditorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PanelRulesEditorLayout.createSequentialGroup()
+                        .addComponent(LabelRulePreview)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BTNCommitPreview)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BTNDiscardPreview)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(LabelRulePreviewZone, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
+        PanelSearchRules.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Search Rules", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Microsoft YaHei UI", 0, 12), new java.awt.Color(74, 136, 199))); // NOI18N
+
         ListRulesDisplay.setModel(this.rulesModel);
         jScrollPane1.setViewportView(ListRulesDisplay);
+
+        BTNResetRules.setText(bundle.getString("RESET")); // NOI18N
+        BTNResetRules.setFocusable(false);
+        BTNResetRules.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTNResetRulesActionPerformed(evt);
+            }
+        });
+
+        BTNRemoveSelectedRule.setText(bundle.getString("REMOVE")); // NOI18N
+        BTNRemoveSelectedRule.setFocusable(false);
+        BTNRemoveSelectedRule.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTNRemoveSelectedRuleActionPerformed(evt);
+            }
+        });
+
+        BTNSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/ico/20pix/search.png"))); // NOI18N
+        BTNSearch.setText("Search");
+        BTNSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTNSearchActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout PanelSearchRulesLayout = new javax.swing.GroupLayout(PanelSearchRules);
+        PanelSearchRules.setLayout(PanelSearchRulesLayout);
+        PanelSearchRulesLayout.setHorizontalGroup(
+            PanelSearchRulesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelSearchRulesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(PanelSearchRulesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
+                    .addGroup(PanelSearchRulesLayout.createSequentialGroup()
+                        .addComponent(BTNResetRules)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(BTNRemoveSelectedRule)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(BTNSearch)))
+                .addContainerGap())
+        );
+        PanelSearchRulesLayout.setVerticalGroup(
+            PanelSearchRulesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelSearchRulesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(PanelSearchRulesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BTNResetRules)
+                    .addComponent(BTNRemoveSelectedRule)
+                    .addComponent(BTNSearch))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -204,7 +286,7 @@ public class MetaAdvanceSearch extends javax.swing.JFrame {
                             .addComponent(CheckBoxCreateNewTab)
                             .addComponent(ComboBoxTargetMetaLib, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(PanelRulesEditor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1))
+                    .addComponent(PanelSearchRules, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(33, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -222,9 +304,9 @@ public class MetaAdvanceSearch extends javax.swing.JFrame {
                 .addComponent(CheckBoxSearchOnES)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(PanelRulesEditor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(71, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(PanelSearchRules, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(71, 71, 71))
         );
 
         pack();
@@ -239,13 +321,29 @@ public class MetaAdvanceSearch extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_BTNResetRulesActionPerformed
 
-    private void BTNAddRuleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNAddRuleActionPerformed
+    private void BTNAddRuleToPreviewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNAddRuleToPreviewActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_BTNAddRuleActionPerformed
+    }//GEN-LAST:event_BTNAddRuleToPreviewActionPerformed
 
-    private void BTNRemoveRuleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNRemoveRuleActionPerformed
+    private void BTNRemoveSelectedRuleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNRemoveSelectedRuleActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_BTNRemoveRuleActionPerformed
+    }//GEN-LAST:event_BTNRemoveSelectedRuleActionPerformed
+
+    private void BTNCommitPreviewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNCommitPreviewActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BTNCommitPreviewActionPerformed
+
+    private void BTNDiscardPreviewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNDiscardPreviewActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BTNDiscardPreviewActionPerformed
+
+    private void BTNSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNSearchActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BTNSearchActionPerformed
+
+    private void CheckBoxIsCompoundRuleItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_CheckBoxIsCompoundRuleItemStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CheckBoxIsCompoundRuleItemStateChanged
     //</Auto-Generate>
     
     /**
@@ -277,10 +375,14 @@ public class MetaAdvanceSearch extends javax.swing.JFrame {
     //</My-Custom>
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    protected javax.swing.JButton BTNAddRule;
-    private javax.swing.JButton BTNRemoveRule;
+    protected javax.swing.JButton BTNAddRuleToPreview;
+    protected javax.swing.JButton BTNCommitPreview;
+    protected javax.swing.JButton BTNDiscardPreview;
+    protected javax.swing.JButton BTNRemoveSelectedRule;
     protected javax.swing.JButton BTNResetRules;
+    protected javax.swing.JButton BTNSearch;
     protected javax.swing.JCheckBox CheckBoxCreateNewTab;
+    protected javax.swing.JCheckBox CheckBoxIsCompoundRule;
     protected javax.swing.JCheckBox CheckBoxSearchOnDB;
     protected javax.swing.JCheckBox CheckBoxSearchOnES;
     protected javax.swing.JComboBox<String> ComboBoxAttribute;
@@ -288,13 +390,15 @@ public class MetaAdvanceSearch extends javax.swing.JFrame {
     protected javax.swing.JComboBox<String> ComboBoxRulesConnector;
     protected javax.swing.JComboBox<String> ComboBoxTargetMetaLib;
     private javax.swing.JLabel LabelAttribute;
+    protected javax.swing.JLabel LabelRulePreview;
+    protected javax.swing.JLabel LabelRulePreviewZone;
     private javax.swing.JLabel LabelTarget;
     private javax.swing.JLabel LabelThen;
     protected javax.swing.JList<String> ListRulesDisplay;
     protected javax.swing.JPanel PanelRulesEditor;
+    protected javax.swing.JPanel PanelSearchRules;
     protected javax.swing.JTextField TextFieldSearchInput;
     protected javax.swing.ButtonGroup buttonGroupOnWhere;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

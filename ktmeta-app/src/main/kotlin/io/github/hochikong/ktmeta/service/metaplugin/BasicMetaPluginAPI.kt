@@ -34,7 +34,7 @@ import io.github.hochikong.ktmeta.service.device.DeviceAPI
  * 5. Import/Export metadata document (as json). Mark delete. Insert new document to cover the deleted one.
  * 6. Full-Text search support and search rules
  * 7. Advance search support and search rules
- * 8. Aggregate search support
+ * 8. Attribute search support
  * 9. Add custom jMenuItem in 'Tools' and new jDialog or jFrame
  * 10. Plugin description
  * */
@@ -102,8 +102,16 @@ interface BasicMetaPluginAPI {
     fun fullTextSearchHelper(): String
 
     /**
+     * Use [rawInput] execute full text search.
+     * @param rawInput String, from full text search's GUI form.
+     * @param targetLib Int, target metadata library's id.
+     * @param newTab Boolean, create a new tab to show results.
+     * */
+    fun fullTextSearchOnDBMS(rawInput: String, targetLib: Int, newTab: Boolean): List<Any>
+
+    /**
      *
      * */
-    fun fullTextSearch()
+    fun advanceSearchOnDBMS(rules: List<String>, targetLib: Int, newTab: Boolean): List<Any>
 
 }

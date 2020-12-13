@@ -25,18 +25,18 @@ import java.awt.event.KeyEvent;
  *
  * @author ckhoi
  */
-public class MetaAggregateSearch extends javax.swing.JFrame {
+public class MetaAttrSearch extends javax.swing.JFrame {
 
     /**
      * Creates new form HeuristicSearch
      */
-    public MetaAggregateSearch() {
+    public MetaAttrSearch() {
         initComponents();
         HideHead();
         setLocationRelativeTo(null);
     }
     
-    public MetaAggregateSearch(String[] MetaLibs, Image icon) {
+    public MetaAttrSearch(String[] MetaLibs, Image icon) {
         this.metaLibs = MetaLibs;
         initComponents();
         HideHead();
@@ -65,7 +65,7 @@ public class MetaAggregateSearch extends javax.swing.JFrame {
         CheckBoxSearchOnES = new javax.swing.JCheckBox();
         jLabel1 = new javax.swing.JLabel();
 
-        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("i18n/Frames/MetaAggregateSearch_trans"); // NOI18N
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("i18n/Frames/MetaAttrSearch_trans"); // NOI18N
         PMSearch.setText(bundle.getString("SEARCH")); // NOI18N
         PMSearch.setToolTipText("");
         PMSearch.addActionListener(new java.awt.event.ActionListener() {
@@ -200,7 +200,7 @@ public class MetaAggregateSearch extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MetaAggregateSearch().setVisible(true);
+                new MetaAttrSearch().setVisible(true);
             }
         });
     }

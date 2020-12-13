@@ -11,7 +11,7 @@
         <MenuItem class="javax.swing.JMenuItem" name="PMSearch">
           <Properties>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="i18n/Frames/MetaAggregateSearch_trans.properties" key="SEARCH" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+              <ResourceString bundle="i18n/Frames/MetaAttrSearch_trans.properties" key="SEARCH" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value=""/>
           </Properties>
@@ -33,7 +33,7 @@
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
     <Property name="title" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-      <ResourceString bundle="i18n/Frames/MetaAggregateSearch_trans.properties" key="AGGREGATE SEARCH" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+      <ResourceString bundle="i18n/Frames/MetaAttrSearch_trans.properties" key="AGGREGATE SEARCH" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
     </Property>
     <Property name="undecorated" type="boolean" value="true"/>
   </Properties>
@@ -117,7 +117,7 @@
     <Component class="javax.swing.JLabel" name="LabelTarget">
       <Properties>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <ResourceString bundle="i18n/Frames/MetaAggregateSearch_trans.properties" key="TARGET METADATA LIBRARY : " replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+          <ResourceString bundle="i18n/Frames/MetaAttrSearch_trans.properties" key="TARGET METADATA LIBRARY : " replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
         </Property>
       </Properties>
     </Component>
@@ -141,7 +141,7 @@
           <Image iconType="3" name="/icons/ico/20pix/groupby search.png"/>
         </Property>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <ResourceString bundle="i18n/Frames/MetaAggregateSearch_trans.properties" key="GATHER ATTRIBUTES" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+          <ResourceString bundle="i18n/Frames/MetaAttrSearch_trans.properties" key="GATHER ATTRIBUTES" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
         </Property>
         <Property name="focusable" type="boolean" value="false"/>
       </Properties>
@@ -209,7 +209,7 @@
     <Component class="javax.swing.JCheckBox" name="CheckBoxCreateNewTab">
       <Properties>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <ResourceString bundle="i18n/Frames/MetaAggregateSearch_trans.properties" key="CREATE NEW TAB" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+          <ResourceString bundle="i18n/Frames/MetaAttrSearch_trans.properties" key="CREATE NEW TAB" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
         </Property>
       </Properties>
       <AuxValues>
@@ -219,7 +219,7 @@
     <Component class="javax.swing.JCheckBox" name="CheckBoxSearchOnDB">
       <Properties>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <ResourceString bundle="i18n/Frames/MetaAggregateSearch_trans.properties" key="ON DATABASE" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+          <ResourceString bundle="i18n/Frames/MetaAttrSearch_trans.properties" key="ON DATABASE" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
         </Property>
       </Properties>
       <AuxValues>
@@ -229,7 +229,7 @@
     <Component class="javax.swing.JCheckBox" name="CheckBoxSearchOnES">
       <Properties>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <ResourceString bundle="i18n/Frames/MetaAggregateSearch_trans.properties" key="ON ELASTICSEARCH" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+          <ResourceString bundle="i18n/Frames/MetaAttrSearch_trans.properties" key="ON ELASTICSEARCH" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
         </Property>
       </Properties>
       <AuxValues>
@@ -242,7 +242,7 @@
           <Color blue="c7" green="88" red="4a" type="rgb"/>
         </Property>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <ResourceString bundle="i18n/Frames/MetaAggregateSearch_trans.properties" key="SELECT A CELL TO SEARCH (RIGHT CLICK OR CTRL+ENTER)" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+          <ResourceString bundle="i18n/Frames/MetaAttrSearch_trans.properties" key="SELECT A CELL TO SEARCH (RIGHT CLICK OR CTRL+ENTER)" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
         </Property>
       </Properties>
     </Component>
