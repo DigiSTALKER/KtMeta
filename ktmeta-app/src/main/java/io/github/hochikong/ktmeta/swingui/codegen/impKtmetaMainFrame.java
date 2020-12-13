@@ -114,7 +114,6 @@ public class impKtmetaMainFrame extends javax.swing.JFrame {
         LabelFTSearch = new javax.swing.JLabel();
         TextFieldFTSearch = new javax.swing.JTextField();
         BTNFTSearch = new javax.swing.JButton();
-        BTNFTHelper = new javax.swing.JButton();
         CheckBoxFTOnDB = new javax.swing.JCheckBox();
         CheckBoxFTOnES = new javax.swing.JCheckBox();
         PanelInfoOutput = new javax.swing.JPanel();
@@ -394,7 +393,7 @@ public class impKtmetaMainFrame extends javax.swing.JFrame {
         ToolBarPanelLayout.setVerticalGroup(
             ToolBarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ToolBarPanelLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(0, 3, Short.MAX_VALUE)
                 .addComponent(MainToolBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -539,15 +538,6 @@ public class impKtmetaMainFrame extends javax.swing.JFrame {
             }
         });
 
-        BTNFTHelper.setText("?");
-        BTNFTHelper.setToolTipText(bundle.getString("HELPER")); // NOI18N
-        BTNFTHelper.setFocusable(false);
-        BTNFTHelper.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BTNFTHelperActionPerformed(evt);
-            }
-        });
-
         ButtonGroupOnWhere.add(CheckBoxFTOnDB);
         CheckBoxFTOnDB.setText(bundle.getString("ON DATABASE")); // NOI18N
 
@@ -572,12 +562,10 @@ public class impKtmetaMainFrame extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(TextFieldFTSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(BTNFTSearch)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(BTNFTHelper))
+                        .addComponent(BTNFTSearch))
                     .addComponent(CheckBoxFTOnES)
                     .addComponent(CheckBoxFTOnDB))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(406, Short.MAX_VALUE))
         );
         PanelQuickQueryLayout.setVerticalGroup(
             PanelQuickQueryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -588,18 +576,15 @@ public class impKtmetaMainFrame extends javax.swing.JFrame {
                     .addComponent(LabelQQueryOnMetaLib)
                     .addComponent(CheckBoxFTCreateNewTab))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(PanelQuickQueryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(PanelQuickQueryLayout.createSequentialGroup()
-                        .addGroup(PanelQuickQueryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(LabelFTSearch)
-                            .addComponent(TextFieldFTSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(BTNFTSearch))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(CheckBoxFTOnDB)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(CheckBoxFTOnES))
-                    .addComponent(BTNFTHelper))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(PanelQuickQueryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(LabelFTSearch)
+                    .addComponent(TextFieldFTSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BTNFTSearch))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(CheckBoxFTOnDB)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(CheckBoxFTOnES)
+                .addContainerGap(81, Short.MAX_VALUE))
         );
 
         PanelQuery.addTab("Full-Text Search", PanelQuickQuery);
@@ -1030,10 +1015,6 @@ public class impKtmetaMainFrame extends javax.swing.JFrame {
         impBTNFTSearchActionPerformed(evt);
     }//GEN-LAST:event_BTNFTSearchActionPerformed
 
-    private void BTNFTHelperActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNFTHelperActionPerformed
-        impBTNFTHelperActionPerformed(evt);
-    }//GEN-LAST:event_BTNFTHelperActionPerformed
-
     private void RightTextPaneAbstractMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RightTextPaneAbstractMouseClicked
         impRightTextPaneAbstractMouseClicked(evt);
     }//GEN-LAST:event_RightTextPaneAbstractMouseClicked
@@ -1185,7 +1166,6 @@ public class impKtmetaMainFrame extends javax.swing.JFrame {
     protected javax.swing.JButton BTNAddMetaLib;
     protected javax.swing.JButton BTNAdvanceSearch;
     protected javax.swing.JButton BTNAggrSearcg;
-    protected javax.swing.JButton BTNFTHelper;
     protected javax.swing.JButton BTNFTSearch;
     protected javax.swing.JButton BTNRightPreviewManager;
     protected javax.swing.JButton BTNRunningTasks;
@@ -1312,7 +1292,6 @@ public class impKtmetaMainFrame extends javax.swing.JFrame {
     protected void impTreeIndicesValueChanged(javax.swing.event.TreeSelectionEvent evt){}
     protected void impComboBoxFTAvailableMetaLibsItemStateChanged(java.awt.event.ItemEvent evt){}
     protected void impBTNFTSearchActionPerformed(java.awt.event.ActionEvent evt){}
-    protected void impBTNFTHelperActionPerformed(java.awt.event.ActionEvent evt){}
     protected void impRightTextPaneAbstractMouseClicked(java.awt.event.MouseEvent evt){}
     protected void impRightTextPaneTagsMouseClicked(java.awt.event.MouseEvent evt){}
     protected void impBTNRightPreviewManagerActionPerformed(java.awt.event.ActionEvent evt){}
