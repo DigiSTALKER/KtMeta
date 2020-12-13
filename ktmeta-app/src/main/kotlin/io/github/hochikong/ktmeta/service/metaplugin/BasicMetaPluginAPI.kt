@@ -32,18 +32,13 @@ import io.github.hochikong.ktmeta.service.device.DeviceAPI
  * 3. Edit custom tags
  * 4. Edit preview
  * 5. Import/Export metadata document (as json). Mark delete. Insert new document to cover the deleted one.
- * 6. Full-Text search support and search rules
+ * 6. Full-Text search support
  * 7. Advance search support and search rules
  * 8. Attribute search support
  * 9. Add custom jMenuItem in 'Tools' and new jDialog or jFrame
  * 10. Plugin description
  * */
 interface BasicMetaPluginAPI {
-    /**
-     * Return a html text to describe the plugin
-     * */
-    fun getHTMLDescription(): String
-
     /**
      * Return a sql for getting the page from [pageLocation] with [pageSize] rows.
      * */
@@ -97,11 +92,6 @@ interface BasicMetaPluginAPI {
     fun exportMetadata(id: Int): Boolean
 
     /**
-     * Return the helper message(e.g., Search rules) of full-text search.
-     * */
-    fun fullTextSearchHelper(): String
-
-    /**
      * Use [rawInput] execute full text search.
      * @param rawInput String, from full text search's GUI form.
      * @param targetLib Int, target metadata library's id.
@@ -110,8 +100,23 @@ interface BasicMetaPluginAPI {
     fun fullTextSearchOnDBMS(rawInput: String, targetLib: Int, newTab: Boolean): List<Any>
 
     /**
-     *
+     * Use rules to execute advance search.
      * */
-    fun advanceSearchOnDBMS(rules: List<String>, targetLib: Int, newTab: Boolean): List<Any>
+    fun advanceSearchOnDBMS(rules: List<AdvanceSearchRules>, targetLib: Int, newTab: Boolean): List<Any>
 
+    /**
+     * Find out all metadata which its [attribute] exactly equals to [value].
+     * */
+    fun attrSearchOnDBMS(attribute: String, value: String, targetLib: Int, newTab: Boolean): List<Any>
+
+    /**
+     * Return a list contains all names you want to add to JMenu and corresponding class name
+     * to create a instance of JDialog or JFrame.
+     * */
+    fun registerJMenuItem(): Map<String, String>
+
+    /**
+     * Return a html text to describe the plugin
+     * */
+    fun getHTMLDescription(): String
 }

@@ -17,17 +17,41 @@ package io.github.hochikong.ktmeta.service.metaplugin
  * All metadata plugins can implement this interface to add ElasticSearch support.
  * This interface supports the use of RDBMS or ElasticSearch to store metadata.
  *
- * Supported features:
- * 1. Search result paging
- * 2. Edit abstract
- * 3. Edit custom tags
- * 4. Edit preview
- * 5. Import/Export metadata document (as json
- * 6. Full-Text search support and search rules
- * 7. Advance search support and search rules
- * 8. Aggregate search support
- * 9. Metadata maintain: update, delete
- * 10. Add custom jMenuItem in 'Tools' and new jDialog or jFrame
- * 11. Plugin description
+ * Additional supported features:
+ * 1. Copy data to ElasticSearch
+ * 2. Copy changed data to ElasticSearch
+ * 3. Full text search on ElasticSearch
+ * 4. Attribute Search on ElasticSearch
+ * 5. Advance Search on ElasticSearch
  * */
-interface AdvMetaPluginAPI
+interface AdvMetaPluginAPI : BasicMetaPluginAPI {
+    /**
+     * Clean the ElasticSearch index then copy all data from DBMS to ElasticSearch.
+     * The database and Index should in the same Metadata Library.
+     * */
+    fun fullSyncToES(): Boolean
+
+    /**
+     * Copy all changes in DBMS to ES and update Index
+     * */
+    fun syncToES(): Boolean
+
+
+    /**
+     * Use [rawInput] execute full text search.
+     * @param rawInput String, from full text search's GUI form.
+     * @param targetLib Int, target metadata library's id.
+     * @param newTab Boolean, create a new tab to show results.
+     * */
+    fun fullTextSearchOnES(rawInput: String, targetLib: Int, newTab: Boolean): List<Any>
+
+    /**
+     * Use rules to execute advance search.
+     * */
+    fun advanceSearchOnES(rules: List<AdvanceSearchRules>, targetLib: Int, newTab: Boolean): List<Any>
+
+    /**
+     * Find out all metadata which its [attribute] exactly equals to [value].
+     * */
+    fun attrSearchOnES(attribute: String, value: String, targetLib: Int, newTab: Boolean): List<Any>
+}
