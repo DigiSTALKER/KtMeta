@@ -65,4 +65,4 @@ data class BasicRule(
 data class CompoundRule(
     val rules: LinkedHashMap<Int, BasicRule>,
     val ruleConnectorToNext: RuleConnector
-)
+): AdvanceSearchRules()

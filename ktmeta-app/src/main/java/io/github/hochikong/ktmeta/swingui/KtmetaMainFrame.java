@@ -18,7 +18,6 @@ import io.github.hochikong.ktmeta.swingui.essentials.VerticalTabComp;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.util.HashMap;
 
 /**
  *
@@ -35,8 +34,9 @@ public class KtmetaMainFrame extends javax.swing.JFrame {
         HideHead();
         this.setLocationRelativeTo(null);
     }
-    
-    public KtmetaMainFrame(Image icon) {
+
+    public KtmetaMainFrame(Image icon, Font uiFont) {
+        this.OverrideUIFont = uiFont;
         initComponents();
         HideHead();
         this.setIconImage(icon);
@@ -94,6 +94,12 @@ public class KtmetaMainFrame extends javax.swing.JFrame {
         MainSplitPane = new javax.swing.JSplitPane();
         SplitPaneRightTabbedPane = new javax.swing.JTabbedPane();
         PanelMetaLibs = new javax.swing.JPanel();
+        jToolBar1 = new javax.swing.JToolBar();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         TreeMetadataLibs = new javax.swing.JTree();
         PanelResources = new javax.swing.JPanel();
@@ -399,11 +405,35 @@ public class KtmetaMainFrame extends javax.swing.JFrame {
 
         MainSplitPane.setDividerSize(2);
 
-        SplitPaneRightTabbedPane.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(74, 136, 190), 2, true));
+        SplitPaneRightTabbedPane.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
         SplitPaneRightTabbedPane.setTabPlacement(javax.swing.JTabbedPane.LEFT);
 
         PanelMetaLibs.setPreferredSize(new java.awt.Dimension(220, 811));
+        PanelMetaLibs.setLayout(new java.awt.BorderLayout());
 
+        jToolBar1.setRollover(true);
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jToolBar1.add(jComboBox1);
+        jToolBar1.add(filler1);
+
+        jButton1.setText("jButton1");
+        jButton1.setFocusable(false);
+        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(jButton1);
+
+        jButton2.setText("jButton2");
+        jButton2.setFocusable(false);
+        jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(jButton2);
+
+        PanelMetaLibs.add(jToolBar1, java.awt.BorderLayout.NORTH);
+
+        jPanel1.setLayout(new java.awt.CardLayout());
+
+        jScrollPane3.setBorder(javax.swing.BorderFactory.createCompoundBorder());
         jScrollPane3.setMinimumSize(new java.awt.Dimension(2, 19));
         jScrollPane3.setPreferredSize(new java.awt.Dimension(220, 442));
 
@@ -420,30 +450,20 @@ public class KtmetaMainFrame extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(TreeMetadataLibs);
 
-        javax.swing.GroupLayout PanelMetaLibsLayout = new javax.swing.GroupLayout(PanelMetaLibs);
-        PanelMetaLibs.setLayout(PanelMetaLibsLayout);
-        PanelMetaLibsLayout.setHorizontalGroup(
-            PanelMetaLibsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
-        );
-        PanelMetaLibsLayout.setVerticalGroup(
-            PanelMetaLibsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 811, Short.MAX_VALUE)
-        );
+        jPanel1.add(jScrollPane3, "card2");
+
+        PanelMetaLibs.add(jPanel1, java.awt.BorderLayout.CENTER);
 
         SplitPaneRightTabbedPane.addTab("MetaLibs", PanelMetaLibs);
-        VerticalTabLabels.put("MetaLibsVT", new JLabel(bundle.getString("VERTICAL METALIBS")));
-        VerticalTabLabels.get("MetaLibsVT").setPreferredSize(new Dimension(12, 80));
-        VerticalTabLabels.get("MetaLibsVT").setVerticalAlignment(SwingConstants.CENTER);
-        VerticalTabLabels.get("MetaLibsVT").setHorizontalAlignment(SwingConstants.CENTER);
-        VerticalTabLabels.get("MetaLibsVT").setUI(new VerticalTabComp(false));
-        SplitPaneRightTabbedPane.setTabComponentAt(0, VerticalTabLabels.get("MetaLibsVT"));
+        SplitPaneRightTabbedPane.setTabComponentAt(0, registerVerticalTab(bundle.getString("VERTICAL METALIBS"), false));
 
         PanelResources.setPreferredSize(new java.awt.Dimension(230, 811));
 
         jSplitPane1.setDividerLocation(400);
-        jSplitPane1.setDividerSize(2);
+        jSplitPane1.setDividerSize(8);
         jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
+
+        jScrollPane1.setBorder(javax.swing.BorderFactory.createCompoundBorder());
 
         TreeDatabases.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -458,6 +478,8 @@ public class KtmetaMainFrame extends javax.swing.JFrame {
         jScrollPane1.setViewportView(TreeDatabases);
 
         jSplitPane1.setLeftComponent(jScrollPane1);
+
+        jScrollPane2.setBorder(javax.swing.BorderFactory.createCompoundBorder());
 
         TreeIndices.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -477,20 +499,15 @@ public class KtmetaMainFrame extends javax.swing.JFrame {
         PanelResources.setLayout(PanelResourcesLayout);
         PanelResourcesLayout.setHorizontalGroup(
             PanelResourcesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
+            .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
         );
         PanelResourcesLayout.setVerticalGroup(
             PanelResourcesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 811, Short.MAX_VALUE)
+            .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 813, Short.MAX_VALUE)
         );
 
         SplitPaneRightTabbedPane.addTab("Resources", PanelResources);
-        VerticalTabLabels.put("ResourcesVT", new JLabel(bundle.getString("VERTICAL RESOURCES")));
-        VerticalTabLabels.get("ResourcesVT").setPreferredSize(new Dimension(12, 80));
-        VerticalTabLabels.get("ResourcesVT").setVerticalAlignment(SwingConstants.CENTER);
-        VerticalTabLabels.get("ResourcesVT").setHorizontalAlignment(SwingConstants.CENTER);
-        VerticalTabLabels.get("ResourcesVT").setUI(new VerticalTabComp(false));
-        SplitPaneRightTabbedPane.setTabComponentAt(1, VerticalTabLabels.get("ResourcesVT"));
+        SplitPaneRightTabbedPane.setTabComponentAt(1, registerVerticalTab(bundle.getString("VERTICAL RESOURCES"), false));
 
         MainSplitPane.setLeftComponent(SplitPaneRightTabbedPane);
 
@@ -505,11 +522,11 @@ public class KtmetaMainFrame extends javax.swing.JFrame {
         SplitPaneVTGeneral.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
         SplitPaneVTGeneral.setPreferredSize(new java.awt.Dimension(900, 856));
 
-        TabbedPaneQueryResult.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(74, 136, 199), 2, true));
+        TabbedPaneQueryResult.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
         TabbedPaneQueryResult.setPreferredSize(new java.awt.Dimension(900, 650));
         SplitPaneVTGeneral.setLeftComponent(TabbedPaneQueryResult);
 
-        PanelQuery.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(74, 136, 199), 2, true));
+        PanelQuery.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
         PanelQuery.setTabPlacement(javax.swing.JTabbedPane.BOTTOM);
         PanelQuery.setMinimumSize(new java.awt.Dimension(104, 40));
         PanelQuery.setPreferredSize(new java.awt.Dimension(1280, 200));
@@ -565,7 +582,7 @@ public class KtmetaMainFrame extends javax.swing.JFrame {
                         .addComponent(BTNFTSearch))
                     .addComponent(CheckBoxFTOnES)
                     .addComponent(CheckBoxFTOnDB))
-                .addContainerGap(406, Short.MAX_VALUE))
+                .addContainerGap(408, Short.MAX_VALUE))
         );
         PanelQuickQueryLayout.setVerticalGroup(
             PanelQuickQueryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -584,7 +601,7 @@ public class KtmetaMainFrame extends javax.swing.JFrame {
                 .addComponent(CheckBoxFTOnDB)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(CheckBoxFTOnES)
-                .addContainerGap(81, Short.MAX_VALUE))
+                .addContainerGap(83, Short.MAX_VALUE))
         );
 
         PanelQuery.addTab("Full-Text Search", PanelQuickQuery);
@@ -621,11 +638,13 @@ public class KtmetaMainFrame extends javax.swing.JFrame {
 
         SplitPaneSubRight.setLeftComponent(PanelSplitCenter);
 
-        TabbedPaneSplitRight.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(74, 136, 199), 2, true));
+        TabbedPaneSplitRight.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
         TabbedPaneSplitRight.setTabPlacement(javax.swing.JTabbedPane.RIGHT);
         TabbedPaneSplitRight.setPreferredSize(new java.awt.Dimension(250, 811));
 
         PanelRightPreview.setPreferredSize(new java.awt.Dimension(250, 807));
+
+        jScrollPane8.setBorder(javax.swing.BorderFactory.createCompoundBorder());
 
         LabelRightAbstract.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 18)); // NOI18N
         LabelRightAbstract.setText(bundle.getString("ABSTRACT : ")); // NOI18N
@@ -709,7 +728,7 @@ public class KtmetaMainFrame extends javax.swing.JFrame {
                     .addComponent(LabelRightPreview)
                     .addComponent(BTNRightPreviewManager))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 355, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -719,20 +738,17 @@ public class KtmetaMainFrame extends javax.swing.JFrame {
         PanelRightPreview.setLayout(PanelRightPreviewLayout);
         PanelRightPreviewLayout.setHorizontalGroup(
             PanelRightPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 285, Short.MAX_VALUE)
+            .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE)
         );
         PanelRightPreviewLayout.setVerticalGroup(
             PanelRightPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane8)
         );
 
+        jScrollPane8.getVerticalScrollBar().setUnitIncrement(16);
+
         TabbedPaneSplitRight.addTab("Preview", PanelRightPreview);
-        VerticalTabLabels.put("PreviewVT", new JLabel(bundle.getString("VERTICAL PREVIEW")));
-        VerticalTabLabels.get("PreviewVT").setPreferredSize(new Dimension(12, 60));
-        VerticalTabLabels.get("PreviewVT").setVerticalAlignment(SwingConstants.CENTER);
-        VerticalTabLabels.get("PreviewVT").setHorizontalAlignment(SwingConstants.CENTER);
-        VerticalTabLabels.get("PreviewVT").setUI(new VerticalTabComp(true));
-        TabbedPaneSplitRight.setTabComponentAt(0, VerticalTabLabels.get("PreviewVT"));
+        TabbedPaneSplitRight.setTabComponentAt(0, registerVerticalTab(bundle.getString("VERTICAL PREVIEW"), true));
 
         RightLabelMetadataDoc.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 18)); // NOI18N
         RightLabelMetadataDoc.setText(bundle.getString("METADATA DOCUMENT : ")); // NOI18N
@@ -760,17 +776,12 @@ public class KtmetaMainFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(RightLabelMetadataDoc)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 765, Short.MAX_VALUE)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 771, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         TabbedPaneSplitRight.addTab("Details", RightDetailsPane);
-        VerticalTabLabels.put("DetailsVT", new JLabel(bundle.getString("VERTICAL DETAILS")));
-        VerticalTabLabels.get("DetailsVT").setPreferredSize(new Dimension(12, 60));
-        VerticalTabLabels.get("DetailsVT").setVerticalAlignment(SwingConstants.CENTER);
-        VerticalTabLabels.get("DetailsVT").setHorizontalAlignment(SwingConstants.CENTER);
-        VerticalTabLabels.get("DetailsVT").setUI(new VerticalTabComp(true));
-        TabbedPaneSplitRight.setTabComponentAt(1, VerticalTabLabels.get("DetailsVT"));
+        TabbedPaneSplitRight.setTabComponentAt(1, registerVerticalTab(bundle.getString("VERTICAL DETAILS"), true));
 
         SplitPaneSubRight.setRightComponent(TabbedPaneSplitRight);
 
@@ -929,7 +940,6 @@ public class KtmetaMainFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    
     //<Auto-Generate>
     private void MenuItemNewMetaLibActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemNewMetaLibActionPerformed
         // TODO add your handling code here:
@@ -1116,7 +1126,6 @@ public class KtmetaMainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_MenuItemCreateMappingActionPerformed
     //</Auto-Generate>
 
-
     @Override
     public void layout() {
         super.layout(); //To change body of generated methods, choose Tools | Templates.
@@ -1133,8 +1142,8 @@ public class KtmetaMainFrame extends javax.swing.JFrame {
         //FlatGruvboxDarkSoftIJTheme.install();
         //FlatNordIJTheme.install();
         FlatSolarizedLightIJTheme.install();
-        //FlatDarculaLaf.install();
-        //FlatIntelliJLaf.install();
+//        FlatDarculaLaf.install();
+//        FlatIntelliJLaf.install();
         //FlatCyanLightIJTheme.install();
         //FlatHiberbeeDarkIJTheme.install();
         /* Create and display the form */
@@ -1147,17 +1156,27 @@ public class KtmetaMainFrame extends javax.swing.JFrame {
             }
         });
     }
-    
+
     //<My-Custom>
     protected String[] default_metalibs = {"Lib 1", "Lib 2"};
-    
-    protected void HideHead(){
+
+    protected void HideHead() {
         // Like IDEA style
         this.getRootPane().setWindowDecorationStyle(JRootPane.FRAME);
     }
-    
+
     // Used by vertical tabs in the right side.
-    protected HashMap<String, JLabel> VerticalTabLabels = new HashMap<>();
+    protected JLabel registerVerticalTab(String tabTitle, boolean clockwise) {
+        JLabel result = new JLabel(tabTitle);
+        result.setPreferredSize(new Dimension(12, 80));
+        result.setFont(OverrideUIFont);
+        result.setVerticalAlignment(SwingConstants.CENTER);
+        result.setHorizontalAlignment(SwingConstants.CENTER);
+        result.setUI(new VerticalTabComp(clockwise));
+        return result;
+    }
+
+    private Font OverrideUIFont = UIManager.getFont("defaultFont").deriveFont(14.0F);
     //</My-Custom>
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1250,6 +1269,11 @@ public class KtmetaMainFrame extends javax.swing.JFrame {
     protected javax.swing.JTree TreeDatabases;
     protected javax.swing.JTree TreeIndices;
     protected javax.swing.JTree TreeMetadataLibs;
+    private javax.swing.Box.Filler filler1;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -1268,5 +1292,6 @@ public class KtmetaMainFrame extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator6;
     private javax.swing.JPopupMenu.Separator jSeparator8;
     private javax.swing.JSplitPane jSplitPane1;
+    private javax.swing.JToolBar jToolBar1;
     // End of variables declaration//GEN-END:variables
 }
