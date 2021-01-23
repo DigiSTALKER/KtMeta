@@ -16,6 +16,7 @@ import com.formdev.flatlaf.intellijthemes.FlatSolarizedLightIJTheme;
 import io.github.hochikong.ktmeta.swingui.essentials.VerticalTabComp;
 
 import javax.swing.*;
+import javax.swing.tree.DefaultMutableTreeNode;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
@@ -41,6 +42,278 @@ public class KtmetaMainFrame extends javax.swing.JFrame {
         HideHead();
         this.setIconImage(icon);
     }
+
+    protected String[] MetaLibsCardOptions = new String[] { "MetaLibs" };
+
+    //<Auto-Generate>
+    private void MenuItemNewMetaLibActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemNewMetaLibActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MenuItemNewMetaLibActionPerformed
+
+    private void MenuItemAddDatabaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemAddDatabaseActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MenuItemAddDatabaseActionPerformed
+
+    private void MenuItemAddIndexActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemAddIndexActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MenuItemAddIndexActionPerformed
+
+    private void MenuItemSettingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemSettingsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MenuItemSettingsActionPerformed
+
+    private void MenuItemExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemExitActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MenuItemExitActionPerformed
+
+    private void MenuItemExportToCSVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemExportToCSVActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MenuItemExportToCSVActionPerformed
+
+    private void MenuItemPluginsMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemPluginsMenuActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MenuItemPluginsMenuActionPerformed
+
+    private void MenuItemAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemAboutActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MenuItemAboutActionPerformed
+
+    private void BTNAddDatabaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNAddDatabaseActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BTNAddDatabaseActionPerformed
+
+    private void BTNAddESIndexActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNAddESIndexActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BTNAddESIndexActionPerformed
+
+    private void BTNAddMetaLibActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNAddMetaLibActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BTNAddMetaLibActionPerformed
+
+    private void BTNAggrSearcgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNAggrSearcgActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BTNAggrSearcgActionPerformed
+
+    private void BTNAdvanceSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNAdvanceSearchActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BTNAdvanceSearchActionPerformed
+
+    private void TreeMetadataLibsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TreeMetadataLibsMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TreeMetadataLibsMouseClicked
+
+    private void TreeMetadataLibsValueChanged(javax.swing.event.TreeSelectionEvent evt) {//GEN-FIRST:event_TreeMetadataLibsValueChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TreeMetadataLibsValueChanged
+
+    private void TreeDatabasesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TreeDatabasesMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TreeDatabasesMouseClicked
+
+    private void TreeDatabasesValueChanged(javax.swing.event.TreeSelectionEvent evt) {//GEN-FIRST:event_TreeDatabasesValueChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TreeDatabasesValueChanged
+
+    private void TreeIndicesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TreeIndicesMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TreeIndicesMouseClicked
+
+    private void TreeIndicesValueChanged(javax.swing.event.TreeSelectionEvent evt) {//GEN-FIRST:event_TreeIndicesValueChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TreeIndicesValueChanged
+
+    private void ComboBoxFTAvailableMetaLibsItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_ComboBoxFTAvailableMetaLibsItemStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ComboBoxFTAvailableMetaLibsItemStateChanged
+
+    private void BTNFTSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNFTSearchActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BTNFTSearchActionPerformed
+
+    private void RightTextPaneAbstractMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RightTextPaneAbstractMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_RightTextPaneAbstractMouseClicked
+
+    private void RightTextPaneTagsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RightTextPaneTagsMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_RightTextPaneTagsMouseClicked
+
+    private void BTNRightPreviewManagerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNRightPreviewManagerActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BTNRightPreviewManagerActionPerformed
+
+    private void BTNRunningTasksActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNRunningTasksActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BTNRunningTasksActionPerformed
+
+    private void PMAbstractCopyAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PMAbstractCopyAllActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_PMAbstractCopyAllActionPerformed
+
+    private void PMAbstractCopySelectedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PMAbstractCopySelectedActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_PMAbstractCopySelectedActionPerformed
+
+    private void PMTagsAddCustomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PMTagsAddCustomActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_PMTagsAddCustomActionPerformed
+
+    private void PMTagsCopyAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PMTagsCopyAllActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_PMTagsCopyAllActionPerformed
+
+    private void PMTagsCopySelectedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PMTagsCopySelectedActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_PMTagsCopySelectedActionPerformed
+
+    private void PMViewEnlargeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PMViewEnlargeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_PMViewEnlargeActionPerformed
+
+    private void RightPreviewLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RightPreviewLabelMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_RightPreviewLabelMouseClicked
+
+    private void PMRenameDatabaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PMRenameDatabaseActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_PMRenameDatabaseActionPerformed
+
+    private void PMDBPropertiesEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PMDBPropertiesEditActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_PMDBPropertiesEditActionPerformed
+
+    private void PMRemoveDatabaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PMRemoveDatabaseActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_PMRemoveDatabaseActionPerformed
+
+    private void PMRenameIndicesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PMRenameIndicesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_PMRenameIndicesActionPerformed
+
+    private void PMIndexPropertiesEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PMIndexPropertiesEditActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_PMIndexPropertiesEditActionPerformed
+
+    private void PMRemoveIndexActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PMRemoveIndexActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_PMRemoveIndexActionPerformed
+
+    private void PMRenameMetaLibActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PMRenameMetaLibActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_PMRenameMetaLibActionPerformed
+
+    private void PMMetaLibPropertiesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PMMetaLibPropertiesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_PMMetaLibPropertiesActionPerformed
+
+    private void PMImportDataToDBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PMImportDataToDBActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_PMImportDataToDBActionPerformed
+
+    private void PMSyncToESActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PMSyncToESActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_PMSyncToESActionPerformed
+
+    private void PMRemoveMetaLibActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PMRemoveMetaLibActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_PMRemoveMetaLibActionPerformed
+
+    private void MenuItemImportMetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemImportMetaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MenuItemImportMetaActionPerformed
+
+    private void MenuItemCheckESConnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemCheckESConnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MenuItemCheckESConnActionPerformed
+
+    private void MenuItemCreateMappingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemCreateMappingActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MenuItemCreateMappingActionPerformed
+    protected String[] ResourceCardOptions = new String[] { "Databases", "Indices" };
+    protected DefaultMutableTreeNode metalibsRootNode = new DefaultMutableTreeNode("MetaLibs Collections");
+    protected DefaultMutableTreeNode databaseRootNode = new DefaultMutableTreeNode("Database Collections");
+    protected DefaultMutableTreeNode indicesRootNode = new DefaultMutableTreeNode("ES Index Collections");
+    protected javax.swing.JButton BTNCollapseTree;
+    protected javax.swing.JButton BTNCollapseTree1;
+    //</Auto-Generate>
+
+    @Override
+    public void layout() {
+        super.layout(); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        /* Install theme */
+        //FlatArcDarkIJTheme.install();
+        //FlatCobalt2IJTheme.install();
+        //FlatGradiantoDeepOceanIJTheme.install();
+        //FlatGruvboxDarkSoftIJTheme.install();
+        //FlatNordIJTheme.install();
+        FlatSolarizedLightIJTheme.install();
+//        FlatDarculaLaf.install();
+//        FlatIntelliJLaf.install();
+        //FlatCyanLightIJTheme.install();
+        //FlatHiberbeeDarkIJTheme.install();
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                KtmetaMainFrame f = new KtmetaMainFrame();
+                f.setVisible(true);
+                f.setLocationRelativeTo(null);
+            }
+        });
+    }
+
+    //<My-Custom>
+    protected String[] default_metalibs = {"Lib 1", "Lib 2"};
+
+    protected void HideHead() {
+        // Like IDEA style
+        this.getRootPane().setWindowDecorationStyle(JRootPane.FRAME);
+    }
+
+    // Used by vertical tabs in the right side.
+    protected JLabel registerVerticalTab(String tabTitle, boolean clockwise) {
+        JLabel result = new JLabel(tabTitle);
+        result.setPreferredSize(new Dimension(12, 80));
+        result.setFont(OverrideUIFont);
+        result.setVerticalAlignment(SwingConstants.CENTER);
+        result.setHorizontalAlignment(SwingConstants.CENTER);
+        result.setUI(new VerticalTabComp(clockwise));
+        return result;
+    }
+
+    private Font OverrideUIFont = UIManager.getFont("defaultFont").deriveFont(14.0F);
+    protected javax.swing.JButton BTNExpandTree;
+    protected javax.swing.JButton BTNExpandTree1;
+    protected javax.swing.JComboBox<String> ComboBoxMLOptions;
+    protected javax.swing.JComboBox<String> ComboBoxRESOptions;
+    protected javax.swing.JPanel PanelMetaLibsTreeContainer;
+    //</My-Custom>
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    protected javax.swing.JButton BTNAddDatabase;
+    protected javax.swing.JButton BTNAddESIndex;
+    protected javax.swing.JButton BTNAddMetaLib;
+    protected javax.swing.JButton BTNAdvanceSearch;
+    protected javax.swing.JButton BTNAggrSearcg;
+    protected javax.swing.JPanel PanelResourcesTreeContainer;
+    protected javax.swing.JToolBar ToolBarMetaLibs;
+    protected javax.swing.JToolBar ToolBarResources;
+    private javax.swing.Box.Filler filler2;
+    protected javax.swing.JButton BTNFTSearch;
+    protected javax.swing.JButton BTNRightPreviewManager;
+    protected javax.swing.JButton BTNRunningTasks;
+    protected javax.swing.JPanel BottomPanel;
+    private javax.swing.ButtonGroup ButtonGroupOnWhere;
+    protected javax.swing.JCheckBox CheckBoxFTCreateNewTab;
+    protected javax.swing.JCheckBox CheckBoxFTOnDB;
+    protected javax.swing.JCheckBox CheckBoxFTOnES;
+    protected javax.swing.JComboBox<String> ComboBoxFTAvailableMetaLibs;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -94,20 +367,25 @@ public class KtmetaMainFrame extends javax.swing.JFrame {
         MainSplitPane = new javax.swing.JSplitPane();
         SplitPaneRightTabbedPane = new javax.swing.JTabbedPane();
         PanelMetaLibs = new javax.swing.JPanel();
-        jToolBar1 = new javax.swing.JToolBar();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        ToolBarMetaLibs = new javax.swing.JToolBar();
+        ComboBoxMLOptions = new javax.swing.JComboBox<>();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
+        BTNExpandTree = new javax.swing.JButton();
+        BTNCollapseTree = new javax.swing.JButton();
+        PanelMetaLibsTreeContainer = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        TreeMetadataLibs = new javax.swing.JTree();
+        TreeMetadataLibs = new javax.swing.JTree(metalibsRootNode);
         PanelResources = new javax.swing.JPanel();
-        jSplitPane1 = new javax.swing.JSplitPane();
+        ToolBarResources = new javax.swing.JToolBar();
+        ComboBoxRESOptions = new javax.swing.JComboBox<>();
+        filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
+        BTNExpandTree1 = new javax.swing.JButton();
+        BTNCollapseTree1 = new javax.swing.JButton();
+        PanelResourcesTreeContainer = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        TreeDatabases = new javax.swing.JTree();
+        TreeDatabases = new javax.swing.JTree(databaseRootNode);
         jScrollPane2 = new javax.swing.JScrollPane();
-        TreeIndices = new javax.swing.JTree();
+        TreeIndices = new javax.swing.JTree(indicesRootNode);
         SplitPaneSubRight = new javax.swing.JSplitPane();
         PanelSplitCenter = new javax.swing.JPanel();
         SplitPaneVTGeneral = new javax.swing.JSplitPane();
@@ -323,8 +601,8 @@ public class KtmetaMainFrame extends javax.swing.JFrame {
         ToolBarPanel.setMaximumSize(new java.awt.Dimension(159, 35));
         ToolBarPanel.setMinimumSize(new java.awt.Dimension(159, 35));
         ToolBarPanel.setPreferredSize(new java.awt.Dimension(159, 35));
+        ToolBarPanel.setLayout(new java.awt.BorderLayout());
 
-        MainToolBar.setFloatable(false);
         MainToolBar.setRollover(true);
 
         BTNAddDatabase.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/ico/20pix/database.png"))); // NOI18N
@@ -390,18 +668,7 @@ public class KtmetaMainFrame extends javax.swing.JFrame {
         });
         MainToolBar.add(BTNAdvanceSearch);
 
-        javax.swing.GroupLayout ToolBarPanelLayout = new javax.swing.GroupLayout(ToolBarPanel);
-        ToolBarPanel.setLayout(ToolBarPanelLayout);
-        ToolBarPanelLayout.setHorizontalGroup(
-            ToolBarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(MainToolBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        ToolBarPanelLayout.setVerticalGroup(
-            ToolBarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ToolBarPanelLayout.createSequentialGroup()
-                .addGap(0, 3, Short.MAX_VALUE)
-                .addComponent(MainToolBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
+        ToolBarPanel.add(MainToolBar, java.awt.BorderLayout.CENTER);
 
         MainSplitPane.setDividerSize(2);
 
@@ -411,27 +678,44 @@ public class KtmetaMainFrame extends javax.swing.JFrame {
         PanelMetaLibs.setPreferredSize(new java.awt.Dimension(220, 811));
         PanelMetaLibs.setLayout(new java.awt.BorderLayout());
 
-        jToolBar1.setRollover(true);
+        ToolBarMetaLibs.setRollover(true);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jToolBar1.add(jComboBox1);
-        jToolBar1.add(filler1);
+        ComboBoxMLOptions.setModel(new javax.swing.DefaultComboBoxModel<>(MetaLibsCardOptions));
+        ComboBoxMLOptions.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                ComboBoxMLOptionsItemStateChanged(evt);
+            }
+        });
+        ToolBarMetaLibs.add(ComboBoxMLOptions);
+        ToolBarMetaLibs.add(filler1);
 
-        jButton1.setText("jButton1");
-        jButton1.setFocusable(false);
-        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(jButton1);
+        BTNExpandTree.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/ico/16pix/expandall.png"))); // NOI18N
+        BTNExpandTree.setToolTipText("Expand All");
+        BTNExpandTree.setFocusable(false);
+        BTNExpandTree.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        BTNExpandTree.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        BTNExpandTree.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTNExpandTreeActionPerformed(evt);
+            }
+        });
+        ToolBarMetaLibs.add(BTNExpandTree);
 
-        jButton2.setText("jButton2");
-        jButton2.setFocusable(false);
-        jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(jButton2);
+        BTNCollapseTree.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/ico/16pix/collapseall.png"))); // NOI18N
+        BTNCollapseTree.setToolTipText("Collapse All");
+        BTNCollapseTree.setFocusable(false);
+        BTNCollapseTree.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        BTNCollapseTree.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        BTNCollapseTree.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTNCollapseTreeActionPerformed(evt);
+            }
+        });
+        ToolBarMetaLibs.add(BTNCollapseTree);
 
-        PanelMetaLibs.add(jToolBar1, java.awt.BorderLayout.NORTH);
+        PanelMetaLibs.add(ToolBarMetaLibs, java.awt.BorderLayout.NORTH);
 
-        jPanel1.setLayout(new java.awt.CardLayout());
+        PanelMetaLibsTreeContainer.setLayout(new java.awt.CardLayout());
 
         jScrollPane3.setBorder(javax.swing.BorderFactory.createCompoundBorder());
         jScrollPane3.setMinimumSize(new java.awt.Dimension(2, 19));
@@ -450,18 +734,54 @@ public class KtmetaMainFrame extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(TreeMetadataLibs);
 
-        jPanel1.add(jScrollPane3, "card2");
+        PanelMetaLibsTreeContainer.add(jScrollPane3, "MetaLibs");
 
-        PanelMetaLibs.add(jPanel1, java.awt.BorderLayout.CENTER);
+        PanelMetaLibs.add(PanelMetaLibsTreeContainer, java.awt.BorderLayout.CENTER);
 
         SplitPaneRightTabbedPane.addTab("MetaLibs", PanelMetaLibs);
         SplitPaneRightTabbedPane.setTabComponentAt(0, registerVerticalTab(bundle.getString("VERTICAL METALIBS"), false));
 
         PanelResources.setPreferredSize(new java.awt.Dimension(230, 811));
+        PanelResources.setLayout(new java.awt.BorderLayout());
 
-        jSplitPane1.setDividerLocation(400);
-        jSplitPane1.setDividerSize(8);
-        jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
+        ToolBarResources.setRollover(true);
+
+        ComboBoxRESOptions.setModel(new javax.swing.DefaultComboBoxModel<>(ResourceCardOptions));
+        ComboBoxRESOptions.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                ComboBoxRESOptionsItemStateChanged(evt);
+            }
+        });
+        ToolBarResources.add(ComboBoxRESOptions);
+        ToolBarResources.add(filler2);
+
+        BTNExpandTree1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/ico/16pix/expandall.png"))); // NOI18N
+        BTNExpandTree1.setToolTipText("Expand All");
+        BTNExpandTree1.setFocusable(false);
+        BTNExpandTree1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        BTNExpandTree1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        BTNExpandTree1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTNExpandTree1ActionPerformed(evt);
+            }
+        });
+        ToolBarResources.add(BTNExpandTree1);
+
+        BTNCollapseTree1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/ico/16pix/collapseall.png"))); // NOI18N
+        BTNCollapseTree1.setToolTipText("Collapse All");
+        BTNCollapseTree1.setFocusable(false);
+        BTNCollapseTree1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        BTNCollapseTree1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        BTNCollapseTree1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTNCollapseTree1ActionPerformed(evt);
+            }
+        });
+        ToolBarResources.add(BTNCollapseTree1);
+
+        PanelResources.add(ToolBarResources, java.awt.BorderLayout.NORTH);
+
+        PanelResourcesTreeContainer.setLayout(new java.awt.CardLayout());
 
         jScrollPane1.setBorder(javax.swing.BorderFactory.createCompoundBorder());
 
@@ -477,7 +797,7 @@ public class KtmetaMainFrame extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(TreeDatabases);
 
-        jSplitPane1.setLeftComponent(jScrollPane1);
+        PanelResourcesTreeContainer.add(jScrollPane1, "Databases");
 
         jScrollPane2.setBorder(javax.swing.BorderFactory.createCompoundBorder());
 
@@ -493,18 +813,9 @@ public class KtmetaMainFrame extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(TreeIndices);
 
-        jSplitPane1.setRightComponent(jScrollPane2);
+        PanelResourcesTreeContainer.add(jScrollPane2, "Indices");
 
-        javax.swing.GroupLayout PanelResourcesLayout = new javax.swing.GroupLayout(PanelResources);
-        PanelResources.setLayout(PanelResourcesLayout);
-        PanelResourcesLayout.setHorizontalGroup(
-            PanelResourcesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
-        );
-        PanelResourcesLayout.setVerticalGroup(
-            PanelResourcesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 813, Short.MAX_VALUE)
-        );
+        PanelResources.add(PanelResourcesTreeContainer, java.awt.BorderLayout.CENTER);
 
         SplitPaneRightTabbedPane.addTab("Resources", PanelResources);
         SplitPaneRightTabbedPane.setTabComponentAt(1, registerVerticalTab(bundle.getString("VERTICAL RESOURCES"), false));
@@ -940,260 +1251,10 @@ public class KtmetaMainFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    //<Auto-Generate>
-    private void MenuItemNewMetaLibActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemNewMetaLibActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_MenuItemNewMetaLibActionPerformed
-
-    private void MenuItemAddDatabaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemAddDatabaseActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_MenuItemAddDatabaseActionPerformed
-
-    private void MenuItemAddIndexActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemAddIndexActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_MenuItemAddIndexActionPerformed
-
-    private void MenuItemSettingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemSettingsActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_MenuItemSettingsActionPerformed
-
-    private void MenuItemExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemExitActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_MenuItemExitActionPerformed
-
-    private void MenuItemExportToCSVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemExportToCSVActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_MenuItemExportToCSVActionPerformed
-
-    private void MenuItemPluginsMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemPluginsMenuActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_MenuItemPluginsMenuActionPerformed
-
-    private void MenuItemAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemAboutActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_MenuItemAboutActionPerformed
-
-    private void BTNAddDatabaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNAddDatabaseActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_BTNAddDatabaseActionPerformed
-
-    private void BTNAddESIndexActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNAddESIndexActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_BTNAddESIndexActionPerformed
-
-    private void BTNAddMetaLibActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNAddMetaLibActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_BTNAddMetaLibActionPerformed
-
-    private void BTNAggrSearcgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNAggrSearcgActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_BTNAggrSearcgActionPerformed
-
-    private void BTNAdvanceSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNAdvanceSearchActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_BTNAdvanceSearchActionPerformed
-
-    private void TreeMetadataLibsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TreeMetadataLibsMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TreeMetadataLibsMouseClicked
-
-    private void TreeMetadataLibsValueChanged(javax.swing.event.TreeSelectionEvent evt) {//GEN-FIRST:event_TreeMetadataLibsValueChanged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TreeMetadataLibsValueChanged
-
-    private void TreeDatabasesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TreeDatabasesMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TreeDatabasesMouseClicked
-
-    private void TreeDatabasesValueChanged(javax.swing.event.TreeSelectionEvent evt) {//GEN-FIRST:event_TreeDatabasesValueChanged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TreeDatabasesValueChanged
-
-    private void TreeIndicesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TreeIndicesMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TreeIndicesMouseClicked
-
-    private void TreeIndicesValueChanged(javax.swing.event.TreeSelectionEvent evt) {//GEN-FIRST:event_TreeIndicesValueChanged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TreeIndicesValueChanged
-
-    private void ComboBoxFTAvailableMetaLibsItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_ComboBoxFTAvailableMetaLibsItemStateChanged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ComboBoxFTAvailableMetaLibsItemStateChanged
-
-    private void BTNFTSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNFTSearchActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_BTNFTSearchActionPerformed
-
-    private void RightTextPaneAbstractMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RightTextPaneAbstractMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_RightTextPaneAbstractMouseClicked
-
-    private void RightTextPaneTagsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RightTextPaneTagsMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_RightTextPaneTagsMouseClicked
-
-    private void BTNRightPreviewManagerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNRightPreviewManagerActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_BTNRightPreviewManagerActionPerformed
-
-    private void BTNRunningTasksActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNRunningTasksActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_BTNRunningTasksActionPerformed
-
-    private void PMAbstractCopyAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PMAbstractCopyAllActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_PMAbstractCopyAllActionPerformed
-
-    private void PMAbstractCopySelectedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PMAbstractCopySelectedActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_PMAbstractCopySelectedActionPerformed
-
-    private void PMTagsAddCustomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PMTagsAddCustomActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_PMTagsAddCustomActionPerformed
-
-    private void PMTagsCopyAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PMTagsCopyAllActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_PMTagsCopyAllActionPerformed
-
-    private void PMTagsCopySelectedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PMTagsCopySelectedActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_PMTagsCopySelectedActionPerformed
-
-    private void PMViewEnlargeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PMViewEnlargeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_PMViewEnlargeActionPerformed
-
-    private void RightPreviewLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RightPreviewLabelMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_RightPreviewLabelMouseClicked
-
-    private void PMRenameDatabaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PMRenameDatabaseActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_PMRenameDatabaseActionPerformed
-
-    private void PMDBPropertiesEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PMDBPropertiesEditActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_PMDBPropertiesEditActionPerformed
-
-    private void PMRemoveDatabaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PMRemoveDatabaseActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_PMRemoveDatabaseActionPerformed
-
-    private void PMRenameIndicesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PMRenameIndicesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_PMRenameIndicesActionPerformed
-
-    private void PMIndexPropertiesEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PMIndexPropertiesEditActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_PMIndexPropertiesEditActionPerformed
-
-    private void PMRemoveIndexActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PMRemoveIndexActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_PMRemoveIndexActionPerformed
-
-    private void PMRenameMetaLibActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PMRenameMetaLibActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_PMRenameMetaLibActionPerformed
-
-    private void PMMetaLibPropertiesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PMMetaLibPropertiesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_PMMetaLibPropertiesActionPerformed
-
-    private void PMImportDataToDBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PMImportDataToDBActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_PMImportDataToDBActionPerformed
-
-    private void PMSyncToESActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PMSyncToESActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_PMSyncToESActionPerformed
-
-    private void PMRemoveMetaLibActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PMRemoveMetaLibActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_PMRemoveMetaLibActionPerformed
-
-    private void MenuItemImportMetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemImportMetaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_MenuItemImportMetaActionPerformed
-
-    private void MenuItemCheckESConnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemCheckESConnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_MenuItemCheckESConnActionPerformed
-
-    private void MenuItemCreateMappingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemCreateMappingActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_MenuItemCreateMappingActionPerformed
-    //</Auto-Generate>
-
-    @Override
-    public void layout() {
-        super.layout(); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        /* Install theme */
-        //FlatArcDarkIJTheme.install();
-        //FlatCobalt2IJTheme.install();
-        //FlatGradiantoDeepOceanIJTheme.install();
-        //FlatGruvboxDarkSoftIJTheme.install();
-        //FlatNordIJTheme.install();
-        FlatSolarizedLightIJTheme.install();
-//        FlatDarculaLaf.install();
-//        FlatIntelliJLaf.install();
-        //FlatCyanLightIJTheme.install();
-        //FlatHiberbeeDarkIJTheme.install();
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                KtmetaMainFrame f = new KtmetaMainFrame();
-                f.setVisible(true);
-                f.setLocationRelativeTo(null);
-            }
-        });
-    }
-
-    //<My-Custom>
-    protected String[] default_metalibs = {"Lib 1", "Lib 2"};
-
-    protected void HideHead() {
-        // Like IDEA style
-        this.getRootPane().setWindowDecorationStyle(JRootPane.FRAME);
-    }
-
-    // Used by vertical tabs in the right side.
-    protected JLabel registerVerticalTab(String tabTitle, boolean clockwise) {
-        JLabel result = new JLabel(tabTitle);
-        result.setPreferredSize(new Dimension(12, 80));
-        result.setFont(OverrideUIFont);
-        result.setVerticalAlignment(SwingConstants.CENTER);
-        result.setHorizontalAlignment(SwingConstants.CENTER);
-        result.setUI(new VerticalTabComp(clockwise));
-        return result;
-    }
-
-    private Font OverrideUIFont = UIManager.getFont("defaultFont").deriveFont(14.0F);
-    //</My-Custom>
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    protected javax.swing.JButton BTNAddDatabase;
-    protected javax.swing.JButton BTNAddESIndex;
-    protected javax.swing.JButton BTNAddMetaLib;
-    protected javax.swing.JButton BTNAdvanceSearch;
-    protected javax.swing.JButton BTNAggrSearcg;
-    protected javax.swing.JButton BTNFTSearch;
-    protected javax.swing.JButton BTNRightPreviewManager;
-    protected javax.swing.JButton BTNRunningTasks;
-    protected javax.swing.JPanel BottomPanel;
-    private javax.swing.ButtonGroup ButtonGroupOnWhere;
-    protected javax.swing.JCheckBox CheckBoxFTCreateNewTab;
-    protected javax.swing.JCheckBox CheckBoxFTOnDB;
-    protected javax.swing.JCheckBox CheckBoxFTOnES;
-    protected javax.swing.JComboBox<String> ComboBoxFTAvailableMetaLibs;
+    private void ComboBoxMLOptionsItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_ComboBoxMLOptionsItemStateChanged
+        CardLayout cl = (CardLayout) (PanelMetaLibsTreeContainer.getLayout());
+        cl.show(PanelMetaLibsTreeContainer, (String) evt.getItem());
+    }//GEN-LAST:event_ComboBoxMLOptionsItemStateChanged
     protected javax.swing.JMenu EditMenu;
     protected javax.swing.JMenu FileMenu;
     protected javax.swing.JMenu HelpMenu;
@@ -1240,9 +1301,17 @@ public class KtmetaMainFrame extends javax.swing.JFrame {
     protected javax.swing.JPanel PanelInfoOutput;
     protected javax.swing.JPanel PanelInfoWrapper;
     protected javax.swing.JPanel PanelMetaLibs;
+
+    private void BTNExpandTreeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNExpandTreeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BTNExpandTreeActionPerformed
     protected javax.swing.JTabbedPane PanelQuery;
     protected javax.swing.JPanel PanelQuickQuery;
     protected javax.swing.JPanel PanelResources;
+
+    private void BTNCollapseTreeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNCollapseTreeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BTNCollapseTreeActionPerformed
     protected javax.swing.JPanel PanelRightPreview;
     protected javax.swing.JPanel PanelSplitCenter;
     protected javax.swing.JPopupMenu PopupMenuAbstract;
@@ -1264,16 +1333,25 @@ public class KtmetaMainFrame extends javax.swing.JFrame {
     protected javax.swing.JTabbedPane TabbedPaneQueryResult;
     protected javax.swing.JTabbedPane TabbedPaneSplitRight;
     protected javax.swing.JTextField TextFieldFTSearch;
+
+    private void ComboBoxRESOptionsItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_ComboBoxRESOptionsItemStateChanged
+        CardLayout cl = (CardLayout) (PanelResourcesTreeContainer.getLayout());
+        cl.show(PanelResourcesTreeContainer, (String) evt.getItem());
+    }//GEN-LAST:event_ComboBoxRESOptionsItemStateChanged
     protected javax.swing.JPanel ToolBarPanel;
+
+    private void BTNExpandTree1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNExpandTree1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BTNExpandTree1ActionPerformed
     protected javax.swing.JMenu ToolsMenu;
     protected javax.swing.JTree TreeDatabases;
     protected javax.swing.JTree TreeIndices;
     protected javax.swing.JTree TreeMetadataLibs;
     private javax.swing.Box.Filler filler1;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JPanel jPanel1;
+
+    private void BTNCollapseTree1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNCollapseTree1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BTNCollapseTree1ActionPerformed
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -1291,7 +1369,5 @@ public class KtmetaMainFrame extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator5;
     private javax.swing.JPopupMenu.Separator jSeparator6;
     private javax.swing.JPopupMenu.Separator jSeparator8;
-    private javax.swing.JSplitPane jSplitPane1;
-    private javax.swing.JToolBar jToolBar1;
     // End of variables declaration//GEN-END:variables
 }

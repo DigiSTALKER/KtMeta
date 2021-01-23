@@ -16,6 +16,14 @@ Still working in progress.
 * Something I'am still thinking.
 
 ## ScreenShots:
+### 2021/01/23 Update:
+![Main Preview](screenshots/Screenshot-2021-01-23165324.png)
+
+![New Advance Search](screenshots/Screenshot-2021-01-23165440.png)
+
+### 2020 Old Previews:
+
+
 
 ![Windows](screenshots/IntellijTheme.png)
 
