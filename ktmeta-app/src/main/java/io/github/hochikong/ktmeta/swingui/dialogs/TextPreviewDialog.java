@@ -88,6 +88,7 @@ public class TextPreviewDialog extends javax.swing.JDialog {
         TextAreaEditor.setColumns(20);
         TextAreaEditor.setRows(5);
         TextAreaEditor.setText("<html><h1>Preview</h1></html>\n");
+        LabelEditorPreview.setText("<html><h1>Preview</h1></html>\n");
         TextAreaEditor.addCaretListener(new javax.swing.event.CaretListener() {
             public void caretUpdate(javax.swing.event.CaretEvent evt) {
                 TextAreaEditorCaretUpdate(evt);

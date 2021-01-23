@@ -141,6 +141,7 @@
             <EventHandler event="caretUpdate" listener="javax.swing.event.CaretListener" parameters="javax.swing.event.CaretEvent" handler="TextAreaEditorCaretUpdate"/>
           </Events>
           <AuxValues>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="LabelEditorPreview.setText(&quot;&lt;html&gt;&lt;h1&gt;Preview&lt;/h1&gt;&lt;/html&gt;\n&quot;);"/>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="4"/>
           </AuxValues>
         </Component>

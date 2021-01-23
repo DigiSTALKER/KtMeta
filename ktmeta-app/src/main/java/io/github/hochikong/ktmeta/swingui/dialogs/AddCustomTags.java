@@ -93,6 +93,7 @@ public class AddCustomTags extends javax.swing.JDialog {
         });
 
         BTNOKAddTags.setText(bundle.getString("OK")); // NOI18N
+        BTNOKAddTags.setFocusable(false);
         BTNOKAddTags.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BTNOKAddTagsActionPerformed(evt);
@@ -116,6 +117,7 @@ public class AddCustomTags extends javax.swing.JDialog {
 
         BTNAddTag.setText(bundle.getString("ADD")); // NOI18N
         BTNAddTag.setToolTipText(bundle.getString("ADD NEW TAG")); // NOI18N
+        BTNAddTag.setFocusable(false);
         BTNAddTag.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BTNAddTagActionPerformed(evt);
@@ -123,6 +125,7 @@ public class AddCustomTags extends javax.swing.JDialog {
         });
 
         BTNRemoveTag.setText("Remove Selected Tag");
+        BTNRemoveTag.setFocusable(false);
         BTNRemoveTag.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BTNRemoveTagActionPerformed(evt);

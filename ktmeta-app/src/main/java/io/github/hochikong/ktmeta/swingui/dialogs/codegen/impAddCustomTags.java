@@ -62,6 +62,7 @@ public class impAddCustomTags extends javax.swing.JDialog {
         LabelAddTag = new javax.swing.JLabel();
         TextFieldAddTag = new javax.swing.JTextField();
         BTNAddTag = new javax.swing.JButton();
+        BTNRemoveTag = new javax.swing.JButton();
 
         java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("i18n/Dialogs/AddCustomTags_trans"); // NOI18N
         MenuItemRemoveTag.setText(bundle.getString("REMOVE")); // NOI18N
@@ -92,6 +93,7 @@ public class impAddCustomTags extends javax.swing.JDialog {
         });
 
         BTNOKAddTags.setText(bundle.getString("OK")); // NOI18N
+        BTNOKAddTags.setFocusable(false);
         BTNOKAddTags.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BTNOKAddTagsActionPerformed(evt);
@@ -115,9 +117,18 @@ public class impAddCustomTags extends javax.swing.JDialog {
 
         BTNAddTag.setText(bundle.getString("ADD")); // NOI18N
         BTNAddTag.setToolTipText(bundle.getString("ADD NEW TAG")); // NOI18N
+        BTNAddTag.setFocusable(false);
         BTNAddTag.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BTNAddTagActionPerformed(evt);
+            }
+        });
+
+        BTNRemoveTag.setText("Remove Selected Tag");
+        BTNRemoveTag.setFocusable(false);
+        BTNRemoveTag.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTNRemoveTagActionPerformed(evt);
             }
         });
 
@@ -127,20 +138,21 @@ public class impAddCustomTags extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(33, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(BTNRemoveTag)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(BTNOKAddTags)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(BTNCancelAddTags))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(LabelAddTag)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(TextFieldAddTag, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(BTNAddTag))
-                        .addComponent(LabelCurrentTags)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 668, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(LabelAddTag)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(TextFieldAddTag, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(BTNAddTag))
+                    .addComponent(LabelCurrentTags, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 668, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(33, 33, 33))
         );
         layout.setVerticalGroup(
@@ -158,7 +170,8 @@ public class impAddCustomTags extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BTNOKAddTags)
-                    .addComponent(BTNCancelAddTags))
+                    .addComponent(BTNCancelAddTags)
+                    .addComponent(BTNRemoveTag))
                 .addContainerGap(71, Short.MAX_VALUE))
         );
 
@@ -189,6 +202,10 @@ public class impAddCustomTags extends javax.swing.JDialog {
     private void MenuItemRenameTagActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemRenameTagActionPerformed
         impMenuItemRenameTagActionPerformed(evt);
     }//GEN-LAST:event_MenuItemRenameTagActionPerformed
+
+    private void BTNRemoveTagActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNRemoveTagActionPerformed
+        impBTNRemoveTagActionPerformed(evt);
+    }//GEN-LAST:event_BTNRemoveTagActionPerformed
     //</Auto-Generate>
     
     /**
@@ -225,6 +242,7 @@ public class impAddCustomTags extends javax.swing.JDialog {
     private javax.swing.JButton BTNAddTag;
     protected javax.swing.JButton BTNCancelAddTags;
     protected javax.swing.JButton BTNOKAddTags;
+    protected javax.swing.JButton BTNRemoveTag;
     private javax.swing.JLabel LabelAddTag;
     private javax.swing.JLabel LabelCurrentTags;
     protected javax.swing.JMenuItem MenuItemRemoveTag;
@@ -242,5 +260,6 @@ public class impAddCustomTags extends javax.swing.JDialog {
     protected void impBTNCancelAddTagsActionPerformed(java.awt.event.ActionEvent evt){}
     protected void impMenuItemRemoveTagActionPerformed(java.awt.event.ActionEvent evt){}
     protected void impMenuItemRenameTagActionPerformed(java.awt.event.ActionEvent evt){}
+    protected void impBTNRemoveTagActionPerformed(java.awt.event.ActionEvent evt){}
     //</Auto-Generate-Result>
 }
