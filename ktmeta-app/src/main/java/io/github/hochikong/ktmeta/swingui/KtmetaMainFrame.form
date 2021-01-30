@@ -931,7 +931,7 @@
                             <EventHandler event="valueChanged" listener="javax.swing.event.TreeSelectionListener" parameters="javax.swing.event.TreeSelectionEvent" handler="TreeMetadataLibsValueChanged"/>
                           </Events>
                           <AuxValues>
-                            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTree(metalibsRootNode)"/>
+                            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTree()"/>
                             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="4"/>
                           </AuxValues>
                         </Component>
@@ -1073,7 +1073,7 @@
                             <EventHandler event="valueChanged" listener="javax.swing.event.TreeSelectionListener" parameters="javax.swing.event.TreeSelectionEvent" handler="TreeDatabasesValueChanged"/>
                           </Events>
                           <AuxValues>
-                            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTree(databaseRootNode)"/>
+                            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTree()"/>
                             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="4"/>
                           </AuxValues>
                         </Component>
@@ -1104,7 +1104,7 @@
                             <EventHandler event="valueChanged" listener="javax.swing.event.TreeSelectionListener" parameters="javax.swing.event.TreeSelectionEvent" handler="TreeIndicesValueChanged"/>
                           </Events>
                           <AuxValues>
-                            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTree(indicesRootNode)"/>
+                            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTree()"/>
                             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="4"/>
                           </AuxValues>
                         </Component>

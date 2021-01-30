@@ -16,7 +16,6 @@ import com.formdev.flatlaf.intellijthemes.FlatSolarizedLightIJTheme;
 import io.github.hochikong.ktmeta.swingui.essentials.VerticalTabComp;
 
 import javax.swing.*;
-import javax.swing.tree.DefaultMutableTreeNode;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
@@ -102,7 +101,7 @@ public class KtmetaMainFrame extends javax.swing.JFrame {
         BTNCollapseTree = new javax.swing.JButton();
         PanelMetaLibsTreeContainer = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        TreeMetadataLibs = new javax.swing.JTree(metalibsRootNode);
+        TreeMetadataLibs = new javax.swing.JTree();
         PanelResources = new javax.swing.JPanel();
         ToolBarResources = new javax.swing.JToolBar();
         ComboBoxRESOptions = new javax.swing.JComboBox<>();
@@ -111,9 +110,9 @@ public class KtmetaMainFrame extends javax.swing.JFrame {
         BTNCollapseTree1 = new javax.swing.JButton();
         PanelResourcesTreeContainer = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        TreeDatabases = new javax.swing.JTree(databaseRootNode);
+        TreeDatabases = new javax.swing.JTree();
         jScrollPane2 = new javax.swing.JScrollPane();
-        TreeIndices = new javax.swing.JTree(indicesRootNode);
+        TreeIndices = new javax.swing.JTree();
         SplitPaneSubRight = new javax.swing.JSplitPane();
         PanelSplitCenter = new javax.swing.JPanel();
         SplitPaneVTGeneral = new javax.swing.JSplitPane();
@@ -1245,9 +1244,6 @@ public class KtmetaMainFrame extends javax.swing.JFrame {
     
     protected String[] MetaLibsCardOptions = new String[] { "MetaLibs" };
     protected String[] ResourceCardOptions = new String[] { "Databases", "Indices" };
-    protected DefaultMutableTreeNode metalibsRootNode = new DefaultMutableTreeNode("MetaLibs Collections"); 
-    protected DefaultMutableTreeNode databaseRootNode = new DefaultMutableTreeNode("Database Collections");  
-    protected DefaultMutableTreeNode indicesRootNode = new DefaultMutableTreeNode("ES Index Collections");  
     //</My-Custom>
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
