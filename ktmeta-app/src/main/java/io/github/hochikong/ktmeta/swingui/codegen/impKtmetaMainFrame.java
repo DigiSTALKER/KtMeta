@@ -399,7 +399,7 @@ public class impKtmetaMainFrame extends javax.swing.JFrame {
 
         MainSplitPane.setDividerSize(2);
 
-        SplitPaneRightTabbedPane.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
+        SplitPaneRightTabbedPane.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 0, 1, 1, new java.awt.Color(153, 153, 153)));
         SplitPaneRightTabbedPane.setTabPlacement(javax.swing.JTabbedPane.LEFT);
 
         PanelMetaLibs.setPreferredSize(new java.awt.Dimension(220, 811));
@@ -676,7 +676,7 @@ public class impKtmetaMainFrame extends javax.swing.JFrame {
 
         SplitPaneSubRight.setLeftComponent(PanelSplitCenter);
 
-        TabbedPaneSplitRight.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
+        TabbedPaneSplitRight.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 0, new java.awt.Color(153, 153, 153)));
         TabbedPaneSplitRight.setTabPlacement(javax.swing.JTabbedPane.RIGHT);
         TabbedPaneSplitRight.setPreferredSize(new java.awt.Dimension(250, 811));
 
@@ -776,7 +776,7 @@ public class impKtmetaMainFrame extends javax.swing.JFrame {
         PanelRightPreview.setLayout(PanelRightPreviewLayout);
         PanelRightPreviewLayout.setHorizontalGroup(
             PanelRightPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE)
+            .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 269, Short.MAX_VALUE)
         );
         PanelRightPreviewLayout.setVerticalGroup(
             PanelRightPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
