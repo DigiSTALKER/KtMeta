@@ -26,7 +26,7 @@ plugins {
 apply from: 'filecopy.gradle'
 
 // must set
-mainClassName = 'MainKt'
+mainClassName = 'io.github.hochikong.ktmeta.swingui.codegen.impKtmetaMainFrame'
 
 group 'io.github.hochikong'
 version '1.0-SNAPSHOT'
@@ -128,6 +128,8 @@ distributions {
     }
 }
 
+// When you first compile this repo, you should comment code below before gradle assemble
+// Only after assemble you can use build
 startScripts {
     // If clean the build dir, the task will failed.
     def startScriptDir = outputDir.getAbsolutePath()

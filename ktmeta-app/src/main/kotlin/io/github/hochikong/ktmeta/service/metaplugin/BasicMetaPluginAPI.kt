@@ -26,6 +26,16 @@ import io.github.hochikong.ktmeta.service.device.DeviceAPI
  * Important: Although Abstract, Custom Tags and Preview belong to the metadata document,
  * they can be modified in-place, unlike the document itself.
  *
+ * You should use the unique id for data manipulating or search pagination.
+ *
+ * Hence, you can use auto increment serial as your metadata library's primary key,
+ * and use a column to mark the status of single row(deleted or normal). When you insert new rows, you can update those
+ * rows which have 'deleted' tag before appending new data to the tail of table.
+ *
+ * Or you can just ignore the discontinuous primary key value after you execute lots of delete sql if you don't have too many data.
+ *
+ * If you don't want to use a auto increment primary key, you can simply insert id by yourself your plugin.
+ *
  * Supported features:
  * 1. Search result paging
  * 2. Edit abstract
@@ -42,7 +52,7 @@ interface BasicMetaPluginAPI {
     /**
      * Return a sql for getting the page from [pageLocation] with [pageSize] rows.
      * */
-    fun getPagingConfig(pageSize: Int, pageLocation: Int): String
+    fun gotoPage(pageSize: Int, pageLocation: Int): String
 
     /**
      * Receive new [content] to update [id]: Metadata's Abstract then return the latest abstract.
