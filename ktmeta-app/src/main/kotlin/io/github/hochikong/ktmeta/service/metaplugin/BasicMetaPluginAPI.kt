@@ -26,7 +26,7 @@ import io.github.hochikong.ktmeta.service.device.DeviceAPI
  * Important: Although Abstract, Custom Tags and Preview belong to the metadata document,
  * they can be modified in-place, unlike the document itself.
  *
- * You should use the unique id for data manipulating or search pagination.
+ * You should use the unique id for data manipulating or search pagination. Unique Ids, you should remember.
  *
  * Hence, you can use auto increment serial as your metadata library's primary key,
  * and use a column to mark the status of single row(deleted or normal). When you insert new rows, you can update those

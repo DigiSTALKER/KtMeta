@@ -13,8 +13,9 @@
 
 package io.github.hochikong.ktmeta.service.metaplugin
 
-import io.github.hochikong.ktmeta.common.HowToMatch
-import io.github.hochikong.ktmeta.common.RuleConnector
+import io.github.hochikong.ktmeta.common.MatchOperators
+import io.github.hochikong.ktmeta.common.LogicalOperators
+
 
 sealed class AdvanceSearchRules
 
@@ -30,16 +31,46 @@ sealed class AdvanceSearchRules
  *
  * @param attribute String, a metadata library's attribute or column name.
  * @param howToMatch HowToMatch, a enum class member to describe how to match the [userInput].
- * @param userInput String, multiple value split by spaces will be treated like a single phrase.
  * @param ruleConnectorToNext RuleConnector, a enum class member to describe how to connect
  * to the next rule. If you want to end the rules, just use END class.
  * */
 data class BasicRule(
     val attribute: String,
-    val howToMatch: HowToMatch,
-    val userInput: String,
-    val ruleConnectorToNext: RuleConnector
-) : AdvanceSearchRules()
+    val howToMatch: MatchOperators,
+    val ruleConnectorToNext: LogicalOperators
+) : AdvanceSearchRules() {
+    lateinit var userInput: Any
+
+    /***
+     * @param attribute String, a metadata library's attribute or column name.
+     * @param howToMatch HowToMatch, a enum class member to describe how to match the [userInput].
+     * @param ruleConnectorToNext RuleConnector, a enum class member to describe how to connect
+     * @param userInput String, multiple value split by spaces will be treated like a single phrase.
+     */
+    constructor(
+        attribute: String,
+        howToMatch: MatchOperators,
+        ruleConnectorToNext: LogicalOperators,
+        userInput: String,
+    ) : this(attribute, howToMatch, ruleConnectorToNext) {
+        this.userInput = userInput
+    }
+
+    /***
+     * @param attribute String, a metadata library's attribute or column name.
+     * @param howToMatch HowToMatch, a enum class member to describe how to match the [userInput].
+     * @param ruleConnectorToNext RuleConnector, a enum class member to describe how to connect
+     * @param userInput Number, multiple value split by spaces will be treated like a single phrase.
+     */
+    constructor(
+        attribute: String,
+        howToMatch: MatchOperators,
+        ruleConnectorToNext: LogicalOperators,
+        userInput: Number,
+    ) : this(attribute, howToMatch, ruleConnectorToNext) {
+        this.userInput = userInput
+    }
+}
 
 /**
  * A dataclass for compound rule.
@@ -49,6 +80,7 @@ data class BasicRule(
  *
  * Examples:
  * SELECT * FROM manga WHERE author = 'X1' OR (author = 'X1' and title LIKE '%gals%')
+ *
  * Condition in parentheses to CompoundRule ->
  *     CompoundRule(
  *         {
@@ -64,5 +96,5 @@ data class BasicRule(
  * */
 data class CompoundRule(
     val rules: LinkedHashMap<Int, BasicRule>,
-    val ruleConnectorToNext: RuleConnector
-): AdvanceSearchRules()
+    val ruleConnectorToNext: LogicalOperators
+) : AdvanceSearchRules()
