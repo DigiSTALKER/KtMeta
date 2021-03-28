@@ -17,10 +17,10 @@ import io.github.hochikong.ktmeta.common.MatchOperators
 import io.github.hochikong.ktmeta.common.LogicalOperators
 
 
-sealed class AdvanceSearchRules
+sealed class SearchRules
 
 /**
- * A basic advance search rule.
+ * A basic search rule.
  *
  * Examples:
  * SELECT * FROM manga WHERE author = 'X1'
@@ -38,20 +38,20 @@ data class BasicRule(
     val attribute: String,
     val howToMatch: MatchOperators,
     val ruleConnectorToNext: LogicalOperators
-) : AdvanceSearchRules() {
+) : SearchRules() {
     lateinit var userInput: Any
 
     /***
      * @param attribute String, a metadata library's attribute or column name.
      * @param howToMatch HowToMatch, a enum class member to describe how to match the [userInput].
-     * @param ruleConnectorToNext RuleConnector, a enum class member to describe how to connect
      * @param userInput String, multiple value split by spaces will be treated like a single phrase.
+     * @param ruleConnectorToNext RuleConnector, a enum class member to describe how to connect
      */
     constructor(
         attribute: String,
         howToMatch: MatchOperators,
-        ruleConnectorToNext: LogicalOperators,
         userInput: String,
+        ruleConnectorToNext: LogicalOperators
     ) : this(attribute, howToMatch, ruleConnectorToNext) {
         this.userInput = userInput
     }
@@ -59,14 +59,14 @@ data class BasicRule(
     /***
      * @param attribute String, a metadata library's attribute or column name.
      * @param howToMatch HowToMatch, a enum class member to describe how to match the [userInput].
-     * @param ruleConnectorToNext RuleConnector, a enum class member to describe how to connect
      * @param userInput Number, multiple value split by spaces will be treated like a single phrase.
+     * @param ruleConnectorToNext RuleConnector, a enum class member to describe how to connect
      */
     constructor(
         attribute: String,
         howToMatch: MatchOperators,
-        ruleConnectorToNext: LogicalOperators,
         userInput: Number,
+        ruleConnectorToNext: LogicalOperators
     ) : this(attribute, howToMatch, ruleConnectorToNext) {
         this.userInput = userInput
     }
@@ -97,4 +97,4 @@ data class BasicRule(
 data class CompoundRule(
     val rules: LinkedHashMap<Int, BasicRule>,
     val ruleConnectorToNext: LogicalOperators
-) : AdvanceSearchRules()
+) : SearchRules()

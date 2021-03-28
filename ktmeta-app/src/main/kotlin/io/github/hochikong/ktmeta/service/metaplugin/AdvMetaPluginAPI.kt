@@ -48,7 +48,7 @@ interface AdvMetaPluginAPI : BasicMetaPluginAPI {
     /**
      * Use rules to execute advance search.
      * */
-    fun advanceSearchOnES(rules: List<AdvanceSearchRules>, targetLib: Int, newTab: Boolean): List<Any>
+    fun advanceSearchOnES(rules: List<SearchRules>, targetLib: Int, newTab: Boolean): List<Any>
 
     /**
      * Find out all metadata which its [attribute] exactly equals to [value].

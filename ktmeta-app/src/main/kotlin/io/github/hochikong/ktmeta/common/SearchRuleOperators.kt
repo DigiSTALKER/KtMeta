@@ -6,6 +6,9 @@ package io.github.hochikong.ktmeta.common
  * This enum class provides all basic matching operators to unify the entry point of searching on DBMS and ES
  * for advance search.
  *
+ * When you use operator LIKE and ILike, it means you are using full-text search.
+ * When you use other operators, it means you are using condition search.
+ *
  * @param code String, a sort string which represents one matching operator.
  * @param desc String, the description of matching operator
  * */
