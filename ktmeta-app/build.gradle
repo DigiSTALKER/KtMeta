@@ -79,6 +79,7 @@ dependencies {
     implementation 'org.jdbi:jdbi3-sqlobject:3.17.0'
     implementation 'org.jdbi:jdbi3-kotlin:3.17.0'
     implementation 'org.jdbi:jdbi3-stringtemplate4:3.17.0'
+    implementation 'org.jdbi:jdbi3-kotlin-sqlobject:3.17.0'
     implementation 'me.liuwj.ktorm:ktorm-core:3.0.0'
     implementation 'org.xerial:sqlite-jdbc:3.32.3.1'
     implementation 'org.postgresql:postgresql:42.2.14'

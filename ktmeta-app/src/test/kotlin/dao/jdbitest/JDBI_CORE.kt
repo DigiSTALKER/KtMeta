@@ -4,8 +4,10 @@ import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
 import org.jdbi.v3.core.Jdbi
 import org.jdbi.v3.core.mapper.RowMapper
+import org.jdbi.v3.core.mapper.reflect.BeanMapper
 import org.jdbi.v3.core.mapper.reflect.FieldMapper
 import org.jdbi.v3.core.statement.StatementContext
+import java.beans.ConstructorProperties
 import java.sql.ResultSet
 
 class JDBI_CORE {
@@ -35,6 +37,12 @@ class TestUserMapper : RowMapper<TestUser> {
 
 }
 
+// bean mapper
+class UserBean(var username: String = "", var age: Int = 0) {
+    override fun toString(): String {
+        return "UserBean(username='$username', age=$age)"
+    }
+}
 
 fun main() {
     val jdbiInst = JDBI_CORE()
@@ -95,4 +103,13 @@ fun main() {
         }.list()
     }
     println("All usernames: $usernames")
+
+    // bean mapper
+    println()
+    val handle = jdbiInst.jdbi.open()
+    handle.registerRowMapper(BeanMapper.factory(UserBean::class.java))
+    val usersBeans = handle.createQuery("SELECT username, age FROM users;").mapTo(UserBean::class.java).list()
+    println("Beans:")
+    usersBeans.forEach { println(it) }
+    handle.close()
 }
