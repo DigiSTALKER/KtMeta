@@ -16,8 +16,7 @@ package io.github.hochikong.ktmeta.service.db
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
 import io.github.hochikong.ktmeta.common.Encryption
-import io.github.hochikong.ktmeta.dao.DAOConfig
-import io.github.hochikong.ktmeta.dao.DBRecord
+import io.github.hochikong.ktmeta.dao.DAOConfigFactory
 import io.github.hochikong.ktmeta.dao.impl.DBResourceDAO
 import me.liuwj.ktorm.database.Database
 import javax.sql.DataSource
@@ -28,7 +27,7 @@ import javax.sql.DataSource
  * Use this Object to retrieve connection: JDBC connection or Ktorm Database
  * */
 object DBProvider{
-    fun getDatabase(db: String, user: String?=null, password: String?=null): Database? {
+    /*fun getDatabase(db: String, user: String?=null, password: String?=null): Database? {
         val ds = getDataSource(db, user, password)
         return if (ds != null) {
             Database.connect(dataSource = ds)
@@ -40,7 +39,7 @@ object DBProvider{
     fun getDataSource(db: String, user: String?=null, password: String?=null): DataSource? {
         val query = DBResourceDAO.getRecordByName(db)
         if (query is DBRecord) {
-            val config = HikariConfig(DAOConfig.poolConfigPath)
+            val config = HikariConfig(DAOConfigFactory.poolConfigPath)
             config.poolName = "ConnectionPoolOf${query.db_name}"
             config.jdbcUrl = query.url
 
@@ -58,5 +57,5 @@ object DBProvider{
         } else {
             return null
         }
-    }
+    }*/
 }

@@ -35,49 +35,19 @@ CREATE TABLE IF NOT EXISTS dbs_registration
     CONSTRAINT save_passwd_or_not CHECK ( save_passwd IN (0, 1))
 );
 */
-object DBRegTable : Table<Nothing>(DBRecord.tableName) {
-    val id = int("id").primaryKey()
-    val dbms = varchar("dbms")
-    val db_name = varchar("database")
-    val desc = text("desc")
-    val url = varchar("url")
-    val user = varchar("user")
-    val password = varchar("password")
-    val save_passwd = int("save_passwd")
-}
-
 /**
  * Password And Username must be encrypted.
  * */
-data class DBRecord(
-    val id: Int = -1,
-    val dbms: String,
-    val db_name: String,
-    val desc: String,
-    val url: String,
-    val user: String,
-    val password: String,
-    val save_passwd: Int
-) : ResourcesRecord() {
-    companion object {
-        const val tableName = "dbs_registration"
-        val ddl = """
-            CREATE TABLE IF NOT EXISTS dbs_registration
-(
-    id          INTEGER PRIMARY KEY AUTOINCREMENT,
-    dbms        TEXT    NOT NULL,
-    database    TEXT    NOT NULL UNIQUE,
-    desc        TEXT    NOT NULL,
-    url         TEXT    NOT NULL UNIQUE,
-    user        TEXT,
-    password    TEXT,
-    save_passwd INTEGER NOT NULL,
-    CONSTRAINT db_type_check CHECK ( dbms IN ('Sqlite', 'Postgresql') ),
-    CONSTRAINT save_passwd_or_not CHECK ( save_passwd IN (0, 1))
-);
-        """.trimIndent()
-    }
-}
+data class DBResource(
+    var id: Long = 0,
+    var db_type: String = "",
+    var db_name: String = "",
+    var db_desc: String = "",
+    var db_url: String = "",
+    var user: String = "",
+    var password: String = "",
+    var save_passwd: Int = 0
+) : ResourcesRecord()
 
 /*
 CREATE TABLE IF NOT EXISTS indices_registration(
@@ -103,13 +73,7 @@ data class ESRecord(
     companion object {
         const val tableName = "indices_registration"
         val ddl = """
-            CREATE TABLE IF NOT EXISTS indices_registration
-            (
-                id         INTEGER PRIMARY KEY AUTOINCREMENT,
-                index_name TEXT NOT NULL UNIQUE,
-                index_desc TEXT NOT NULL,
-                index_url  TEXT NOT NULL UNIQUE
-            );
+            
         """.trimIndent()
     }
 }
@@ -144,15 +108,7 @@ data class MPRecord(
     companion object {
         const val tableName = "metaplugins_registration"
         val ddl = """
-            CREATE TABLE IF NOT EXISTS metaplugins_registration
-            (
-                id                INTEGER PRIMARY KEY AUTOINCREMENT,
-                plugin_name       TEXT NOT NULL UNIQUE,
-                plugin_version    TEXT NOT NULL UNIQUE,
-                plugin_class_name TEXT NOT NULL,
-                plugin_desc       TEXT NOT NULL,
-                plugin_helper     TEXT NOT NULL
-            );
+            
         """.trimIndent()
     }
 }
@@ -188,15 +144,7 @@ data class MLRecord(
     companion object {
         const val tableName = "metalibs_registration"
         val ddl = """
-            CREATE TABLE IF NOT EXISTS metalibs_registration
-            (
-                id       INTEGER PRIMARY KEY AUTOINCREMENT,
-                lib_name TEXT                                                    NOT NULL UNIQUE,
-                lib_desc TEXT                                                    NOT NULL,
-                assign_plugin REFERENCES meta_plugins_registration (plugin_name) NOT NULL,
-                assign_db REFERENCES dbs_registration (database) UNIQUE,
-                assign_index REFERENCES indices_registration (index_name) UNIQUE
-            );
+            
         """.trimIndent()
     }
 }

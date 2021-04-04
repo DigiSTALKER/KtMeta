@@ -15,133 +15,199 @@ package io.github.hochikong.ktmeta.dao.impl
 
 import com.zaxxer.hikari.HikariDataSource
 import io.github.hochikong.ktmeta.dao.*
-import me.liuwj.ktorm.database.Database
-import me.liuwj.ktorm.dsl.*
+import org.jdbi.v3.core.Jdbi
+import org.jdbi.v3.core.extension.ExtensionCallback
+import org.jdbi.v3.core.extension.ExtensionConsumer
+import org.jdbi.v3.sqlobject.config.RegisterBeanMapper
+import org.jdbi.v3.sqlobject.customizer.Bind
+import org.jdbi.v3.sqlobject.customizer.BindBean
+import org.jdbi.v3.sqlobject.statement.GetGeneratedKeys
+import org.jdbi.v3.sqlobject.statement.SqlQuery
+import org.jdbi.v3.sqlobject.statement.SqlUpdate
+import org.jdbi.v3.sqlobject.transaction.Transaction
 import org.slf4j.LoggerFactory
-import org.sqlite.SQLiteException
+import org.jdbi.v3.core.statement.UnableToCreateStatementException
+import org.jdbi.v3.sqlobject.statement.SqlScript
+
 
 object DBResourceDAO : ResourcesDAOAPI {
-    private const val tableName = DBRecord.tableName
-
-    private val checkTableSQL = """
-        SELECT 1 FROM $tableName;
-    """.trimIndent()
-    private val resetSQL = """
-        DROP TABLE $tableName;
-    """.trimIndent()
-    private val DDL = DBRecord.ddl
-
-    private val db: Database
-    private val dataSource = HikariDataSource(DAOConfig.buildCPConfig(tableName))
-    private val logger = LoggerFactory.getLogger(DAOConfig.logKey[tableName])
-
-    private fun checkTable() {
-        db.useConnection { connection ->
-            connection.createStatement().use {
-                try {
-                    it.execute(checkTableSQL)
-                } catch (e: SQLiteException) {
-                    logger.info("Solved: $e")
-                    // when no such table
-                    it.execute(DDL)
-                }
-            }
-        }
+    private val tableName = DAOTableNames.DBResource.tName
+    private val dataSource = HikariDataSource(DAOConfigFactory.buildSqliteCPConfig(this.tableName))
+    private val logger = LoggerFactory.getLogger(DAOConfigFactory.logKey[tableName])
+    private val jdbiInstance: Jdbi = Jdbi.create(dataSource).apply {
+        installPlugins()
     }
 
-    init {
-        db = Database.connect(dataSource)
-        checkTable()
+    interface DBR {
+        @SqlUpdate(
+            """
+            INSERT INTO dbs_registration(db_type, db_name, db_desc, db_url, user, password, save_passwd) 
+            VALUES (:db_type, :db_name, :db_desc, :db_url, :user, :password, :save_passwd);
+        """
+        )
+        @GetGeneratedKeys("id")
+        @Transaction
+        fun insert(@BindBean res: DBResource): Long
+
+
+        @SqlUpdate(
+            """
+            UPDATE dbs_registration 
+            SET db_type = :db.db_type, 
+                db_name = :db.db_name, 
+                db_desc = :db.db_desc, 
+                db_url = :db.db_url, 
+                user = :db.user, 
+                password = :db.password, 
+                save_passwd = :db.save_passwd
+            WHERE id = :id;
+        """
+        )
+        @GetGeneratedKeys("id")
+        @Transaction
+        fun update(@Bind("id") id: Long, @BindBean("db") res: DBResource): Long
+
+
+        @SqlQuery(
+            """
+            SELECT id, db_type, db_name, db_desc, db_url, user, password, save_passwd FROM dbs_registration;
+        """
+        )
+        @RegisterBeanMapper(DBResource::class)
+        fun query(): List<DBResource>
+
+        @SqlUpdate("DELETE FROM dbs_registration WHERE id = ?;")
+        @GetGeneratedKeys("id")
+        @Transaction
+        fun delete(id: Long): Long
+
+
+        @SqlUpdate(
+            """
+            CREATE TABLE IF NOT EXISTS dbs_registration
+            (
+            id          INTEGER PRIMARY KEY AUTOINCREMENT,
+            db_type     TEXT    NOT NULL,        -- database type
+            db_name     TEXT    NOT NULL UNIQUE, -- database name
+            db_desc     TEXT    NOT NULL,        -- database description
+            db_url      TEXT    NOT NULL UNIQUE, -- database url
+            user        TEXT,                    -- database username
+            password    TEXT,                    -- database password (encrypted)
+            save_passwd INTEGER NOT NULL,        -- has password or not, 0 -> false; 1 -> true
+            CONSTRAINT db_type_check CHECK ( db_type IN ('Sqlite', 'Postgresql', 'Mysql', 'H2') ),
+            CONSTRAINT save_passwd_or_not CHECK ( save_passwd IN (0, 1))
+            );
+            
+        """
+        )
+        @Transaction
+        fun createTable()
+
+
+        @SqlQuery("SELECT DISTINCT 1 FROM dbs_registration;")
+        fun check(): Int?
+
+
+        @SqlScript("DROP TABLE dbs_registration;")
+        @Transaction
+        fun drop()
     }
 
+    /**
+     * @throws org.jdbi.v3.core.statement.UnableToCreateStatementException
+     * */
     override fun insertRecord(record: ResourcesRecord): Boolean {
-        val r = record as DBRecord
-        val ef = db.insert(DBRegTable) {
-            it.dbms to r.dbms
-            it.db_name to r.db_name
-            it.desc to r.desc
-            it.url to r.url
-            it.user to r.user
-            it.password to r.password
-            it.save_passwd to r.save_passwd
+        if (record is DBResource) {
+            val id = jdbiInstance.withExtension(DBR::class.java, ExtensionCallback {
+                it.insert(record)
+            })
+
+            return id != null
         }
-        logger.info("Insert: $r")
-        return ef > 0
+        return false
     }
 
-    override fun updateRecord(id: Int, newRecord: ResourcesRecord): Boolean {
-        val r = newRecord as DBRecord
-        val ef = db.update(DBRegTable) {
-            it.dbms to r.dbms
-            it.db_name to r.db_name
-            it.desc to r.desc
-            it.url to r.url
-            it.user to r.user
-            it.password to r.password
-            it.save_passwd to r.save_passwd
-            where {
-                it.id eq id
+    /**
+     * @throws org.jdbi.v3.core.statement.UnableToCreateStatementException
+     * */
+    override fun updateRecord(id: Long, newRecord: ResourcesRecord): Boolean {
+        if (newRecord is DBResource) {
+            val idReturn = jdbiInstance.withExtension(DBR::class.java, ExtensionCallback {
+                it.update(id, newRecord)
+            })
+
+            return id == idReturn
+        }
+        return false
+    }
+
+    /**
+     * @throws org.jdbi.v3.core.statement.UnableToCreateStatementException
+     * */
+    override fun getAllRecords(): List<DBResource> {
+        return jdbiInstance.withExtension(DBR::class.java, ExtensionCallback {
+            it.query()
+        })
+    }
+
+    /**
+     * @throws org.jdbi.v3.core.statement.UnableToCreateStatementException
+     * */
+    override fun deleteRecord(id: Long): Boolean {
+        return id == jdbiInstance.withExtension(DBR::class.java, ExtensionCallback {
+            it.delete(id)
+        })
+    }
+
+
+    override fun hasTable(): Boolean {
+        this.logger.info("Checking has table or not")
+
+        return try {
+            val r = jdbiInstance.withExtension(DBR::class.java, ExtensionCallback {
+                it.check()
+            })
+
+            // if has table but no data
+            if (r == null) {
+                true
+            } else {
+                // has table has a least one row
+                1 == r
             }
+        } catch (e: UnableToCreateStatementException) {
+            this.logger.info("Table not found")
+            false
         }
-        logger.info("Update: $r")
-        return ef > 0
-    }
-
-    fun getRecordByName(dbName: String): DBRecord? {
-        // DBRegTable.name is unique
-        var r: DBRecord? = null
-        for (row in db.from(DBRegTable).select().where { DBRegTable.db_name eq dbName }) {
-            if (row[DBRegTable.db_name] != null && row[DBRegTable.db_name] == dbName) {
-                r = DBRecord(
-                    row[DBRegTable.id]!!,
-                    row[DBRegTable.dbms]!!,
-                    row[DBRegTable.db_name]!!,
-                    row[DBRegTable.desc]!!,
-                    row[DBRegTable.url]!!,
-                    row[DBRegTable.user]!!,
-                    row[DBRegTable.password]!!,
-                    row[DBRegTable.save_passwd]!!
-                )
-            }
-        }
-        return r
-    }
-
-    override fun getAllRecords(): List<ResourcesRecord> {
-        val result = mutableListOf<DBRecord>()
-        for (row in db.from(DBRegTable).select()) {
-            result.add(
-                DBRecord(
-                    row[DBRegTable.id] ?: -1,
-                    row[DBRegTable.dbms] ?: "null",
-                    row[DBRegTable.db_name] ?: "null",
-                    row[DBRegTable.desc] ?: "null",
-                    row[DBRegTable.url] ?: "null",
-                    row[DBRegTable.user] ?: "null",
-                    row[DBRegTable.password] ?: "null",
-                    row[DBRegTable.save_passwd] ?: -1
-                )
-            )
-        }
-        return result.toList()
-    }
-
-    override fun deleteRecord(id: Int): Boolean {
-        val ef = db.delete(DBRegTable) {
-            it.id eq id
-        }
-        logger.info("Delete: id=$id")
-        return ef > 0
     }
 
     override fun resetTable(): Boolean {
-        db.useConnection { connection ->
-            connection.createStatement().use {
-                it.execute(resetSQL)
-                it.execute(DDL)
+        return if (this.hasTable()) {
+            jdbiInstance.open().use {
+                val dao = it.attach(DBR::class.java)
+                this.logger.info("Drop table before create")
+                dao.drop()
+                this.logger.info("Create table")
+                dao.createTable()
             }
+
+            true
+        } else {
+            jdbiInstance.open().use {
+                val dao = it.attach(DBR::class.java)
+                this.logger.info("Create table")
+                dao.createTable()
+            }
+            true
         }
-        logger.info("Drop Table")
-        return true
+    }
+
+    override fun drop() {
+        if (this.hasTable()) {
+            jdbiInstance.useExtension(DBR::class.java, ExtensionConsumer {
+                it.drop()
+                this.logger.info("Drop table")
+            })
+        }
     }
 }

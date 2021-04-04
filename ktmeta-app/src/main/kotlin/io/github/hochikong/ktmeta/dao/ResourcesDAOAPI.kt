@@ -14,9 +14,43 @@
 package io.github.hochikong.ktmeta.dao
 
 interface ResourcesDAOAPI {
+    /**
+     * Insert a new record into database
+     *
+     * @param record, ResourcesRecord or its subclasses
+     * */
     fun insertRecord(record: ResourcesRecord): Boolean
-    fun updateRecord(id: Int, newRecord: ResourcesRecord): Boolean
+
+    /**
+     * Update a record in the database by a new record that has a different value in one or all fields,
+     * according to an existing id.
+     *
+     * @param newRecord, ResourcesRecord or its subclasses
+     * */
+    fun updateRecord(id: Long, newRecord: ResourcesRecord): Boolean
+
+    /**
+     * Return all records in database
+     * */
     fun getAllRecords(): List<ResourcesRecord>
-    fun deleteRecord(id: Int): Boolean
+
+    /**
+     * Delete a record according to an existing id.
+     * */
+    fun deleteRecord(id: Long): Boolean
+
+    /**
+     * Check the table exists or not. This method should catch all exceptions.
+     * */
+    fun hasTable(): Boolean
+
+    /**
+     * Drop the existing table then recreate it. Or just truncate it. This method relies on hasTable()
+     * */
     fun resetTable(): Boolean
+
+    /**
+     * Drop the table. This method relies on hasTable()
+     * */
+    fun drop()
 }
