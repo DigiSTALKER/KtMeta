@@ -47,7 +47,7 @@ object DBResourceDAO : ResourcesDAOAPI {
         )
         @GetGeneratedKeys("id")
         @Transaction
-        fun insert(@BindBean res: DBResource): Long
+        fun insert(@BindBean res: DBResourceRecord): Long
 
 
         @SqlUpdate(
@@ -65,7 +65,7 @@ object DBResourceDAO : ResourcesDAOAPI {
         )
         @GetGeneratedKeys("id")
         @Transaction
-        fun update(@Bind("id") id: Long, @BindBean("db") res: DBResource): Long
+        fun update(@Bind("id") id: Long, @BindBean("db") res: DBResourceRecord): Long
 
 
         @SqlQuery(
@@ -73,13 +73,13 @@ object DBResourceDAO : ResourcesDAOAPI {
             SELECT id, db_type, db_name, db_desc, db_url, user, password, save_passwd FROM dbs_registration;
         """
         )
-        @RegisterBeanMapper(DBResource::class)
-        fun query(): List<DBResource>
+        @RegisterBeanMapper(DBResourceRecord::class)
+        fun query(): List<DBResourceRecord>
 
-        @SqlUpdate("DELETE FROM dbs_registration WHERE id = ?;")
+        @SqlUpdate("DELETE FROM dbs_registration WHERE id = :id;")
         @GetGeneratedKeys("id")
         @Transaction
-        fun delete(id: Long): Long
+        fun delete(@Bind("id") id: Long): Long
 
 
         @SqlUpdate(
@@ -97,7 +97,6 @@ object DBResourceDAO : ResourcesDAOAPI {
             CONSTRAINT db_type_check CHECK ( db_type IN ('Sqlite', 'Postgresql', 'Mysql', 'H2') ),
             CONSTRAINT save_passwd_or_not CHECK ( save_passwd IN (0, 1))
             );
-            
         """
         )
         @Transaction
@@ -117,7 +116,9 @@ object DBResourceDAO : ResourcesDAOAPI {
      * @throws org.jdbi.v3.core.statement.UnableToCreateStatementException
      * */
     override fun insertRecord(record: ResourcesRecord): Boolean {
-        if (record is DBResource) {
+        if (record is DBResourceRecord) {
+            this.logger.info("Insert new record")
+
             val id = jdbiInstance.withExtension(DBR::class.java, ExtensionCallback {
                 it.insert(record)
             })
@@ -131,7 +132,9 @@ object DBResourceDAO : ResourcesDAOAPI {
      * @throws org.jdbi.v3.core.statement.UnableToCreateStatementException
      * */
     override fun updateRecord(id: Long, newRecord: ResourcesRecord): Boolean {
-        if (newRecord is DBResource) {
+        if (newRecord is DBResourceRecord) {
+            this.logger.info("Update record")
+
             val idReturn = jdbiInstance.withExtension(DBR::class.java, ExtensionCallback {
                 it.update(id, newRecord)
             })
@@ -144,7 +147,9 @@ object DBResourceDAO : ResourcesDAOAPI {
     /**
      * @throws org.jdbi.v3.core.statement.UnableToCreateStatementException
      * */
-    override fun getAllRecords(): List<DBResource> {
+    override fun getAllRecords(): List<DBResourceRecord> {
+        this.logger.info("Get all records")
+
         return jdbiInstance.withExtension(DBR::class.java, ExtensionCallback {
             it.query()
         })
@@ -154,6 +159,8 @@ object DBResourceDAO : ResourcesDAOAPI {
      * @throws org.jdbi.v3.core.statement.UnableToCreateStatementException
      * */
     override fun deleteRecord(id: Long): Boolean {
+        this.logger.info("Delete a record")
+
         return id == jdbiInstance.withExtension(DBR::class.java, ExtensionCallback {
             it.delete(id)
         })

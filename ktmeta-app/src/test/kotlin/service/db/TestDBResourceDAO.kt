@@ -1,9 +1,8 @@
 package service.db
 
-import io.github.hochikong.ktmeta.dao.DBResource
+import io.github.hochikong.ktmeta.dao.DBResourceRecord
 import io.github.hochikong.ktmeta.dao.impl.DBResourceDAO
 import org.junit.jupiter.api.*
-import org.jdbi.v3.core.statement.UnableToCreateStatementException
 import org.junit.jupiter.api.Assertions.assertEquals
 
 
@@ -25,7 +24,7 @@ class TestDBResourceDAO {
     }
 
     val dao = DBResourceDAO
-    val t1 = DBResource(
+    val t1 = DBResourceRecord(
         db_type = "Sqlite",
         db_name = "my sqlite",
         db_desc = "sqlite desc",
@@ -35,7 +34,7 @@ class TestDBResourceDAO {
         save_passwd = 0
     )
 
-    val t2 = DBResource(
+    val t2 = DBResourceRecord(
         db_type = "Sqlite",
         db_name = "my sqlite new",
         db_desc = "sqlite desc",

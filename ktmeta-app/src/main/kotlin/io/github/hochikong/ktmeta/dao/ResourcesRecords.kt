@@ -20,25 +20,13 @@ import me.liuwj.ktorm.schema.varchar
 
 sealed class ResourcesRecord
 
-/*
-CREATE TABLE IF NOT EXISTS dbs_registration
-(
-    id          INTEGER PRIMARY KEY AUTOINCREMENT,
-    dbms        TEXT    NOT NULL,
-    database    TEXT    NOT NULL UNIQUE,
-    desc        TEXT    NOT NULL,
-    url         TEXT    NOT NULL UNIQUE,
-    user        TEXT,
-    password    TEXT,
-    save_passwd INTEGER NOT NULL,
-    CONSTRAINT db_type_check CHECK ( dbms IN ('Sqlite', 'Postgresql') ),
-    CONSTRAINT save_passwd_or_not CHECK ( save_passwd IN (0, 1))
-);
-*/
+
 /**
- * Password And Username must be encrypted.
+ * Database resources.
+ *
+ * Password must be encrypted.
  * */
-data class DBResource(
+data class DBResourceRecord(
     var id: Long = 0,
     var db_type: String = "",
     var db_name: String = "",
@@ -49,34 +37,16 @@ data class DBResource(
     var save_passwd: Int = 0
 ) : ResourcesRecord()
 
-/*
-CREATE TABLE IF NOT EXISTS indices_registration(
-id INTEGER PRIMARY KEY AUTOINCREMENT ,
-index_name TEXT NOT NULL UNIQUE ,
-index_desc TEXT NOT NULL ,
-index_url TEXT NOT NULL UNIQUE
-);
-*/
-object ESRegTable : Table<Nothing>(ESRecord.tableName) {
-    val id = int("id").primaryKey()
-    val name = varchar("index_name")
-    val desc = text("index_desc")
-    val url = text("index_url")
-}
 
-data class ESRecord(
-    val id: Int = -1,
-    val index_name: String,
-    val index_desc: String,
-    val index_url: String
-) : ResourcesRecord() {
-    companion object {
-        const val tableName = "indices_registration"
-        val ddl = """
-            
-        """.trimIndent()
-    }
-}
+/**
+ * Elastic Search resources.
+ * */
+data class ESResourceRecord(
+    var id: Long = 0,
+    var index_name: String = "",
+    var index_desc: String = "",
+    var index_url: String = ""
+) : ResourcesRecord()
 
 /*
 CREATE TABLE IF NOT EXISTS metaplugins_registration(
