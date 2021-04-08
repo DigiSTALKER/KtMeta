@@ -13,14 +13,6 @@
 
 package io.github.hochikong.ktmeta.service.db
 
-import com.zaxxer.hikari.HikariConfig
-import com.zaxxer.hikari.HikariDataSource
-import io.github.hochikong.ktmeta.common.Encryption
-import io.github.hochikong.ktmeta.dao.DAOConfigFactory
-import io.github.hochikong.ktmeta.dao.impl.DBResourceDAO
-import me.liuwj.ktorm.database.Database
-import javax.sql.DataSource
-
 
 /**
  * Provider of databases' connections.

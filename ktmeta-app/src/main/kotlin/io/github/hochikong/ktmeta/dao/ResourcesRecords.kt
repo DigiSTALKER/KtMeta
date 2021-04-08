@@ -48,40 +48,17 @@ data class ESResourceRecord(
     var index_url: String = ""
 ) : ResourcesRecord()
 
-/*
-CREATE TABLE IF NOT EXISTS metaplugins_registration(
-id INTEGER PRIMARY KEY AUTOINCREMENT ,
-plugin_name TEXT NOT NULL UNIQUE ,
-plugin_version TEXT NOT NULL UNIQUE ,
-plugin_class_name TEXT NOT NULL ,
-plugin_desc TEXT NOT NULL ,
-plugin_helper TEXT NOT NULL
-);
-*/
-object MPRegTable : Table<Nothing>(MPRecord.tableName) {
-    val id = int("id").primaryKey()
-    val name = varchar("plugin_name")
-    val version = varchar("plugin_version")
-    val cname = varchar("plugin_class_name")
-    val desc = text("plugin_desc")
-    val helper = text("plugin_helper")
-}
-
-data class MPRecord(
+/**
+ * Metadata plugins resources
+ * */
+data class MPResourceRecord(
     val id: Int = -1,
     val plugin_name: String,
     val plugin_version: String,
     val plugin_class_name: String,
     val plugin_desc: String,
     val plugin_helper: String
-) : ResourcesRecord() {
-    companion object {
-        const val tableName = "metaplugins_registration"
-        val ddl = """
-            
-        """.trimIndent()
-    }
-}
+) : ResourcesRecord()
 
 /*
 CREATE TABLE IF NOT EXISTS metalibs_registration

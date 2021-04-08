@@ -30,7 +30,7 @@ import org.jdbi.v3.core.statement.UnableToCreateStatementException
 import org.jdbi.v3.sqlobject.statement.SqlScript
 
 
-object DBResourceDAO : ResourcesDAOAPI {
+object DBResourceRegister : ResourcesRegisterAPI {
     private val tableName = DAOTableNames.DBResource.tName
     private val dataSource = HikariDataSource(DAOConfigFactory.buildSqliteCPConfig(this.tableName))
     private val logger = LoggerFactory.getLogger(DAOConfigFactory.logKey[tableName])
@@ -38,7 +38,7 @@ object DBResourceDAO : ResourcesDAOAPI {
         installPlugins()
     }
 
-    interface DBR {
+    interface DBDao {
         @SqlUpdate(
             """
             INSERT INTO dbs_registration(db_type, db_name, db_desc, db_url, user, password, save_passwd) 
@@ -119,7 +119,7 @@ object DBResourceDAO : ResourcesDAOAPI {
         if (record is DBResourceRecord) {
             this.logger.info("Insert new record")
 
-            val id = jdbiInstance.withExtension(DBR::class.java, ExtensionCallback {
+            val id = jdbiInstance.withExtension(DBDao::class.java, ExtensionCallback {
                 it.insert(record)
             })
 
@@ -135,7 +135,7 @@ object DBResourceDAO : ResourcesDAOAPI {
         if (newRecord is DBResourceRecord) {
             this.logger.info("Update record")
 
-            val idReturn = jdbiInstance.withExtension(DBR::class.java, ExtensionCallback {
+            val idReturn = jdbiInstance.withExtension(DBDao::class.java, ExtensionCallback {
                 it.update(id, newRecord)
             })
 
@@ -150,7 +150,7 @@ object DBResourceDAO : ResourcesDAOAPI {
     override fun getAllRecords(): List<DBResourceRecord> {
         this.logger.info("Get all records")
 
-        return jdbiInstance.withExtension(DBR::class.java, ExtensionCallback {
+        return jdbiInstance.withExtension(DBDao::class.java, ExtensionCallback {
             it.query()
         })
     }
@@ -161,7 +161,7 @@ object DBResourceDAO : ResourcesDAOAPI {
     override fun deleteRecord(id: Long): Boolean {
         this.logger.info("Delete a record")
 
-        return id == jdbiInstance.withExtension(DBR::class.java, ExtensionCallback {
+        return id == jdbiInstance.withExtension(DBDao::class.java, ExtensionCallback {
             it.delete(id)
         })
     }
@@ -171,7 +171,7 @@ object DBResourceDAO : ResourcesDAOAPI {
         this.logger.info("Checking has table or not")
 
         return try {
-            val r = jdbiInstance.withExtension(DBR::class.java, ExtensionCallback {
+            val r = jdbiInstance.withExtension(DBDao::class.java, ExtensionCallback {
                 it.check()
             })
 
@@ -191,7 +191,7 @@ object DBResourceDAO : ResourcesDAOAPI {
     override fun resetTable(): Boolean {
         return if (this.hasTable()) {
             jdbiInstance.open().use {
-                val dao = it.attach(DBR::class.java)
+                val dao = it.attach(DBDao::class.java)
                 this.logger.info("Drop table before create")
                 dao.drop()
                 this.logger.info("Create table")
@@ -201,7 +201,7 @@ object DBResourceDAO : ResourcesDAOAPI {
             true
         } else {
             jdbiInstance.open().use {
-                val dao = it.attach(DBR::class.java)
+                val dao = it.attach(DBDao::class.java)
                 this.logger.info("Create table")
                 dao.createTable()
             }
@@ -211,7 +211,7 @@ object DBResourceDAO : ResourcesDAOAPI {
 
     override fun drop() {
         if (this.hasTable()) {
-            jdbiInstance.useExtension(DBR::class.java, ExtensionConsumer {
+            jdbiInstance.useExtension(DBDao::class.java, ExtensionConsumer {
                 it.drop()
                 this.logger.info("Drop table")
             })

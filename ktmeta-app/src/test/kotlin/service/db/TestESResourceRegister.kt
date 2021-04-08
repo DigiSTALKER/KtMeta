@@ -1,29 +1,29 @@
 package service.db
 
-import io.github.hochikong.ktmeta.dao.impl.ESResourceDAO
+import io.github.hochikong.ktmeta.dao.impl.ESResourceRegister
 import io.github.hochikong.ktmeta.dao.ESResourceRecord
 import org.junit.jupiter.api.*
 import org.junit.jupiter.api.Assertions.assertEquals
 
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation::class)
-class TestESResourceDAO {
+class TestESResourceRegister {
     companion object {
 
         @JvmStatic
         @BeforeAll
         fun doBefore() {
-            ESResourceDAO.drop()
+            ESResourceRegister.drop()
         }
 
         @JvmStatic
         @AfterAll
         fun doAfter() {
-            ESResourceDAO.drop()
+            ESResourceRegister.drop()
         }
     }
 
-    val dao = ESResourceDAO
+    val dao = ESResourceRegister
     val t1 = ESResourceRecord(
         index_name = "index 1",
         index_desc = "1 desc",
@@ -40,32 +40,32 @@ class TestESResourceDAO {
     @Order(1)
     fun all() {
         // no table first
-        assertEquals(false, ESResourceDAO.hasTable())
+        assertEquals(false, ESResourceRegister.hasTable())
 
         // create it
-        assertEquals(true, ESResourceDAO.resetTable())
+        assertEquals(true, ESResourceRegister.resetTable())
 
         // has table now
-        assertEquals(true, ESResourceDAO.hasTable())
+        assertEquals(true, ESResourceRegister.hasTable())
 
         // insert
-        assertEquals(true, ESResourceDAO.insertRecord(t1))
+        assertEquals(true, ESResourceRegister.insertRecord(t1))
 
         // query
-        val rs = ESResourceDAO.getAllRecords()
+        val rs = ESResourceRegister.getAllRecords()
         assertEquals(rs[0].index_name, t1.index_name)
         assertEquals(rs[0].index_url, t1.index_url)
         println("Query: ${rs[0]}")
 
         // update
-        ESResourceDAO.updateRecord(rs[0].id, t2)
-        val rs1 = ESResourceDAO.getAllRecords()
+        ESResourceRegister.updateRecord(rs[0].id, t2)
+        val rs1 = ESResourceRegister.getAllRecords()
         assertEquals(rs1[0].index_name, t2.index_name)
         println("Update ${rs1[0]}")
 
         // delete
-        assertEquals(true, ESResourceDAO.deleteRecord(rs1[0].id))
-        println("After deleted: ${ESResourceDAO.getAllRecords()}")
+        assertEquals(true, ESResourceRegister.deleteRecord(rs1[0].id))
+        println("After deleted: ${ESResourceRegister.getAllRecords()}")
 
     }
 }

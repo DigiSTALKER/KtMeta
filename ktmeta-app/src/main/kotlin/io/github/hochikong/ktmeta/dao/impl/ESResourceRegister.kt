@@ -16,7 +16,7 @@ import org.jdbi.v3.sqlobject.statement.SqlUpdate
 import org.jdbi.v3.sqlobject.transaction.Transaction
 import org.slf4j.LoggerFactory
 
-object ESResourceDAO : ResourcesDAOAPI {
+object ESResourceRegister : ResourcesRegisterAPI {
     private val tableName = DAOTableNames.ESResource.tName
     private val dataSource = HikariDataSource(DAOConfigFactory.buildSqliteCPConfig(this.tableName))
     private val logger = LoggerFactory.getLogger(DAOConfigFactory.logKey[tableName])
@@ -24,7 +24,7 @@ object ESResourceDAO : ResourcesDAOAPI {
         installPlugins()
     }
 
-    interface ESR {
+    interface ESDao {
         @SqlUpdate(
             """
             INSERT INTO indices_registration(index_name, index_desc, index_url)
@@ -91,7 +91,7 @@ object ESResourceDAO : ResourcesDAOAPI {
         if (record is ESResourceRecord) {
             this.logger.info("Insert new record")
 
-            val id = jdbiInstance.withExtension(ESR::class.java, ExtensionCallback {
+            val id = jdbiInstance.withExtension(ESDao::class.java, ExtensionCallback {
                 it.insert(record)
             })
 
@@ -104,7 +104,7 @@ object ESResourceDAO : ResourcesDAOAPI {
         if (newRecord is ESResourceRecord) {
             this.logger.info("Update record")
 
-            val idReturn = jdbiInstance.withExtension(ESR::class.java, ExtensionCallback {
+            val idReturn = jdbiInstance.withExtension(ESDao::class.java, ExtensionCallback {
                 it.update(id, newRecord)
             })
 
@@ -116,7 +116,7 @@ object ESResourceDAO : ResourcesDAOAPI {
     override fun getAllRecords(): List<ESResourceRecord> {
         this.logger.info("Get all records")
 
-        return jdbiInstance.withExtension(ESR::class.java, ExtensionCallback {
+        return jdbiInstance.withExtension(ESDao::class.java, ExtensionCallback {
             it.query()
         })
     }
@@ -124,7 +124,7 @@ object ESResourceDAO : ResourcesDAOAPI {
     override fun deleteRecord(id: Long): Boolean {
         this.logger.info("Delete a record")
 
-        return id == jdbiInstance.withExtension(ESR::class.java, ExtensionCallback {
+        return id == jdbiInstance.withExtension(ESDao::class.java, ExtensionCallback {
             it.delete(id)
         })
     }
@@ -133,7 +133,7 @@ object ESResourceDAO : ResourcesDAOAPI {
         this.logger.info("Checking has table or not")
 
         return try {
-            val r = jdbiInstance.withExtension(ESR::class.java, ExtensionCallback {
+            val r = jdbiInstance.withExtension(ESDao::class.java, ExtensionCallback {
                 it.check()
             })
 
@@ -153,7 +153,7 @@ object ESResourceDAO : ResourcesDAOAPI {
     override fun resetTable(): Boolean {
         return if (this.hasTable()) {
             jdbiInstance.open().use {
-                val dao = it.attach(ESR::class.java)
+                val dao = it.attach(ESDao::class.java)
                 this.logger.info("Drop table before create")
                 dao.drop()
                 this.logger.info("Create table")
@@ -163,7 +163,7 @@ object ESResourceDAO : ResourcesDAOAPI {
             true
         } else {
             jdbiInstance.open().use {
-                val dao = it.attach(ESR::class.java)
+                val dao = it.attach(ESDao::class.java)
                 this.logger.info("Create table")
                 dao.createTable()
             }
@@ -173,7 +173,7 @@ object ESResourceDAO : ResourcesDAOAPI {
 
     override fun drop() {
         if (this.hasTable()) {
-            jdbiInstance.useExtension(ESR::class.java, ExtensionConsumer {
+            jdbiInstance.useExtension(ESDao::class.java, ExtensionConsumer {
                 it.drop()
                 this.logger.info("Drop table")
             })
