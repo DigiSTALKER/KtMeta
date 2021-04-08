@@ -23,7 +23,6 @@ class TestDBResourceRegister {
         }
     }
 
-    val dao = DBResourceRegister
     val t1 = DBResourceRecord(
         db_type = "Sqlite",
         db_name = "my sqlite",

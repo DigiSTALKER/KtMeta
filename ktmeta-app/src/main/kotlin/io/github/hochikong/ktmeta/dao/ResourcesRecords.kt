@@ -52,12 +52,12 @@ data class ESResourceRecord(
  * Metadata plugins resources
  * */
 data class MPResourceRecord(
-    val id: Int = -1,
-    val plugin_name: String,
-    val plugin_version: String,
-    val plugin_class_name: String,
-    val plugin_desc: String,
-    val plugin_helper: String
+    var id: Long = 0,
+    var plugin_name: String = "",
+    var plugin_version: String = "",
+    var plugin_class_name: String = "",
+    var plugin_desc: String = "",
+    var plugin_helper: String = ""
 ) : ResourcesRecord()
 
 /*

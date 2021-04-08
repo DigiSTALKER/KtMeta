@@ -23,7 +23,6 @@ class TestESResourceRegister {
         }
     }
 
-    val dao = ESResourceRegister
     val t1 = ESResourceRecord(
         index_name = "index 1",
         index_desc = "1 desc",
