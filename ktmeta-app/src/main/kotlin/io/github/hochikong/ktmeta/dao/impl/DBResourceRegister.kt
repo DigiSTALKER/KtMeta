@@ -76,6 +76,7 @@ object DBResourceRegister : ResourcesRegisterAPI {
         @RegisterBeanMapper(DBResourceRecord::class)
         fun query(): List<DBResourceRecord>
 
+
         @SqlUpdate("DELETE FROM dbs_registration WHERE id = :id;")
         @GetGeneratedKeys("id")
         @Transaction

@@ -16,50 +16,53 @@ import org.jdbi.v3.sqlobject.statement.SqlUpdate
 import org.jdbi.v3.sqlobject.transaction.Transaction
 import org.slf4j.LoggerFactory
 
-object ESResourceRegister : ResourcesRegisterAPI {
-    private val tableName = DAOTableNames.ESResource.tName
+object MLResourceRegister : ResourcesRegisterAPI {
+    private val tableName = DAOTableNames.MLResource.tName
     private val dataSource = HikariDataSource(DAOConfigFactory.buildSqliteCPConfig(this.tableName))
     private val logger = LoggerFactory.getLogger(DAOConfigFactory.logKey[tableName])
     private val jdbiInstance: Jdbi = Jdbi.create(dataSource).apply {
         installPlugins()
     }
 
-    interface ESDao {
+    interface MLDao {
         @SqlUpdate(
             """
-            INSERT INTO indices_registration(index_name, index_desc, index_url)
-            VALUES (:index_name, :index_desc, :index_url);
+            INSERT INTO metalibs_registration (lib_name, lib_desc, assign_plugin, assign_db, assign_index) 
+            VALUES (:lib_name, :lib_desc, :assign_plugin, :assign_db, :assign_index); 
         """
         )
         @GetGeneratedKeys("id")
         @Transaction
-        fun insert(@BindBean res: ESResourceRecord): Long
+        fun insert(@BindBean res: MLResourceRecord): Long
 
 
         @SqlUpdate(
             """
-            UPDATE indices_registration
-            SET index_name = :es.index_name,
-            index_desc = :es.index_desc,
-            index_url = :es.index_url
+            UPDATE metalibs_registration
+            SET lib_name = :ml.lib_name,
+            lib_desc = :ml.lib_desc, 
+            assign_plugin = :ml.assign_plugin, 
+            assign_db = :ml.assign_db, 
+            assign_index = :ml.assign_index
             WHERE id = :id;
         """
         )
         @GetGeneratedKeys("id")
         @Transaction
-        fun update(@Bind("id") id: Long, @BindBean("es") res: ESResourceRecord): Long
+        fun update(@Bind("id") id: Long, @BindBean("ml") res: MLResourceRecord): Long
 
 
         @SqlQuery(
             """
-            SELECT id, index_name, index_desc, index_url FROM indices_registration;
+            SELECT id, lib_name, lib_desc, assign_plugin, assign_db, assign_index
+            FROM metalibs_registration;
         """
         )
-        @RegisterBeanMapper(ESResourceRecord::class)
-        fun query(): List<ESResourceRecord>
+        @RegisterBeanMapper(MLResourceRecord::class)
+        fun query(): List<MLResourceRecord>
 
 
-        @SqlUpdate("DELETE FROM indices_registration WHERE id = :id;")
+        @SqlUpdate("DELETE FROM metalibs_registration WHERE id = :id;")
         @GetGeneratedKeys("id")
         @Transaction
         fun delete(@Bind("id") id: Long): Long
@@ -67,12 +70,14 @@ object ESResourceRegister : ResourcesRegisterAPI {
 
         @SqlUpdate(
             """
-            CREATE TABLE IF NOT EXISTS indices_registration
+            CREATE TABLE IF NOT EXISTS metalibs_registration
             (
-            id         INTEGER PRIMARY KEY AUTOINCREMENT,
-            index_name TEXT NOT NULL UNIQUE, -- elasticsearch index name
-            index_desc TEXT NOT NULL, -- elasticsearch index description
-            index_url  TEXT NOT NULL UNIQUE -- elasticsearch index url
+            id       INTEGER PRIMARY KEY AUTOINCREMENT,
+            lib_name TEXT                                                    NOT NULL UNIQUE,
+            lib_desc TEXT                                                    NOT NULL,
+            assign_plugin REFERENCES meta_plugins_registration (plugin_name) NOT NULL,
+            assign_db REFERENCES dbs_registration (database) UNIQUE,
+            assign_index REFERENCES indices_registration (index_name) UNIQUE
             );
         """
         )
@@ -80,20 +85,20 @@ object ESResourceRegister : ResourcesRegisterAPI {
         fun createTable()
 
 
-        @SqlQuery("SELECT DISTINCT 1 FROM indices_registration;")
+        @SqlQuery("SELECT DISTINCT 1 FROM metalibs_registration;")
         fun check(): Int?
 
 
-        @SqlScript("DROP TABLE indices_registration;")
+        @SqlScript("DROP TABLE metalibs_registration;")
         @Transaction
         fun drop()
     }
 
     override fun insertRecord(record: ResourcesRecord): Boolean {
-        if (record is ESResourceRecord) {
+        if (record is MLResourceRecord) {
             this.logger.info("Insert new record")
 
-            val id = jdbiInstance.withExtension(ESDao::class.java, ExtensionCallback {
+            val id = jdbiInstance.withExtension(MLDao::class.java, ExtensionCallback {
                 it.insert(record)
             })
 
@@ -103,10 +108,10 @@ object ESResourceRegister : ResourcesRegisterAPI {
     }
 
     override fun updateRecord(id: Long, newRecord: ResourcesRecord): Boolean {
-        if (newRecord is ESResourceRecord) {
+        if (newRecord is MLResourceRecord) {
             this.logger.info("Update record")
 
-            val idReturn = jdbiInstance.withExtension(ESDao::class.java, ExtensionCallback {
+            val idReturn = jdbiInstance.withExtension(MLDao::class.java, ExtensionCallback {
                 it.update(id, newRecord)
             })
 
@@ -115,10 +120,10 @@ object ESResourceRegister : ResourcesRegisterAPI {
         return false
     }
 
-    override fun getAllRecords(): List<ESResourceRecord> {
+    override fun getAllRecords(): List<MLResourceRecord> {
         this.logger.info("Get all records")
 
-        return jdbiInstance.withExtension(ESDao::class.java, ExtensionCallback {
+        return jdbiInstance.withExtension(MLDao::class.java, ExtensionCallback {
             it.query()
         })
     }
@@ -126,7 +131,7 @@ object ESResourceRegister : ResourcesRegisterAPI {
     override fun deleteRecord(id: Long): Boolean {
         this.logger.info("Delete a record")
 
-        return id == jdbiInstance.withExtension(ESDao::class.java, ExtensionCallback {
+        return id == jdbiInstance.withExtension(MLDao::class.java, ExtensionCallback {
             it.delete(id)
         })
     }
@@ -135,7 +140,7 @@ object ESResourceRegister : ResourcesRegisterAPI {
         this.logger.info("Checking has table or not")
 
         return try {
-            val r = jdbiInstance.withExtension(ESDao::class.java, ExtensionCallback {
+            val r = jdbiInstance.withExtension(MLDao::class.java, ExtensionCallback {
                 it.check()
             })
 
@@ -155,7 +160,7 @@ object ESResourceRegister : ResourcesRegisterAPI {
     override fun resetTable(): Boolean {
         return if (this.hasTable()) {
             jdbiInstance.open().use {
-                val dao = it.attach(ESDao::class.java)
+                val dao = it.attach(MLDao::class.java)
                 this.logger.info("Drop table before create")
                 dao.drop()
                 this.logger.info("Create table")
@@ -165,7 +170,7 @@ object ESResourceRegister : ResourcesRegisterAPI {
             true
         } else {
             jdbiInstance.open().use {
-                val dao = it.attach(ESDao::class.java)
+                val dao = it.attach(MLDao::class.java)
                 this.logger.info("Create table")
                 dao.createTable()
             }
@@ -175,7 +180,7 @@ object ESResourceRegister : ResourcesRegisterAPI {
 
     override fun drop() {
         if (this.hasTable()) {
-            jdbiInstance.useExtension(ESDao::class.java, ExtensionConsumer {
+            jdbiInstance.useExtension(MLDao::class.java, ExtensionConsumer {
                 it.drop()
                 this.logger.info("Drop table")
             })
