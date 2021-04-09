@@ -13,191 +13,62 @@
 
 package io.github.hochikong.ktmeta.dao
 
-import me.liuwj.ktorm.schema.Table
-import me.liuwj.ktorm.schema.int
-import me.liuwj.ktorm.schema.text
-import me.liuwj.ktorm.schema.varchar
-
 sealed class ResourcesRecord
 
-/*
-CREATE TABLE IF NOT EXISTS dbs_registration
-(
-    id          INTEGER PRIMARY KEY AUTOINCREMENT,
-    dbms        TEXT    NOT NULL,
-    database    TEXT    NOT NULL UNIQUE,
-    desc        TEXT    NOT NULL,
-    url         TEXT    NOT NULL UNIQUE,
-    user        TEXT,
-    password    TEXT,
-    save_passwd INTEGER NOT NULL,
-    CONSTRAINT db_type_check CHECK ( dbms IN ('Sqlite', 'Postgresql') ),
-    CONSTRAINT save_passwd_or_not CHECK ( save_passwd IN (0, 1))
-);
-*/
-object DBRegTable : Table<Nothing>(DBRecord.tableName) {
-    val id = int("id").primaryKey()
-    val dbms = varchar("dbms")
-    val db_name = varchar("database")
-    val desc = text("desc")
-    val url = varchar("url")
-    val user = varchar("user")
-    val password = varchar("password")
-    val save_passwd = int("save_passwd")
-}
 
 /**
- * Password And Username must be encrypted.
+ * Database resources.
+ *
+ * Password must be encrypted.
+ *
+ * If you are using an embedded database like SQLite and H2,
+ * you may want to assign a null value on the 'user' and 'password' fields.
+ * You should use the string 'null' instead of the real null type.
+ *
  * */
-data class DBRecord(
-    val id: Int = -1,
-    val dbms: String,
-    val db_name: String,
-    val desc: String,
-    val url: String,
-    val user: String,
-    val password: String,
-    val save_passwd: Int
-) : ResourcesRecord() {
-    companion object {
-        const val tableName = "dbs_registration"
-        val ddl = """
-            CREATE TABLE IF NOT EXISTS dbs_registration
-(
-    id          INTEGER PRIMARY KEY AUTOINCREMENT,
-    dbms        TEXT    NOT NULL,
-    database    TEXT    NOT NULL UNIQUE,
-    desc        TEXT    NOT NULL,
-    url         TEXT    NOT NULL UNIQUE,
-    user        TEXT,
-    password    TEXT,
-    save_passwd INTEGER NOT NULL,
-    CONSTRAINT db_type_check CHECK ( dbms IN ('Sqlite', 'Postgresql') ),
-    CONSTRAINT save_passwd_or_not CHECK ( save_passwd IN (0, 1))
-);
-        """.trimIndent()
-    }
-}
+data class DBResourceRecord(
+    var id: Long = -1,
+    var db_type: String = "",
+    var db_name: String = "",
+    var db_desc: String = "",
+    var db_url: String = "",
+    var user: String = "",
+    var password: String = "",
+    var save_passwd: Int = 0
+) : ResourcesRecord()
 
-/*
-CREATE TABLE IF NOT EXISTS indices_registration(
-id INTEGER PRIMARY KEY AUTOINCREMENT ,
-index_name TEXT NOT NULL UNIQUE ,
-index_desc TEXT NOT NULL ,
-index_url TEXT NOT NULL UNIQUE
-);
-*/
-object ESRegTable : Table<Nothing>(ESRecord.tableName) {
-    val id = int("id").primaryKey()
-    val name = varchar("index_name")
-    val desc = text("index_desc")
-    val url = text("index_url")
-}
 
-data class ESRecord(
-    val id: Int = -1,
-    val index_name: String,
-    val index_desc: String,
-    val index_url: String
-) : ResourcesRecord() {
-    companion object {
-        const val tableName = "indices_registration"
-        val ddl = """
-            CREATE TABLE IF NOT EXISTS indices_registration
-            (
-                id         INTEGER PRIMARY KEY AUTOINCREMENT,
-                index_name TEXT NOT NULL UNIQUE,
-                index_desc TEXT NOT NULL,
-                index_url  TEXT NOT NULL UNIQUE
-            );
-        """.trimIndent()
-    }
-}
+/**
+ * Elastic Search resources.
+ * */
+data class ESResourceRecord(
+    var id: Long = -1,
+    var index_name: String = "",
+    var index_desc: String = "",
+    var index_url: String = ""
+) : ResourcesRecord()
 
-/*
-CREATE TABLE IF NOT EXISTS metaplugins_registration(
-id INTEGER PRIMARY KEY AUTOINCREMENT ,
-plugin_name TEXT NOT NULL UNIQUE ,
-plugin_version TEXT NOT NULL UNIQUE ,
-plugin_class_name TEXT NOT NULL ,
-plugin_desc TEXT NOT NULL ,
-plugin_helper TEXT NOT NULL
-);
-*/
-object MPRegTable : Table<Nothing>(MPRecord.tableName) {
-    val id = int("id").primaryKey()
-    val name = varchar("plugin_name")
-    val version = varchar("plugin_version")
-    val cname = varchar("plugin_class_name")
-    val desc = text("plugin_desc")
-    val helper = text("plugin_helper")
-}
+/**
+ * Metadata plugins resources
+ * */
+data class MPResourceRecord(
+    var id: Long = -1,
+    var plugin_name: String = "",
+    var plugin_version: String = "",
+    var plugin_class_name: String = "",
+    var plugin_desc: String = "",
+    var plugin_helper: String = ""
+) : ResourcesRecord()
 
-data class MPRecord(
-    val id: Int = -1,
-    val plugin_name: String,
-    val plugin_version: String,
-    val plugin_class_name: String,
-    val plugin_desc: String,
-    val plugin_helper: String
-) : ResourcesRecord() {
-    companion object {
-        const val tableName = "metaplugins_registration"
-        val ddl = """
-            CREATE TABLE IF NOT EXISTS metaplugins_registration
-            (
-                id                INTEGER PRIMARY KEY AUTOINCREMENT,
-                plugin_name       TEXT NOT NULL UNIQUE,
-                plugin_version    TEXT NOT NULL UNIQUE,
-                plugin_class_name TEXT NOT NULL,
-                plugin_desc       TEXT NOT NULL,
-                plugin_helper     TEXT NOT NULL
-            );
-        """.trimIndent()
-    }
-}
-
-/*
-CREATE TABLE IF NOT EXISTS metalibs_registration
-(
-id       INTEGER PRIMARY KEY AUTOINCREMENT,
-lib_name TEXT                                                    NOT NULL UNIQUE,
-lib_desc TEXT                                                    NOT NULL,
-assign_plugin REFERENCES metaplugins_registration (plugin_name) NOT NULL,
-assign_db REFERENCES dbs_registration (database) UNIQUE,
-assign_index REFERENCES indices_registration (index_name) UNIQUE
-);
-*/
-object MLRegTable : Table<Nothing>(MLRecord.tableName) {
-    val id = int("id").primaryKey()
-    val name = varchar("lib_name")
-    val desc = text("lib_desc")
-    val plugin = varchar("assign_plugin")
-    val db = varchar("assign_db")
-    val index = varchar("assign_index")
-}
-
-data class MLRecord(
-    val id: Int = -1,
-    val lib_name: String,
-    val lib_desc: String,
-    val assign_plugin: String,
-    val assign_db: String,
-    val assign_index: String
-) : ResourcesRecord() {
-    companion object {
-        const val tableName = "metalibs_registration"
-        val ddl = """
-            CREATE TABLE IF NOT EXISTS metalibs_registration
-            (
-                id       INTEGER PRIMARY KEY AUTOINCREMENT,
-                lib_name TEXT                                                    NOT NULL UNIQUE,
-                lib_desc TEXT                                                    NOT NULL,
-                assign_plugin REFERENCES meta_plugins_registration (plugin_name) NOT NULL,
-                assign_db REFERENCES dbs_registration (database) UNIQUE,
-                assign_index REFERENCES indices_registration (index_name) UNIQUE
-            );
-        """.trimIndent()
-    }
-}
+/**
+ * Metadata library resources
+ * */
+data class MLResourceRecord(
+    var id: Long = -1,
+    var lib_name: String = "",
+    var lib_desc: String = "",
+    var assign_plugin: String = "",
+    var assign_db: String = "",
+    var assign_index: String = ""
+) : ResourcesRecord()
 

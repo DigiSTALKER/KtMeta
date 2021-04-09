@@ -90,6 +90,9 @@ interface FoodMenu {
     @SqlQuery("SELECT food_name, price FROM food_menu;")
     @RegisterConstructorMapper(Food::class)
     fun listFoods(): List<Food>
+
+    @SqlQuery("SELECT 1 FROM food_menu;")
+    fun check(): List<Int>
 }
 
 fun main() {
@@ -107,7 +110,8 @@ fun main() {
     val x = ins.jdbi.withExtension(FoodMenu::class.java, ExtensionCallback {
         it.createTable()
 //        it.insert(Food("Nosd", 21))
-        it.listFoods()
+//        it.listFoods()
+        it.check()
     })
     println(x)
 }
