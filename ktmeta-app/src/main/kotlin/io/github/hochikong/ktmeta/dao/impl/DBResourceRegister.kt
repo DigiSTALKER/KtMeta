@@ -18,16 +18,16 @@ import io.github.hochikong.ktmeta.dao.*
 import org.jdbi.v3.core.Jdbi
 import org.jdbi.v3.core.extension.ExtensionCallback
 import org.jdbi.v3.core.extension.ExtensionConsumer
+import org.jdbi.v3.core.statement.UnableToCreateStatementException
 import org.jdbi.v3.sqlobject.config.RegisterBeanMapper
 import org.jdbi.v3.sqlobject.customizer.Bind
 import org.jdbi.v3.sqlobject.customizer.BindBean
 import org.jdbi.v3.sqlobject.statement.GetGeneratedKeys
 import org.jdbi.v3.sqlobject.statement.SqlQuery
+import org.jdbi.v3.sqlobject.statement.SqlScript
 import org.jdbi.v3.sqlobject.statement.SqlUpdate
 import org.jdbi.v3.sqlobject.transaction.Transaction
 import org.slf4j.LoggerFactory
-import org.jdbi.v3.core.statement.UnableToCreateStatementException
-import org.jdbi.v3.sqlobject.statement.SqlScript
 
 
 object DBResourceRegister : ResourcesRegisterAPI {
@@ -217,5 +217,36 @@ object DBResourceRegister : ResourcesRegisterAPI {
                 this.logger.info("Drop table")
             })
         }
+    }
+
+    /**
+     * Use a name to get a database resource record, only one result should be returned.
+     *
+     * If nothing found, return a default/empty DBResourceRecord and its id is -1.
+     * */
+    fun getRecordByName(db: String): DBResourceRecord {
+        try {
+            this.jdbiInstance.open().use {
+                val opt = it.createQuery(
+                    """
+                    SELECT id, db_type, db_name, db_desc, db_url, user, password, save_passwd 
+                    FROM dbs_registration
+                    WHERE db_name = :name;
+                """.trimIndent()
+                )
+                    .bind("name", db)
+                    .mapToBean(DBResourceRecord::class.java)
+                    .findOne()
+
+                if (opt.isPresent) {
+                    return opt.get()
+                }
+            }
+        } catch (e: IllegalStateException) {
+            // do nothing
+        }
+
+        // return empty one
+        return DBResourceRecord()
     }
 }

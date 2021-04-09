@@ -13,11 +13,6 @@
 
 package io.github.hochikong.ktmeta.dao
 
-import me.liuwj.ktorm.schema.Table
-import me.liuwj.ktorm.schema.int
-import me.liuwj.ktorm.schema.text
-import me.liuwj.ktorm.schema.varchar
-
 sealed class ResourcesRecord
 
 
@@ -25,9 +20,14 @@ sealed class ResourcesRecord
  * Database resources.
  *
  * Password must be encrypted.
+ *
+ * If you are using an embedded database like SQLite and H2,
+ * you may want to assign a null value on the 'user' and 'password' fields.
+ * You should use the string 'null' instead of the real null type.
+ *
  * */
 data class DBResourceRecord(
-    var id: Long = 0,
+    var id: Long = -1,
     var db_type: String = "",
     var db_name: String = "",
     var db_desc: String = "",
@@ -42,7 +42,7 @@ data class DBResourceRecord(
  * Elastic Search resources.
  * */
 data class ESResourceRecord(
-    var id: Long = 0,
+    var id: Long = -1,
     var index_name: String = "",
     var index_desc: String = "",
     var index_url: String = ""
@@ -52,7 +52,7 @@ data class ESResourceRecord(
  * Metadata plugins resources
  * */
 data class MPResourceRecord(
-    var id: Long = 0,
+    var id: Long = -1,
     var plugin_name: String = "",
     var plugin_version: String = "",
     var plugin_class_name: String = "",
@@ -64,7 +64,7 @@ data class MPResourceRecord(
  * Metadata library resources
  * */
 data class MLResourceRecord(
-    var id: Long = 0,
+    var id: Long = -1,
     var lib_name: String = "",
     var lib_desc: String = "",
     var assign_plugin: String = "",

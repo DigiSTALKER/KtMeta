@@ -13,41 +13,40 @@
 
 package io.github.hochikong.ktmeta.service.db
 
+import com.zaxxer.hikari.HikariConfig
+import com.zaxxer.hikari.HikariDataSource
+import io.github.hochikong.ktmeta.common.DatabaseNotFoundException
+import io.github.hochikong.ktmeta.common.Encryption
+import io.github.hochikong.ktmeta.dao.impl.DBResourceRegister
+import javax.sql.DataSource
+
 
 /**
  * Provider of databases' connections.
- * Use this Object to retrieve connection: JDBC connection or Ktorm Database
+ * Use this Object to retrieve connection: datasource
+ *
+ * If your databases not protected by username and password (Sqlite), use a string 'null' as their values
+ *
+ * @throws DatabaseNotFoundException
  * */
-object DBProvider{
-    /*fun getDatabase(db: String, user: String?=null, password: String?=null): Database? {
-        val ds = getDataSource(db, user, password)
-        return if (ds != null) {
-            Database.connect(dataSource = ds)
-        } else {
-            null
-        }
-    }
-
-    fun getDataSource(db: String, user: String?=null, password: String?=null): DataSource? {
-        val query = DBResourceDAO.getRecordByName(db)
-        if (query is DBRecord) {
-            val config = HikariConfig(DAOConfigFactory.poolConfigPath)
+object DBProvider {
+    fun getDataSource(dbName: String, user: String, password: String): DataSource {
+        val query = DBResourceRegister.getRecordByName(dbName)
+        if (query.id != -1L) {
+            val config = HikariConfig()
             config.poolName = "ConnectionPoolOf${query.db_name}"
-            config.jdbcUrl = query.url
+            config.jdbcUrl = query.db_url
 
-            // username, password must be encrypted or simply "null"
-            if (user is String) {
-                if (query.user !== "null" && Encryption.verify(user, query.user)) {
-                    config.username = user
-                }
+            // password must be encrypted or simply "null"
+            if (query.user !== "null") {
+                config.username = user
             }
-            if (password is String) {
-                if (query.password != "null" && Encryption.verify(password, query.password))
-                    config.password = password
-            }
+            if (query.password != "null" && Encryption.verify(password, query.password))
+                config.password = password
+
             return HikariDataSource(config)
         } else {
-            return null
+            throw DatabaseNotFoundException("Database $dbName not found in db resources.")
         }
-    }*/
+    }
 }

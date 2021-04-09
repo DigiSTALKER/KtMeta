@@ -75,4 +75,19 @@ class TestDBResourceRegister {
         println("After deleted: ${DBResourceRegister.getAllRecords()}")
 
     }
+
+    @Test
+    @Order(2)
+    fun getDBRecord() {
+        println("Doing getDBRecord \n")
+        DBResourceRegister.insertRecord(t2)
+
+        val r = DBResourceRegister.getRecordByName("sb")
+        assertEquals(-1, r.id)
+        println("r is $r")
+
+        val r1 = DBResourceRegister.getRecordByName("my sqlite new")
+        assertEquals("sqlite desc", r1.db_desc)
+        println("r1 is $r1")
+    }
 }
