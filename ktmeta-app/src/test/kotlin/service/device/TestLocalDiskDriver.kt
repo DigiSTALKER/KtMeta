@@ -33,95 +33,104 @@ import org.junit.jupiter.api.Order
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestMethodOrder
 
+
+/**
+ * Environment Prepare:
+ *
+ * When you use a different machine to run tests.
+ * You should look at the directory 'KtMeta\ktmeta-app\src\test\resources\tree' in the source code,
+ * to create your test directory tree. After that, modify the test code to run the test.
+ *
+ * */
 @TestMethodOrder(MethodOrderer.OrderAnnotation::class)
 class TestLocalDiskDriver {
-    private val path = "C:\\Users\\ckhoi\\IdeaProjects\\ktmeta\\src\\test\\resources\\tree"
+    private val path = "F:\\devtmp\\tree"
     private val data = listOf(
         FileRow(
-            selfPath = "C:\\Users\\ckhoi\\IdeaProjects\\ktmeta\\src\\test\\resources\\tree",
-            rootPath = "C:\\Users\\ckhoi\\IdeaProjects\\ktmeta\\src\\test\\resources\\tree",
+            selfPath = "F:\\devtmp\\tree",
+            rootPath = "F:\\devtmp\\tree",
             hasFather = false,
             fatherPath = ".",
             hasChild = true,
             type = FileType.Directory
         ),
         FileRow(
-            selfPath = "C:\\Users\\ckhoi\\IdeaProjects\\ktmeta\\src\\test\\resources\\tree\\sub1",
-            rootPath = "C:\\Users\\ckhoi\\IdeaProjects\\ktmeta\\src\\test\\resources\\tree",
+            selfPath = "F:\\devtmp\\tree\\sub1",
+            rootPath = "F:\\devtmp\\tree",
             hasFather = true,
-            fatherPath = "C:\\Users\\ckhoi\\IdeaProjects\\ktmeta\\src\\test\\resources\\tree",
+            fatherPath = "F:\\devtmp\\tree",
             hasChild = true,
             type = FileType.Directory
         ),
         FileRow(
-            selfPath = "C:\\Users\\ckhoi\\IdeaProjects\\ktmeta\\src\\test\\resources\\tree\\sub1\\sub11",
-            rootPath = "C:\\Users\\ckhoi\\IdeaProjects\\ktmeta\\src\\test\\resources\\tree",
+            selfPath = "F:\\devtmp\\tree\\sub1\\sub11",
+            rootPath = "F:\\devtmp\\tree",
             hasFather = true,
-            fatherPath = "C:\\Users\\ckhoi\\IdeaProjects\\ktmeta\\src\\test\\resources\\tree\\sub1",
+            fatherPath = "F:\\devtmp\\tree\\sub1",
             hasChild = true,
             type = FileType.Directory
         ),
         FileRow(
-            selfPath = "C:\\Users\\ckhoi\\IdeaProjects\\ktmeta\\src\\test\\resources\\tree\\sub1\\sub11\\sub1a.txt",
-            rootPath = "C:\\Users\\ckhoi\\IdeaProjects\\ktmeta\\src\\test\\resources\\tree",
+            selfPath = "F:\\devtmp\\tree\\sub1\\sub11\\sub1a.txt",
+            rootPath = "F:\\devtmp\\tree",
             hasFather = true,
-            fatherPath = "C:\\Users\\ckhoi\\IdeaProjects\\ktmeta\\src\\test\\resources\\tree\\sub1\\sub11",
+            fatherPath = "F:\\devtmp\\tree\\sub1\\sub11",
             hasChild = false,
             type = FileType.File
         ),
         FileRow(
-            selfPath = "C:\\Users\\ckhoi\\IdeaProjects\\ktmeta\\src\\test\\resources\\tree\\sub2",
-            rootPath = "C:\\Users\\ckhoi\\IdeaProjects\\ktmeta\\src\\test\\resources\\tree",
+            selfPath = "F:\\devtmp\\tree\\sub2",
+            rootPath = "F:\\devtmp\\tree",
             hasFather = true,
-            fatherPath = "C:\\Users\\ckhoi\\IdeaProjects\\ktmeta\\src\\test\\resources\\tree",
+            fatherPath = "F:\\devtmp\\tree",
             hasChild = true,
             type = FileType.Directory
         ),
         FileRow(
-            selfPath = "C:\\Users\\ckhoi\\IdeaProjects\\ktmeta\\src\\test\\resources\\tree\\sub2\\sub22",
-            rootPath = "C:\\Users\\ckhoi\\IdeaProjects\\ktmeta\\src\\test\\resources\\tree",
+            selfPath = "F:\\devtmp\\tree\\sub2\\sub22",
+            rootPath = "F:\\devtmp\\tree",
             hasFather = true,
-            fatherPath = "C:\\Users\\ckhoi\\IdeaProjects\\ktmeta\\src\\test\\resources\\tree\\sub2",
+            fatherPath = "F:\\devtmp\\tree\\sub2",
             hasChild = true,
             type = FileType.Directory
         ),
         FileRow(
-            selfPath = "C:\\Users\\ckhoi\\IdeaProjects\\ktmeta\\src\\test\\resources\\tree\\sub2\\sub22\\sub222",
-            rootPath = "C:\\Users\\ckhoi\\IdeaProjects\\ktmeta\\src\\test\\resources\\tree",
+            selfPath = "F:\\devtmp\\tree\\sub2\\sub22\\sub222",
+            rootPath = "F:\\devtmp\\tree",
             hasFather = true,
-            fatherPath = "C:\\Users\\ckhoi\\IdeaProjects\\ktmeta\\src\\test\\resources\\tree\\sub2\\sub22",
+            fatherPath = "F:\\devtmp\\tree\\sub2\\sub22",
             hasChild = true,
             type = FileType.Directory
         ),
         FileRow(
-            selfPath = "C:\\Users\\ckhoi\\IdeaProjects\\ktmeta\\src\\test\\resources\\tree\\sub2\\sub22\\sub222\\nmsl.txt",
-            rootPath = "C:\\Users\\ckhoi\\IdeaProjects\\ktmeta\\src\\test\\resources\\tree",
+            selfPath = "F:\\devtmp\\tree\\sub2\\sub22\\sub222\\nmsl.txt",
+            rootPath = "F:\\devtmp\\tree",
             hasFather = true,
-            fatherPath = "C:\\Users\\ckhoi\\IdeaProjects\\ktmeta\\src\\test\\resources\\tree\\sub2\\sub22\\sub222",
+            fatherPath = "F:\\devtmp\\tree\\sub2\\sub22\\sub222",
             hasChild = false,
             type = FileType.File
         ),
         FileRow(
-            selfPath = "C:\\Users\\ckhoi\\IdeaProjects\\ktmeta\\src\\test\\resources\\tree\\sub2\\sub2a.txt",
-            rootPath = "C:\\Users\\ckhoi\\IdeaProjects\\ktmeta\\src\\test\\resources\\tree",
+            selfPath = "F:\\devtmp\\tree\\sub2\\sub2a.txt",
+            rootPath = "F:\\devtmp\\tree",
             hasFather = true,
-            fatherPath = "C:\\Users\\ckhoi\\IdeaProjects\\ktmeta\\src\\test\\resources\\tree\\sub2",
+            fatherPath = "F:\\devtmp\\tree\\sub2",
             hasChild = false,
             type = FileType.File
         ),
         FileRow(
-            selfPath = "C:\\Users\\ckhoi\\IdeaProjects\\ktmeta\\src\\test\\resources\\tree\\suba.txt",
-            rootPath = "C:\\Users\\ckhoi\\IdeaProjects\\ktmeta\\src\\test\\resources\\tree",
+            selfPath = "F:\\devtmp\\tree\\suba.txt",
+            rootPath = "F:\\devtmp\\tree",
             hasFather = true,
-            fatherPath = "C:\\Users\\ckhoi\\IdeaProjects\\ktmeta\\src\\test\\resources\\tree",
+            fatherPath = "F:\\devtmp\\tree",
             hasChild = false,
             type = FileType.File
         ),
         FileRow(
-            selfPath = "C:\\Users\\ckhoi\\IdeaProjects\\ktmeta\\src\\test\\resources\\tree\\subb.txt",
-            rootPath = "C:\\Users\\ckhoi\\IdeaProjects\\ktmeta\\src\\test\\resources\\tree",
+            selfPath = "F:\\devtmp\\tree\\subb.txt",
+            rootPath = "F:\\devtmp\\tree",
             hasFather = true,
-            fatherPath = "C:\\Users\\ckhoi\\IdeaProjects\\ktmeta\\src\\test\\resources\\tree",
+            fatherPath = "F:\\devtmp\\tree",
             hasChild = false,
             type = FileType.File
         )
@@ -156,29 +165,29 @@ class TestLocalDiskDriver {
     @Test
     fun testPushPopLsFilter() {
         val list = listOf(
-            "C:\\Users\\ckhoi\\IdeaProjects\\ktmeta\\src\\test\\resources\\tree\\sub2\\sub22",
-            "C:\\Users\\ckhoi\\IdeaProjects\\ktmeta\\src\\test\\resources\\tree\\sub2\\sub2a.txt"
+            "F:\\devtmp\\tree\\sub2\\sub22",
+            "F:\\devtmp\\tree\\sub2\\sub2a.txt"
         )
         val x = LocalDiskDriver()
         x.setTargetDir(path)
         assertEquals(true, x.push("sub2"))
         //println(x.dirs)
         println(x.checkStack())
-        assertEquals("C:\\Users\\ckhoi\\IdeaProjects\\ktmeta\\src\\test\\resources\\tree\\sub2", x.pwd())
+        assertEquals("F:\\devtmp\\tree\\sub2", x.pwd())
         assertEquals(list, x.ls())
         x.pop()
         println(x.checkStack())
         assertEquals(true, x.push("sub222"))
         val files = x.globFilter(rule = "*.txt")
         assertEquals(
-            "C:\\Users\\ckhoi\\IdeaProjects\\ktmeta\\src\\test\\resources\\tree\\sub2\\sub22\\sub222\\nmsl.txt",
+            "F:\\devtmp\\tree\\sub2\\sub22\\sub222\\nmsl.txt",
             files[0]
         )
         x.pop()
         // at root dir
         println(x.ls())
         println(x.globFilter("root", "*.txt"))
-        val file = x.readFile("C:\\Users\\ckhoi\\IdeaProjects\\ktmeta\\src\\test\\resources\\tree\\subb.txt")
+        val file = x.readFile("F:\\devtmp\\tree\\subb.txt")
         println(file)
     }
 }

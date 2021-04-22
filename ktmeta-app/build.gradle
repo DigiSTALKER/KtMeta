@@ -11,7 +11,7 @@
  * limitations under the License.
  */
 
-import java.io.File
+import java.nio.file.*
 
 plugins {
     id 'java'
@@ -20,19 +20,30 @@ plugins {
     id 'org.jetbrains.kotlin.kapt'
     id 'application'
     id 'distribution'
-    id 'io.ebean' version '12.6.1'
+    id 'edu.sc.seis.launch4j' version '2.5.0'
 }
 
-apply from: 'filecopy.gradle'
-
 // must set
-mainClassName = 'io.github.hochikong.ktmeta.swingui.codegen.impKtmetaMainFrame'
+//mainClassName = 'io.github.hochikong.ktmeta.swingui.codegen.impKtmetaMainFrame'
+mainClassName = 'io.github.hochikong.ktmeta.swingui.dialogs.About'
 
 group 'io.github.hochikong'
 version '1.0-SNAPSHOT'
 
 test {
     useJUnitPlatform()
+}
+
+launch4j {
+    // when use openjdk 11, you dont have jre, so preferJdk
+    // if you use azul or adopt, you can choose jre
+    jdkPreference = 'preferJdk'
+
+    // just place a jre folder with launch4j generated exe in the same level
+    bundledJrePath = 'jre'
+    bundledJre64Bit = true
+//    mainClassName = 'io.github.hochikong.ktmeta.swingui.codegen.impKtmetaMainFrame'
+    mainClassName = 'io.github.hochikong.ktmeta.swingui.dialogs.About'
 }
 
 dependencies {
@@ -107,10 +118,12 @@ compileTestKotlin {
     kotlinOptions.jvmTarget = "1.8"
 }
 
+// fat jar
 jar {
     archiveBaseName='KtMetaDesktop'
     manifest {
-        attributes 'Main-Class': 'MainKt'
+//        attributes 'Main-Class': 'io.github.hochikong.ktmeta.swingui.codegen.impKtmetaMainFrame'
+        attributes 'Main-Class': 'io.github.hochikong.ktmeta.swingui.dialogs.About'
     }
     from {
         configurations.runtimeClasspath.collect {
@@ -125,9 +138,53 @@ distributions {
     }
 }
 
+void modifyFile(srcFile, Closure c) {
+    modifyFile(srcFile, srcFile, c)
+}
+
+void modifyFile(String srcFile, String destFile, Closure c = { println it; return it }) {
+    StringBuffer ret = new StringBuffer()
+    File src = new File(srcFile)
+    File dest = new File(destFile)
+
+    src.withReader { reader ->
+        reader.eachLine {
+            def line = c(it)
+            if (line != null) {
+                ret.append(line)
+                ret.append("\n")
+            }
+        }
+    }
+    dest.delete()
+    dest.write(ret.toString())
+}
+
+void copyFile(String originFile, String destFile, boolean overwrite = false) {
+
+    Path origPath = Paths.get(originFile)
+    Path destPath = Paths.get(destFile)
+    def fileAtDestination = destPath.toFile()
+    if (fileAtDestination.exists()) {
+        if (overwrite) {
+            fileAtDestination.delete()
+            Files.copy(origPath, destPath)
+        } else {
+            println("Won't overwrite existing file $fileAtDestination")
+            println("Call 'copyFile(orig, dest, true)' to delete the existing file first")
+        }
+    } else {
+        // There's no file at the destination yet
+        Files.copy(origPath, destPath)
+    }
+}
+
 // When you first compile this repo, you should comment code below before gradle assemble
 // Only after assemble you can use build
 startScripts {
+    // solved too long classpath
+    classpath = files( '$APP_HOME/lib/*' )
+
     // If clean the build dir, the task will failed.
     def startScriptDir = outputDir.getAbsolutePath()
     if (!new File(startScriptDir).exists()) {
@@ -138,7 +195,7 @@ startScripts {
         def winStartupScriptNoConsole = startScriptDir + "/" + applicationName + "WithoutConsole.bat"
         copyFile(winStartupScript, winStartupScriptNoConsole, true)
 
-        modifyFile(winStartupScript) {
+        modifyFile(winStartupScriptNoConsole) {
             // javaw.exe doesn't have a console
             if(it.contains("java.exe")){
                 return it.replace("java.exe", "javaw.exe")
