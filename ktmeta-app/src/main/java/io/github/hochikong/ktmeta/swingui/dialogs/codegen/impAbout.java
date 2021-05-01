@@ -34,12 +34,55 @@ public class impAbout extends javax.swing.JDialog {
         // display About at the centre of screen
         this.setLocationRelativeTo(null);
     }
-    
+
     public impAbout(java.awt.Frame parent, boolean modal, Image icon) {
         super(parent, modal);
         initComponents();
         this.setIconImage(icon);
     }
+
+    protected String BottomText = "OS: " + system.getName()
+            + " ; Arch: " + system.getArch()
+            + " ; Cores: " + system.getAvailableProcessors()
+            + "\n"
+            + runtime.getVmName()
+            + " ; " + runtime.getVmVendor()
+            + " ; \n" + runtime.getSpecVersion() + runtime.getVmVersion();
+
+    //<Auto-Generate>
+    private void LabelPhotoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LabelPhotoMouseClicked
+        impLabelPhotoMouseClicked(evt);
+    }//GEN-LAST:event_LabelPhotoMouseClicked
+
+    private void TextPaneInfoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TextPaneInfoMouseClicked
+        impTextPaneInfoMouseClicked(evt);
+    }//GEN-LAST:event_TextPaneInfoMouseClicked
+    //</Auto-Generate>
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        FlatSolarizedLightIJTheme.install();
+
+        /* Create and display the dialog */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                impAbout dialog = new impAbout(new javax.swing.JFrame(), true);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+                dialog.setVisible(true);
+            }
+        });
+    }
+
+    //<My-Custom>  
+    OperatingSystemMXBean system = ManagementFactory.getOperatingSystemMXBean();
+    RuntimeMXBean runtime = ManagementFactory.getRuntimeMXBean();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -77,7 +120,7 @@ public class impAbout extends javax.swing.JDialog {
             }
         });
         InfoScrollPane.setViewportView(TextPaneInfo);
-        TextPaneInfo.setText(ButtomText);
+        TextPaneInfo.setText(BottomText);
 
         javax.swing.GroupLayout LabelInfoLayout = new javax.swing.GroupLayout(LabelInfo);
         LabelInfo.setLayout(LabelInfoLayout);
@@ -100,60 +143,19 @@ public class impAbout extends javax.swing.JDialog {
             .addComponent(LabelInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(LabelPhoto)
-                .addGap(0, 0, 0)
-                .addComponent(LabelInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addComponent(LabelPhoto)
+                                .addGap(0, 0, 0)
+                                .addComponent(LabelInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    //<Auto-Generate>
-    private void LabelPhotoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LabelPhotoMouseClicked
-        impLabelPhotoMouseClicked(evt);
-    }//GEN-LAST:event_LabelPhotoMouseClicked
-
-    private void TextPaneInfoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TextPaneInfoMouseClicked
-        impTextPaneInfoMouseClicked(evt);
-    }//GEN-LAST:event_TextPaneInfoMouseClicked
-    //</Auto-Generate>
-    
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        FlatSolarizedLightIJTheme.install();
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                impAbout dialog = new impAbout(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
-
-    //<My-Custom>  
-    OperatingSystemMXBean system = ManagementFactory.getOperatingSystemMXBean();
-    RuntimeMXBean runtime = ManagementFactory.getRuntimeMXBean();
-    protected String ButtomText = "OS: " + system.getName()
-            + " ; Arch: " + system.getArch()
-            + " ; Cores: " + system.getAvailableProcessors()
-            + "\n"
-            + runtime.getVmName()
-            + " ; " + runtime.getVmVendor()
-            + " ; \n" + runtime.getSpecVersion() + runtime.getVmVersion();
-    
-    protected void diaDispose(){
-        this.dispose();
+    protected void updateButtomText(String text) {
+        this.BottomText = text;
+        this.TextPaneInfo.setText(this.BottomText);
     }
     //</My-Custom>
 
