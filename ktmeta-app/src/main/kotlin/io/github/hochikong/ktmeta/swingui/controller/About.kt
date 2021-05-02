@@ -13,23 +13,24 @@
 
 package io.github.hochikong.ktmeta.swingui.controller
 
-import com.formdev.flatlaf.intellijthemes.FlatCarbonIJTheme
+//import com.formdev.flatlaf.intellijthemes.FlatCarbonIJTheme
+//import javax.swing.JFrame
 import io.github.hochikong.ktmeta.swingui.dialogs.codegen.impAbout
 import java.awt.Frame
 import java.awt.event.MouseEvent
 import java.lang.management.ManagementFactory
 import java.lang.management.OperatingSystemMXBean
-import javax.swing.JFrame
 
 
-class AboutCont(parent: Frame) : impAbout(parent, true) {
+class About(parent: Frame) : impAbout(parent, true) {
     private val system: OperatingSystemMXBean = ManagementFactory.getOperatingSystemMXBean()
     private val runtime = ManagementFactory.getRuntimeMXBean()
 
     init {
         this.updateButtomText(
             """
-            OS: ${system.name}   Arch: ${system.arch}
+            OS: ${system.name}   
+            Arch: ${system.arch}
             Cores: ${system.availableProcessors}
             
             ${runtime.vmName} By ${runtime.vmVendor}
@@ -47,8 +48,8 @@ class AboutCont(parent: Frame) : impAbout(parent, true) {
     }
 }
 
-fun main() {
-    FlatCarbonIJTheme.install()
-    val dialog = AboutCont(JFrame())
-    dialog.isVisible = true
-}
+//fun main() {
+//    FlatCarbonIJTheme.install()
+//    val dialog = About(JFrame())
+//    dialog.isVisible = true
+//}

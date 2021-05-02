@@ -41,6 +41,9 @@ public class About extends javax.swing.JDialog {
         this.setIconImage(icon);
     }
 
+    //<My-Custom>
+    OperatingSystemMXBean system = ManagementFactory.getOperatingSystemMXBean();
+    RuntimeMXBean runtime = ManagementFactory.getRuntimeMXBean();
     protected String BottomText = "OS: " + system.getName()
             + " ; Arch: " + system.getArch()
             + " ; Cores: " + system.getAvailableProcessors()
@@ -48,15 +51,6 @@ public class About extends javax.swing.JDialog {
             + runtime.getVmName()
             + " ; " + runtime.getVmVendor()
             + " ; \n" + runtime.getSpecVersion() + runtime.getVmVersion();
-
-    //<Auto-Generate>
-    private void LabelPhotoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LabelPhotoMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_LabelPhotoMouseClicked
-
-    private void TextPaneInfoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TextPaneInfoMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TextPaneInfoMouseClicked
     //</Auto-Generate>
 
     /**
@@ -79,10 +73,6 @@ public class About extends javax.swing.JDialog {
             }
         });
     }
-
-    //<My-Custom>  
-    OperatingSystemMXBean system = ManagementFactory.getOperatingSystemMXBean();
-    RuntimeMXBean runtime = ManagementFactory.getRuntimeMXBean();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -152,6 +142,15 @@ public class About extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    //<Auto-Generate>
+    private void LabelPhotoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LabelPhotoMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_LabelPhotoMouseClicked
+
+    private void TextPaneInfoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TextPaneInfoMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TextPaneInfoMouseClicked
 
     protected void updateButtomText(String text) {
         this.BottomText = text;
