@@ -34,44 +34,11 @@ public class About extends javax.swing.JDialog {
         // display About at the centre of screen
         this.setLocationRelativeTo(null);
     }
-
+    
     public About(java.awt.Frame parent, boolean modal, Image icon) {
         super(parent, modal);
         initComponents();
         this.setIconImage(icon);
-    }
-
-    //<My-Custom>
-    OperatingSystemMXBean system = ManagementFactory.getOperatingSystemMXBean();
-    RuntimeMXBean runtime = ManagementFactory.getRuntimeMXBean();
-    protected String BottomText = "OS: " + system.getName()
-            + " ; Arch: " + system.getArch()
-            + " ; Cores: " + system.getAvailableProcessors()
-            + "\n"
-            + runtime.getVmName()
-            + " ; " + runtime.getVmVendor()
-            + " ; \n" + runtime.getSpecVersion() + runtime.getVmVersion();
-    //</Auto-Generate>
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        FlatSolarizedLightIJTheme.install();
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                About dialog = new About(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
     }
 
     /**
@@ -133,11 +100,11 @@ public class About extends javax.swing.JDialog {
             .addComponent(LabelInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addComponent(LabelPhoto)
-                                .addGap(0, 0, 0)
-                                .addComponent(LabelInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(LabelPhoto)
+                .addGap(0, 0, 0)
+                .addComponent(LabelInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -151,8 +118,41 @@ public class About extends javax.swing.JDialog {
     private void TextPaneInfoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TextPaneInfoMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_TextPaneInfoMouseClicked
+    //</Auto-Generate>
+    
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        FlatSolarizedLightIJTheme.install();
 
-    protected void updateButtomText(String text) {
+        /* Create and display the dialog */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                About dialog = new About(new javax.swing.JFrame(), true);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+                dialog.setVisible(true);
+            }
+        });
+    }
+
+    //<My-Custom>  
+    OperatingSystemMXBean system = ManagementFactory.getOperatingSystemMXBean();
+    RuntimeMXBean runtime = ManagementFactory.getRuntimeMXBean();
+    protected String BottomText = "OS: " + system.getName()
+            + " ; Arch: " + system.getArch()
+            + " ; Cores: " + system.getAvailableProcessors()
+            + "\n"
+            + runtime.getVmName()
+            + " ; " + runtime.getVmVendor()
+            + " ; \n" + runtime.getSpecVersion() + runtime.getVmVersion();
+    
+    protected void updateButtomText(String text){
         this.BottomText = text;
         this.TextPaneInfo.setText(this.BottomText);
     }

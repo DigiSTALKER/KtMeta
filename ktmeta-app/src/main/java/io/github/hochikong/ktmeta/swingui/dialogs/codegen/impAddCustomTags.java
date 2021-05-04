@@ -17,6 +17,7 @@ import io.github.hochikong.ktmeta.swingui.essentials.CustomTagsTableModel;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
 
 /**
  *
@@ -33,8 +34,16 @@ public class impAddCustomTags extends javax.swing.JDialog {
         HideHead();
         this.setLocationRelativeTo(null);
     }
-    
-    public impAddCustomTags(java.awt.Frame parent, boolean modal, Object[][] TagsData, Image icon){
+
+    public impAddCustomTags(java.awt.Frame parent, boolean modal, List<String> TagsData) {
+        super(parent, modal);
+        this.tagsData = TagsData;
+        initComponents();
+        HideHead();
+        this.setLocationRelativeTo(null);
+    }
+
+    public impAddCustomTags(java.awt.Frame parent, boolean modal, List<String> TagsData, Image icon) {
         super(parent, modal);
         this.tagsData = TagsData;
         initComponents();
@@ -51,37 +60,20 @@ public class impAddCustomTags extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        PopupMenuTagsOps = new javax.swing.JPopupMenu();
-        MenuItemRemoveTag = new javax.swing.JMenuItem();
-        MenuItemRenameTag = new javax.swing.JMenuItem();
         BTNCancelAddTags = new javax.swing.JButton();
         BTNOKAddTags = new javax.swing.JButton();
         LabelCurrentTags = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         TableUserCustomTags = new javax.swing.JTable();
         LabelAddTag = new javax.swing.JLabel();
-        TextFieldAddTag = new javax.swing.JTextField();
         BTNAddTag = new javax.swing.JButton();
         BTNRemoveTag = new javax.swing.JButton();
-
-        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("i18n/Dialogs/AddCustomTags_trans"); // NOI18N
-        MenuItemRemoveTag.setText(bundle.getString("REMOVE")); // NOI18N
-        MenuItemRemoveTag.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MenuItemRemoveTagActionPerformed(evt);
-            }
-        });
-        PopupMenuTagsOps.add(MenuItemRemoveTag);
-
-        MenuItemRenameTag.setText(bundle.getString("RENAME")); // NOI18N
-        MenuItemRenameTag.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MenuItemRenameTagActionPerformed(evt);
-            }
-        });
-        PopupMenuTagsOps.add(MenuItemRenameTag);
+        jPanel1 = new javax.swing.JPanel();
+        BTNClear = new javax.swing.JButton();
+        TextFieldAddTag = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("i18n/Dialogs/AddCustomTags_trans"); // NOI18N
         setTitle(bundle.getString("ADD CUSTOM TAGS")); // NOI18N
         setUndecorated(true);
 
@@ -103,9 +95,13 @@ public class impAddCustomTags extends javax.swing.JDialog {
         LabelCurrentTags.setText(bundle.getString("CURRENT USER CUSTOM TAGS : ")); // NOI18N
 
         TableUserCustomTags.setAutoCreateRowSorter(true);
-        TableUserCustomTags.setModel(new CustomTagsTableModel());
+        if (this.tagsData != null){
+            this.myModel = new CustomTagsTableModel(this.tagsData);
+        }
+        TableUserCustomTags.setModel(this.myModel);
         TableUserCustomTags.setCellSelectionEnabled(true);
-        TableUserCustomTags.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        TableUserCustomTags.setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        TableUserCustomTags.setShowHorizontalLines(true);
         TableUserCustomTags.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 TableUserCustomTagsMouseClicked(evt);
@@ -132,6 +128,41 @@ public class impAddCustomTags extends javax.swing.JDialog {
             }
         });
 
+        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        BTNClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/ico/16pix/close.png"))); // NOI18N
+        BTNClear.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        BTNClear.setFocusable(false);
+        BTNClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTNClearActionPerformed(evt);
+            }
+        });
+
+        TextFieldAddTag.setToolTipText("Hit 'Enter' to quick add");
+        TextFieldAddTag.setBorder(null);
+        TextFieldAddTag.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TextFieldAddTagActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addComponent(TextFieldAddTag, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(BTNClear)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(BTNClear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(TextFieldAddTag, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -148,7 +179,7 @@ public class impAddCustomTags extends javax.swing.JDialog {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(LabelAddTag)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(TextFieldAddTag, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(BTNAddTag))
                     .addComponent(LabelCurrentTags, javax.swing.GroupLayout.Alignment.LEADING)
@@ -164,15 +195,15 @@ public class impAddCustomTags extends javax.swing.JDialog {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TextFieldAddTag, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(LabelAddTag)
-                    .addComponent(BTNAddTag))
+                    .addComponent(BTNAddTag)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BTNOKAddTags)
                     .addComponent(BTNCancelAddTags)
                     .addComponent(BTNRemoveTag))
-                .addContainerGap(71, Short.MAX_VALUE))
+                .addContainerGap(67, Short.MAX_VALUE))
         );
 
         pack();
@@ -195,19 +226,19 @@ public class impAddCustomTags extends javax.swing.JDialog {
         impBTNCancelAddTagsActionPerformed(evt);
     }//GEN-LAST:event_BTNCancelAddTagsActionPerformed
 
-    private void MenuItemRemoveTagActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemRemoveTagActionPerformed
-        impMenuItemRemoveTagActionPerformed(evt);
-    }//GEN-LAST:event_MenuItemRemoveTagActionPerformed
-
-    private void MenuItemRenameTagActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemRenameTagActionPerformed
-        impMenuItemRenameTagActionPerformed(evt);
-    }//GEN-LAST:event_MenuItemRenameTagActionPerformed
-
     private void BTNRemoveTagActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNRemoveTagActionPerformed
         impBTNRemoveTagActionPerformed(evt);
     }//GEN-LAST:event_BTNRemoveTagActionPerformed
+
+    private void BTNClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNClearActionPerformed
+        impBTNClearActionPerformed(evt);
+    }//GEN-LAST:event_BTNClearActionPerformed
+
+    private void TextFieldAddTagActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextFieldAddTagActionPerformed
+        impTextFieldAddTagActionPerformed(evt);
+    }//GEN-LAST:event_TextFieldAddTagActionPerformed
     //</Auto-Generate>
-    
+
     /**
      * @param args the command line arguments
      */
@@ -228,11 +259,12 @@ public class impAddCustomTags extends javax.swing.JDialog {
             }
         });
     }
-    
+
     //<My-Custom>
-    protected Object[][] tagsData;
-    
-    protected void HideHead(){
+    protected List<String> tagsData;
+    protected CustomTagsTableModel myModel = new CustomTagsTableModel();
+
+    protected void HideHead() {
         // Like IDEA style
         this.getRootPane().setWindowDecorationStyle(JRootPane.FRAME);
     }
@@ -241,15 +273,14 @@ public class impAddCustomTags extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BTNAddTag;
     protected javax.swing.JButton BTNCancelAddTags;
+    protected javax.swing.JButton BTNClear;
     protected javax.swing.JButton BTNOKAddTags;
     protected javax.swing.JButton BTNRemoveTag;
     private javax.swing.JLabel LabelAddTag;
     private javax.swing.JLabel LabelCurrentTags;
-    protected javax.swing.JMenuItem MenuItemRemoveTag;
-    protected javax.swing.JMenuItem MenuItemRenameTag;
-    protected javax.swing.JPopupMenu PopupMenuTagsOps;
     protected javax.swing.JTable TableUserCustomTags;
     protected javax.swing.JTextField TextFieldAddTag;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
 
@@ -258,8 +289,8 @@ public class impAddCustomTags extends javax.swing.JDialog {
     protected void impBTNAddTagActionPerformed(java.awt.event.ActionEvent evt){}
     protected void impBTNOKAddTagsActionPerformed(java.awt.event.ActionEvent evt){}
     protected void impBTNCancelAddTagsActionPerformed(java.awt.event.ActionEvent evt){}
-    protected void impMenuItemRemoveTagActionPerformed(java.awt.event.ActionEvent evt){}
-    protected void impMenuItemRenameTagActionPerformed(java.awt.event.ActionEvent evt){}
     protected void impBTNRemoveTagActionPerformed(java.awt.event.ActionEvent evt){}
+    protected void impBTNClearActionPerformed(java.awt.event.ActionEvent evt){}
+    protected void impTextFieldAddTagActionPerformed(java.awt.event.ActionEvent evt){}
     //</Auto-Generate-Result>
 }

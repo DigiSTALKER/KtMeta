@@ -11,7 +11,7 @@
  * limitations under the License.
  */
 
-package io.github.hochikong.ktmeta.swingui.controller
+package io.github.hochikong.ktmeta.swingui.controller.dialogs
 
 //import com.formdev.flatlaf.intellijthemes.FlatCarbonIJTheme
 //import javax.swing.JFrame
