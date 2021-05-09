@@ -77,9 +77,12 @@ class AddCustomTags(parent: Frame, tags: List<String>) : impAddCustomTags(parent
         this.updateModel()
     }
 
+    /**
+     * Remove tags and update table content
+     * */
     override fun impBTNRemoveTagActionPerformed(evt: ActionEvent?) {
         val elementShouldBeDeleted = mutableListOf<String>()
-        if (this.TableUserCustomTags.selectedRowCount > 0){
+        if (this.TableUserCustomTags.selectedRowCount > 0) {
             this.TableUserCustomTags.selectedRows.forEach { elementShouldBeDeleted.add(this.tagsData[it]) }
 
             elementShouldBeDeleted.forEach { this.tagsData.remove(it) }
@@ -87,6 +90,9 @@ class AddCustomTags(parent: Frame, tags: List<String>) : impAddCustomTags(parent
         this.updateModel()
     }
 
+    /**
+     * Add new tag
+     * */
     override fun impTextFieldAddTagActionPerformed(evt: ActionEvent?) {
         addNewTag()
     }

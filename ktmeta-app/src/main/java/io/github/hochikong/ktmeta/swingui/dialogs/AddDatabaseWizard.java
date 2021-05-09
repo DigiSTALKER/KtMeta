@@ -18,16 +18,28 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- *
  * @author ckhoi
  */
 public class AddDatabaseWizard extends javax.swing.JDialog {
+
+    //<My-Custom>
+    protected String[] supportedDatabaseList;
 
     /**
      * Creates new form AddDatabaseWizard
      */
     public AddDatabaseWizard(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+        this.supportedDatabaseList = new String[]{"SQLite", "PostgreSQL"};
+        initComponents();
+        HideHead();
+        // centre
+        this.setLocationRelativeTo(null);
+    }
+
+    public AddDatabaseWizard(java.awt.Frame parent, boolean modal, String[] SupportedDBList) {
+        super(parent, modal);
+        this.supportedDatabaseList = SupportedDBList;
         initComponents();
         HideHead();
         // centre
@@ -40,6 +52,68 @@ public class AddDatabaseWizard extends javax.swing.JDialog {
         initComponents();
         HideHead();
         this.setIconImage(icon);
+        this.setLocationRelativeTo(null);
+    }
+
+    //<Auto-Generate>
+    private void BTNOKAddDBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNOKAddDBActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BTNOKAddDBActionPerformed
+
+    private void BTNCancelAddDBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNCancelAddDBActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BTNCancelAddDBActionPerformed
+
+    private void FieldNameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FieldNameMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_FieldNameMouseClicked
+
+    private void FieldDescriptionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FieldDescriptionMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_FieldDescriptionMouseClicked
+
+    private void FieldJDBCURLMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FieldJDBCURLMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_FieldJDBCURLMouseClicked
+
+    private void FieldUsernameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FieldUsernameMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_FieldUsernameMouseClicked
+
+    private void FieldPasswordMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FieldPasswordMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_FieldPasswordMouseClicked
+
+    private void BTNTestConnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNTestConnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BTNTestConnActionPerformed
+
+    private void ComboBoxAvailableDBMSItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_ComboBoxAvailableDBMSItemStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ComboBoxAvailableDBMSItemStateChanged
+    //</Auto-Generate>
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        FlatSolarizedLightIJTheme.install();
+        /* Create and display the dialog */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                AddDatabaseWizard dialog = new AddDatabaseWizard(new javax.swing.JFrame(), true);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+
+                // must request focus
+                dialog.BTNCancelAddDB.requestFocusInWindow();
+                dialog.setVisible(true);
+            }
+        });
     }
 
     /**
@@ -67,7 +141,6 @@ public class AddDatabaseWizard extends javax.swing.JDialog {
         FieldPassword = new javax.swing.JPasswordField();
         BTNTestConn = new javax.swing.JButton();
         PBarTestConnection = new javax.swing.JProgressBar();
-        CheckBoxRememberPassword = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("i18n/Dialogs/AddDatabaseWizard_trans"); // NOI18N
@@ -154,51 +227,47 @@ public class AddDatabaseWizard extends javax.swing.JDialog {
             }
         });
 
-        CheckBoxRememberPassword.setText(bundle.getString("REMEMBER PASSWORD")); // NOI18N
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(BTNOKAddDB)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(BTNCancelAddDB)
-                .addGap(33, 33, 33))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(LabelJDBCURL, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(LabelDBMS))
-                            .addComponent(LabelDescription)
-                            .addComponent(LabelName))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(FieldName)
-                            .addComponent(FieldDescription)
-                            .addComponent(ComboBoxAvailableDBMS, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(FieldJDBCURL, javax.swing.GroupLayout.DEFAULT_SIZE, 427, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(LabelUsername)
-                            .addComponent(LabelPassword))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(FieldUsername)
-                            .addComponent(FieldPassword)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(BTNTestConn)
-                                .addGap(33, 33, 33)
-                                .addComponent(PBarTestConnection, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(CheckBoxRememberPassword))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(33, 33, 33))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                            .addContainerGap()
+                                            .addComponent(BTNOKAddDB)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(BTNCancelAddDB))
+                                    .addGroup(layout.createSequentialGroup()
+                                            .addGap(33, 33, 33)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addGroup(layout.createSequentialGroup()
+                                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                                            .addComponent(LabelJDBCURL, javax.swing.GroupLayout.Alignment.TRAILING)
+                                                                            .addComponent(LabelDBMS))
+                                                                    .addComponent(LabelDescription)
+                                                                    .addComponent(LabelName))
+                                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                                    .addComponent(FieldName)
+                                                                    .addComponent(FieldDescription)
+                                                                    .addComponent(ComboBoxAvailableDBMS, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                                    .addComponent(FieldJDBCURL, javax.swing.GroupLayout.DEFAULT_SIZE, 427, Short.MAX_VALUE)))
+                                                    .addGroup(layout.createSequentialGroup()
+                                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                                    .addComponent(LabelUsername)
+                                                                    .addComponent(LabelPassword))
+                                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                                    .addComponent(FieldUsername)
+                                                                    .addComponent(FieldPassword)))
+                                                    .addGroup(layout.createSequentialGroup()
+                                                            .addComponent(BTNTestConn)
+                                                            .addGap(33, 33, 33)
+                                                            .addComponent(PBarTestConnection, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                            .addGap(0, 0, Short.MAX_VALUE)))))
+                            .addGap(33, 33, 33))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -217,20 +286,18 @@ public class AddDatabaseWizard extends javax.swing.JDialog {
                     .addComponent(ComboBoxAvailableDBMS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(LabelJDBCURL)
-                    .addComponent(FieldJDBCURL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(FieldUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(LabelUsername))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(LabelPassword)
-                    .addComponent(FieldPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(CheckBoxRememberPassword)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(LabelJDBCURL)
+                        .addComponent(FieldJDBCURL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(FieldUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(LabelUsername))
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(LabelPassword)
+                            .addComponent(FieldPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(BTNTestConn)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(PBarTestConnection, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -245,71 +312,7 @@ public class AddDatabaseWizard extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    //<Auto-Generate>
-    private void BTNOKAddDBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNOKAddDBActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_BTNOKAddDBActionPerformed
-
-    private void BTNCancelAddDBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNCancelAddDBActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_BTNCancelAddDBActionPerformed
-
-    private void FieldNameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FieldNameMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_FieldNameMouseClicked
-
-    private void FieldDescriptionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FieldDescriptionMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_FieldDescriptionMouseClicked
-
-    private void FieldJDBCURLMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FieldJDBCURLMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_FieldJDBCURLMouseClicked
-
-    private void FieldUsernameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FieldUsernameMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_FieldUsernameMouseClicked
-
-    private void FieldPasswordMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FieldPasswordMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_FieldPasswordMouseClicked
-
-    private void BTNTestConnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNTestConnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_BTNTestConnActionPerformed
-
-    private void ComboBoxAvailableDBMSItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_ComboBoxAvailableDBMSItemStateChanged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ComboBoxAvailableDBMSItemStateChanged
-    //</Auto-Generate>
-    
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        FlatSolarizedLightIJTheme.install();
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                AddDatabaseWizard dialog = new AddDatabaseWizard(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-
-                // must request focus
-                dialog.BTNCancelAddDB.requestFocusInWindow();
-                dialog.setVisible(true);
-            }
-        });
-    }
-
-    //<My-Custom>
-    protected String[] supportedDatabaseList = {"Postgresql", "Sqlite"};
-    
-    protected void HideHead(){
+    protected void HideHead() {
         // Like IDEA style
         this.getRootPane().setWindowDecorationStyle(JRootPane.FRAME);
     }
@@ -319,7 +322,6 @@ public class AddDatabaseWizard extends javax.swing.JDialog {
     protected javax.swing.JButton BTNCancelAddDB;
     protected javax.swing.JButton BTNOKAddDB;
     protected javax.swing.JButton BTNTestConn;
-    protected javax.swing.JCheckBox CheckBoxRememberPassword;
     protected javax.swing.JComboBox<String> ComboBoxAvailableDBMS;
     protected javax.swing.JTextField FieldDescription;
     protected javax.swing.JTextField FieldJDBCURL;
