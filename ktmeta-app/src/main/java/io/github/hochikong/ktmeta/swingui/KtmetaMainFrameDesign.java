@@ -782,7 +782,7 @@ public class KtmetaMainFrameDesign extends javax.swing.JFrame {
     // *************************************************************************
     // my custom codes
     // Used by TabbedPaneSplitRight to keep the reference of JLabels.
-    private final int testIndex = 0;
+    private int testIndex = 0;
     
     protected HashMap<String, JLabel> rightVerticalTabLabels = new HashMap<>();
 
@@ -837,7 +837,7 @@ public class KtmetaMainFrameDesign extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String args[]) {
         /* Install theme */
         FlatSolarizedLightIJTheme.install();
         //FlatDarculaLaf.install();

@@ -20,8 +20,8 @@ import java.io.File;
  * @author ckhoi
  */
 public class FileTypeFilter extends FileFilter{
-    private final String extension;
-    private final String description;
+    private String extension;
+    private String description;
     
     public FileTypeFilter(String extension, String desc){
         this.extension = extension;

@@ -46,7 +46,7 @@ public class LaunchView extends javax.swing.JFrame {
     private void initComponents() {
 
         PanelBackgroundPicture = new javax.swing.JPanel() {
-            private final Image img = new ImageIcon(getClass().getResource("/imgs/launchLOGO.png")).getImage();
+            private Image img = new ImageIcon(getClass().getResource("/imgs/launchLOGO.png")).getImage();
             @Override
             public void paintComponent(Graphics g) {
                 g.drawImage(img, 0, 0, null);
@@ -106,7 +106,7 @@ public class LaunchView extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String args[]) {
         FlatSolarizedLightIJTheme.install();
 
         /* Create and display the form */

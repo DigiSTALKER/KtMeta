@@ -24,8 +24,7 @@ plugins {
 }
 
 // must set
-//mainClassName = 'io.github.hochikong.ktmeta.swingui.codegen.impKtmetaMainFrame'
-mainClassName = 'io.github.hochikong.ktmeta.swingui.dialogs.About'
+mainClassName = 'io.github.hochikong.ktmeta.swingui.codegen.impKtmetaMainFrame'
 
 group 'io.github.hochikong'
 version '1.0-SNAPSHOT'
@@ -42,8 +41,7 @@ launch4j {
     // just place a jre folder with launch4j generated exe in the same level
     bundledJrePath = 'jre'
     bundledJre64Bit = true
-//    mainClassName = 'io.github.hochikong.ktmeta.swingui.codegen.impKtmetaMainFrame'
-    mainClassName = 'io.github.hochikong.ktmeta.swingui.dialogs.About'
+    mainClassName = 'io.github.hochikong.ktmeta.swingui.codegen.impKtmetaMainFrame'
 }
 
 dependencies {
@@ -122,8 +120,7 @@ compileTestKotlin {
 jar {
     archiveBaseName='KtMetaDesktop'
     manifest {
-//        attributes 'Main-Class': 'io.github.hochikong.ktmeta.swingui.codegen.impKtmetaMainFrame'
-        attributes 'Main-Class': 'io.github.hochikong.ktmeta.swingui.dialogs.About'
+        attributes 'Main-Class': 'io.github.hochikong.ktmeta.swingui.codegen.impKtmetaMainFrame'
     }
     from {
         configurations.runtimeClasspath.collect {

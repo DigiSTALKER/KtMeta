@@ -19,7 +19,7 @@ import javax.swing.table.AbstractTableModel;
  * @author ckhoi
  */
 public class PluginsTableModel extends AbstractTableModel {
-    private final String[] columnNames = {
+    private String[] columnNames = {
         "Name",
         "Activated"
     };

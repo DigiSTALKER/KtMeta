@@ -1,9 +1,10 @@
 package io.github.hochikong.ktmeta.swingui.controller.dialogs
 
+import io.github.hochikong.ktmeta.swingui.controller.doWhenClickOnTextField
 import io.github.hochikong.ktmeta.swingui.dialogs.codegen.impAddDatabaseWizard
-import java.awt.Color
 import java.awt.Frame
 import java.awt.event.ActionEvent
+import java.awt.event.FocusEvent
 import java.awt.event.ItemEvent
 import java.awt.event.MouseEvent
 import javax.swing.JTextField
@@ -37,22 +38,22 @@ class AddDatabaseWizard(parent: Frame, dbList: Array<String>) : impAddDatabaseWi
     }
 
     /**
-     * Change color
+     * Change color and select
      * */
-    override fun impFieldNameMouseClicked(evt: MouseEvent?) {
-        this.doWhenClickOnField("FieldName")
+    override fun impFieldNameFocusGained(evt: FocusEvent?) {
+        doWhenClickOnTextField(this.componentRegister,"FieldName")
     }
 
-    override fun impFieldDescriptionMouseClicked(evt: MouseEvent?) {
-        this.doWhenClickOnField("FieldDescription")
+    override fun impFieldDescriptionFocusGained(evt: FocusEvent?) {
+        doWhenClickOnTextField(this.componentRegister, "FieldDescription")
     }
 
-    override fun impFieldJDBCURLMouseClicked(evt: MouseEvent?) {
-        this.doWhenClickOnField("FieldJDBCURL")
+    override fun impFieldJDBCURLFocusGained(evt: FocusEvent?) {
+        doWhenClickOnTextField(this.componentRegister, "FieldJDBCURL")
     }
 
-    override fun impFieldUsernameMouseClicked(evt: MouseEvent?) {
-        this.doWhenClickOnField("FieldUsername")
+    override fun impFieldUsernameFocusGained(evt: FocusEvent?) {
+        doWhenClickOnTextField(this.componentRegister, "FieldUsername")
     }
 
     override fun impFieldPasswordMouseClicked(evt: MouseEvent?) {
@@ -74,14 +75,8 @@ class AddDatabaseWizard(parent: Frame, dbList: Array<String>) : impAddDatabaseWi
         }
     }
 
-    private fun doWhenClickOnField(key: String) {
-        val comp = this.componentRegister[key]
-        if (comp is JTextField) {
-            comp.selectAll()
-            if (comp.foreground != Color(0, 0, 0)) {
-                comp.foreground = Color(0, 0, 0)
-            }
-        }
+    fun initFocus(){
+        BTNCancelAddDB.requestFocusInWindow()
     }
 }
 

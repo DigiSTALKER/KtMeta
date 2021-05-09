@@ -13,7 +13,7 @@
 package io.github.hochikong.ktmeta.swingui.essentials.codegen;
 
 import javax.swing.table.TableModel;
-import java.nio.charset.StandardCharsets;
+import java.nio.charset.Charset;
 import java.util.Random;
 
 /**
@@ -260,7 +260,7 @@ public class impSimpleResultPanelContainer extends javax.swing.JPanel {
     private String getRandomString() {
         byte[] array = new byte[7]; // length is bounded by 7
         new Random().nextBytes(array);
-        return new String(array, StandardCharsets.UTF_8);
+        return new String(array, Charset.forName("UTF-8"));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

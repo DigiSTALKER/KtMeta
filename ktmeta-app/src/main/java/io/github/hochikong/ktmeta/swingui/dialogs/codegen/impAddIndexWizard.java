@@ -56,9 +56,9 @@ public class impAddIndexWizard extends javax.swing.JDialog {
         LabelIndexURL = new javax.swing.JLabel();
         FieldIndexURL = new javax.swing.JTextField();
         BTNIndexTestConn = new javax.swing.JButton();
+        ProgressBarTestConn = new javax.swing.JProgressBar();
         BTNCancelAddIndex = new javax.swing.JButton();
         BTNOKAddIndex = new javax.swing.JButton();
-        ProgressBarTestConn = new javax.swing.JProgressBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("i18n/Dialogs/AddIndexWizard_trans"); // NOI18N
@@ -69,9 +69,9 @@ public class impAddIndexWizard extends javax.swing.JDialog {
 
         FieldIndexName.setForeground(new java.awt.Color(204, 204, 204));
         FieldIndexName.setText(bundle.getString("ALIAS OF ELASTICSEARCH INDEX")); // NOI18N
-        FieldIndexName.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                FieldIndexNameMouseClicked(evt);
+        FieldIndexName.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                FieldIndexNameFocusGained(evt);
             }
         });
 
@@ -79,9 +79,9 @@ public class impAddIndexWizard extends javax.swing.JDialog {
 
         FieldIndexDesc.setForeground(new java.awt.Color(204, 204, 204));
         FieldIndexDesc.setText(bundle.getString("DESCRIPTION OF ELASTICSEARCH INDEX")); // NOI18N
-        FieldIndexDesc.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                FieldIndexDescMouseClicked(evt);
+        FieldIndexDesc.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                FieldIndexDescFocusGained(evt);
             }
         });
 
@@ -89,9 +89,9 @@ public class impAddIndexWizard extends javax.swing.JDialog {
 
         FieldIndexURL.setForeground(new java.awt.Color(204, 204, 204));
         FieldIndexURL.setText("http://xxxxx/xxx:9200");
-        FieldIndexURL.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                FieldIndexURLMouseClicked(evt);
+        FieldIndexURL.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                FieldIndexURLFocusGained(evt);
             }
         });
 
@@ -123,27 +123,25 @@ public class impAddIndexWizard extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(LabelIndexURL, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(LabelIndexName)
-                            .addComponent(LabelIndexDesc))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(FieldIndexURL)
-                            .addComponent(FieldIndexDesc, javax.swing.GroupLayout.DEFAULT_SIZE, 390, Short.MAX_VALUE)
-                            .addComponent(FieldIndexName)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(BTNIndexTestConn)
-                        .addGap(26, 26, 26)
-                        .addComponent(ProgressBarTestConn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(BTNIndexTestConn)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(ProgressBarTestConn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 182, Short.MAX_VALUE)
+                            .addComponent(BTNOKAddIndex)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(BTNCancelAddIndex))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(LabelIndexURL, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(LabelIndexName)
+                                .addComponent(LabelIndexDesc))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(FieldIndexURL)
+                                .addComponent(FieldIndexDesc, javax.swing.GroupLayout.DEFAULT_SIZE, 390, Short.MAX_VALUE)
+                                .addComponent(FieldIndexName)))))
                 .addContainerGap(33, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(BTNOKAddIndex)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(BTNCancelAddIndex)
-                .addGap(33, 33, 33))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -160,59 +158,51 @@ public class impAddIndexWizard extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(FieldIndexURL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(LabelIndexURL))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(53, 53, 53)
-                        .addComponent(ProgressBarTestConn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(39, 39, 39)
-                        .addComponent(BTNIndexTestConn)))
-                .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BTNOKAddIndex)
-                    .addComponent(BTNCancelAddIndex))
+                        .addComponent(BTNIndexTestConn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(ProgressBarTestConn, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(BTNCancelAddIndex)
+                        .addComponent(BTNOKAddIndex)))
                 .addContainerGap(71, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void BTNIndexTestConnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNIndexTestConnActionPerformed
+        impBTNIndexTestConnActionPerformed(evt);
+    }//GEN-LAST:event_BTNIndexTestConnActionPerformed
+
     //</Auto-Generate>
     private void BTNCancelAddIndexActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNCancelAddIndexActionPerformed
         impBTNCancelAddIndexActionPerformed(evt);
     }//GEN-LAST:event_BTNCancelAddIndexActionPerformed
 
-    private void BTNIndexTestConnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNIndexTestConnActionPerformed
-        impBTNIndexTestConnActionPerformed(evt);
-    }//GEN-LAST:event_BTNIndexTestConnActionPerformed
-
     private void BTNOKAddIndexActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNOKAddIndexActionPerformed
         impBTNOKAddIndexActionPerformed(evt);
     }//GEN-LAST:event_BTNOKAddIndexActionPerformed
 
-    private void FieldIndexNameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FieldIndexNameMouseClicked
-        impFieldIndexNameMouseClicked(evt);
-//        this.FieldIndexName.setForeground(new java.awt.Color(0, 0, 0));
-//        this.FieldIndexName.selectAll();
-    }//GEN-LAST:event_FieldIndexNameMouseClicked
+    private void FieldIndexNameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_FieldIndexNameFocusGained
+        impFieldIndexNameFocusGained(evt);
+    }//GEN-LAST:event_FieldIndexNameFocusGained
 
-    private void FieldIndexDescMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FieldIndexDescMouseClicked
-        impFieldIndexDescMouseClicked(evt);
-//        this.FieldIndexDesc.setForeground(new java.awt.Color(0, 0, 0));
-//        this.FieldIndexDesc.selectAll();
-    }//GEN-LAST:event_FieldIndexDescMouseClicked
+    private void FieldIndexDescFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_FieldIndexDescFocusGained
+        impFieldIndexDescFocusGained(evt);
+    }//GEN-LAST:event_FieldIndexDescFocusGained
 
-    private void FieldIndexURLMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FieldIndexURLMouseClicked
-        impFieldIndexURLMouseClicked(evt);
-//        this.FieldIndexURL.setForeground(new java.awt.Color(0, 0, 0));
-//        this.FieldIndexURL.selectAll();
-    }//GEN-LAST:event_FieldIndexURLMouseClicked
+    private void FieldIndexURLFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_FieldIndexURLFocusGained
+        impFieldIndexURLFocusGained(evt);
+    }//GEN-LAST:event_FieldIndexURLFocusGained
     //</Auto-Generate>
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String args[]) {
         FlatSolarizedLightIJTheme.install();
 
         /* Create and display the dialog */
@@ -254,11 +244,11 @@ public class impAddIndexWizard extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     //<Auto-Generate-Result>
-    protected void impBTNCancelAddIndexActionPerformed(java.awt.event.ActionEvent evt){}
     protected void impBTNIndexTestConnActionPerformed(java.awt.event.ActionEvent evt){}
+    protected void impBTNCancelAddIndexActionPerformed(java.awt.event.ActionEvent evt){}
     protected void impBTNOKAddIndexActionPerformed(java.awt.event.ActionEvent evt){}
-    protected void impFieldIndexNameMouseClicked(java.awt.event.MouseEvent evt){}
-    protected void impFieldIndexDescMouseClicked(java.awt.event.MouseEvent evt){}
-    protected void impFieldIndexURLMouseClicked(java.awt.event.MouseEvent evt){}
+    protected void impFieldIndexNameFocusGained(java.awt.event.FocusEvent evt){}
+    protected void impFieldIndexDescFocusGained(java.awt.event.FocusEvent evt){}
+    protected void impFieldIndexURLFocusGained(java.awt.event.FocusEvent evt){}
     //</Auto-Generate-Result>
 }

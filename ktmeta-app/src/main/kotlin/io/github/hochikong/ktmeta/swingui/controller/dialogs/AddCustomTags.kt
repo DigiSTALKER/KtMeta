@@ -13,13 +13,13 @@
 
 package io.github.hochikong.ktmeta.swingui.controller.dialogs
 
-import com.formdev.flatlaf.FlatIntelliJLaf
 import io.github.hochikong.ktmeta.swingui.dialogs.codegen.impAddCustomTags
 import io.github.hochikong.ktmeta.swingui.essentials.CustomTagsTableModel
 import java.awt.Frame
 import java.awt.event.ActionEvent
 import java.awt.event.MouseEvent
 import javax.swing.JOptionPane
+//import com.formdev.flatlaf.FlatIntelliJLaf
 
 class AddCustomTags(parent: Frame, tags: List<String>) : impAddCustomTags(parent, true, tags) {
     private val backupTags = this.tagsData.toList()
@@ -103,8 +103,8 @@ class AddCustomTags(parent: Frame, tags: List<String>) : impAddCustomTags(parent
     }
 }
 
-fun main() {
-    FlatIntelliJLaf.install()
-    val dialog = AddCustomTags(Frame(), mutableListOf("1", "2"))
-    dialog.isVisible = true
-}
+//fun main() {
+//    FlatIntelliJLaf.install()
+//    val dialog = AddCustomTags(Frame(), mutableListOf("1", "2"))
+//    dialog.isVisible = true
+//}

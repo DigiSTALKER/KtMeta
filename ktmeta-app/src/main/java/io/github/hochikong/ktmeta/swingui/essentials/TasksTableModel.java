@@ -19,7 +19,7 @@ import javax.swing.table.AbstractTableModel;
  * @author ckhoi
  */
 public class TasksTableModel extends AbstractTableModel{
-    private final String[] columnNames = {
+    private String[] columnNames = {
         "Task Name",
         "Task Status",
         "Task UUID"

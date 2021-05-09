@@ -32,6 +32,20 @@ public class impAddMetaLibWizard extends javax.swing.JDialog {
         HideHead();
         this.setLocationRelativeTo(null);
     }
+    
+    public impAddMetaLibWizard(java.awt.Frame parent, boolean modal,
+            String[] SupportedPluginsList,
+            String[] AvailableDBsList,
+            String[] AvailableIndicesList
+    ) {
+        super(parent, modal);
+        this.supportedPlugins = SupportedPluginsList;
+        this.availableDatabases = AvailableDBsList;
+        this.availableIndices = AvailableIndicesList;
+        initComponents();
+        HideHead();
+        this.setLocationRelativeTo(null);
+    }
 
     public impAddMetaLibWizard(java.awt.Frame parent, boolean modal,
             Image icon,
@@ -46,6 +60,7 @@ public class impAddMetaLibWizard extends javax.swing.JDialog {
         initComponents();
         HideHead();
         this.setIconImage(icon);
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -94,9 +109,9 @@ public class impAddMetaLibWizard extends javax.swing.JDialog {
 
         FieldAlias.setForeground(new java.awt.Color(204, 204, 204));
         FieldAlias.setText(bundle.getString("ALIAS OF METADATA LIBRARY")); // NOI18N
-        FieldAlias.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                FieldAliasMouseClicked(evt);
+        FieldAlias.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                FieldAliasFocusGained(evt);
             }
         });
 
@@ -104,9 +119,9 @@ public class impAddMetaLibWizard extends javax.swing.JDialog {
 
         FieldDescription.setForeground(new java.awt.Color(204, 204, 204));
         FieldDescription.setText(bundle.getString("DESCRIPTION OF METADATA LIBRARY")); // NOI18N
-        FieldDescription.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                FieldDescriptionMouseClicked(evt);
+        FieldDescription.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                FieldDescriptionFocusGained(evt);
             }
         });
 
@@ -206,18 +221,6 @@ public class impAddMetaLibWizard extends javax.swing.JDialog {
         impBTNOKAddMetaLibActionPerformed(evt);
     }//GEN-LAST:event_BTNOKAddMetaLibActionPerformed
 
-    private void FieldAliasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FieldAliasMouseClicked
-        impFieldAliasMouseClicked(evt);
-//        this.FieldAlias.setForeground(new java.awt.Color(0, 0, 0));
-//        this.FieldAlias.selectAll();
-    }//GEN-LAST:event_FieldAliasMouseClicked
-
-    private void FieldDescriptionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FieldDescriptionMouseClicked
-        impFieldDescriptionMouseClicked(evt);
-//        this.FieldDescription.setForeground(new java.awt.Color(0, 0, 0));
-//        this.FieldDescription.selectAll
-    }//GEN-LAST:event_FieldDescriptionMouseClicked
-
     private void ComboBoxAvailablePluginsItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_ComboBoxAvailablePluginsItemStateChanged
         impComboBoxAvailablePluginsItemStateChanged(evt);
     }//GEN-LAST:event_ComboBoxAvailablePluginsItemStateChanged
@@ -229,12 +232,20 @@ public class impAddMetaLibWizard extends javax.swing.JDialog {
     private void ComboBoxAvailableIndicesItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_ComboBoxAvailableIndicesItemStateChanged
         impComboBoxAvailableIndicesItemStateChanged(evt);
     }//GEN-LAST:event_ComboBoxAvailableIndicesItemStateChanged
+
+    private void FieldAliasFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_FieldAliasFocusGained
+        impFieldAliasFocusGained(evt);
+    }//GEN-LAST:event_FieldAliasFocusGained
+
+    private void FieldDescriptionFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_FieldDescriptionFocusGained
+        impFieldDescriptionFocusGained(evt);
+    }//GEN-LAST:event_FieldDescriptionFocusGained
     //</Auto-Generate>
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String args[]) {
         FlatSolarizedLightIJTheme.install();
 
         /* Create and display the dialog */
@@ -284,10 +295,10 @@ public class impAddMetaLibWizard extends javax.swing.JDialog {
     //<Auto-Generate-Result>
     protected void impBTNCancelAddMetaLibActionPerformed(java.awt.event.ActionEvent evt){}
     protected void impBTNOKAddMetaLibActionPerformed(java.awt.event.ActionEvent evt){}
-    protected void impFieldAliasMouseClicked(java.awt.event.MouseEvent evt){}
-    protected void impFieldDescriptionMouseClicked(java.awt.event.MouseEvent evt){}
     protected void impComboBoxAvailablePluginsItemStateChanged(java.awt.event.ItemEvent evt){}
     protected void impComboBoxAvailableDBsItemStateChanged(java.awt.event.ItemEvent evt){}
     protected void impComboBoxAvailableIndicesItemStateChanged(java.awt.event.ItemEvent evt){}
+    protected void impFieldAliasFocusGained(java.awt.event.FocusEvent evt){}
+    protected void impFieldDescriptionFocusGained(java.awt.event.FocusEvent evt){}
     //</Auto-Generate-Result>
 }

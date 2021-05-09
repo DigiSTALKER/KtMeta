@@ -1198,7 +1198,7 @@ public class KtmetaMainFrame extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String args[]) {
         /* Install theme */
         //FlatArcDarkIJTheme.install();
         //FlatCobalt2IJTheme.install();

@@ -175,7 +175,7 @@ public class impTextPreviewDialog extends javax.swing.JDialog {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String args[]) {
         FlatSolarizedLightIJTheme.install();
 
         /* Create and display the dialog */
