@@ -12,8 +12,8 @@
  */
 package io.github.hochikong.ktmeta.swingui.essentials;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 
 /**
  *

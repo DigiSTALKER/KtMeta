@@ -13,9 +13,9 @@
 package io.github.hochikong.ktmeta.swingui.dialogs.codegen;
 
 import com.formdev.flatlaf.intellijthemes.FlatSolarizedLightIJTheme;
-
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Image;
+import java.util.List;
+import javax.swing.JRootPane;
 
 /**
  *
@@ -31,6 +31,13 @@ public class impImportMetaData extends javax.swing.JDialog {
         initComponents();
         HideHead();
         this.setLocationRelativeTo(null);
+    }
+    
+    public impImportMetaData(java.awt.Frame parent, boolean modal, String[] metalibs){
+        super(parent, modal);
+        this.metaLibs = metalibs;
+        initComponents();
+        HideHead();
     }
     
     public impImportMetaData(java.awt.Frame parent, boolean modal, Image icon){
@@ -64,7 +71,7 @@ public class impImportMetaData extends javax.swing.JDialog {
         java.util.ResourceBundle bundle1 = java.util.ResourceBundle.getBundle("i18n/Frames/MetaAdvanceSearch_trans"); // NOI18N
         LabelTarget.setText(bundle1.getString("TARGET METADATA LIBRARY : ")); // NOI18N
 
-        TabbedPaneTools.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Import Metadata Wizard", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Microsoft YaHei UI", 0, 14), new java.awt.Color(74, 136, 199))); // NOI18N
+        TabbedPaneTools.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Import Metadata Wizard", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Microsoft YaHei UI", 0, 12), new java.awt.Color(74, 136, 199))); // NOI18N
 
         BTNImportFromDisk.setText(bundle.getString("IMPORT FROM LOCAL DISK")); // NOI18N
         BTNImportFromDisk.setFocusable(false);
@@ -112,12 +119,12 @@ public class impImportMetaData extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(33, 33, 33)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(TabbedPaneTools, javax.swing.GroupLayout.PREFERRED_SIZE, 644, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(LabelTarget)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(ComboBoxTargetMetaLib, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(ComboBoxTargetMetaLib, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(33, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(

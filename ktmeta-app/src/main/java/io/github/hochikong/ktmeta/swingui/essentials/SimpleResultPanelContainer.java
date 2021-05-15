@@ -12,9 +12,9 @@
  */
 package io.github.hochikong.ktmeta.swingui.essentials;
 
-import javax.swing.table.TableModel;
 import java.nio.charset.Charset;
 import java.util.Random;
+import javax.swing.table.TableModel;
 
 /**
  *

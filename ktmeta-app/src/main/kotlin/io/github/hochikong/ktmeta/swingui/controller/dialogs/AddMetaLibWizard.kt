@@ -93,5 +93,6 @@ class AddMetaLibWizard(
 //    val dialog =
 //        AddMetaLibWizard(JFrame(), arrayOf("p1", "p2", "p3"), arrayOf("d1", "d2", "d3"), arrayOf("i1", "i2", "i3"))
 //    dialog.initFocus()
+//    dialog.setLocationRelativeTo(null)
 //    dialog.isVisible = true
 //}

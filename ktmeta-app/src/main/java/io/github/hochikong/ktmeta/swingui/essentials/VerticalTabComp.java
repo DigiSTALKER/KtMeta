@@ -1,9 +1,17 @@
 package io.github.hochikong.ktmeta.swingui.essentials;
 
-import javax.swing.*;
-import javax.swing.plaf.basic.BasicLabelUI;
-import java.awt.*;
+import java.awt.Dimension;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Insets;
+import java.awt.Rectangle;
 import java.awt.geom.AffineTransform;
+
+import javax.swing.Icon;
+import javax.swing.JComponent;
+import javax.swing.JLabel;
+import javax.swing.plaf.basic.BasicLabelUI;
 
 
 public class VerticalTabComp extends BasicLabelUI {

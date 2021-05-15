@@ -13,9 +13,8 @@
 package io.github.hochikong.ktmeta.swingui.dialogs;
 
 import com.formdev.flatlaf.intellijthemes.FlatSolarizedLightIJTheme;
-
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Image;
+import javax.swing.JRootPane;
 
 /**
  *
@@ -30,7 +29,6 @@ public class AddIndexWizard extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         HideHead();
-        this.setLocationRelativeTo(null);
     }
     
     public AddIndexWizard(java.awt.Frame parent, boolean modal, Image icon){
@@ -209,6 +207,8 @@ public class AddIndexWizard extends javax.swing.JDialog {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 AddIndexWizard dialog = new AddIndexWizard(new javax.swing.JFrame(), true);
+                dialog.setLocationRelativeTo(null);
+                
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

@@ -14,12 +14,14 @@ package io.github.hochikong.ktmeta.swingui.codegen;
 
 import com.formdev.flatlaf.intellijthemes.FlatSolarizedLightIJTheme;
 import io.github.hochikong.ktmeta.swingui.essentials.AggregateSearchTableModel;
-
-import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.InputEvent;
+import java.awt.Image;
 import java.awt.event.KeyEvent;
+import javax.swing.KeyStroke;
+import java.awt.event.InputEvent;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
+import javax.swing.JRootPane;
 
 /**
  *

@@ -6,9 +6,8 @@
 package io.github.hochikong.ktmeta.swingui.dialogs.codegen;
 
 import com.formdev.flatlaf.intellijthemes.FlatSolarizedLightIJTheme;
-
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Image;
+import javax.swing.JRootPane;
 
 /**
  *
@@ -23,7 +22,6 @@ public class impSetESMapping extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         HideHead();
-        this.setLocationRelativeTo(null);
     }
     
     public impSetESMapping(java.awt.Frame parent, boolean modal, Image icon) {
@@ -63,9 +61,9 @@ public class impSetESMapping extends javax.swing.JDialog {
 
         TextFieldESHost.setForeground(new java.awt.Color(204, 204, 204));
         TextFieldESHost.setText("localhost");
-        TextFieldESHost.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                TextFieldESHostMouseClicked(evt);
+        TextFieldESHost.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                TextFieldESHostFocusGained(evt);
             }
         });
 
@@ -75,15 +73,15 @@ public class impSetESMapping extends javax.swing.JDialog {
 
         TextFieldESIndex.setForeground(new java.awt.Color(204, 204, 204));
         TextFieldESIndex.setText("TargetIndex");
-        TextFieldESIndex.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                TextFieldESIndexMouseClicked(evt);
+        TextFieldESIndex.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                TextFieldESIndexFocusGained(evt);
             }
         });
 
         TextAreaJSONSample.setColumns(20);
         TextAreaJSONSample.setRows(5);
-        TextAreaJSONSample.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Paste your sample document here", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Microsoft YaHei UI", 0, 14), new java.awt.Color(74, 136, 199))); // NOI18N
+        TextAreaJSONSample.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Paste your sample document here", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Microsoft YaHei UI", 0, 12), new java.awt.Color(74, 136, 199))); // NOI18N
         jScrollPane1.setViewportView(TextAreaJSONSample);
 
         BTNCreateMapping.setText(bundle.getString("CREATE MAPPING BY SAMPLE")); // NOI18N
@@ -165,15 +163,6 @@ public class impSetESMapping extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    //<Auto-Generate>
-    private void TextFieldESHostMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TextFieldESHostMouseClicked
-        impTextFieldESHostMouseClicked(evt);
-    }//GEN-LAST:event_TextFieldESHostMouseClicked
-
-    private void TextFieldESIndexMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TextFieldESIndexMouseClicked
-        impTextFieldESIndexMouseClicked(evt);
-    }//GEN-LAST:event_TextFieldESIndexMouseClicked
-
     private void BTNCreateMappingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNCreateMappingActionPerformed
         impBTNCreateMappingActionPerformed(evt);
     }//GEN-LAST:event_BTNCreateMappingActionPerformed
@@ -185,6 +174,14 @@ public class impSetESMapping extends javax.swing.JDialog {
     private void BTNClearTextAreaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNClearTextAreaActionPerformed
         impBTNClearTextAreaActionPerformed(evt);
     }//GEN-LAST:event_BTNClearTextAreaActionPerformed
+
+    private void TextFieldESHostFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TextFieldESHostFocusGained
+        impTextFieldESHostFocusGained(evt);
+    }//GEN-LAST:event_TextFieldESHostFocusGained
+
+    private void TextFieldESIndexFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TextFieldESIndexFocusGained
+        impTextFieldESIndexFocusGained(evt);
+    }//GEN-LAST:event_TextFieldESIndexFocusGained
     //</Auto-Generate>
     
     /**
@@ -197,6 +194,8 @@ public class impSetESMapping extends javax.swing.JDialog {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 impSetESMapping dialog = new impSetESMapping(new javax.swing.JFrame(), true);
+                dialog.setLocationRelativeTo(null);
+                
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -231,10 +230,10 @@ public class impSetESMapping extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     //<Auto-Generate-Result>
-    protected void impTextFieldESHostMouseClicked(java.awt.event.MouseEvent evt){}
-    protected void impTextFieldESIndexMouseClicked(java.awt.event.MouseEvent evt){}
     protected void impBTNCreateMappingActionPerformed(java.awt.event.ActionEvent evt){}
     protected void impBTNResetMappingActionPerformed(java.awt.event.ActionEvent evt){}
     protected void impBTNClearTextAreaActionPerformed(java.awt.event.ActionEvent evt){}
+    protected void impTextFieldESHostFocusGained(java.awt.event.FocusEvent evt){}
+    protected void impTextFieldESIndexFocusGained(java.awt.event.FocusEvent evt){}
     //</Auto-Generate-Result>
 }

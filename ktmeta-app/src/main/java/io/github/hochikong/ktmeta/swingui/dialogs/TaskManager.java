@@ -18,9 +18,8 @@ package io.github.hochikong.ktmeta.swingui.dialogs;
 
 import com.formdev.flatlaf.intellijthemes.FlatSolarizedLightIJTheme;
 import io.github.hochikong.ktmeta.swingui.essentials.TasksTableModel;
-
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JRootPane;
+import java.awt.Image;
 
 /**
  *

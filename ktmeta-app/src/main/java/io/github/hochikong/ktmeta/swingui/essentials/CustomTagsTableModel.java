@@ -12,11 +12,11 @@
  */
 package io.github.hochikong.ktmeta.swingui.essentials;
 
-import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import javax.swing.table.AbstractTableModel;
 
 /**
  *

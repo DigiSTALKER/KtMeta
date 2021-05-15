@@ -13,9 +13,8 @@
 package io.github.hochikong.ktmeta.swingui.dialogs;
 
 import com.formdev.flatlaf.intellijthemes.FlatSolarizedLightIJTheme;
-
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Image;
+import javax.swing.JRootPane;
 
 /**
  *
@@ -30,7 +29,6 @@ public class AddMetaLibWizard extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         HideHead();
-        this.setLocationRelativeTo(null);
     }
     
     public AddMetaLibWizard(java.awt.Frame parent, boolean modal,
@@ -44,7 +42,6 @@ public class AddMetaLibWizard extends javax.swing.JDialog {
         this.availableIndices = AvailableIndicesList;
         initComponents();
         HideHead();
-        this.setLocationRelativeTo(null);
     }
 
     public AddMetaLibWizard(java.awt.Frame parent, boolean modal,
@@ -60,7 +57,6 @@ public class AddMetaLibWizard extends javax.swing.JDialog {
         initComponents();
         HideHead();
         this.setIconImage(icon);
-        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -252,6 +248,8 @@ public class AddMetaLibWizard extends javax.swing.JDialog {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 AddMetaLibWizard dialog = new AddMetaLibWizard(new javax.swing.JFrame(), true);
+                dialog.setLocationRelativeTo(null);
+                
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

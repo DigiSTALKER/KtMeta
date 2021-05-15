@@ -13,9 +13,8 @@
 package io.github.hochikong.ktmeta.swingui.dialogs.codegen;
 
 import com.formdev.flatlaf.intellijthemes.FlatSolarizedLightIJTheme;
-
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Image;
+import javax.swing.JRootPane;
 
 /**
  *
@@ -31,8 +30,6 @@ public class impAddDatabaseWizard extends javax.swing.JDialog {
         this.supportedDatabaseList = new String[]{"SQLite", "PostgreSQL"};
         initComponents();
         HideHead();
-        // centre
-        this.setLocationRelativeTo(null);
     }
 
     public impAddDatabaseWizard(java.awt.Frame parent, boolean modal, String[] SupportedDBList) {
@@ -40,8 +37,6 @@ public class impAddDatabaseWizard extends javax.swing.JDialog {
         this.supportedDatabaseList = SupportedDBList;
         initComponents();
         HideHead();
-        // centre
-        this.setLocationRelativeTo(null);
     }
 
     public impAddDatabaseWizard(java.awt.Frame parent, boolean modal, String[] SupportedDBList, Image icon) {
@@ -50,7 +45,6 @@ public class impAddDatabaseWizard extends javax.swing.JDialog {
         initComponents();
         HideHead();
         this.setIconImage(icon);
-        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -294,6 +288,8 @@ public class impAddDatabaseWizard extends javax.swing.JDialog {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 impAddDatabaseWizard dialog = new impAddDatabaseWizard(new javax.swing.JFrame(), true);
+                dialog.setLocationRelativeTo(null);
+                
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

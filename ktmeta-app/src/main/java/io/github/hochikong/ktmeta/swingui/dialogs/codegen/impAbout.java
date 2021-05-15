@@ -12,12 +12,11 @@
  */
 package io.github.hochikong.ktmeta.swingui.dialogs.codegen;
 
-import com.formdev.flatlaf.intellijthemes.FlatSolarizedLightIJTheme;
-
-import java.awt.*;
 import java.lang.management.ManagementFactory;
 import java.lang.management.OperatingSystemMXBean;
 import java.lang.management.RuntimeMXBean;
+import com.formdev.flatlaf.intellijthemes.FlatSolarizedLightIJTheme;
+import java.awt.Image;
 
 /**
  *
@@ -31,8 +30,6 @@ public class impAbout extends javax.swing.JDialog {
     public impAbout(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        // display About at the centre of screen
-        this.setLocationRelativeTo(null);
     }
     
     public impAbout(java.awt.Frame parent, boolean modal, Image icon) {
@@ -130,6 +127,9 @@ public class impAbout extends javax.swing.JDialog {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 impAbout dialog = new impAbout(new javax.swing.JFrame(), true);
+                // display About at the centre of screen
+                dialog.setLocationRelativeTo(null);
+                
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

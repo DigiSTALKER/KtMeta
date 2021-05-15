@@ -29,12 +29,12 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="TabbedPaneTools" alignment="0" min="-2" pref="644" max="-2" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="LabelTarget" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="ComboBoxTargetMetaLib" min="-2" max="-2" attributes="0"/>
+                      <Component id="ComboBoxTargetMetaLib" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace pref="33" max="32767" attributes="0"/>

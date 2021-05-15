@@ -14,14 +14,17 @@ package io.github.hochikong.ktmeta.swingui.dialogs;
 
 import com.formdev.flatlaf.intellijthemes.FlatSolarizedLightIJTheme;
 import io.github.hochikong.ktmeta.swingui.essentials.PluginsTableModel;
-
-import javax.swing.*;
+import java.awt.GraphicsEnvironment;
+import javax.swing.SpinnerNumberModel;
+import java.awt.Font;
+import java.awt.Image;
+import javax.swing.JRootPane;
+import javax.swing.RowFilter;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.TableRowSorter;
-import java.awt.*;
 
 /**
  *

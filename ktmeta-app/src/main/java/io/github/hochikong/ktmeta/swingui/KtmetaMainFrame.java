@@ -11,13 +11,19 @@
  * limitations under the License.
  */
 package io.github.hochikong.ktmeta.swingui;
-
-import com.formdev.flatlaf.intellijthemes.FlatSolarizedLightIJTheme;
-import io.github.hochikong.ktmeta.swingui.essentials.VerticalTabComp;
-
-import javax.swing.*;
-import java.awt.*;
+ 
+import javax.swing.ImageIcon;
 import java.awt.image.BufferedImage;
+import com.formdev.flatlaf.intellijthemes.*;
+import io.github.hochikong.ktmeta.swingui.essentials.VerticalTabComp;
+import java.awt.CardLayout;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Image;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
+import javax.swing.JRootPane;
+import javax.swing.UIManager;
 
 /**
  *

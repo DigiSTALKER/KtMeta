@@ -12,8 +12,8 @@
  */
 package io.github.hochikong.ktmeta.swingui.essentials;
 
-import javax.swing.filechooser.FileFilter;
 import java.io.File;
+import javax.swing.filechooser.FileFilter;
 
 /**
  *

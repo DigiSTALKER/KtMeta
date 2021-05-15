@@ -14,10 +14,9 @@ package io.github.hochikong.ktmeta.swingui.dialogs.codegen;
 
 import com.formdev.flatlaf.intellijthemes.FlatSolarizedLightIJTheme;
 import io.github.hochikong.ktmeta.swingui.essentials.CustomTagsTableModel;
-
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Image;
 import java.util.List;
+import javax.swing.JRootPane;
 
 /**
  *
@@ -32,7 +31,6 @@ public class impAddCustomTags extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         HideHead();
-        this.setLocationRelativeTo(null);
     }
 
     public impAddCustomTags(java.awt.Frame parent, boolean modal, List<String> TagsData) {
@@ -40,7 +38,6 @@ public class impAddCustomTags extends javax.swing.JDialog {
         this.tagsData = TagsData;
         initComponents();
         HideHead();
-        this.setLocationRelativeTo(null);
     }
 
     public impAddCustomTags(java.awt.Frame parent, boolean modal, List<String> TagsData, Image icon) {
@@ -194,10 +191,11 @@ public class impAddCustomTags extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(LabelAddTag)
-                    .addComponent(BTNAddTag)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(LabelAddTag)
+                        .addComponent(BTNAddTag)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BTNOKAddTags)
@@ -249,6 +247,8 @@ public class impAddCustomTags extends javax.swing.JDialog {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 impAddCustomTags dialog = new impAddCustomTags(new javax.swing.JFrame(), true);
+                dialog.setLocationRelativeTo(null);
+                
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -263,7 +263,8 @@ public class impAddCustomTags extends javax.swing.JDialog {
     //<My-Custom>
     protected List<String> tagsData;
     protected CustomTagsTableModel myModel = new CustomTagsTableModel();
-
+    
+    // set dialog undecorated first
     protected void HideHead() {
         // Like IDEA style
         this.getRootPane().setWindowDecorationStyle(JRootPane.FRAME);

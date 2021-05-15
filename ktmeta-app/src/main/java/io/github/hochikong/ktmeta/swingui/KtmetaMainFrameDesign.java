@@ -12,16 +12,19 @@
  */
 package io.github.hochikong.ktmeta.swingui;
 
-import com.formdev.flatlaf.intellijthemes.FlatSolarizedLightIJTheme;
+import javax.swing.ImageIcon;
+import java.awt.image.BufferedImage;
+import com.formdev.flatlaf.intellijthemes.*;
 import io.github.hochikong.ktmeta.swingui.essentials.SimpleResultPanelContainer;
 import io.github.hochikong.ktmeta.swingui.essentials.VerticalTabComp;
-
-import javax.swing.*;
-import javax.swing.table.TableModel;
-import javax.swing.tree.DefaultMutableTreeNode;
-import java.awt.*;
-import java.awt.image.BufferedImage;
+import java.awt.Dimension;
+import java.awt.Image;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 import java.util.HashMap;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.JTree;
+import javax.swing.table.TableModel;
 
 /**
  *

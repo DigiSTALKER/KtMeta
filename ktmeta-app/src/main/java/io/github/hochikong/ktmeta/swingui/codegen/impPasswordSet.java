@@ -13,9 +13,8 @@
 package io.github.hochikong.ktmeta.swingui.codegen;
 
 import com.formdev.flatlaf.intellijthemes.FlatSolarizedLightIJTheme;
-
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Image;
+import javax.swing.JRootPane;
 
 /**
  *
