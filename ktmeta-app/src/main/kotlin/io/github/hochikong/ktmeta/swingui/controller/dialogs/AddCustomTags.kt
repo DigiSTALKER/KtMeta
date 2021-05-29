@@ -19,6 +19,7 @@ import java.awt.Frame
 import java.awt.event.ActionEvent
 import java.awt.event.MouseEvent
 import javax.swing.JOptionPane
+//import javax.swing.JFrame
 //import com.formdev.flatlaf.FlatIntelliJLaf
 
 class AddCustomTags(parent: Frame, tags: List<String>) : impAddCustomTags(parent, true, tags) {
@@ -105,6 +106,6 @@ class AddCustomTags(parent: Frame, tags: List<String>) : impAddCustomTags(parent
 
 //fun main() {
 //    FlatIntelliJLaf.install()
-//    val dialog = AddCustomTags(Frame(), mutableListOf("1", "2"))
+//    val dialog = AddCustomTags(JFrame(), mutableListOf("1", "2"))
 //    dialog.isVisible = true
 //}

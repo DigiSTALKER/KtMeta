@@ -46,6 +46,21 @@ public class impSettings extends javax.swing.JDialog {
             String[] Languages,
             String[] Themes,
             Object[][] PluginsData,
+            String[] PluginsDesc
+    ) {
+        super(parent, modal);
+        this.supportedLanguages = Languages;
+        this.supportedThemes = Themes;
+        this.pluginsData = PluginsData;
+        this.pluginsDescs = PluginsDesc;
+        initComponents();
+        HideHead();
+    }
+
+    public impSettings(java.awt.Frame parent, boolean modal,
+            String[] Languages,
+            String[] Themes,
+            Object[][] PluginsData,
             String[] PluginsDesc,
             Image icon
     ) {
@@ -510,8 +525,8 @@ public class impSettings extends javax.swing.JDialog {
     private boolean CustomFontEnable() {
         return this.ComboBoxFontSelector.isEnabled();
     }
-    
-    protected void HideHead(){
+
+    protected void HideHead() {
         // Like IDEA style
         this.getRootPane().setWindowDecorationStyle(JRootPane.FRAME);
     }
@@ -528,7 +543,7 @@ public class impSettings extends javax.swing.JDialog {
         "FlatHiberbeeDarkIJTheme"
     };
 
-    // RGB color, for example "43,43,43"
+// RGB color, for example "43,43,43"
 //    private String[] SupportedThemeBackgroundColors = new String[]{
 //        "238,232,213",
 //        "238,238,238",
@@ -544,7 +559,7 @@ public class impSettings extends javax.swing.JDialog {
         {"Plugin 1", new Boolean(true)},
         {"1 Plugin 2", new Boolean(false)}
     };
-    
+
     protected String[] pluginsDescs = {
         "<html>First line<br>Second line</html>",
         "<html>SECOND line<br>Third line</html>"
@@ -573,7 +588,7 @@ public class impSettings extends javax.swing.JDialog {
             default:
                 realStyle = Font.PLAIN;
         }
-        int realFontSize = Integer.parseInt(this.SpinnerFontSize.getModel().getValue().toString());
+        int realFontSize = (int) this.SpinnerFontSize.getValue();
         this.LabelPreviewCustomFont.setFont(new Font(fontChoice, realStyle, realFontSize));
     }
 
@@ -596,7 +611,11 @@ public class impSettings extends javax.swing.JDialog {
     protected ListSelectionListener buildRowSelectionEventHandler() {
         ListSelectionListener handler = (ListSelectionEvent e) -> {
             int index = TablePlugins.getSelectedRow();
-            LabelPluginDescription.setText(pluginsDescs[index]);
+            if (index != -1) {
+                LabelPluginDescription.setText(pluginsDescs[index]);
+            }else{
+                LabelPluginDescription.setText("......");
+            }
         };
         return handler;
     }

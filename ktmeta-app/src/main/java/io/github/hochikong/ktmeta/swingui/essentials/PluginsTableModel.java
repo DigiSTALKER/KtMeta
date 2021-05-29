@@ -25,8 +25,8 @@ public class PluginsTableModel extends AbstractTableModel {
     };
     
     private Object[][] data = {
-            {"Fisrt test plugin", new Boolean(true)},
-            {"Second test plugin", new Boolean (false)},
+            {"Fisrt test plugin", new Boolean(true), "pluginid:xxxx1"},
+            {"Second test plugin", new Boolean (false), "pluginid:xxxx2"},
     };
     
     public PluginsTableModel(Object[][] customData){
