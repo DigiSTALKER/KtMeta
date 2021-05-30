@@ -37,6 +37,13 @@ public class TaskManager extends javax.swing.JDialog {
         this.setLocationRelativeTo(null);
     }
     
+    public TaskManager(java.awt.Frame parent, boolean modal, Object[][] Tasks) {
+        super(parent, modal);
+        this.tasksModel = new TasksTableModel(Tasks);
+        initComponents();
+        HideHead();
+    }
+    
     public TaskManager(java.awt.Frame parent, boolean modal, Image icon, Object[][] Tasks) {
         super(parent, modal);
         this.tasksModel = new TasksTableModel(Tasks);
