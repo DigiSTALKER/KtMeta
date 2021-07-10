@@ -17,8 +17,8 @@ import io.github.hochikong.ktmeta.swingui.dialogs.codegen.impTaskManager
 import java.awt.Frame
 import java.awt.event.ActionEvent
 
-//import javax.swing.JFrame
-//import com.formdev.flatlaf.FlatIntelliJLaf
+import javax.swing.JFrame
+import com.formdev.flatlaf.FlatIntelliJLaf
 
 class TaskManager(parent: Frame, tasks: Array<Array<String>>) : impTaskManager(parent, true, tasks){
     init {
@@ -32,9 +32,9 @@ class TaskManager(parent: Frame, tasks: Array<Array<String>>) : impTaskManager(p
     }
 }
 
-//fun main() {
-//    FlatIntelliJLaf.install()
-//    val dialog = TaskManager(JFrame(), arrayOf(arrayOf("task 1", "running", "id1"), arrayOf("task 2", "pending", "id2")))
-//    dialog.setLocationRelativeTo(null)
-//    dialog.isVisible = true
-//}
+fun main() {
+    FlatIntelliJLaf.install()
+    val dialog = TaskManager(JFrame(), arrayOf(arrayOf("task 1", "running", "id1"), arrayOf("task 2", "pending", "id2")))
+    dialog.setLocationRelativeTo(null)
+    dialog.isVisible = true
+}

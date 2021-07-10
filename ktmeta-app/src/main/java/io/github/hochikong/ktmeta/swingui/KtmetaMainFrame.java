@@ -38,7 +38,6 @@ public class KtmetaMainFrame extends javax.swing.JFrame {
         // UIManager.getLookAndFeelDefaults().put("defaultFont", new Font("GenYoMin TW B", Font.PLAIN, 14));
         initComponents();
         HideHead();
-        this.setLocationRelativeTo(null);
     }
 
     public KtmetaMainFrame(Image icon, Font uiFont) {

@@ -38,7 +38,6 @@ public class impKtmetaMainFrame extends javax.swing.JFrame {
         // UIManager.getLookAndFeelDefaults().put("defaultFont", new Font("GenYoMin TW B", Font.PLAIN, 14));
         initComponents();
         HideHead();
-        this.setLocationRelativeTo(null);
     }
 
     public impKtmetaMainFrame(Image icon, Font uiFont) {
