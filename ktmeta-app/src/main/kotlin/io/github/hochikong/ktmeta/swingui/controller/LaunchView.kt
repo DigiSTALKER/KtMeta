@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Hochikong
+ * Copyright 2021 Hochikong
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -11,5 +11,15 @@
  * limitations under the License.
  */
 
-package io.github.hochikong.ktmeta.verticles
+package io.github.hochikong.ktmeta.swingui.controller
 
+import javax.swing.SwingUtilities
+import io.github.hochikong.ktmeta.swingui.LaunchView
+
+class LaunchViewC : LaunchView() {
+    fun updateLoadingTest(text: String) {
+        SwingUtilities.invokeLater {
+            this.LabelLaunchingStatus.text = text
+        }
+    }
+}

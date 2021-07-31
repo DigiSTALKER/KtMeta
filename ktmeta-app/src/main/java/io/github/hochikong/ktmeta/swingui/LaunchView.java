@@ -28,7 +28,6 @@ public class LaunchView extends javax.swing.JFrame {
      */
     public LaunchView() {
         initComponents();
-        setLocationRelativeTo(null);
     }
     
     public LaunchView(Image icon) {

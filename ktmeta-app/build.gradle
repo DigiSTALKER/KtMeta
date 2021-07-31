@@ -52,25 +52,25 @@ dependencies {
     implementation 'com.formdev:flatlaf-intellij-themes:0.41'
 
     // Vertx
-    implementation 'io.vertx:vertx-core:4.0.0'
-    implementation 'io.vertx:vertx-service-factory:4.0.0'
-    implementation 'io.vertx:vertx-hazelcast:4.0.0'
-    implementation 'io.vertx:vertx-lang-kotlin:4.0.0'
+//    implementation 'io.vertx:vertx-core:4.0.0'
+//    implementation 'io.vertx:vertx-service-factory:4.0.0'
+//    implementation 'io.vertx:vertx-hazelcast:4.0.0'
+//    implementation 'io.vertx:vertx-lang-kotlin:4.0.0'
 
     // Encryption
     implementation 'org.jasypt:jasypt:1.9.3'
 
     // Enhance
     implementation 'commons-io:commons-io:2.8.0'
-    implementation 'com.google.inject:guice:4.2.3'
-    implementation 'com.google.guava:guava:29.0-jre'
-    implementation 'cglib:cglib:3.3.0'
+//    implementation 'com.google.inject:guice:4.2.3'
+//    implementation 'com.google.guava:guava:29.0-jre'
+//    implementation 'cglib:cglib:3.3.0'
 
     // Web HTTP
     implementation 'com.squareup.okhttp3:okhttp:4.9.0'
-    implementation 'io.ktor:ktor-server-netty:1.4.0'
-    implementation 'io.ktor:ktor-jackson:1.4.0'
-    implementation 'io.ktor:ktor-client-apache:1.4.0'
+//    implementation 'io.ktor:ktor-server-netty:1.4.0'
+//    implementation 'io.ktor:ktor-jackson:1.4.0'
+//    implementation 'io.ktor:ktor-client-apache:1.4.0'
     implementation 'org.elasticsearch.client:elasticsearch-rest-high-level-client:7.9.3'
 
     // Coroutine
