@@ -2,21 +2,15 @@ package io.github.hochikong.ktmeta.dao.impl
 
 import com.zaxxer.hikari.HikariDataSource
 import io.github.hochikong.ktmeta.dao.*
+import io.github.hochikong.ktmeta.dao.impl_dao.MPDao
 import org.jdbi.v3.core.Jdbi
 import org.jdbi.v3.core.extension.ExtensionCallback
 import org.jdbi.v3.core.extension.ExtensionConsumer
 import org.jdbi.v3.core.statement.UnableToCreateStatementException
-import org.jdbi.v3.sqlobject.config.RegisterBeanMapper
-import org.jdbi.v3.sqlobject.customizer.Bind
-import org.jdbi.v3.sqlobject.customizer.BindBean
-import org.jdbi.v3.sqlobject.statement.GetGeneratedKeys
-import org.jdbi.v3.sqlobject.statement.SqlQuery
-import org.jdbi.v3.sqlobject.statement.SqlScript
-import org.jdbi.v3.sqlobject.statement.SqlUpdate
-import org.jdbi.v3.sqlobject.transaction.Transaction
+
 import org.slf4j.LoggerFactory
 
-object MPResourceRegister : ResourcesRegisterAPI {
+object MPResourcePool : ResourcesRegisterAPI {
     private val tableName = DAOTableNames.MPResource.tName
     private val dataSource = HikariDataSource(DAOConfigFactory.buildSqliteCPConfig(this.tableName))
     private val logger = LoggerFactory.getLogger(DAOConfigFactory.logKey[tableName])
@@ -24,75 +18,6 @@ object MPResourceRegister : ResourcesRegisterAPI {
         installPlugins()
     }
 
-    interface MPDao {
-        @SqlUpdate(
-            """
-            INSERT INTO metaplugins_registration (plugin_name, plugin_version, plugin_class_name, plugin_desc, plugin_helper)
-            VALUES (:plugin_name, :plugin_version, :plugin_class_name, :plugin_desc, :plugin_helper);
-        """
-        )
-        @GetGeneratedKeys("id")
-        @Transaction
-        fun insert(@BindBean res: MPResourceRecord): Long
-
-
-        @SqlUpdate(
-            """
-            UPDATE metaplugins_registration
-            SET plugin_name       = :mp.plugin_name,
-            plugin_version    = :mp.plugin_version,
-            plugin_class_name = :mp.plugin_class_name,
-            plugin_desc       = :mp.plugin_desc,
-            plugin_helper     = :mp.plugin_helper
-            WHERE id = :id;
-        """
-        )
-        @GetGeneratedKeys("id")
-        @Transaction
-        fun update(@Bind("id") id: Long, @BindBean("mp") res: MPResourceRecord): Long
-
-
-        @SqlQuery(
-            """
-            SELECT id, plugin_name, plugin_version, plugin_class_name, plugin_desc, plugin_helper
-            FROM metaplugins_registration;
-        """
-        )
-        @RegisterBeanMapper(MPResourceRecord::class)
-        fun query(): List<MPResourceRecord>
-
-
-        @SqlUpdate("DELETE FROM metaplugins_registration WHERE id = :id;")
-        @GetGeneratedKeys("id")
-        @Transaction
-        fun delete(@Bind("id") id: Long): Long
-
-
-        @SqlUpdate(
-            """
-            CREATE TABLE IF NOT EXISTS metaplugins_registration
-            (
-            id                INTEGER PRIMARY KEY AUTOINCREMENT,
-            plugin_name       TEXT NOT NULL UNIQUE,
-            plugin_version    TEXT NOT NULL UNIQUE,
-            plugin_class_name TEXT NOT NULL, -- plugin class name, use reflection to load plugins
-            plugin_desc       TEXT NOT NULL,
-            plugin_helper     TEXT NOT NULL  -- plugin help message
-            );
-        """
-        )
-        @Transaction
-        fun createTable()
-
-
-        @SqlQuery("SELECT DISTINCT 1 FROM metaplugins_registration;")
-        fun check(): Int?
-
-
-        @SqlScript("DROP TABLE metaplugins_registration;")
-        @Transaction
-        fun drop()
-    }
 
     override fun insertRecord(record: ResourcesRecord): Boolean {
         if (record is MPResourceRecord) {

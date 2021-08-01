@@ -2,21 +2,14 @@ package io.github.hochikong.ktmeta.dao.impl
 
 import com.zaxxer.hikari.HikariDataSource
 import io.github.hochikong.ktmeta.dao.*
+import io.github.hochikong.ktmeta.dao.impl_dao.ESDao
 import org.jdbi.v3.core.Jdbi
 import org.jdbi.v3.core.extension.ExtensionCallback
 import org.jdbi.v3.core.extension.ExtensionConsumer
 import org.jdbi.v3.core.statement.UnableToCreateStatementException
-import org.jdbi.v3.sqlobject.config.RegisterBeanMapper
-import org.jdbi.v3.sqlobject.customizer.Bind
-import org.jdbi.v3.sqlobject.customizer.BindBean
-import org.jdbi.v3.sqlobject.statement.GetGeneratedKeys
-import org.jdbi.v3.sqlobject.statement.SqlQuery
-import org.jdbi.v3.sqlobject.statement.SqlScript
-import org.jdbi.v3.sqlobject.statement.SqlUpdate
-import org.jdbi.v3.sqlobject.transaction.Transaction
 import org.slf4j.LoggerFactory
 
-object ESResourceRegister : ResourcesRegisterAPI {
+object ESResourcePool : ResourcesRegisterAPI {
     private val tableName = DAOTableNames.ESResource.tName
     private val dataSource = HikariDataSource(DAOConfigFactory.buildSqliteCPConfig(this.tableName))
     private val logger = LoggerFactory.getLogger(DAOConfigFactory.logKey[tableName])
@@ -24,70 +17,6 @@ object ESResourceRegister : ResourcesRegisterAPI {
         installPlugins()
     }
 
-    interface ESDao {
-        @SqlUpdate(
-            """
-            INSERT INTO indices_registration(index_name, index_desc, index_url)
-            VALUES (:index_name, :index_desc, :index_url);
-        """
-        )
-        @GetGeneratedKeys("id")
-        @Transaction
-        fun insert(@BindBean res: ESResourceRecord): Long
-
-
-        @SqlUpdate(
-            """
-            UPDATE indices_registration
-            SET index_name = :es.index_name,
-            index_desc = :es.index_desc,
-            index_url = :es.index_url
-            WHERE id = :id;
-        """
-        )
-        @GetGeneratedKeys("id")
-        @Transaction
-        fun update(@Bind("id") id: Long, @BindBean("es") res: ESResourceRecord): Long
-
-
-        @SqlQuery(
-            """
-            SELECT id, index_name, index_desc, index_url FROM indices_registration;
-        """
-        )
-        @RegisterBeanMapper(ESResourceRecord::class)
-        fun query(): List<ESResourceRecord>
-
-
-        @SqlUpdate("DELETE FROM indices_registration WHERE id = :id;")
-        @GetGeneratedKeys("id")
-        @Transaction
-        fun delete(@Bind("id") id: Long): Long
-
-
-        @SqlUpdate(
-            """
-            CREATE TABLE IF NOT EXISTS indices_registration
-            (
-            id         INTEGER PRIMARY KEY AUTOINCREMENT,
-            index_name TEXT NOT NULL UNIQUE, -- elasticsearch index name
-            index_desc TEXT NOT NULL, -- elasticsearch index description
-            index_url  TEXT NOT NULL UNIQUE -- elasticsearch index url
-            );
-        """
-        )
-        @Transaction
-        fun createTable()
-
-
-        @SqlQuery("SELECT DISTINCT 1 FROM indices_registration;")
-        fun check(): Int?
-
-
-        @SqlScript("DROP TABLE indices_registration;")
-        @Transaction
-        fun drop()
-    }
 
     override fun insertRecord(record: ResourcesRecord): Boolean {
         if (record is ESResourceRecord) {

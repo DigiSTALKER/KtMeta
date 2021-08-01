@@ -1,25 +1,25 @@
 package service.db
 
-import io.github.hochikong.ktmeta.dao.impl.ESResourceRegister
+import io.github.hochikong.ktmeta.dao.impl.ESResourcePool
 import io.github.hochikong.ktmeta.dao.ESResourceRecord
 import org.junit.jupiter.api.*
 import org.junit.jupiter.api.Assertions.assertEquals
 
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation::class)
-class TestESResourceRegister {
+class TestESResourcePool {
     companion object {
 
         @JvmStatic
         @BeforeAll
         fun doBefore() {
-            ESResourceRegister.drop()
+            ESResourcePool.drop()
         }
 
         @JvmStatic
         @AfterAll
         fun doAfter() {
-            ESResourceRegister.drop()
+            ESResourcePool.drop()
         }
     }
 
@@ -39,32 +39,32 @@ class TestESResourceRegister {
     @Order(1)
     fun all() {
         // no table first
-        assertEquals(false, ESResourceRegister.hasTable())
+        assertEquals(false, ESResourcePool.hasTable())
 
         // create it
-        assertEquals(true, ESResourceRegister.resetTable())
+        assertEquals(true, ESResourcePool.resetTable())
 
         // has table now
-        assertEquals(true, ESResourceRegister.hasTable())
+        assertEquals(true, ESResourcePool.hasTable())
 
         // insert
-        assertEquals(true, ESResourceRegister.insertRecord(t1))
+        assertEquals(true, ESResourcePool.insertRecord(t1))
 
         // query
-        val rs = ESResourceRegister.getAllRecords()
+        val rs = ESResourcePool.getAllRecords()
         assertEquals(rs[0].index_name, t1.index_name)
         assertEquals(rs[0].index_url, t1.index_url)
         println("Query: ${rs[0]}")
 
         // update
-        ESResourceRegister.updateRecord(rs[0].id, t2)
-        val rs1 = ESResourceRegister.getAllRecords()
+        ESResourcePool.updateRecord(rs[0].id, t2)
+        val rs1 = ESResourcePool.getAllRecords()
         assertEquals(rs1[0].index_name, t2.index_name)
         println("Update ${rs1[0]}")
 
         // delete
-        assertEquals(true, ESResourceRegister.deleteRecord(rs1[0].id))
-        println("After deleted: ${ESResourceRegister.getAllRecords()}")
+        assertEquals(true, ESResourcePool.deleteRecord(rs1[0].id))
+        println("After deleted: ${ESResourcePool.getAllRecords()}")
 
     }
 }

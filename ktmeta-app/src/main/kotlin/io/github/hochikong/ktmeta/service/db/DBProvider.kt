@@ -17,7 +17,7 @@ import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
 import io.github.hochikong.ktmeta.common.DatabaseNotFoundException
 import io.github.hochikong.ktmeta.common.Encryption
-import io.github.hochikong.ktmeta.dao.impl.DBResourceRegister
+import io.github.hochikong.ktmeta.dao.impl.DBResourcePool
 import javax.sql.DataSource
 
 
@@ -31,7 +31,7 @@ import javax.sql.DataSource
  * */
 object DBProvider {
     fun getDataSource(dbName: String, user: String, password: String): DataSource {
-        val query = DBResourceRegister.getRecordByName(dbName)
+        val query = DBResourcePool.getRecordByName(dbName)
         if (query.id != -1L) {
             val config = HikariConfig()
             config.poolName = "ConnectionPoolOf${query.db_name}"

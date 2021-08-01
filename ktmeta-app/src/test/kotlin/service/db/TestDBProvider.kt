@@ -3,7 +3,7 @@ package service.db
 import io.github.hochikong.ktmeta.common.DatabaseNotFoundException
 import io.github.hochikong.ktmeta.common.Encryption
 import io.github.hochikong.ktmeta.dao.DBResourceRecord
-import io.github.hochikong.ktmeta.dao.impl.DBResourceRegister
+import io.github.hochikong.ktmeta.dao.impl.DBResourcePool
 import io.github.hochikong.ktmeta.service.db.DBProvider
 import org.junit.jupiter.api.*
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -16,13 +16,13 @@ class TestDBProvider {
         @JvmStatic
         @BeforeAll
         fun doBefore() {
-            DBResourceRegister.drop()
+            DBResourcePool.drop()
         }
 
         @JvmStatic
         @AfterAll
         fun doAfter() {
-            DBResourceRegister.drop()
+            DBResourcePool.drop()
         }
     }
 
@@ -31,9 +31,9 @@ class TestDBProvider {
     @Test
     @Order(1)
     fun prepare() {
-        DBResourceRegister.resetTable()
+        DBResourcePool.resetTable()
         assertEquals(
-            true, DBResourceRegister.insertRecord(
+            true, DBResourcePool.insertRecord(
                 DBResourceRecord(
                     db_type = "Postgresql",
                     db_name = "Debian Test",

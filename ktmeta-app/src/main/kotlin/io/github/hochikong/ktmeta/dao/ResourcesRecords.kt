@@ -13,8 +13,10 @@
 
 package io.github.hochikong.ktmeta.dao
 
+/**
+ * Data classes, use with xxxResourceRegister to insert a new record or as a query result
+ * */
 sealed class ResourcesRecord
-
 
 /**
  * Database resources.

@@ -1,23 +1,23 @@
 package service.db
 
 import io.github.hochikong.ktmeta.dao.MPResourceRecord
-import io.github.hochikong.ktmeta.dao.impl.MPResourceRegister
+import io.github.hochikong.ktmeta.dao.impl.MPResourcePool
 import org.junit.jupiter.api.*
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation::class)
-class TestMPResourceRegister {
+class TestMPResourcePool {
     companion object {
 
         @JvmStatic
         @BeforeAll
         fun doBefore() {
-            MPResourceRegister.drop()
+            MPResourcePool.drop()
         }
 
         @JvmStatic
         @AfterAll
         fun doAfter() {
-            MPResourceRegister.drop()
+            MPResourcePool.drop()
         }
     }
 
@@ -41,32 +41,32 @@ class TestMPResourceRegister {
     @Order(1)
     fun all() {
         // no table first
-        Assertions.assertEquals(false, MPResourceRegister.hasTable())
+        Assertions.assertEquals(false, MPResourcePool.hasTable())
 
         // create it
-        Assertions.assertEquals(true, MPResourceRegister.resetTable())
+        Assertions.assertEquals(true, MPResourcePool.resetTable())
 
         // has table now
-        Assertions.assertEquals(true, MPResourceRegister.hasTable())
+        Assertions.assertEquals(true, MPResourcePool.hasTable())
 
         // insert
-        Assertions.assertEquals(true, MPResourceRegister.insertRecord(t1))
+        Assertions.assertEquals(true, MPResourcePool.insertRecord(t1))
 
         // query
-        val rs = MPResourceRegister.getAllRecords()
+        val rs = MPResourcePool.getAllRecords()
         Assertions.assertEquals(rs[0].plugin_name, t1.plugin_name)
         Assertions.assertEquals(rs[0].plugin_class_name, t1.plugin_class_name)
         println("Query: ${rs[0]}")
 
         // update
-        MPResourceRegister.updateRecord(rs[0].id, t2)
-        val rs1 = MPResourceRegister.getAllRecords()
+        MPResourcePool.updateRecord(rs[0].id, t2)
+        val rs1 = MPResourcePool.getAllRecords()
         Assertions.assertEquals(rs1[0].plugin_name, t2.plugin_name)
         println("Update ${rs1[0]}")
 
         // delete
-        Assertions.assertEquals(true, MPResourceRegister.deleteRecord(rs1[0].id))
-        println("After deleted: ${MPResourceRegister.getAllRecords()}")
+        Assertions.assertEquals(true, MPResourcePool.deleteRecord(rs1[0].id))
+        println("After deleted: ${MPResourcePool.getAllRecords()}")
 
     }
 }

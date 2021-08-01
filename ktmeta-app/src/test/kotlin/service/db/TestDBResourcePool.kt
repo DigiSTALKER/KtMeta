@@ -1,25 +1,25 @@
 package service.db
 
 import io.github.hochikong.ktmeta.dao.DBResourceRecord
-import io.github.hochikong.ktmeta.dao.impl.DBResourceRegister
+import io.github.hochikong.ktmeta.dao.impl.DBResourcePool
 import org.junit.jupiter.api.*
 import org.junit.jupiter.api.Assertions.assertEquals
 
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation::class)
-class TestDBResourceRegister {
+class TestDBResourcePool {
     companion object {
 
         @JvmStatic
         @BeforeAll
         fun doBefore() {
-            DBResourceRegister.drop()
+            DBResourcePool.drop()
         }
 
         @JvmStatic
         @AfterAll
         fun doAfter() {
-            DBResourceRegister.drop()
+            DBResourcePool.drop()
         }
     }
 
@@ -47,32 +47,32 @@ class TestDBResourceRegister {
     @Order(1)
     fun all() {
         // no table first
-        assertEquals(false, DBResourceRegister.hasTable())
+        assertEquals(false, DBResourcePool.hasTable())
 
         // create it
-        assertEquals(true, DBResourceRegister.resetTable())
+        assertEquals(true, DBResourcePool.resetTable())
 
         // has table now
-        assertEquals(true, DBResourceRegister.hasTable())
+        assertEquals(true, DBResourcePool.hasTable())
 
         // insert
-        assertEquals(true, DBResourceRegister.insertRecord(t1))
+        assertEquals(true, DBResourcePool.insertRecord(t1))
 
         // query
-        val rs = DBResourceRegister.getAllRecords()
+        val rs = DBResourcePool.getAllRecords()
         assertEquals(rs[0].db_type, t1.db_type)
         assertEquals(rs[0].db_desc, t1.db_desc)
         println("Query: ${rs[0]}")
 
         // update
-        DBResourceRegister.updateRecord(rs[0].id, t2)
-        val rs1 = DBResourceRegister.getAllRecords()
+        DBResourcePool.updateRecord(rs[0].id, t2)
+        val rs1 = DBResourcePool.getAllRecords()
         assertEquals(rs1[0].db_name, t2.db_name)
         println("Update ${rs1[0]}")
 
         // delete
-        assertEquals(true, DBResourceRegister.deleteRecord(rs1[0].id))
-        println("After deleted: ${DBResourceRegister.getAllRecords()}")
+        assertEquals(true, DBResourcePool.deleteRecord(rs1[0].id))
+        println("After deleted: ${DBResourcePool.getAllRecords()}")
 
     }
 
@@ -80,13 +80,13 @@ class TestDBResourceRegister {
     @Order(2)
     fun getDBRecord() {
         println("Doing getDBRecord \n")
-        DBResourceRegister.insertRecord(t2)
+        DBResourcePool.insertRecord(t2)
 
-        val r = DBResourceRegister.getRecordByName("sb")
+        val r = DBResourcePool.getRecordByName("sb")
         assertEquals(-1, r.id)
         println("r is $r")
 
-        val r1 = DBResourceRegister.getRecordByName("my sqlite new")
+        val r1 = DBResourcePool.getRecordByName("my sqlite new")
         assertEquals("sqlite desc", r1.db_desc)
         println("r1 is $r1")
     }

@@ -14,6 +14,8 @@
 import io.github.hochikong.ktmeta.swingui.controller.LaunchViewC
 import com.formdev.flatlaf.FlatIntelliJLaf
 import io.github.hochikong.ktmeta.swingui.controller.MainScene
+import javax.swing.JDialog
+import io.github.hochikong.ktmeta.dao.impl.*
 
 class MainController {
     private var fcLaunchView: LaunchViewC = LaunchViewC().apply {
@@ -24,9 +26,31 @@ class MainController {
         this.setLocationRelativeTo(null)
     }
 
+    private var dialogsMap: MutableMap<String, JDialog> = mutableMapOf()
+
+    private fun initResources() {
+        // check
+        if (!DBResourcePool.hasTable()) {
+            DBResourcePool.resetTable()
+        }
+
+        if (!ESResourcePool.hasTable()) {
+            ESResourcePool.resetTable()
+        }
+
+        if (!MLResourcePool.hasTable()) {
+            MLResourcePool.resetTable()
+        }
+
+        if (!MPResourcePool.hasTable()) {
+            MPResourcePool.resetTable()
+        }
+    }
+
     init {
         fcLaunchView.isVisible = true
         fcLaunchView.updateLoadingTest("正在初始化环境")
+        initResources()
         Thread.sleep(2000)
         fcLaunchView.updateLoadingTest("正在初始化工具")
         Thread.sleep(2000)

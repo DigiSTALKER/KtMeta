@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent
 import java.lang.management.ManagementFactory
 import java.lang.management.OperatingSystemMXBean
 import javax.swing.JOptionPane
+import kotlin.system.exitProcess
 
 class MainScene : impKtmetaMainFrame() {
     override fun impMenuItemAboutActionPerformed(evt: ActionEvent?) {
@@ -20,6 +21,10 @@ class MainScene : impKtmetaMainFrame() {
             "About",
             JOptionPane.INFORMATION_MESSAGE
         )
+    }
+
+    override fun impMenuItemExitActionPerformed(evt: ActionEvent?) {
+        exitProcess(0)
     }
 }
 

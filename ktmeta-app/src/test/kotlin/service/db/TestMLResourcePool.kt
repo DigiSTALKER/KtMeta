@@ -2,26 +2,26 @@ package service.db
 
 import io.github.hochikong.ktmeta.dao.MLResourceRecord
 import io.github.hochikong.ktmeta.dao.MPResourceRecord
-import io.github.hochikong.ktmeta.dao.impl.MLResourceRegister
-import io.github.hochikong.ktmeta.dao.impl.MPResourceRegister
+import io.github.hochikong.ktmeta.dao.impl.MLResourcePool
+import io.github.hochikong.ktmeta.dao.impl.MPResourcePool
 import org.junit.jupiter.api.*
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation::class)
-class TestMLResourceRegister {
+class TestMLResourcePool {
     companion object {
 
         @JvmStatic
         @BeforeAll
         fun doBefore() {
-            MLResourceRegister.drop()
-            MPResourceRegister.drop()
+            MLResourcePool.drop()
+            MPResourcePool.drop()
         }
 
         @JvmStatic
         @AfterAll
         fun doAfter() {
-            MLResourceRegister.drop()
-            MPResourceRegister.drop()
+            MLResourcePool.drop()
+            MPResourcePool.drop()
         }
     }
 
@@ -44,8 +44,8 @@ class TestMLResourceRegister {
     @Test
     @Order(1)
     fun all() {
-        MPResourceRegister.resetTable()
-        MPResourceRegister.insertRecord(
+        MPResourcePool.resetTable()
+        MPResourcePool.insertRecord(
             MPResourceRecord(
                 plugin_name = "p1",
                 plugin_version = "v0.0.1",
@@ -56,32 +56,32 @@ class TestMLResourceRegister {
         )
 
         // no table first
-        Assertions.assertEquals(false, MLResourceRegister.hasTable())
+        Assertions.assertEquals(false, MLResourcePool.hasTable())
 
         // create it
-        Assertions.assertEquals(true, MLResourceRegister.resetTable())
+        Assertions.assertEquals(true, MLResourcePool.resetTable())
 
         // has table now
-        Assertions.assertEquals(true, MLResourceRegister.hasTable())
+        Assertions.assertEquals(true, MLResourcePool.hasTable())
 
         // insert
-        Assertions.assertEquals(true, MLResourceRegister.insertRecord(t1))
+        Assertions.assertEquals(true, MLResourcePool.insertRecord(t1))
 
         // query
-        val rs = MLResourceRegister.getAllRecords()
+        val rs = MLResourcePool.getAllRecords()
         Assertions.assertEquals(rs[0].lib_name, t1.lib_name)
         Assertions.assertEquals(rs[0].assign_plugin, t1.assign_plugin)
         println("Query: ${rs[0]}")
 
         // update
-        MLResourceRegister.updateRecord(rs[0].id, t2)
-        val rs1 = MLResourceRegister.getAllRecords()
+        MLResourcePool.updateRecord(rs[0].id, t2)
+        val rs1 = MLResourcePool.getAllRecords()
         Assertions.assertEquals(rs1[0].lib_name, t2.lib_name)
         println("Update ${rs1[0]}")
 
         // delete
-        Assertions.assertEquals(true, MLResourceRegister.deleteRecord(rs1[0].id))
-        println("After deleted: ${MLResourceRegister.getAllRecords()}")
+        Assertions.assertEquals(true, MLResourcePool.deleteRecord(rs1[0].id))
+        println("After deleted: ${MLResourcePool.getAllRecords()}")
 
     }
 }
