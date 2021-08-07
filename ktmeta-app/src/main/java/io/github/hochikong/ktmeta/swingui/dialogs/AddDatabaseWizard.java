@@ -76,7 +76,7 @@ public class AddDatabaseWizard extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("i18n/Dialogs/AddDatabaseWizard_trans"); // NOI18N
         setTitle(bundle.getString("ADD DATABASE")); // NOI18N
-        setAlwaysOnTop(true);
+        setAlwaysOnTop(false);
         setUndecorated(true);
 
         LabelName.setText(bundle.getString("NAME : ")); // NOI18N
@@ -105,6 +105,11 @@ public class AddDatabaseWizard extends javax.swing.JDialog {
         ComboBoxAvailableDBMS.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 ComboBoxAvailableDBMSItemStateChanged(evt);
+            }
+        });
+        ComboBoxAvailableDBMS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ComboBoxAvailableDBMSActionPerformed(evt);
             }
         });
 
@@ -277,6 +282,10 @@ public class AddDatabaseWizard extends javax.swing.JDialog {
     private void FieldUsernameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_FieldUsernameFocusGained
         // TODO add your handling code here:
     }//GEN-LAST:event_FieldUsernameFocusGained
+
+    private void ComboBoxAvailableDBMSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboBoxAvailableDBMSActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ComboBoxAvailableDBMSActionPerformed
     //</Auto-Generate>
 
     /**

@@ -68,6 +68,7 @@ object MPResourcePool : ResourcesRegisterAPI {
             val r = jdbiInstance.withExtension(MPDao::class.java, ExtensionCallback {
                 it.check()
             })
+            this.logger.info("Table found")
 
             // if has table but no data
             if (r == null) {

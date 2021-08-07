@@ -67,6 +67,7 @@ object ESResourcePool : ResourcesRegisterAPI {
             val r = jdbiInstance.withExtension(ESDao::class.java, ExtensionCallback {
                 it.check()
             })
+            this.logger.info("Table found")
 
             // if has table but no data
             if (r == null) {

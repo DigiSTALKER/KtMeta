@@ -31,7 +31,7 @@ object DAOConfigFactory {
     private const val sqliteUrl = "jdbc:sqlite:resources.db"
 
     // hikari
-    private const val poolConfigPath = ".\\hikari.properties"
+    private var poolConfigPath = ".\\hikari.properties"
 
     // logback
     val logKey = mapOf(
@@ -40,6 +40,10 @@ object DAOConfigFactory {
         DAOTableNames.MPResource.tName to "ktmeta-dao-mp",
         DAOTableNames.MLResource.tName to "ktmeta-dao-ml"
     )
+
+    fun setPoolConfigPath(path: String){
+        this.poolConfigPath = path
+    }
 
     /**
      * Return HikariConfig for DAOs, which use SQLite as its backend to register database, metadata plugins, etc.

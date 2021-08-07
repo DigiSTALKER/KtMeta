@@ -94,6 +94,7 @@ object DBResourcePool : ResourcesRegisterAPI {
             val r = jdbiInstance.withExtension(DBDao::class.java, ExtensionCallback {
                 it.check()
             })
+            this.logger.info("Table found")
 
             // if has table but no data
             if (r == null) {

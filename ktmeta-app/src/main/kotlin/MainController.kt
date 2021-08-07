@@ -11,11 +11,15 @@
  * limitations under the License.
  */
 
-import io.github.hochikong.ktmeta.swingui.controller.LaunchViewC
 import com.formdev.flatlaf.FlatIntelliJLaf
+import io.github.hochikong.ktmeta.dao.MLResourceRecord
+import io.github.hochikong.ktmeta.dao.impl.DBResourcePool
+import io.github.hochikong.ktmeta.dao.impl.ESResourcePool
+import io.github.hochikong.ktmeta.dao.impl.MLResourcePool
+import io.github.hochikong.ktmeta.dao.impl.MPResourcePool
+import io.github.hochikong.ktmeta.swingui.controller.LaunchViewC
 import io.github.hochikong.ktmeta.swingui.controller.MainScene
 import javax.swing.JDialog
-import io.github.hochikong.ktmeta.dao.impl.*
 
 class MainController {
     private var fcLaunchView: LaunchViewC = LaunchViewC().apply {
@@ -42,6 +46,7 @@ class MainController {
             MLResourcePool.resetTable()
         }
 
+
         if (!MPResourcePool.hasTable()) {
             MPResourcePool.resetTable()
         }
@@ -58,6 +63,26 @@ class MainController {
         Thread.sleep(3000)
         fcLaunchView.dispose()
 
+        // insert test
+        val nc = MLResourceRecord(
+            lib_name = "A",
+            lib_desc = "A lib",
+            assign_plugin = "P1",
+            assign_db = "DB1",
+            assign_index = "IND1"
+        )
+
+        val nc2 = MLResourceRecord(
+            lib_name = "B",
+            lib_desc = "B lib",
+            assign_plugin = "P1",
+            assign_db = "DB2",
+            assign_index = "IND2"
+        )
+        MLResourcePool.insertRecord(nc)
+        MLResourcePool.insertRecord(nc2)
+        val mList = MLResourcePool.getAllRecords()
+        fcMainScene.fullUpdateMetaLibsTree(mList.map { it.lib_name }.toList())
         fcMainScene.isVisible = true
     }
 }

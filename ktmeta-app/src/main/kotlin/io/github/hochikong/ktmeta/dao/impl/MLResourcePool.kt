@@ -67,6 +67,7 @@ object MLResourcePool : ResourcesRegisterAPI {
             val r = jdbiInstance.withExtension(MLDao::class.java, ExtensionCallback {
                 it.check()
             })
+            this.logger.info("Table found")
 
             // if has table but no data
             if (r == null) {

@@ -13,6 +13,9 @@
 
 package io.github.hochikong.ktmeta.swingui.controller.dialogs
 
+import io.github.hochikong.ktmeta.common.Encryption
+import io.github.hochikong.ktmeta.dao.DBResourceRecord
+import io.github.hochikong.ktmeta.dao.impl.DBResourcePool
 import io.github.hochikong.ktmeta.swingui.controller.doWhenClickOnTextField
 import io.github.hochikong.ktmeta.swingui.dialogs.codegen.impAddDatabaseWizard
 import java.awt.Frame
@@ -20,6 +23,7 @@ import java.awt.event.ActionEvent
 import java.awt.event.FocusEvent
 import java.awt.event.ItemEvent
 import java.awt.event.MouseEvent
+import javax.swing.JOptionPane
 import javax.swing.JTextField
 
 //import com.formdev.flatlaf.FlatIntelliJLaf
@@ -40,21 +44,49 @@ class AddDatabaseWizard(parent: Frame, dbList: Array<String>) : impAddDatabaseWi
      * Commit
      * */
     override fun impBTNOKAddDBActionPerformed(evt: ActionEvent?) {
-        // TODO
+        try {
+            var passwd = ""
+            var savePasswd = 0
+            if (this.FieldPassword.text.isNotEmpty()) {
+                passwd = Encryption.encrypt(this.FieldPassword.text)
+                savePasswd = 1
+            }
+
+
+            val record = DBResourceRecord(
+                db_type = this.currentDBMSSelected,
+                db_name = this.FieldName.text,
+                db_desc = this.FieldDescription.text,
+                db_url = this.FieldJDBCURL.text,
+                user = this.FieldUsername.text,
+                password = passwd,
+                save_passwd = savePasswd
+            )
+            DBResourcePool.insertRecord(record)
+
+            this.dispose()
+        } catch (e: Exception) {
+            JOptionPane.showMessageDialog(
+                this,
+                e,
+                "Insert error",
+                JOptionPane.ERROR_MESSAGE
+            );
+        }
     }
 
     /**
      * Discard
      * */
     override fun impBTNCancelAddDBActionPerformed(evt: ActionEvent?) {
-        // TODO
+        this.dispose()
     }
 
     /**
      * Change color and select
      * */
     override fun impFieldNameFocusGained(evt: FocusEvent?) {
-        doWhenClickOnTextField(this.componentRegister,"FieldName")
+        doWhenClickOnTextField(this.componentRegister, "FieldName")
     }
 
     override fun impFieldDescriptionFocusGained(evt: FocusEvent?) {
@@ -88,7 +120,7 @@ class AddDatabaseWizard(parent: Frame, dbList: Array<String>) : impAddDatabaseWi
         }
     }
 
-    fun initFocus(){
+    fun initFocus() {
         BTNCancelAddDB.requestFocusInWindow()
     }
 }

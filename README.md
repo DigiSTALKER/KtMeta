@@ -17,7 +17,7 @@ Still working in progress.
 
 ## ScreenShots:
 ### 2021/01/23 Update:
-![Main Preview](screenshots/Screenshot-2021-01-23165324.png)
+![Shakeit Preview](screenshots/Screenshot-2021-01-23165324.png)
 
 ![New Advance Search](screenshots/Screenshot-2021-01-23165440.png)
 
