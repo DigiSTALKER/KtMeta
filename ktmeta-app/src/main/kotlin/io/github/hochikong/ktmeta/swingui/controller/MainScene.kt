@@ -2,6 +2,7 @@ package io.github.hochikong.ktmeta.swingui.controller
 
 import com.formdev.flatlaf.FlatIntelliJLaf
 import io.github.hochikong.ktmeta.common.SupportedDBs
+import io.github.hochikong.ktmeta.dao.impl.DBResourcePool
 import io.github.hochikong.ktmeta.dao.impl.MLResourcePool
 import io.github.hochikong.ktmeta.swingui.codegen.impKtmetaMainFrame
 import java.awt.event.ActionEvent
@@ -22,6 +23,18 @@ class MainScene : impKtmetaMainFrame() {
     fun fullUpdateMetaLibsTree(libs: List<String>){
         val model = this.TreeMetadataLibs.model as DefaultTreeModel
         val myNode = DefaultMutableTreeNode("My MetaLibs")
+        for (name in libs){
+            myNode.add(DefaultMutableTreeNode(name))
+        }
+        SwingUtilities.invokeLater {
+            model.setRoot(myNode)
+            model.reload(model.root as DefaultMutableTreeNode)
+        }
+    }
+
+    fun fullUpdateDBTree(libs: List<String>){
+        val model = this.TreeDatabases.model as DefaultTreeModel
+        val myNode = DefaultMutableTreeNode("My Databases")
         for (name in libs){
             myNode.add(DefaultMutableTreeNode(name))
         }
@@ -60,6 +73,10 @@ class MainScene : impKtmetaMainFrame() {
         val dialog = AddDatabaseWizard(this, SupportedDBs.values().map { it.identity }.toTypedArray())
         dialog.setLocationRelativeTo(null)
         dialog.isVisible = true
+
+        // update tree
+        val dbList = DBResourcePool.getAllRecords()
+        fullUpdateDBTree(dbList.map { it.db_name }.toList())
     }
 
     override fun impMenuItemNewMetaLibActionPerformed(evt: ActionEvent?) {

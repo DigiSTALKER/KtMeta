@@ -18,11 +18,13 @@ import io.github.hochikong.ktmeta.dao.DBResourceRecord
 import io.github.hochikong.ktmeta.dao.impl.DBResourcePool
 import io.github.hochikong.ktmeta.swingui.controller.doWhenClickOnTextField
 import io.github.hochikong.ktmeta.swingui.dialogs.codegen.impAddDatabaseWizard
+import kotlinx.coroutines.*
 import java.awt.Frame
 import java.awt.event.ActionEvent
 import java.awt.event.FocusEvent
 import java.awt.event.ItemEvent
 import java.awt.event.MouseEvent
+import java.sql.DriverManager
 import javax.swing.JOptionPane
 import javax.swing.JTextField
 
@@ -71,7 +73,7 @@ class AddDatabaseWizard(parent: Frame, dbList: Array<String>) : impAddDatabaseWi
                 e,
                 "Insert error",
                 JOptionPane.ERROR_MESSAGE
-            );
+            )
         }
     }
 
@@ -106,8 +108,67 @@ class AddDatabaseWizard(parent: Frame, dbList: Array<String>) : impAddDatabaseWi
     }
 
     override fun impBTNTestConnActionPerformed(evt: ActionEvent?) {
-        this.PBarTestConnection.isIndeterminate = true
-        // TODO
+        val handleException = CoroutineExceptionHandler { _, throwable ->
+            //可以捕获到launch中抛出的异常
+            this.PBarTestConnection.isIndeterminate = false
+            println("CoroutineExceptionHandler catch $throwable")
+            JOptionPane.showMessageDialog(
+                this,
+                throwable,
+                "Test error",
+                JOptionPane.ERROR_MESSAGE
+            )
+        }
+
+        CoroutineScope(Dispatchers.IO).launch(handleException) {
+            this@AddDatabaseWizard.PBarTestConnection.isIndeterminate = true
+            if (this@AddDatabaseWizard.currentDBMSSelected == "Sqlite") {
+                try {
+                    testConnection(
+                        this@AddDatabaseWizard.currentDBMSSelected,
+                        this@AddDatabaseWizard.FieldJDBCURL.text,
+                        "",
+                        ""
+                    )
+                    JOptionPane.showMessageDialog(
+                        this@AddDatabaseWizard,
+                        "Connection established",
+                        "Test OK",
+                        JOptionPane.INFORMATION_MESSAGE
+                    )
+                } catch (e: Exception) {
+                    JOptionPane.showMessageDialog(
+                        this@AddDatabaseWizard,
+                        e,
+                        "Test error",
+                        JOptionPane.ERROR_MESSAGE
+                    )
+                }
+            } else if (this@AddDatabaseWizard.currentDBMSSelected == "Postgresql") {
+                try {
+                    testConnection(
+                        this@AddDatabaseWizard.currentDBMSSelected,
+                        this@AddDatabaseWizard.FieldJDBCURL.text,
+                        this@AddDatabaseWizard.FieldUsername.text,
+                        this@AddDatabaseWizard.FieldPassword.text
+                    )
+                    JOptionPane.showMessageDialog(
+                        this@AddDatabaseWizard,
+                        "Connection established",
+                        "Test OK",
+                        JOptionPane.INFORMATION_MESSAGE
+                    )
+                } catch (e: Exception) {
+                    JOptionPane.showMessageDialog(
+                        this@AddDatabaseWizard,
+                        e,
+                        "Test error",
+                        JOptionPane.ERROR_MESSAGE
+                    )
+                }
+            }
+            this@AddDatabaseWizard.PBarTestConnection.isIndeterminate = false
+        }
     }
 
     override fun impComboBoxAvailableDBMSItemStateChanged(evt: ItemEvent?) {
@@ -122,6 +183,18 @@ class AddDatabaseWizard(parent: Frame, dbList: Array<String>) : impAddDatabaseWi
 
     fun initFocus() {
         BTNCancelAddDB.requestFocusInWindow()
+    }
+
+    private fun testConnection(DBMS: String, url: String, user: String, password: String): Boolean {
+        return if (user.isNotEmpty() && password.isNotEmpty()) {
+            val con = DriverManager.getConnection(url, user, password)
+            true
+        } else if (user.isEmpty() && password.isEmpty()) {
+            val con = DriverManager.getConnection(url)
+            false
+        } else {
+            throw AssertionError("Username should provided with password, or no username no password.")
+        }
     }
 }
 

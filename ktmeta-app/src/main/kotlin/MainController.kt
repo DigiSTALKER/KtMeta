@@ -12,7 +12,6 @@
  */
 
 import com.formdev.flatlaf.FlatIntelliJLaf
-import io.github.hochikong.ktmeta.dao.MLResourceRecord
 import io.github.hochikong.ktmeta.dao.impl.DBResourcePool
 import io.github.hochikong.ktmeta.dao.impl.ESResourcePool
 import io.github.hochikong.ktmeta.dao.impl.MLResourcePool
@@ -64,25 +63,29 @@ class MainController {
         fcLaunchView.dispose()
 
         // insert test
-        val nc = MLResourceRecord(
-            lib_name = "A",
-            lib_desc = "A lib",
-            assign_plugin = "P1",
-            assign_db = "DB1",
-            assign_index = "IND1"
-        )
+//        val nc = MLResourceRecord(
+//            lib_name = "A",
+//            lib_desc = "A lib",
+//            assign_plugin = "P1",
+//            assign_db = "DB1",
+//            assign_index = "IND1"
+//        )
+//
+//        val nc2 = MLResourceRecord(
+//            lib_name = "B",
+//            lib_desc = "B lib",
+//            assign_plugin = "P1",
+//            assign_db = "DB2",
+//            assign_index = "IND2"
+//        )
+//        MLResourcePool.insertRecord(nc)
+//        MLResourcePool.insertRecord(nc2)
+        val mlList = MLResourcePool.getAllRecords()
+        fcMainScene.fullUpdateMetaLibsTree(mlList.map { it.lib_name }.toList())
 
-        val nc2 = MLResourceRecord(
-            lib_name = "B",
-            lib_desc = "B lib",
-            assign_plugin = "P1",
-            assign_db = "DB2",
-            assign_index = "IND2"
-        )
-        MLResourcePool.insertRecord(nc)
-        MLResourcePool.insertRecord(nc2)
-        val mList = MLResourcePool.getAllRecords()
-        fcMainScene.fullUpdateMetaLibsTree(mList.map { it.lib_name }.toList())
+        val dbList = DBResourcePool.getAllRecords()
+        fcMainScene.fullUpdateDBTree(dbList.map { it.db_name }.toList())
+
         fcMainScene.isVisible = true
     }
 }
