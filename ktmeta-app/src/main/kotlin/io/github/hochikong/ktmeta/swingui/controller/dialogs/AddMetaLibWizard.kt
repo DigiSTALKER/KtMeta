@@ -14,12 +14,15 @@
 package io.github.hochikong.ktmeta.swingui.controller.dialogs
 
 
+import io.github.hochikong.ktmeta.dao.MLResourceRecord
+import io.github.hochikong.ktmeta.dao.impl.MLResourcePool
 import io.github.hochikong.ktmeta.swingui.controller.doWhenClickOnTextField
 import io.github.hochikong.ktmeta.swingui.dialogs.codegen.impAddMetaLibWizard
 import java.awt.Frame
 import java.awt.event.ActionEvent
 import java.awt.event.FocusEvent
 import java.awt.event.ItemEvent
+import javax.swing.JOptionPane
 import javax.swing.JTextField
 
 //import javax.swing.JFrame
@@ -48,11 +51,42 @@ class AddMetaLibWizard(
     private var currentIndexRes = this.availableIndices[0]
 
     override fun impBTNCancelAddMetaLibActionPerformed(evt: ActionEvent?) {
-        // TODO
+        this.dispose()
     }
 
     override fun impBTNOKAddMetaLibActionPerformed(evt: ActionEvent?) {
-        // TODO
+        try {
+            when {
+                this.FieldAlias.text.isEmpty() -> {
+                    JOptionPane.showMessageDialog(
+                        this,
+                        "Library name can't be empty",
+                        "Insert error",
+                        JOptionPane.ERROR_MESSAGE
+                    )
+                    return
+                }
+            }
+
+            // when empty, insert none
+            val record = MLResourceRecord(
+                lib_name = this.FieldAlias.text,
+                lib_desc = this.FieldDescription.text,
+                assign_plugin = if (this.currentPlugin == "None") "" else this.currentPlugin,
+                assign_db = if (this.currentDBRes == "None") "" else this.currentDBRes,
+                assign_index = if (this.currentIndexRes == "None") "" else this.currentIndexRes
+            )
+            MLResourcePool.insertRecord(record)
+
+            this.dispose()
+        } catch (e: Exception) {
+            JOptionPane.showMessageDialog(
+                this,
+                e,
+                "Insert error",
+                JOptionPane.ERROR_MESSAGE
+            )
+        }
     }
 
     override fun impComboBoxAvailablePluginsItemStateChanged(evt: ItemEvent?) {
@@ -96,7 +130,7 @@ class AddMetaLibWizard(
         doWhenClickOnTextField(this.componentRegister, "FieldDescription")
     }
 
-    fun initFocus(){
+    fun initFocus() {
         BTNCancelAddMetaLib.requestFocusInWindow()
     }
 }

@@ -5,9 +5,11 @@ import io.github.hochikong.ktmeta.common.SupportedDBs
 import io.github.hochikong.ktmeta.dao.impl.DBResourcePool
 import io.github.hochikong.ktmeta.dao.impl.ESResourcePool
 import io.github.hochikong.ktmeta.dao.impl.MLResourcePool
+import io.github.hochikong.ktmeta.dao.impl.MPResourcePool
 import io.github.hochikong.ktmeta.swingui.codegen.impKtmetaMainFrame
 import io.github.hochikong.ktmeta.swingui.controller.dialogs.AddDatabaseWizard
 import io.github.hochikong.ktmeta.swingui.controller.dialogs.AddIndexWizard
+import io.github.hochikong.ktmeta.swingui.controller.dialogs.AddMetaLibWizard
 import java.awt.event.ActionEvent
 import java.lang.management.ManagementFactory
 import java.lang.management.OperatingSystemMXBean
@@ -104,7 +106,24 @@ class MainScene : impKtmetaMainFrame() {
     }
 
     override fun impMenuItemNewMetaLibActionPerformed(evt: ActionEvent?) {
+        var allDBs = DBResourcePool.getAllRecords().map { it.db_name }.toTypedArray()
+        if (allDBs.isEmpty()) {
+            allDBs = arrayOf("None")
+        }
+        var allIndices = ESResourcePool.getAllRecords().map { it.index_name }.toTypedArray()
+        if (allIndices.isEmpty()) {
+            allIndices = arrayOf("None")
+        }
+        var allPlugins = MPResourcePool.getAllRecords().map { it.plugin_name }.toTypedArray()
+        if (allPlugins.isEmpty()) {
+            allPlugins = arrayOf("None")
+        }
+        val dialog = AddMetaLibWizard(this, allPlugins, allDBs, allIndices)
+        dialog.setLocationRelativeTo(null)
+        dialog.isVisible = true
 
+        val mlTree = MLResourcePool.getAllRecords()
+        fullUpdateMetaLibsTree(mlTree.map { it.lib_name }.toList())
     }
 
     override fun impMenuItemExitActionPerformed(evt: ActionEvent?) {
