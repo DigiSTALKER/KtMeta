@@ -3,8 +3,11 @@ package io.github.hochikong.ktmeta.swingui.controller
 import com.formdev.flatlaf.FlatIntelliJLaf
 import io.github.hochikong.ktmeta.common.SupportedDBs
 import io.github.hochikong.ktmeta.dao.impl.DBResourcePool
+import io.github.hochikong.ktmeta.dao.impl.ESResourcePool
 import io.github.hochikong.ktmeta.dao.impl.MLResourcePool
 import io.github.hochikong.ktmeta.swingui.codegen.impKtmetaMainFrame
+import io.github.hochikong.ktmeta.swingui.controller.dialogs.AddDatabaseWizard
+import io.github.hochikong.ktmeta.swingui.controller.dialogs.AddIndexWizard
 import java.awt.event.ActionEvent
 import java.lang.management.ManagementFactory
 import java.lang.management.OperatingSystemMXBean
@@ -13,17 +16,16 @@ import javax.swing.SwingUtilities
 import javax.swing.tree.DefaultMutableTreeNode
 import javax.swing.tree.DefaultTreeModel
 import kotlin.system.exitProcess
-import io.github.hochikong.ktmeta.swingui.controller.dialogs.AddDatabaseWizard
 
 
 class MainScene : impKtmetaMainFrame() {
     /**
      * Update MainFrame's metadata libraries tree on the left
      * */
-    fun fullUpdateMetaLibsTree(libs: List<String>){
+    fun fullUpdateMetaLibsTree(libs: List<String>) {
         val model = this.TreeMetadataLibs.model as DefaultTreeModel
         val myNode = DefaultMutableTreeNode("My MetaLibs")
-        for (name in libs){
+        for (name in libs) {
             myNode.add(DefaultMutableTreeNode(name))
         }
         SwingUtilities.invokeLater {
@@ -32,10 +34,10 @@ class MainScene : impKtmetaMainFrame() {
         }
     }
 
-    fun fullUpdateDBTree(libs: List<String>){
+    fun fullUpdateDBTree(libs: List<String>) {
         val model = this.TreeDatabases.model as DefaultTreeModel
         val myNode = DefaultMutableTreeNode("My Databases")
-        for (name in libs){
+        for (name in libs) {
             myNode.add(DefaultMutableTreeNode(name))
         }
         SwingUtilities.invokeLater {
@@ -44,7 +46,19 @@ class MainScene : impKtmetaMainFrame() {
         }
     }
 
-    private fun updateMetaLibsTreeWithQuery(){
+    fun fullUpdateIndexTree(indices: List<String>) {
+        val model = this.TreeIndices.model as DefaultTreeModel
+        val myNode = DefaultMutableTreeNode("My Indices")
+        for (name in indices) {
+            myNode.add(DefaultMutableTreeNode(name))
+        }
+        SwingUtilities.invokeLater {
+            model.setRoot(myNode)
+            model.reload(model.root as DefaultMutableTreeNode)
+        }
+    }
+
+    private fun updateMetaLibsTreeWithQuery() {
         val mList = MLResourcePool.getAllRecords()
         this.fullUpdateMetaLibsTree(mList.map { it.lib_name }.toList())
     }
@@ -77,6 +91,16 @@ class MainScene : impKtmetaMainFrame() {
         // update tree
         val dbList = DBResourcePool.getAllRecords()
         fullUpdateDBTree(dbList.map { it.db_name }.toList())
+    }
+
+    override fun impMenuItemAddIndexActionPerformed(evt: ActionEvent?) {
+        val dialog = AddIndexWizard(this)
+        dialog.setLocationRelativeTo(null)
+        dialog.isVisible = true
+
+        // update tree
+        val indexList = ESResourcePool.getAllRecords()
+        fullUpdateIndexTree(indexList.map { it.index_name }.toList())
     }
 
     override fun impMenuItemNewMetaLibActionPerformed(evt: ActionEvent?) {

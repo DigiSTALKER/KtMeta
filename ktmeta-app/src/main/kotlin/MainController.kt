@@ -62,29 +62,14 @@ class MainController {
         Thread.sleep(3000)
         fcLaunchView.dispose()
 
-        // insert test
-//        val nc = MLResourceRecord(
-//            lib_name = "A",
-//            lib_desc = "A lib",
-//            assign_plugin = "P1",
-//            assign_db = "DB1",
-//            assign_index = "IND1"
-//        )
-//
-//        val nc2 = MLResourceRecord(
-//            lib_name = "B",
-//            lib_desc = "B lib",
-//            assign_plugin = "P1",
-//            assign_db = "DB2",
-//            assign_index = "IND2"
-//        )
-//        MLResourcePool.insertRecord(nc)
-//        MLResourcePool.insertRecord(nc2)
         val mlList = MLResourcePool.getAllRecords()
         fcMainScene.fullUpdateMetaLibsTree(mlList.map { it.lib_name }.toList())
 
         val dbList = DBResourcePool.getAllRecords()
         fcMainScene.fullUpdateDBTree(dbList.map { it.db_name }.toList())
+
+        val indexList = ESResourcePool.getAllRecords()
+        fcMainScene.fullUpdateIndexTree(indexList.map { it.index_name }.toList())
 
         fcMainScene.isVisible = true
     }

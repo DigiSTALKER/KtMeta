@@ -14,11 +14,14 @@
 package io.github.hochikong.ktmeta.swingui.controller.dialogs
 
 
+import io.github.hochikong.ktmeta.dao.ESResourceRecord
+import io.github.hochikong.ktmeta.dao.impl.ESResourcePool
 import io.github.hochikong.ktmeta.swingui.controller.doWhenClickOnTextField
 import io.github.hochikong.ktmeta.swingui.dialogs.codegen.impAddIndexWizard
 import java.awt.Frame
 import java.awt.event.ActionEvent
 import java.awt.event.FocusEvent
+import javax.swing.JOptionPane
 import javax.swing.JTextField
 
 //import com.formdev.flatlaf.FlatIntelliJLaf
@@ -37,11 +40,50 @@ class AddIndexWizard(parent: Frame) : impAddIndexWizard(parent, true) {
     }
 
     override fun impBTNCancelAddIndexActionPerformed(evt: ActionEvent?) {
-        // TODO
+        this.dispose()
     }
 
     override fun impBTNOKAddIndexActionPerformed(evt: ActionEvent?) {
-        // TODO
+        try {
+            when{
+                this.FieldIndexName.text.isEmpty() -> {
+                    JOptionPane.showMessageDialog(
+                        this,
+                        "Index name can't be empty",
+                        "Insert error",
+                        JOptionPane.ERROR_MESSAGE
+                    )
+                    return
+                }
+
+                this.FieldIndexURL.text.isEmpty() -> {
+                    JOptionPane.showMessageDialog(
+                        this,
+                        "Index URL can't be empty",
+                        "Insert error",
+                        JOptionPane.ERROR_MESSAGE
+                    )
+                    return
+                }
+            }
+
+
+            val record = ESResourceRecord(
+                index_name = this.FieldIndexName.text,
+                index_desc = this.FieldIndexDesc.text,
+                index_url = this.FieldIndexURL.text
+            )
+            ESResourcePool.insertRecord(record)
+
+            this.dispose()
+        } catch (e: Exception) {
+            JOptionPane.showMessageDialog(
+                this,
+                e,
+                "Insert error",
+                JOptionPane.ERROR_MESSAGE
+            )
+        }
     }
 
     override fun impFieldIndexNameFocusGained(evt: FocusEvent?) {
@@ -56,7 +98,7 @@ class AddIndexWizard(parent: Frame) : impAddIndexWizard(parent, true) {
         doWhenClickOnTextField(this.componentRegister, "FieldIndexURL")
     }
 
-    fun initFocus(){
+    fun initFocus() {
         BTNCancelAddIndex.requestFocusInWindow()
     }
 }
