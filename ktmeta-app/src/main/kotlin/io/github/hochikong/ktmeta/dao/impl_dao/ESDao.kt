@@ -44,9 +44,8 @@ interface ESDao {
             WHERE id = :id;
         """
     )
-    @GetGeneratedKeys("id")
     @Transaction
-    fun update(@Bind("id") id: Long, @BindBean("es") res: ESResourceRecord): Long
+    fun update(@Bind("id") id: Long, @BindBean("es") res: ESResourceRecord): Int
 
 
     @SqlQuery(

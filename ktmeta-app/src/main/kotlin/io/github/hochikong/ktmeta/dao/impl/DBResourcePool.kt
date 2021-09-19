@@ -55,11 +55,11 @@ object DBResourcePool : ResourcesRegisterAPI {
         if (newRecord is DBResourceRecord) {
             this.logger.info("Update record")
 
-            val idReturn = jdbiInstance.withExtension(DBDao::class.java, ExtensionCallback {
+            val effectRows = jdbiInstance.withExtension(DBDao::class.java, ExtensionCallback {
                 it.update(id, newRecord)
             })
 
-            return id == idReturn
+            return effectRows == 1
         }
         return false
     }

@@ -321,6 +321,11 @@ public class impKtmetaMainFrame extends javax.swing.JFrame {
         PopupMenuMetaLibsTree.add(PMRemoveMetaLib);
 
         PMExportMetaDocToFile.setText(bundle.getString("EXPORT METADATA DOCUMENT TO FILE")); // NOI18N
+        PMExportMetaDocToFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PMExportMetaDocToFileActionPerformed(evt);
+            }
+        });
         PopupMenuMetaDoc.add(PMExportMetaDocToFile);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -350,7 +355,7 @@ public class impKtmetaMainFrame extends javax.swing.JFrame {
         MainToolBar.add(BTNAddDatabase);
 
         BTNAddESIndex.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/ico/20pix/es.png"))); // NOI18N
-        BTNAddESIndex.setToolTipText(bundle.getString("ADD METADATA LIBRARY")); // NOI18N
+        BTNAddESIndex.setToolTipText(bundle.getString("ADD ES LIBRARY"));
         BTNAddESIndex.setFocusable(false);
         BTNAddESIndex.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         BTNAddESIndex.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -1193,6 +1198,10 @@ public class impKtmetaMainFrame extends javax.swing.JFrame {
     private void BTNCollapseTree1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNCollapseTree1ActionPerformed
         impBTNCollapseTree1ActionPerformed(evt);
     }//GEN-LAST:event_BTNCollapseTree1ActionPerformed
+
+    private void PMExportMetaDocToFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PMExportMetaDocToFileActionPerformed
+        impPMExportMetaDocToFileActionPerformed(evt);
+    }//GEN-LAST:event_PMExportMetaDocToFileActionPerformed
     //</Auto-Generate>
 
     @Override
@@ -1423,5 +1432,6 @@ public class impKtmetaMainFrame extends javax.swing.JFrame {
     protected void impBTNCollapseTreeActionPerformed(java.awt.event.ActionEvent evt){}
     protected void impBTNExpandTree1ActionPerformed(java.awt.event.ActionEvent evt){}
     protected void impBTNCollapseTree1ActionPerformed(java.awt.event.ActionEvent evt){}
+    protected void impPMExportMetaDocToFileActionPerformed(java.awt.event.ActionEvent evt){}
     //</Auto-Generate-Result>
 }

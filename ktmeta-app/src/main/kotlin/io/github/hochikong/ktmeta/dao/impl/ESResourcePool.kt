@@ -35,11 +35,11 @@ object ESResourcePool : ResourcesRegisterAPI {
         if (newRecord is ESResourceRecord) {
             this.logger.info("Update record")
 
-            val idReturn = jdbiInstance.withExtension(ESDao::class.java, ExtensionCallback {
+            val effectRows = jdbiInstance.withExtension(ESDao::class.java, ExtensionCallback {
                 it.update(id, newRecord)
             })
 
-            return id == idReturn
+            return effectRows == 1
         }
         return false
     }

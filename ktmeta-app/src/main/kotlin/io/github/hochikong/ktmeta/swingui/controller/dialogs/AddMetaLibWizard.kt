@@ -50,6 +50,20 @@ class AddMetaLibWizard(
     private var currentDBRes = this.availableDatabases[0]
     private var currentIndexRes = this.availableIndices[0]
 
+    private var updateMode: Boolean = false
+    private var oldName: String = ""
+
+    /**
+     * Used by properties change method
+     * */
+    fun setBasicInfo(name: String, desc: String, updateMode: Boolean = true) {
+        FieldAlias.text = name
+        oldName = name
+        FieldDescription.text = desc
+        this.impFieldDescriptionFocusGained(null)
+        this.updateMode = updateMode
+    }
+
     override fun impBTNCancelAddMetaLibActionPerformed(evt: ActionEvent?) {
         this.dispose()
     }
@@ -76,7 +90,13 @@ class AddMetaLibWizard(
                 assign_db = if (this.currentDBRes == "None") "" else this.currentDBRes,
                 assign_index = if (this.currentIndexRes == "None") "" else this.currentIndexRes
             )
-            MLResourcePool.insertRecord(record)
+
+            if (updateMode) {
+                val oldRecord = MLResourcePool.getRecordByName(oldName)
+                MLResourcePool.updateRecord(oldRecord.id, record)
+            } else {
+                MLResourcePool.insertRecord(record)
+            }
 
             this.dispose()
         } catch (e: Exception) {

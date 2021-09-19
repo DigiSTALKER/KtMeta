@@ -48,9 +48,8 @@ interface DBDao {
             WHERE id = :id;
         """
     )
-    @GetGeneratedKeys("id")
     @Transaction
-    fun update(@Bind("id") id: Long, @BindBean("db") res: DBResourceRecord): Long
+    fun update(@Bind("id") id: Long, @BindBean("db") res: DBResourceRecord): Int
 
 
     @SqlQuery(

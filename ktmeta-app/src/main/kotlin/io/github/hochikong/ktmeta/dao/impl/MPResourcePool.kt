@@ -36,11 +36,11 @@ object MPResourcePool : ResourcesRegisterAPI {
         if (newRecord is MPResourceRecord) {
             this.logger.info("Update record")
 
-            val idReturn = jdbiInstance.withExtension(MPDao::class.java, ExtensionCallback {
+            val effectRows = jdbiInstance.withExtension(MPDao::class.java, ExtensionCallback {
                 it.update(id, newRecord)
             })
 
-            return id == idReturn
+            return effectRows == 1
         }
         return false
     }

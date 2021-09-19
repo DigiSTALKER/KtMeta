@@ -47,9 +47,8 @@ interface MLDao {
             WHERE id = :id;
         """
     )
-    @GetGeneratedKeys("id")
     @Transaction
-    fun update(@Bind("id") id: Long, @BindBean("ml") res: MLResourceRecord): Long
+    fun update(@Bind("id") id: Long, @BindBean("ml") res: MLResourceRecord): Int
 
 
     @SqlQuery(
@@ -60,6 +59,15 @@ interface MLDao {
     )
     @RegisterBeanMapper(MLResourceRecord::class)
     fun query(): List<MLResourceRecord>
+
+    @SqlQuery(
+        """
+            SELECT id, lib_name, lib_desc, assign_plugin, assign_db, assign_index
+            FROM metalibs_registration WHERE lib_name = :lib_name;
+        """
+    )
+    @RegisterBeanMapper(MLResourceRecord::class)
+    fun queryByName(@Bind("lib_name") libName: String): MLResourceRecord
 
 
     @SqlUpdate("DELETE FROM metalibs_registration WHERE id = :id;")

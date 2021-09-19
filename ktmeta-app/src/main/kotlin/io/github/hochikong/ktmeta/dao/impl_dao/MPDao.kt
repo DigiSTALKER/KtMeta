@@ -46,9 +46,8 @@ interface MPDao {
             WHERE id = :id;
         """
     )
-    @GetGeneratedKeys("id")
     @Transaction
-    fun update(@Bind("id") id: Long, @BindBean("mp") res: MPResourceRecord): Long
+    fun update(@Bind("id") id: Long, @BindBean("mp") res: MPResourceRecord): Int
 
 
     @SqlQuery(

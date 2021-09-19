@@ -35,11 +35,11 @@ object MLResourcePool : ResourcesRegisterAPI {
         if (newRecord is MLResourceRecord) {
             this.logger.info("Update record")
 
-            val idReturn = jdbiInstance.withExtension(MLDao::class.java, ExtensionCallback {
+            val effectRows = jdbiInstance.withExtension(MLDao::class.java, ExtensionCallback {
                 it.update(id, newRecord)
             })
 
-            return id == idReturn
+            return effectRows == 1
         }
         return false
     }
@@ -49,6 +49,14 @@ object MLResourcePool : ResourcesRegisterAPI {
 
         return jdbiInstance.withExtension(MLDao::class.java, ExtensionCallback {
             it.query()
+        })
+    }
+
+    fun getRecordByName(name: String): MLResourceRecord {
+        this.logger.info("Get record by name")
+
+        return jdbiInstance.withExtension(MLDao::class.java, ExtensionCallback {
+            it.queryByName(name)
         })
     }
 
